@@ -1,7 +1,7 @@
 ## Nom du paquetage sur CTAN
 PACKAGENAME = ulthese
 
-## Liste des fichiers à inclure dans l'archive (outre README)
+## Liste des fichiers à inclure dans l'archive (outre README.md)
 FILES=ulthese.ins ulthese.dtx ulthese.pdf ul_p.eps ul_p.pdf
 
 ## Numéro de version et date de publication extraits du fichier
@@ -27,10 +27,12 @@ doc : ulthese.dtx ulthese.gls
 	${MAKEINDEX} -s gglo.ist -o ulthese.gls ulthese.glo
 	${LATEX} ulthese.dtx
 
-zip : ${FILES}
+zip : ${FILES} README-HEADER.in README.md
 	if [ -d ${PACKAGENAME} ]; then ${RM} ${PACKAGENAME}; fi
 	mkdir ${PACKAGENAME}
+	touch ${PACKAGENAME}/README.md && \
+	  sed 's/<VERSION>/${VERSION}/' README-HEADER.in >> ${PACKAGENAME}/README.md && \
+	  awk 'BEGIN { print } /^# /,0' README.md >> ${PACKAGENAME}/README.md
 	cp ${FILES} ${PACKAGENAME}
-	sed -e 's/<VERSION>/${VERSION}/' README.in > ${PACKAGENAME}/README
 	zip --filesync -r ${PACKAGENAME}.zip ${PACKAGENAME}
 	rm -r ${PACKAGENAME}
