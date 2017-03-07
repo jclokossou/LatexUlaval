@@ -1,0 +1,38 @@
+
+ \begin{theglossary} 
+
+    \makeatletter\scan@allowedfalse
+
+  \item 1.0\efill 
+ \subitem General:\ Version initiale\pfill 1
+  \item 1.0a\efill 
+ \subitem General:\ Pr\IeC {\'e}cisions dans la documentation\pfill 1
+  \item 1.0b\efill 
+ \subitem General:\ Ajouts et corrections mineures dans la documentation\pfill 1
+  \item 2.0\efill 
+ \subitem General:\ Traitement automatique des longs titres\pfill 1
+  \item 2.1\efill 
+ \subitem General:\ Utilisation transparente de la police Helvetica pour la page de titre\pfill 
+		1
+  \item 3.0\efill 
+ \subitem General:\ D\IeC {\'e}claration du grade en option de la classe. Moteur {\XeLaTeX  } support\IeC {\'e}; ajout de l'option \texttt  {nobabel}\pfill 
+		1
+  \item 3.0a\efill 
+ \subitem General:\ Modifications et corrections \IeC {\`a} la documentation, notamment relativement \IeC {\`a} la configuration de \textbf  {natbib}\pfill 
+		1
+  \item 3.1\efill 
+ \subitem General:\ Prise en charge de la ma\IeC {\^\i }trise en bidiplomation\pfill 1
+  \item 4.0\efill 
+ \subitem General:\ Nouvelles r\IeC {\`e}gles de pr\IeC {\'e}sentation mat\IeC {\'e}rielle de la FESP: recto seulement, page frontispice.\pfill 
+		1
+  \item 4.1\efill 
+ \subitem General:\ Paquetage \textbf  {geometry} d\IeC {\'e}clar\IeC {\'e} incompatible avec la classe.\pfill 
+		1
+  \item 4.2\efill 
+ \subitem General:\ Ajout de l'option \texttt  {examen}. Nouvelles options de \textbf  {babel} dans les gabarits.\pfill 
+		1
+  \item 4.3\efill 
+ \subitem General:\ Nouvelles options pour les titres de docteur en musique, ma\IeC {\^\i }tre en architecture, ma\IeC {\^\i }tre en ergoth\IeC {\'e}rapie, ma\IeC {\^\i }tre en physioth\IeC {\'e}rapie et ma\IeC {\^\i }tre en psycho\IeC {\'e}ducation. Modifications \IeC {\`a} la composition des sigles de grades. V\IeC {\'e}rification de la compatibilit\IeC {\'e} entre le grade et les options multifacultaire, cotutelle, bidiplomation et extension. Am\IeC {\'e}liorations \IeC {\`a} la documentation.\pfill 
+		1
+
+ \end{theglossary}

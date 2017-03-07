@@ -1,0 +1,12 @@
+\glossaryentry{4.3> =General:>Nouvelles options pour les titres de docteur en musique, ma\IeC {\^\i }tre en architecture, ma\IeC {\^\i }tre en ergoth\IeC {\'e}rapie, ma\IeC {\^\i }tre en physioth\IeC {\'e}rapie et ma\IeC {\^\i }tre en psycho\IeC {\'e}ducation. Modifications \IeC {\`a} la composition des sigles de grades. V\IeC {\'e}rification de la compatibilit\IeC {\'e} entre le grade et les options multifacultaire, cotutelle, bidiplomation et extension. Am\IeC {\'e}liorations \IeC {\`a} la documentation.}{1}
+\glossaryentry{4.2> =General:>Ajout de l'option \texttt  {examen}. Nouvelles options de \textbf  {babel} dans les gabarits.}{1}
+\glossaryentry{4.1> =General:>Paquetage \textbf  {geometry} d\IeC {\'e}clar\IeC {\'e} incompatible avec la classe.}{1}
+\glossaryentry{4.0> =General:>Nouvelles r\IeC {\`e}gles de pr\IeC {\'e}sentation mat\IeC {\'e}rielle de la FESP: recto seulement, page frontispice.}{1}
+\glossaryentry{3.1> =General:>Prise en charge de la ma\IeC {\^\i }trise en bidiplomation}{1}
+\glossaryentry{3.0a> =General:>Modifications et corrections \IeC {\`a} la documentation, notamment relativement \IeC {\`a} la configuration de \textbf  {natbib}}{1}
+\glossaryentry{3.0> =General:>D\IeC {\'e}claration du grade en option de la classe. Moteur {\XeLaTeX  } support\IeC {\'e}; ajout de l'option \texttt  {nobabel}}{1}
+\glossaryentry{2.1> =General:>Utilisation transparente de la police Helvetica pour la page de titre}{1}
+\glossaryentry{2.0> =General:>Traitement automatique des longs titres}{1}
+\glossaryentry{1.0b> =General:>Ajouts et corrections mineures dans la documentation}{1}
+\glossaryentry{1.0a> =General:>Pr\IeC {\'e}cisions dans la documentation}{1}
+\glossaryentry{1.0> =General:>Version initiale}{1}
