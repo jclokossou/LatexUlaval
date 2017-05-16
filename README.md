@@ -1,14 +1,35 @@
-> **Pour affichage dans GitHub**
->
-> Ceci est la partie en français du fichier `README.md` du paquetage
-> LaTeX `ulthese`.
+> Ceci est le fichier `README.md` du paquetage LaTeX **ulthese**.
 >
 > Le paquetage est distribué via
 > [CTAN](https://www.ctan.org/pkg/ulthese).
 
+# Package ulthese
+
+The package provides a class based on memoir and compatible with LaTeX
+and XeLaTeX to prepare theses and memoirs compliant with the
+presentation rules set forth by the Faculty of Graduate Studies of
+Université Laval, Québec, Canada. The class also comes with an
+extensive set of templates for the various types of theses and memoirs
+offered at Laval.
+
+Please note that the documentation for the class and the comments in
+the templates are all written in French, the language of the target
+audience.
+
+## Licence
+
+LaTeX Project Public License, version 1.3c or (at your option) any
+later version.
+
+## Authors
+
+Vincent Goulet <vincent.goulet@act.ulaval.ca>
+
+> The rest of this file is in French for the target audience.
+
 # Paquetage ulthese
 
-Le paquetage `ulthese` fournit la classe du même nom permettant de
+Le paquetage **ulthese** fournit la classe du même nom permettant de
 composer des thèses et mémoires immédiatement conformes aux règles
 générales de présentation matérielle de la Faculté des études
 supérieures et postdoctorales (FESP) de
@@ -43,6 +64,7 @@ La compilation du fichier ulthese.ins générera plusieurs fichiers:
 2. des gabarits pour les documents maîtres de différents types de
    thèses et de mémoires:
    - `gabarit-doctorat.tex`
+   - `gabarit-doctorat-articles.tex`
    - `gabarit-doctorat-mesure.tex`
    - `gabarit-doctorat-multifacultaire.tex`
    - `gabarit-doctorat-cotutelle.tex`
@@ -54,15 +76,17 @@ La compilation du fichier ulthese.ins générera plusieurs fichiers:
    - `gabarit-maitrise-extension-UQAC.tex`
 
 3. des gabarits pour quelques parties d'un document:
-  - `resume.tex`
-  - `abstract.tex`
-  - `remerciements.tex`
-  - `avantpropos.tex`
-  - `introduction.tex`
-  - `chapitre1.tex`
-  - `chapitre2.tex`
-  - `conclusion.tex`
-  - `annexe.tex`
+   - `resume.tex`
+   - `abstract.tex`
+   - `remerciements.tex`
+   - `avantpropos.tex`
+   - `introduction.tex`
+   - `chapitre1.tex`
+   - `chapitre1-articles.tex`
+   - `chapitre2.tex`
+   - `chapitre2-articles.tex`
+   - `conclusion.tex`
+   - `annexe.tex`
 
 Les gabarits inutiles peuvent être supprimés.
 
