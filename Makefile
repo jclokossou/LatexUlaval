@@ -42,7 +42,7 @@ doc : ulthese.dtx ulthese.gls
 	${MAKEINDEX} -s gglo.ist -o ulthese.gls ulthese.glo
 	${LATEX} ulthese.dtx
 
-zip : ${FILES} README-HEADER.in README.md
+zip : ${FILES} README.md
 	if [ -d ${PACKAGENAME} ]; then ${RM} ${PACKAGENAME}; fi
 	mkdir ${PACKAGENAME}
 	touch ${PACKAGENAME}/README.md && \
