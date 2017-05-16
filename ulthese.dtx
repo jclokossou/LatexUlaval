@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2017/03/01 v4.3 Classe pour les theses et memoires de l'Universite Laval]
+  [2017/05/15 v4.4 Classe pour les theses et memoires de l'Universite Laval]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -92,11 +92,17 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{834}
+% \CheckSum{0}
 % \DoNotIndex{\',\^,\`,\ ,\ae}
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ifthenelse,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*,\newboolean}
 % \DoNotIndex{\setlength,\setboolean}
+% \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
+%   multiples pour les thèses et mémoires par articles.}
+% \changes{4.4}{2017-05-16}{Nouveau gabarit pour une thèse par
+%   articles.}
+% \changes{4.4}{2017-05-16}{Documentation révisée, principalement ce
+%   qui touche à la préparation de la bibliographie.}
 % \changes{4.3}{2017-03-01}{Nouvelles options pour les titres de
 %   docteur en musique, maître en architecture, maître en
 %   ergothérapie, maître en physiothérapie et maître en
@@ -278,7 +284,7 @@
 % ci-dessous font l'objet de la \autoref{sec:commandes}.
 %
 % \begin{DescribeMacro}{PhD,MSc,MA, ...}
-%   Déclaration du type de grade (consulter le \autoref{tab:grades}
+%   Identifie le type de grade (consulter le \autoref{tab:grades}
 %   pour la liste complète des options et les grades correspondants).
 %   La déclaration d'un type de grade est obligatoire.
 % \end{DescribeMacro}
@@ -332,41 +338,41 @@
 % \end{table}
 %
 % \begin{DescribeMacro}{multifacultaire}
-%   Déclaration d'une thèse multifacultaire. Valide uniquement avec un
+%   Identifie une thèse comme multifacultaire. Valide uniquement avec un
 %   grade de doctorat. Cette déclaration requiert ensuite d'utiliser
 %   la commande \cmd{\faculteUL}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{cotutelle}
-%   Déclaration d'une thèse effectuée en cotutelle avec une autre
+%   Identifie une thèse comme effectuée en cotutelle avec une autre
 %   université. Valide uniquement avec un grade de doctorat. Cette
 %   déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\univcotutelle} et \cmd{\gradecotutelle}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{bidiplomation}
-%   Déclaration d'un mémoire en bidiplomation avec une autre
+%   Identifie un mémoire comme effectué en bidiplomation avec une autre
 %   université. Valide uniquement avec un grade de maîtrise. Cette
 %   déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\univbidiplomation} et \cmd{\gradebidiplomation}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{extensionUdeS}
-%   Déclaration d'une thèse réalisée en extension à l'Université de
+%   Identifie une thèse comme réalisée en extension à l'Université de
 %   Sherbrooke. Valide uniquement avec un grade de doctorat. Cette
 %   déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\faculteUL} et \cmd{\faculteUdeS}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{extensionUQO}
-%   Déclaration d'une thèse réalisée en extension à l'Université du
+%   Identifie une thèse comme réalisée en extension à l'Université du
 %   Québec en Outaouais. Valide uniquement avec un grade de doctorat.
 %   Cette déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\faculteUL} et \cmd{\faculteUQO}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{extensionUQAC}
-%   Déclaration d'un mémoire réalisé en extension à l'Université du
+%   Identifie un mémoire comme réalisé en extension à l'Université du
 %   Québec à Chicoutimi. Valide uniquement avec un grade de maîtrise.
 %   Cette déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\faculteUL} et \cmd{\faculteUQAC}.
@@ -388,6 +394,22 @@
 %   polices des pages de titre n'est pas affectée par ces options.
 % \end{DescribeMacro}
 %
+% \begin{DescribeMacro}{bibchapitre}
+%   \changes{4.4}{2017-05-15}{ajout de l'option |bibchapitre| à la classe}^^A
+%   Permet de composer une bibliographie distincte après chaque
+%   fichier inséré dans le document avec \cmd{\include},
+%   habituellement un chapitre. Cette option est principalement utile
+%   pour les thèses et mémoires par articles; voir la
+%   \autoref{sec:bibliographie:multiples}. La bibliographie se
+%   présente sous la forme d'un chapitre non numéroté.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{bibsection}
+%   \changes{4.4}{2017-05-15}{ajout de l'option |bibsection| à la classe}^^A
+%   Comme l'option |bibchapitre|, sauf que la bibliographie se présente
+%   sous la forme d'une section numérotée.
+% \end{DescribeMacro}
+%
 % \begin{DescribeMacro}{nonatbib}
 %   Empêche le chargement du paquetage \pkg{natbib}. La paquetage est
 %   normalement chargé par la classe; voir la
@@ -407,10 +429,10 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{english, french, ...}
-%   Langues utilisées dans le document. Celles-ci sont passées au
-%   paquetage \pkg{babel} (dans la mesure où |nobabel| n'est pas
-%   spécifié, bien entendu). Le libellé des langues devrait donc
-%   correspondre aux options de \pkg{babel}. La dernière langue
+%   Identifie les langues utilisées dans le document. Celles-ci sont
+%   passées au paquetage \pkg{babel} (dans la mesure où |nobabel|
+%   n'est pas spécifié, bien entendu). Le libellé des langues devrait
+%   donc correspondre aux options de \pkg{babel}. La dernière langue
 %   spécifiée est la langue active par défaut dans le document.
 % \end{DescribeMacro}
 %
@@ -687,7 +709,11 @@
 %   positions (une espace en français);
 % \item[\normalfont\pkg{natbib}] \citep{natbib} gestion de la
 %   bibliographie (si l'option |nonatbib| de la classe est absente;
-%   voir aussi la \autoref{sec:bibliographystyle});
+%   voir aussi la \autoref{sec:bibliographie});
+% \item[\normalfont\pkg{chapterbib}] \citep{chapterbib} gestion de
+%   bibliographies multiples (si l'une ou l'autre des options
+%   |chapterbib| ou |sectionbib| est spécifiée;
+%   voir aussi la \autoref{sec:bibliographie:multiples});
 % \item[\normalfont\pkg{fontspec}] \citep{fontspec} gestion des
 %   polices OpenType sous {\XeLaTeX} (chargé avec ce moteur
 %   seulement);
@@ -754,8 +780,16 @@
 % etc. Consultez au moins les documents consacrés aux
 % langues utilisées dans votre thèse ou mémoire. Le plus simple
 % consiste sans doute à consulter en ligne sur CTAN les
-% \link{http://mirrors.ctan.org/macros/latex/required/babel/contrib/}{%
+% \link{http://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
 % documents spécifiques par langue}.
+% \changes{4.4}{2017-05-14}{Fixed url to babel documentation.}
+%
+% \begin{DescribeMacro}{\nombre}
+%   Le paquetage \pkg{numprint} étant chargé dans la classe avec
+%   \pkg{babel}, vous pouvez utiliser la commande \cmd{\nombre} pour
+%   formater automatiquement les nombres. Par exemple, le résultat de
+%   |\nombre{123456789}| est \nombre{123456789}.
+% \end{DescribeMacro}
 %
 % Les utilisateurs de {\XeLaTeX} qui souhaiteraient plutôt utiliser le
 % plus récent paquetage \pkg{polyglossia} \citep{polyglossia} peuvent
@@ -764,6 +798,136 @@
 % \pkg{polyglossia} eux-mêmes dans l'entête de leur document. Ce
 % paquetage est moins évolué que \pkg{babel} pour la typographie
 % française.
+%
+% \section{Bibliographie}
+% \label{sec:bibliographie}
+%
+% Il est fortement recommandé d'utiliser {\BibTeX} pour la préparation
+% de la bibliographie, tel qu'expliqué en détail dans le chapitre~8 de %
+% \doc[Rédaction avec {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul}.
+%
+% \begin{DescribeMacro}{\bibliography}
+%   Avec {\BibTeX}, la bibliographie est insérée dans le document à
+%   l'endroit où apparait la commande \cmd{\bibliography} dans le code
+%   source. Cette commande prend en arguments les noms des bases de
+%   données bibliographiques séparés par des virgules.
+% \end{DescribeMacro}
+%
+% \subsection{Mise en forme des citations}
+% \label{sec:bibliographie:options}
+%
+% Dans la classe \class{ulthese}, la mise en forme des citations est
+% confiée au paquetage \pkg{natbib} (à moins que l'option |nonatbib|
+% ne soit spécifiée). Le paquetage est chargé avec les options par
+% défaut, soit |round|, |semicolon| et |authoryear|. Pour spécifier
+% d'autres options, vous avez deux possibilités:
+% \begin{enumerate}
+% \item utiliser l'option |nonatbib| de la classe et ensuite charger
+%   explicitement \pkg{natbib} avec ses options;
+% \item
+%   \begin{DescribeMacro}{\setcitestyle}
+%     utiliser la commande \cmd{\setcitestyle} pour passer de
+%     nouvelles options à \pkg{natbib}.
+%   \end{DescribeMacro}
+% \end{enumerate}
+%
+% Par exemple, pour utiliser un style de citation numérique où le
+% numéro de la référence se trouve entre crochets, on peut procéder de
+% l'une ou l'autre des deux manières suivantes:
+% \begin{quote}
+%   |\documentclass[nonatbib]{ulthese}| \\
+%   |\usepackage[numbers,square]{natbib}| \\
+%   |...| \\
+%   |\bibliographystyle{plain-fr}|
+% \end{quote}
+% ou
+% \begin{quote}
+%   |\documentclass{ulthese}| \\
+%   |...| \\
+%   |\setcitestyle{numbers,square}| \\
+%   |\bibliographystyle{plain-fr}|
+% \end{quote}
+%
+% Consulter la %
+% \doc{natbib}{http://texdoc.net/pkg/natbib/} %
+% de \pkg{natbib} pour les détails.
+%
+% \subsection{Bibliographies multiples}
+% \label{sec:bibliographie:multiples}
+%
+% La rédaction de la thèse ou du mémoire par articles est une pratique
+% qui gagne en popularité. Elle consiste à remplacer le corps
+% principal du manuscrit par un ou des articles scientifiques,
+% habituellement à raison d'un par chapitre. Dans de tels cas, on
+% souhaitera utiliser une bibliographie distincte pour chacun de ces
+% chapitres. L'ajout de |bibchapitre| ou de |bibsection| dans les
+% options de la classe permet de réaliser cette mise en forme
+% particulière.
+%
+% La classe fait appel au paquetage \pkg{chapterbib}
+% \citep{chapterbib} pour composer des bibliographies multiples. La
+% \doc{chapterbib}{http://texdoc.net/pkg/chapterbib/} du paquetage
+% explique la procédure à suivre pour obtenir une bibliographie par
+% chapitre avec {\BibTeX}. En résumé:
+% \begin{enumerate}
+% \item chaque chapitre comportant sa propre bibliographie doit
+%   absolument être inséré dans le document principal avec la commande
+%   \cmd{\include} \citep[section~3.5]{Goulet:2016};
+% \item chaque fichier visé doit contenir une commande
+%   \cmd{\bibliographystyle} (\autoref{sec:bibliographie:style}) et
+%   une commande \cmd{\bibliography};
+% \item on obtient les diverses bibliographies en compilant avec
+%   {\BibTeX} les fichiers individuels, et non le document maître.
+% \end{enumerate}
+%
+% La plupart des auteurs préféreront sans doute l'effet de l'option
+% |bibsection|, où la bibliographie apparait comme une section normale
+% à la fin d'un chapitre. Lorsque \pkg{babel} est chargé, la section
+% sera numérotée. Pour supprimer la numérotation, insérer dans le
+% préambule du document la commande
+% \begin{quote}
+%   |\addto\extras|\meta{langue}|{\renewcommand{\bibsection}{%| \\
+%   |  \section*{\bibname}\prebibhook}}|
+% \end{quote}
+% où \meta{langue} est la langue par défaut du document
+% (\autoref{sec:langues}).
+%
+% Le gabarit |gabarit-doctorat-articles| fournit la structure de base
+% d'une thèse par articles.
+%
+% \subsection{Style de la bibliographie}
+% \label{sec:bibliographie:style}
+%
+% \begin{DescribeMacro}{\bibliographystyle}
+%   Le format général de la bibliographie est contrôlé par un
+%   \emph{style} choisi avec la commande \cmd{\bibliographystyle} dans
+%   le préambule du document ou dans les fichiers de chaque chapitre
+%   dans une thèse ou un mémoire par articles. Les styles standards de
+%   {\LaTeX} sont |plain|, |unsrt|, |alpha| et |abbrv|.
+% \end{DescribeMacro}
+%
+% Le paquetage \pkg{natbib} chargé par défaut par la classe supporte
+% le style de citation auteur-année fréquemment employé en sciences
+% naturelles, plusieurs commandes de citation, un grand nombre de
+% styles de bibliographie ainsi que des entrées spécifiques pour les
+% numéros ISBN et les URL. Le paquetage fournit des styles de
+% bibliographie |plainnat|, |unsrtnat| et |abbrvnat| similaires aux
+% styles standards, mais plus complets. Il existe des
+% \link{http://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/}{versions
+% francisées} de ces styles (et de quelques autres) dans CTAN.
+%
+% Le paquetage \pkg{francais-bst} \citep{francais-bst} fournit une
+% feuille de style compatible avec \pkg{natbib} permettant de composer
+% des bibliographies auteur-année respectant les normes de typographie
+% française proposées dans \cite{Malo:1996}. Pour utiliser ce style,
+% on spécifiera dans le préambule du document LaTeX
+% \begin{quote}
+%   |\bibliographystyle{francais}|
+% \end{quote}
+%
+% Autrement, la FESP n'a pas d'exigences particulières quant à la
+% présentation de la bibliographie (présentation du titre, des auteurs
+% et autres informations bibliographiques).
 %
 % \section{Police de caractères du document}
 % \label{sec:police}
@@ -798,12 +962,13 @@
 %
 % \subsection{Encodage des fichiers}
 %
-% Composer de longs textes en français en {\LaTeX} devient rapidement
-% pénible si l'on utilise les commandes |\'e|, |\`a| ou |\^e| pour
-% entrer les lettres accentuées. Afin de pouvoir plutôt entrer
-% directement |é|, |à| ou |ê|, {\LaTeX} doit être configuré pour
-% reconnaître les lettres accentuées. C'est le rôle du paquetage
-% \pkg{inputenc} \citep{inputenc}.
+% Composer en {\LaTeX} de longs textes dans une langue ayant recours
+% aux signes diacritiques devient rapidement pénible si l'on utilise
+% des commandes telles que |\'e|, |\`a| ou |\"o| pour entrer des lettres
+% accentuées. Afin de pouvoir plutôt entrer directement |é|, |à| ou
+% |ö|, {\LaTeX} doit être configuré pour reconnaître les lettres
+% accentuées. C'est le rôle du paquetage \pkg{inputenc}
+% \citep{inputenc}.
 %
 % Il existe plusieurs manières différentes d'encoder --- ou
 % d'enregistrer --- les lettres accentuées et autres caractères
@@ -901,90 +1066,17 @@
 %   commandes \cmd{\og} et \cmd{\fg} de \pkg{babel} tout en bénéficiant de
 %   l'ajutement automatique des espaces autour des symboles.
 % \end{enumerate}
-%
-% \begin{DescribeMacro}{\nombre}
-%   Au sujet des espaces dans les nombres, le paquetage \pkg{numprint} étant
-%   chargé dans la classe avec \pkg{babel}, vous pouvez utiliser la
-%   commande \cmd{\nombre} pour formater automatiquement les nombres. Par
-%   exemple, le résultat de |\nombre{123456789}| est
-%   \nombre{123456789}.
-% \end{DescribeMacro}
-%
 % Vous devez évidemment désactiver ces ajustements si l'option
 % |nobabel| est spécifiée au chargement de la classe.
 %
 % \subsection{Style de la bibliographie}
 % \label{sec:bibliographystyle}
 %
-% \begin{DescribeMacro}{\bibliographystyle}
-%   Il est fortement recommandé d'utiliser {\BibTeX} pour la préparation
-%   de la bibliographie. Le formatage de la bibliographie est contrôlé
-%   par un style choisi par la commande \cmd{\bibliographystyle}. Les styles
-%   standards de {\LaTeX} sont |plain|, |unsrt|, |alpha| et |abbrv|.
-% \end{DescribeMacro}
-%
-% Pour plus de flexibilité, il est recommandé d'utiliser le paquetage
-% \pkg{natbib} pour la gestion des références et des styles de la
-% bibliographie. Entre autres choses, ce paquetage supporte le style de
-% citation auteur-année fréquemment employé en sciences naturelles,
-% plusieurs commandes de citation, un grand nombre de styles de
-% bibliographie ainsi que des entrées spécifiques pour les numéros ISBN
-% et les URL. Le paquetage fournit des styles de bibliographie
-% |plainnat|, |unsrtnat| et |abbrvnat| similaires aux styles standards,
-% mais plus complets. Il existe des
-% \link{http://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/}{versions
-%   francisées} de ces styles (et de quelques autres) dans CTAN.
-%
-% Afin d'assurer le bon fonctionnement avec \pkg{babel}, le
-% paquetage \pkg{natbib} est chargé par la classe \class{ulthese}
-% (à moins que l'option |nonatbib| ne soit spécifiée) avec les options
-% par défaut, soit |round|, |semicolon| et |authoryear|. Pour
-% spécifier d'autres options, vous avez deux possibilités:
-% \begin{enumerate}
-% \item utiliser l'option |nonatbib| de la classe et ensuite charger
-%   explicitement \pkg{natbib} avec ses options;
-% \item
-%   \begin{DescribeMacro}{\setcitestyle}
-%     utiliser la commande \cmd{\setcitestyle} pour passer de
-%     nouvelles options à \pkg{natbib}.
-%   \end{DescribeMacro}
-% \end{enumerate}
-%
-% Par exemple, pour utiliser un style de citation numérique où le
-% numéro de la référence se trouve entre crochets, on peut procéder de
-% l'une de ces deux manières:
-% \begin{quote}
-%   |\documentclass[nonatbib]{ulthese}| \\
-%   |\usepackage[numbers,square]{natbib}| \\
-%   |...| \\
-%   |\bibliographystyle{plain-fr}|
-% \end{quote}
-% ou
-% \begin{quote}
-%   |\documentclass{ulthese}| \\
-%   |...| \\
-%   |\setcitestyle{numbers,square}| \\
-%   |\bibliographystyle{plain-fr}|
-% \end{quote}
-%
-% Consultez la %
-% \doc{natbib}{http://texdoc.net/pkg/natbib/} %
-% de \pkg{natbib} pour les détails.
-%
-% Le paquetage
-% \link{http://www.ctan.org/pkg/francais-bst/}{\pkg{francais-bst}}
-% \citep{francais-bst} fournit une feuille de style compatible avec
-% \pkg{natbib} permettant de composer des bibliographies auteur-année
-% respectant les normes de typographie française proposées dans
-% \cite{Malo:1996}. Pour utiliser ce style, on spécifiera dans le
-% préambule du document LaTeX
-% \begin{quote}
-%   |\bibliographystyle{francais}|
-% \end{quote}
-%
-% Autrement, la FESP n'a pas d'exigences particulières quant à la
-% présentation de la bibliographie (présentation du titre, des auteurs
-% et autres informations bibliographiques).
+% Tel qu'expliqué à la \autoref{sec:bibliographie:style}, la commande
+% \cmd{\bibliographystyle} permet de définir le mode de citation dans
+% le texte et la présentation des notices bibliographiques. Cette
+% commande devrait figurer dans les fichiers des chapitres
+% individuels dans une thèse ou un mémoire par articles.
 %
 % \subsection{Déclarations des pages de titre}
 %
@@ -1083,20 +1175,17 @@
 %   Si la thèse ou le mémoire comporte une ou plusieurs annexes,
 %   composer celles-ci comme des chapitres normaux insérés dans le
 %   document maître après la commande \cmd{\appendix}. Cette commande a
-%   pour effet de passer d'un mode de numération numérique (1, 2, 3,
-%   \dots) à un mode alphabétique (A, B, C, \dots).
+%   pour effet de passer d'un mode de numération numérique (1, 1.1, 2, 2.1,
+%   \dots) à un mode alphabétique (A, A.1, B, B.1, \dots).
 % \end{DescribeMacro}
 %
 % \subsection{Bibliographie}
 %
-% \begin{DescribeMacro}{\bibliography}
-%   Si vous utilisez {\BibTeX}, la bibliographie est insérée dans le
-%   document à l'endroit où apparait la commande \cmd{\bibliography} dans le
-%   code source.
-% \end{DescribeMacro}
-%
-% Consulter la \autoref{sec:bibliographystyle} pour des
-% informations additionnelles sur la préparation de la bibliographie.
+% La bibliographie figure normalement à la toute fin du document, sous
+% forme de chapitre non numéroté. Tel qu'expliqué à la
+% \autoref{sec:bibliographie:multiples}, la commande
+% \cmd{\bibliography} doit plutôt se trouver dans les fichiers des
+% chapitres dans une thèse ou un mémoire par articles.
 %
 % \section{Aide additionnelle}
 %
@@ -1116,8 +1205,14 @@
 % \href{mailto:ulthese-aide@listes.ulaval.ca}{\url{ulthese-aide@listes.ulaval.ca}}.
 %
 % \StopEventually{
-%   \begin{thebibliography}{1}
+%   \begin{thebibliography}{15}
 %     \addcontentsline{toc}{section}{Références}
+%   \bibitem[{Arseneau(2015)}]{chapterbib}
+%     Arseneau, D. 2010,
+%     {\selectlanguage{english}\emph{chapterbib. Multiple
+%     bibliographies in {\LaTeX}}}.
+%     URL~\url{http://www.ctan.org/pkg/chapterbib/}.
+%
 %   \bibitem[{Braams et Bezos(2015)}]{babel}
 %     Braams, J. et J.~Bezos. 2015,
 %     {\selectlanguage{english}\emph{Babel}}.
@@ -1217,11 +1312,13 @@
 %<*class>
 \RequirePackage{ifthen}
 \RequirePackage{ifxetex}
-\newboolean{UL@babel}           % charger babel ou non
-\newboolean{UL@natbib}          % charger natbib ou non
-\newboolean{UL@isprogmasc}      % nom de programme masculin ou non
-\newboolean{UL@isexam}          % examen de doctorat ou non
-\newboolean{UL@hassubtitle}     % document a un sous-titre ou non
+\newboolean{UL@babel}           % charger babel?
+\newboolean{UL@natbib}          % charger natbib?
+\newboolean{UL@chapterbib}      % charger chapterbib?
+\newboolean{UL@sectionbib}      % option sectionbib de chapterbib?
+\newboolean{UL@isprogmasc}      % nom de programme masculin?
+\newboolean{UL@isexam}          % examen de doctorat?
+\newboolean{UL@hassubtitle}     % document a un sous-titre?
 %    \end{macrocode}
 %
 % \subsection{Options de la classe}
@@ -1240,6 +1337,25 @@
 \setboolean{UL@natbib}{true}
 \DeclareOption{nonatbib}{\setboolean{UL@natbib}{false}}
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{bibchapitre}
+%   \begin{macro}{bibsection}
+%     L'option |bibchapitre| entraine le chargement du paquetage
+%     \pkg{chapterbib} qui permet de composer des bibliographies
+%     multiples dans un document, habituellement une par
+%     chapitre. Avec l'option |bibsection|, la bibliographie se
+%     présente sous la forme d'une section plutôt que d'un chapitre.
+%     La seconde option implique la première.
+%    \begin{macrocode}
+\setboolean{UL@chapterbib}{false}
+\setboolean{UL@sectionbib}{false}
+\DeclareOption{bibchapitre}{\setboolean{UL@chapterbib}{true}}
+\DeclareOption{bibsection}{%
+  \setboolean{UL@chapterbib}{true}
+  \setboolean{UL@sectionbib}{true}}
+%    \end{macrocode}
+%   \end{macro}
 % \end{macro}
 %
 % \begin{macro}{nobabel}
@@ -1444,7 +1560,7 @@
 %    \begin{macrocode}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ExecuteOptions{11pt,letterpaper}
-\ProcessOptions
+\ProcessOptions\relax
 \ifx\UL@typenum\empty
   \ClassError{ulthese}{%
     No thesis type specified}
@@ -1473,12 +1589,19 @@
 \fi
 %    \end{macrocode}
 %
-% Le paquetage \pkg{natbib} doit être chargé avant \pkg{babel}
-% pour bien fonctionner. C'est pourquoi il est chargé dans la classe,
-% à moins que l'option |nonatbib| n'ait été spécifiée au chargement de
-% la classe.
+% Les paquetages \pkg{natbib} et \pkg{chapterbib} doivent être chargés
+% avant \pkg{babel} pour bien fonctionner, le cas échéant. Tel que
+% précisé dans la documentation de \pkg{natbib}, l'option |sectionbib|
+% est passée à ce paquetage est chargé, ou à \pkg{chapterbib} sinon.
 %    \begin{macrocode}
-\ifthenelse{\boolean{UL@natbib}}{\RequirePackage{natbib}}{}
+\ifthenelse{\boolean{UL@natbib}}{%
+  \ifthenelse{\boolean{UL@sectionbib}}{%
+    \PassOptionsToPackage{sectionbib}{natbib}}{}
+  \RequirePackage[round,semicolon,authoryear]{natbib}}{}
+\ifthenelse{\boolean{UL@chapterbib}}{%
+  \ifthenelse{\boolean{UL@sectionbib}\AND\not{\boolean{UL@natbib}}}{%
+    \PassOptionsToPackage{sectionbib}{chapterbib}}{}
+  \RequirePackage{chapterbib}}{}
 %    \end{macrocode}
 %
 % Le support pour les langues autres que l'anglais est offert par le
@@ -2025,6 +2148,7 @@
 %<*gabarit>
 %<phd&standard>%% GABARIT POUR THÈSE STANDARD
 %<phd&mesure>%% GABARIT POUR THÈSE SUR MESURE
+%<phd&articles>%% GABARIT POUR THÈSE PAR ARTICLES
 %<phd&multifac>%% GABARIT POUR THÈSE MULTIFACULTAIRE
 %<phd&cotutelle>%% GABARIT POUR THÈSE EN COTUTELLE
 %<phd&UdeS>%% GABARIT POUR THÈSE EN EXTENSION À L'UNIVERSITÉ DE SHERBROOKE
@@ -2045,8 +2169,12 @@
 %<m>%%   [l'un de MATDR, MArch, MA, LLM, MErg, MMus, MPht, MSc, MScGeogr,
 %<m>%%    MServSoc, MPsEd]
 %% et les langues les plus courantes. Le français sera la langue par
-%% défaut du document.
+%<!articles>%% défaut du document.
+%<articles>%% défaut du document. L'option 'bibsection' permet de créer des
+%<articles>%% bibliographies par chapitre présentées sous forme de section
+%<articles>%% numérotée.
 %<phd&(standard|mesure)>\documentclass[PhD,english,french]{ulthese}
+%<phd&articles>\documentclass[PhD,bibsection,english,french]{ulthese}
 %<phd&multifac>\documentclass[PhD,multifacultaire,english,french]{ulthese}
 %<phd&cotutelle>\documentclass[PhD,cotutelle,english,french]{ulthese}
 %<phd&UdeS>\documentclass[PhD,extensionUdeS,english,french]{ulthese}
@@ -2089,8 +2217,13 @@
     og=«, fg=»                     % caractères « et » sont les guillemets
   }
 
-  %% Style de la bibliographie.
-  \bibliographystyle{}
+%<!articles>  %% Style de la bibliographie.
+%<!articles> \bibliographystyle{}
+%<articles>  %% Suppression du numéro de section de la bibliographie. Utilisation
+%<articles>  %% de \extrasfrench parce que c'est la dernière langue déclarée dans
+%<articles>  %% \documentclass, ci-dessus.
+%<articles>  %\addto\extrasfrench{%
+%<articles>  %  \renewcommand{\bibsection}{\section*{\bibname}\prebibhook}}
 
   %% Déclarations des pages de titre. Remplacer les éléments entre < >.
   %% Supprimer les caractères < >. Couper un long titre ou un long
@@ -2158,16 +2291,18 @@
 \mainmatter                     % corps du document
 
 \include{introduction}          % introduction
-\include{chapitre1}             % chapitre 1
-\include{chapitre2}             % chapitre 2, etc.
+%<!articles>\include{chapitre1}             % chapitre 1
+%<articles>\include{chapitre1-articles}    % chapitre 1
+%<!articles>\include{chapitre2}             % chapitre 2, etc.
+%<articles>\include{chapitre2-articles}    % chapitre 2, etc.
 \include{conclusion}            % conclusion
 
 \appendix                       % annexes le cas échéant
 
 \include{annexe}                % annexe A
 
-\bibliography{}                 % production de la bibliographie
-
+%<!articles>\bibliography{}                 % production de la bibliographie
+%<!articles>
 \end{document}
 %</gabarit>
 %
@@ -2217,6 +2352,9 @@ qu'elle n'est pas numérotée.
 \chapter{Titre du chapitre}     % numéroté
 
 Texte du chapitre.
+%<articles>
+%<articles>\bibliographystyle{}              % style de la bibliographie
+%<articles>\bibliography{}                   % production de la bibliographie
 %</chapitre>
 %
 %<*conclusion>

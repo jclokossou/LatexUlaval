@@ -10,3 +10,6 @@
 \glossaryentry{1.0b> =General:>Ajouts et corrections mineures dans la documentation}{1}
 \glossaryentry{1.0a> =General:>Pr\IeC {\'e}cisions dans la documentation}{1}
 \glossaryentry{1.0> =General:>Version initiale}{1}
+\glossaryentry{4.4> =General:>ajout de l'option |bibchapitre| \IeC {\`a} la classe}{5}
+\glossaryentry{4.4> =General:>ajout de l'option |bibsection| \IeC {\`a} la classe}{5}
+\glossaryentry{4.4> =General:>Fixed url to babel documentation.}{11}
