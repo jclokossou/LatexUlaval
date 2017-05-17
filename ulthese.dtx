@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2017/05/15 v4.4 Classe pour les theses et memoires de l'Universite Laval]
+  [2017/05/16 v4.4 Classe pour les theses et memoires de l'Universite Laval]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -92,7 +92,7 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{0}
+% \CheckSum{856}
 % \DoNotIndex{\',\^,\`,\ ,\ae}
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ifthenelse,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*,\newboolean}
@@ -106,10 +106,13 @@
 % \changes{4.3}{2017-03-01}{Nouvelles options pour les titres de
 %   docteur en musique, maître en architecture, maître en
 %   ergothérapie, maître en physiothérapie et maître en
-%   psychoéducation. Modifications à la composition des sigles de
-%   grades. Vérification de la compatibilité entre le grade et les
-%   options multifacultaire, cotutelle, bidiplomation et extension.
-%   Améliorations à la documentation.}
+%   psychoéducation.}
+% \changes{4.3}{2017-03-01}{Modifications à la composition des sigles de
+%   grades.}
+% \changes{4.3}{2017-03-01}{Vérification de la compatibilité entre le
+%   grade et les options multifacultaire, cotutelle, bidiplomation et
+%   extension.}
+% \changes{4.3}{2017-03-01}{Améliorations à la documentation.}
 % \changes{4.2}{2016-03-29}{Ajout de l'option \texttt{examen}. Nouvelles
 %   options de \pkg{babel} dans les gabarits.}
 % \changes{4.1}{2016-02-13}{Paquetage \pkg{geometry} déclaré incompatible
@@ -120,7 +123,9 @@
 % \changes{3.0a}{2014-03-24}{Modifications et corrections à la
 %   documentation, notamment relativement à la configuration de \pkg{natbib}}
 % \changes{3.0}{2014-01-06}{Déclaration du grade en option de la
-%   classe. Moteur {\XeLaTeX} supporté; ajout de l'option \texttt{nobabel}}
+%   classe.}
+% \changes{3.0}{2014-01-06}{Moteur {\XeLaTeX} supporté}
+% \changes{3.0}{2014-01-06}{Ajout de l'option \texttt{nobabel}}
 % \changes{2.1}{2013-01-16}{Utilisation transparente de la police
 %   Helvetica pour la page de titre}
 % \changes{2.0}{2013-01-13}{Traitement automatique des longs titres}
@@ -394,8 +399,8 @@
 %   polices des pages de titre n'est pas affectée par ces options.
 % \end{DescribeMacro}
 %
+% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibchapitre}}
 % \begin{DescribeMacro}{bibchapitre}
-%   \changes{4.4}{2017-05-15}{ajout de l'option |bibchapitre| à la classe}^^A
 %   Permet de composer une bibliographie distincte après chaque
 %   fichier inséré dans le document avec \cmd{\include},
 %   habituellement un chapitre. Cette option est principalement utile
@@ -404,8 +409,8 @@
 %   présente sous la forme d'un chapitre non numéroté.
 % \end{DescribeMacro}
 %
+% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibsection}}
 % \begin{DescribeMacro}{bibsection}
-%   \changes{4.4}{2017-05-15}{ajout de l'option |bibsection| à la classe}^^A
 %   Comme l'option |bibchapitre|, sauf que la bibliographie se présente
 %   sous la forme d'une section numérotée.
 % \end{DescribeMacro}
@@ -782,7 +787,8 @@
 % consiste sans doute à consulter en ligne sur CTAN les
 % \link{http://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
 % documents spécifiques par langue}.
-% \changes{4.4}{2017-05-14}{Fixed url to babel documentation.}
+% \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
+%   de babel.}
 %
 % \begin{DescribeMacro}{\nombre}
 %   Le paquetage \pkg{numprint} étant chargé dans la classe avec

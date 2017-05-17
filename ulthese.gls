@@ -15,8 +15,10 @@
  \subitem General:\ Utilisation transparente de la police Helvetica pour la page de titre\pfill 
 		1
   \item 3.0\efill 
- \subitem General:\ D\IeC {\'e}claration du grade en option de la classe. Moteur {\XeLaTeX  } support\IeC {\'e}; ajout de l'option \texttt  {nobabel}\pfill 
+ \subitem General:\ Ajout de l'option \texttt  {nobabel}\pfill 1
+      \subsubitem D\IeC {\'e}claration du grade en option de la classe.\pfill 
 		1
+      \subsubitem Moteur {\XeLaTeX  } support\IeC {\'e}\pfill 1
   \item 3.0a\efill 
  \subitem General:\ Modifications et corrections \IeC {\`a} la documentation, notamment relativement \IeC {\`a} la configuration de \textbf  {natbib}\pfill 
 		1
@@ -32,9 +34,23 @@
  \subitem General:\ Ajout de l'option \texttt  {examen}. Nouvelles options de \textbf  {babel} dans les gabarits.\pfill 
 		1
   \item 4.3\efill 
- \subitem General:\ Nouvelles options pour les titres de docteur en musique, ma\IeC {\^\i }tre en architecture, ma\IeC {\^\i }tre en ergoth\IeC {\'e}rapie, ma\IeC {\^\i }tre en physioth\IeC {\'e}rapie et ma\IeC {\^\i }tre en psycho\IeC {\'e}ducation. Modifications \IeC {\`a} la composition des sigles de grades. V\IeC {\'e}rification de la compatibilit\IeC {\'e} entre le grade et les options multifacultaire, cotutelle, bidiplomation et extension. Am\IeC {\'e}liorations \IeC {\`a} la documentation.\pfill 
+ \subitem General:\ Am\IeC {\'e}liorations \IeC {\`a} la documentation.\pfill 1
+      \subsubitem Modifications \IeC {\`a} la composition des sigles de grades.\pfill 
+		1
+      \subsubitem Nouvelles options pour les titres de docteur en musique, ma\IeC {\^\i }tre en architecture, ma\IeC {\^\i }tre en ergoth\IeC {\'e}rapie, ma\IeC {\^\i }tre en physioth\IeC {\'e}rapie et ma\IeC {\^\i }tre en psycho\IeC {\'e}ducation.\pfill 
+		1
+      \subsubitem V\IeC {\'e}rification de la compatibilit\IeC {\'e} entre le grade et les options multifacultaire, cotutelle, bidiplomation et extension.\pfill 
 		1
   \item 4.4\efill 
- \subitem General:\ Fixed url to babel documentation.\pfill 11
+ \subitem General:\ Ajout de l'option \texttt  {bibchapitre}\pfill 5
+      \subsubitem Ajout de l'option \texttt  {bibsection}\pfill 5
+      \subsubitem Correction d'une url vers la documentation de babel.\pfill 
+		11
+      \subsubitem Documentation r\IeC {\'e}vis\IeC {\'e}e, principalement ce qui touche \IeC {\`a} la pr\IeC {\'e}paration de la bibliographie.\pfill 
+		1
+      \subsubitem Nouveau gabarit pour une th\IeC {\`e}se par articles.\pfill 
+		1
+      \subsubitem Prise en charge des bibliographies multiples pour les th\IeC {\`e}ses et m\IeC {\'e}moires par articles.\pfill 
+		1
 
  \end{theglossary}
