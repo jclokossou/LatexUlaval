@@ -21,9 +21,9 @@ audience.
 LaTeX Project Public License, version 1.3c or (at your option) any
 later version.
 
-## Authors
+## Author
 
-Vincent Goulet <vincent.goulet@act.ulaval.ca>
+Université Laval <ulthese-dev@bibl.ulaval.ca>
 
 > The rest of this file is in French for the target audience.
 
