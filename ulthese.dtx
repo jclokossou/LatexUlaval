@@ -43,49 +43,66 @@
   \usepackage[scaled=1.02]{inconsolata}
   \usepackage[sc]{mathpazo}
   \usepackage{fontawesome}
-  \usepackage{color,metalogo}
-  \usepackage{enumitem,tabularx,booktabs,amsthm}
+  \usepackage{metalogo}
+  \usepackage{tabularx,booktabs}
   \DisableCrossrefs
   \CodelineNumbered
   \RecordChanges
   \GlossaryPrologue{\section*{Historique des versions}%
     \addcontentsline{toc}{section}{Historique des versions}}
 
+  %% Couleurs
+  \usepackage{xcolor}
   \definecolor{link}{rgb}{0,0.4,0.6}   % ~RoyalBlue de dvips
   \definecolor{url}{rgb}{0.6,0,0}      % rouge foncé
   \definecolor{citation}{rgb}{0,0.5,0} % vert foncé
 
   %% Liste description alignée à gauche
+  \usepackage{enumitem}
   \setlist[description]{leftmargin=*,align=left}
 
+  %% Environnement pour remarques
+  \usepackage{amsthm}
+  \theoremstyle{definition}
+  \newtheorem*{rem}{Remarque}
+
+  %% Hyperliens
   \usepackage{hyperref}
-  \hypersetup{colorlinks, linktocpage,
-    urlcolor=url, linkcolor=link, citecolor=citation,
-    bookmarksopen, bookmarksnumbered, bookmarksdepth=subsubsection,
-    pdftitle={Manuel de référence de la classe ulthese},
-    pdfauthor={Faculté des études supérieures et postdoctorales}}
+  \hypersetup{%
+    pdfauthor = {Faculté des études supérieures et postdoctorales},
+    pdftitle = {Guide de l'utilisateur de la classe ulthese},
+    colorlinks = {true},
+    linktocpage = {true},
+    urlcolor = {url},
+    linkcolor = {link},
+    citecolor = {citation},
+    pdfpagemode = {UseOutlines},
+    pdfstartview = {Fit},
+    bookmarksopen = {true},
+    bookmarksnumbered = {true},
+    bookmarksdepth = {subsubsection}}
   \addto\extrasfrench{%
     \def\appendixautorefname{annexe}%
     \def\tableautorefname{tableau}%
     \def\subsectionautorefname{section}%
   }
 
-  \theoremstyle{definition}
-  \newtheorem*{rem}{Remarque}
-
-  \newcommand{\class}[1]{\textsf{#1}}
-  \newcommand{\pkg}[1]{\textbf{#1}}
-
-  \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
-  \newcommand{\doc}[3][documentation]{%
-    \link{#3}{#1}\marginpar{\hfill\faBookmark~\texttt{#2}}}
-
+  %% Paramétrage de babel
   \frenchbsetup{%
     StandardItemizeEnv=true,       % listes standards
     ThinSpaceInFrenchNumbers=true, % espace fine dans les nombres
     og=«, fg=»                     % « et » sont les guillemets
   }
-  \addto\captionsfrench{\def\tablename{{\scshape Tab.}}}
+  \def\frenchtablename{{\scshape Tab.}}
+
+  %% Commandes de mise en forme spéciales
+  \newcommand{\class}[1]{\textsf{#1}}
+  \newcommand{\pkg}[1]{\textbf{#1}}
+
+  %% Commandes pour les liens vers la documentation
+  \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
+  \newcommand{\doc}[3][documentation]{%
+    \link{#3}{#1}\marginpar{\hfill\faBookmark~\texttt{#2}}}
 
 \begin{document}
   \DocInput{ulthese.dtx}
@@ -276,7 +293,7 @@
 %
 % On charge la classe avec la commande
 % \begin{quote}
-%   \cmd{\documentclass}\oarg{options}|{ulthese}|
+% |\documentclass|\oarg{options}|{ulthese}|
 % \end{quote}
 % Les marges, l'interligne et la numérotation des pages sont adaptées
 % aux règles de présentation matérielle de la FESP. Les sections
