@@ -177,22 +177,24 @@
 % trouve dans la marge le nom du fichier correspondant (sans
 % l'extension \texttt{.pdf}) sur un système doté d'une installation de
 % {\TeX}~Live.} %
-% exhaustive: le guide de l'utilisateur fait près de 600~pages! Il
-% peut être utile de s'y référer de temps à autre pour réaliser une
-% mise en page particulière.
+% exhaustive: le guide de l'utilisateur fait près de 600~pages!
+% N'hésitez pas à vous y référer pour réaliser une mise en page
+% particulière.
 %
-% On trouvera des informations additionnelles sur l'utilisation des
-% classes \class{ulthese} et \class{memoir} dans \doc[Rédaction avec
-% {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul}
+% L'autre compagnon naturel de la présente documentation est
+% \doc[Rédaction avec {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul},^^A
 % \citep{Goulet:2016}, la formation {\LaTeX} de l'Université Laval.
+% Vous y trouverez des informations additionnelles sur l'utilisation des
+% classes \class{ulthese} et \class{memoir}.
 %
 % \section{Démarrage rapide (pour les impatients)}
 % \label{sec:utilisation:rapide}
 %
-% La classe est livrée avec la distribution {\TeX}~Live. Si vous
-% utilisez cette distribution et qu'elle est à jour\footnote{%
-%   En cas de doute, exécutez la commande |tlmgr update --all| depuis
-%   une invite de commande.}, %
+% La classe est livrée avec les distributions {\TeX}~Live, Mac{\TeX} et
+% MiK{\TeX}. Si vous utilisez l'une ou l'autre de ces distributions et
+% qu'elle est à jour\footnote{%
+%   Validez à l'aide de l'assistant de mise à jour de votre
+%   distribution.}, %
 % vous devriez pouvoir utiliser \class{ulthese} sans autre
 % intervention.
 %
@@ -207,16 +209,16 @@
 % lesquels se baser pour:
 % \begin{itemize}
 % \item les fichiers maîtres de divers types de thèses et mémoires
-%   (standard, sur mesure, en cotutelle, en bidiplomation, en
-%   extension, etc.);
+%   (standard, par articles, sur mesure, en cotutelle, en
+%   bidiplomation, en extension, etc.);
 % \item les fichiers des parties les plus usuelles (résumés français
 %   et anglais, avant-propos, introduction, chapitres, conclusion,
 %   etc.).
 % \end{itemize}
 % Les noms des fichiers devraient permettre de facilement identifier
-% leur contenu (une bonne pratique; |rappels.tex| est plus parlant et
-% résiste mieux aux changements à l'ordre des chapitres que
-% |chapitre1.tex|).
+% leur contenu (c'est là une bonne pratique: le nom |rappels.tex|
+% parle de lui-même et résiste mieux aux changements à l'ordre des
+% chapitres que |chapitre1.tex|).
 %
 % Dans {\TeX}~Live, les gabarits sont classés avec la documentation de
 % la classe. Pour les utiliser, copiez les fichiers appropriés dans
@@ -277,9 +279,9 @@
 %   \cmd{\documentclass}\oarg{options}|{ulthese}|
 % \end{quote}
 % Les marges, l'interligne et la numérotation des pages sont adaptées
-% aux règles de présentation matérielle de la FESP. Les options et les
-% commandes définies par la classe sont décrites dans les sections
-% suivantes.
+% aux règles de présentation matérielle de la FESP. Les sections
+% suivantes décrivent les options et les commandes définies par la
+% classe.
 %
 % \subsection{Options de la classe}
 % \label{sec:utilisation:options}
@@ -343,84 +345,83 @@
 % \end{table}
 %
 % \begin{DescribeMacro}{multifacultaire}
-%   Identifie une thèse comme multifacultaire. Valide uniquement avec un
+%   Identifie une thèse multifacultaire. Valide uniquement avec un
 %   grade de doctorat. Cette déclaration requiert ensuite d'utiliser
 %   la commande \cmd{\faculteUL}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{cotutelle}
-%   Identifie une thèse comme effectuée en cotutelle avec une autre
+%   Identifie une thèse effectuée en cotutelle avec une autre
 %   université. Valide uniquement avec un grade de doctorat. Cette
 %   déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\univcotutelle} et \cmd{\gradecotutelle}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{bidiplomation}
-%   Identifie un mémoire comme effectué en bidiplomation avec une autre
+%   Identifie un mémoire effectué en bidiplomation avec une autre
 %   université. Valide uniquement avec un grade de maîtrise. Cette
 %   déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\univbidiplomation} et \cmd{\gradebidiplomation}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{extensionUdeS}
-%   Identifie une thèse comme réalisée en extension à l'Université de
+%   Identifie une thèse réalisée en extension à l'Université de
 %   Sherbrooke. Valide uniquement avec un grade de doctorat. Cette
 %   déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\faculteUL} et \cmd{\faculteUdeS}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{extensionUQO}
-%   Identifie une thèse comme réalisée en extension à l'Université du
-%   Québec en Outaouais. Valide uniquement avec un grade de doctorat.
+%   Identifie une thèse réalisée en extension à l'Université du
+%   Québec en Outaouais (UQO). Valide uniquement avec un grade de doctorat.
 %   Cette déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\faculteUL} et \cmd{\faculteUQO}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{extensionUQAC}
-%   Identifie un mémoire comme réalisé en extension à l'Université du
-%   Québec à Chicoutimi. Valide uniquement avec un grade de maîtrise.
+%   Identifie un mémoire réalisé en extension à l'Université du Québec
+%   à Chicoutimi (UQAC). Valide uniquement avec un grade de maîtrise.
 %   Cette déclaration requiert ensuite d'utiliser les commandes
 %   \cmd{\faculteUL} et \cmd{\faculteUQAC}.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{examen}
-%   Identifie le document comme un examen de doctorat. Cette option
-%   permet d'utiliser la classe pour la rédaction d'un examen de
-%   doctorat respectant les règles de présentation matérielle de la
-%   FESP. Elle a pour effet de changer l'appellation «Thèse» sur la
-%   page couverture pour «Examen de doctorat». Elle supprime également
-%   la page frontispice. L'option n'est compatible qu'avec l'une des
-%   options de grade de doctorat.
+%   Identifie un examen de doctorat. Cette option permet d'utiliser la
+%   classe pour la rédaction d'un examen de doctorat respectant les
+%   règles de présentation matérielle de la FESP. Elle a pour effet de
+%   changer l'appellation «Thèse» sur la page couverture pour «Examen
+%   de doctorat». Elle supprime également la page frontispice.
+%   L'option n'est compatible qu'avec l'une des options de grade de
+%   doctorat.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{10pt,11pt,12pt}
 %   Sélectionne une taille de police de 10, 11 ou 12~points. Par
-%   défaut la classe utilise une police de 11~points. La taille des
-%   polices des pages de titre n'est pas affectée par ces options.
+%   défaut la classe utilise une police de 11~points. Ces options
+%   n'ont aucun effet sur la taille des polices des pages de titre.
 % \end{DescribeMacro}
 %
 % \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibchapitre}}
-% \begin{DescribeMacro}{bibchapitre}
-%   Permet de composer une bibliographie distincte après chaque
-%   fichier inséré dans le document avec \cmd{\include},
-%   habituellement un chapitre. Cette option est principalement utile
-%   pour les thèses et mémoires par articles; voir la
-%   \autoref{sec:bibliographie:multiples}. La bibliographie se
-%   présente sous la forme d'un chapitre non numéroté.
-% \end{DescribeMacro}
-%
 % \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibsection}}
-% \begin{DescribeMacro}{bibsection}
-%   Comme l'option |bibchapitre|, sauf que la bibliographie se présente
-%   sous la forme d'une section numérotée.
+% \begin{DescribeMacro}{bibchapitre}
+%   \begin{DescribeMacro}{bibsection}
+%     Permettent de composer une bibliographie distincte après chaque
+%     fichier inséré dans le document avec \cmd{\include},
+%     habituellement un chapitre; voir la
+%     \autoref{sec:bibliographie:multiples}. Ces options sont
+%     principalement utiles pour les thèses et mémoires par articles.
+%     La bibliographie se présente sous la forme d'un chapitre non
+%     numéroté avec |bibchapitre|, et sous la forme d'une section
+%     numérotée avec |bibsection|.
+%   \end{DescribeMacro}
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{nonatbib}
 %   Empêche le chargement du paquetage \pkg{natbib}. La paquetage est
 %   normalement chargé par la classe; voir la
-%   \autoref{sec:bibliographystyle}. L'option |nonatbib| permet
-%   d'empêcher le chargement pour modifier les options du paquetage ou
-%   en cas de conflit avec un autre paquetage de mise en forme de la
+%   \autoref{sec:bibliographie}. L'option |nonatbib| permet d'empêcher
+%   le chargement pour modifier les options du paquetage ou en cas de
+%   conflit avec un autre paquetage de mise en forme de la
 %   bibliographie.
 % \end{DescribeMacro}
 %
@@ -434,8 +435,8 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{english, french, ...}
-%   Identifie les langues utilisées dans le document. Celles-ci sont
-%   passées au paquetage \pkg{babel} (dans la mesure où |nobabel|
+%   Déclare les langues utilisées dans le document. Ces options sont
+%   transférées au paquetage \pkg{babel} (dans la mesure où |nobabel|
 %   n'est pas spécifié, bien entendu). Le libellé des langues devrait
 %   donc correspondre aux options de \pkg{babel}. La dernière langue
 %   spécifiée est la langue active par défaut dans le document.
@@ -497,7 +498,7 @@
 %   \begin{quote}
 %     |\titre{Ceci est un titre d'une seule ligne}|
 %   \end{quote}
-%   Pour un titre de deux lignes, on écrira:
+%   Pour un titre de deux lignes, utiliser:
 %   \begin{quote}
 %     |\titre{Ceci est la première ligne d'un long titre \\| \\
 %     |       et ceci est la seconde}|
@@ -512,7 +513,8 @@
 % \begin{DescribeMacro}{\auteur}
 %   Nom complet de l'auteur de la thèse ou du mémoire, sous la forme
 %   |Prénom Nom| avec seulement des majuscules initiales. Ne pas
-%   utiliser la commande \cmd{\author} de {\LaTeX} pour le nom de l'auteur.
+%   utiliser la commande \cmd{\author} de {\LaTeX} pour le nom de
+%   l'auteur.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\annee}
@@ -532,9 +534,9 @@
 %   d'une virgule et de la mention «directeur de recherche» ou
 %   «directrice de recherche».
 %
-%   Les thèses en cotutelle comportent un directeur ou une directrice de
-%   recherche et un directeur ou une directrice de cotutelle. On
-%   sépare chaque mention par |\\|, comme ceci:
+%   Les thèses en cotutelle comportent un directeur ou une directrice
+%   de recherche et un directeur ou une directrice de cotutelle.
+%   Séparer chaque mention par |\\|, comme ceci:
 %   \begin{quote}
 %     |\direction{Prénom Nom, directrice de recherche \\| \\
 %     |           Prénom Nom, directeur de cotutelle}|
@@ -546,9 +548,10 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\codirection}
-%   Comme la commande \cmd{\direction}, mais pour le ou les codirecteurs
-%   de recherche, s'il y a lieu. Lorsqu'il y a plus d'un codirecteur de
-%   recherche, séparer chaque mention par |\\|, comme ceci:
+%   Comme la commande \cmd{\direction}, mais pour le ou les
+%   codirecteurs de recherche, s'il y a lieu. Lorsqu'il y a plus d'un
+%   codirecteur de recherche, séparer chaque mention par |\\|, comme
+%   ceci:
 %   \begin{quote}
 %     |\codirection{Prénom Nom, directrice de recherche \\| \\
 %     |             Prénom Nom, directeur de recherche}|
@@ -586,8 +589,8 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\gradebidiplomation}
-%   Grade conféré par l'université de bidiplomation,
-%   déclaré sous la forme
+%   Grade conféré par l'université de bidiplomation, déclaré sous la
+%   forme
 %   \begin{quote}
 %     |\gradebidiplomation{Nom du grade (sigle)}|
 %   \end{quote}
@@ -630,26 +633,25 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\pagestitre}
-%   Déclaration de création de la page de titre et de la page
-%   frontispice. Ne pas utiliser la commande \cmd{\pagetitle} de {\LaTeX}
-%   pour ce faire. De toutes les commandes ci-dessus, c'est la seule
-%   qui doit se trouver dans le corps du document plutôt que dans le
-%   préambule.
+%   Création de la page de titre et de la page frontispice. Ne pas
+%   utiliser la commande \cmd{\pagetitle} de {\LaTeX} pour ce faire.
+%   De toutes les commandes ci-dessus, c'est la seule qui doit se
+%   trouver dans le corps du document plutôt que dans le préambule.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\dedicace}
-%   La commande \cmd{\dedicace} ajoute une dédicace («À mes parents», «À
-%   Camille») à la thèse ou au mémoire. La dédicace est disposée seule
-%   sur une page liminaire, à une dizaine de lignes de la marge du haut et
-%   alignée à droite. Par défaut, elle est composée en italique.
+%   Ajout d'une dédicace («À mes parents», «À Camille») à la thèse ou
+%   au mémoire. La dédicace est disposée seule sur une page liminaire,
+%   à une dizaine de lignes de la marge du haut et alignée à droite.
+%   Par défaut, elle est composée en italique.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\epigraphe}
-%   La commande \cmd{\epigraphe} sert à ajouter une épigraphe au début du
-%   document. Comme la dédicace, l'épigraphe est disposée seule sur une
-%   page liminaire, à une dizaine de lignes de la marge du haut et alignée à
-%   droite. La commande accepte deux arguments, soit le texte de la
-%   citation et son auteur ou la source, dans l'ordre.
+%   Ajout d'une épigraphe au début du document. Comme la dédicace,
+%   l'épigraphe est disposée seule sur une page liminaire, à une
+%   dizaine de lignes de la marge du haut et alignée à droite. La
+%   commande accepte deux arguments, soit le texte de la citation et
+%   son auteur ou la source, dans l'ordre.
 %
 %   Pour ajouter une épigraphe au début d'un ou plusieurs chapitres,
 %   utiliser directement la commande \cmd{\epigraph} de
@@ -674,9 +676,9 @@
 %   les citations «longues», celles qui peuvent s'étendre sur plus de
 %   cinq lignes ou, surtout, plus d'un paragraphe. Dans la classe, le
 %   texte est alors toujours placé en retrait de 10~mm, mais également
-%   à interligne simple. De plus, les paragraphes, le cas échéant,
-%   sont séparés d'un espace vertical afin de bien les distinguer les
-%   uns des autres.
+%   à interligne simple. De plus, un espace vertical sépare les
+%   paragraphes, le cas échéant, afin de bien les distinguer les uns
+%   des autres.
 % \end{DescribeEnv}
 %
 % \subsection{Interligne}
@@ -717,7 +719,7 @@
 %   voir aussi la \autoref{sec:bibliographie});
 % \item[\normalfont\pkg{chapterbib}] \citep{chapterbib} gestion de
 %   bibliographies multiples (si l'une ou l'autre des options
-%   |chapterbib| ou |sectionbib| est spécifiée;
+%   |bibchapitre| ou |bibsection| est spécifiée;
 %   voir aussi la \autoref{sec:bibliographie:multiples});
 % \item[\normalfont\pkg{fontspec}] \citep{fontspec} gestion des
 %   polices OpenType sous {\XeLaTeX} (chargé avec ce moteur
@@ -725,10 +727,10 @@
 % \item[\normalfont\pkg{unicode-math}] \citep{unicode-math} gestion
 %   des polices mathématiques {\XeLaTeX} (chargé avec ce moteur
 %   seulement);
-% \item[\normalfont\pkg{graphicx}] \citep{graphicx} support pour
-%   l'insertion et la manipulation de graphiques;
-% \item[\normalfont\pkg{xcolor}] \citep{xcolor} extension du paquetage
-%   \pkg{color} pour gérer les couleurs dans le texte;
+% \item[\normalfont\pkg{graphicx}] \citep{graphicx} insertion et
+%   manipulation de graphiques;
+% \item[\normalfont\pkg{xcolor}] \citep{xcolor} gestion des couleurs
+%   dans le document;
 % \item[\normalfont\pkg{textcomp}] multitude de symboles spéciaux,
 %   dont un beau symbole de copyright, \textcopyright.
 % \end{description}
@@ -808,12 +810,12 @@
 % \section{Bibliographie}
 % \label{sec:bibliographie}
 %
-% Il est fortement recommandé d'utiliser {\BibTeX} pour la préparation
-% de la bibliographie, tel qu'expliqué en détail dans le chapitre~8 de %
-% \doc[Rédaction avec {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul}.
-%
 % \begin{DescribeMacro}{\bibliography}
-%   Avec {\BibTeX}, la bibliographie est insérée dans le document à
+%   Il est fortement recommandé d'utiliser {\BibTeX} pour la
+%   préparation de la bibliographie, tel qu'expliqué en détail dans le
+%   chapitre~8 de %
+%   \doc[Rédaction avec {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul}.^^A
+%   La bibliographie est insérée dans le document à
 %   l'endroit où apparait la commande \cmd{\bibliography} dans le code
 %   source. Cette commande prend en arguments les noms des bases de
 %   données bibliographiques séparés par des virgules.
@@ -838,8 +840,8 @@
 % \end{enumerate}
 %
 % Par exemple, pour utiliser un style de citation numérique où le
-% numéro de la référence se trouve entre crochets, on peut procéder de
-% l'une ou l'autre des deux manières suivantes:
+% numéro de la référence se trouve entre crochets, vous pouvez
+% procéder de l'une ou l'autre des deux manières suivantes:
 % \begin{quote}
 %   |\documentclass[nonatbib]{ulthese}| \\
 %   |\usepackage[numbers,square]{natbib}| \\
@@ -854,7 +856,7 @@
 %   |\bibliographystyle{plain-fr}|
 % \end{quote}
 %
-% Consulter la %
+% Consultez la %
 % \doc{natbib}{http://texdoc.net/pkg/natbib/} %
 % de \pkg{natbib} pour les détails.
 %
@@ -926,7 +928,7 @@
 % feuille de style compatible avec \pkg{natbib} permettant de composer
 % des bibliographies auteur-année respectant les normes de typographie
 % française proposées dans \cite{Malo:1996}. Pour utiliser ce style,
-% on spécifiera dans le préambule du document LaTeX
+% spécifier dans le préambule du document LaTeX
 % \begin{quote}
 %   |\bibliographystyle{francais}|
 % \end{quote}
@@ -943,20 +945,20 @@
 % Computer Modern}. Avec toute distribution {\LaTeX} moderne, il est
 % maintenant simple d'utiliser l'une ou l'autre des polices PostScript
 % standards. D'ailleurs la classe \class{ulthese} utilise la police
-% sans empattements \textsf{Helvetica} pour composer les page de
+% sans empattements \textsf{Helvetica} pour composer les pages de
 % titre.
 %
 % La FESP permet l'utilisation des polices Times, Palatino (la police
 % du présent document) et Lucida~Bright dans les thèse et mémoires. La
 % section~10.2 de \doc[Rédaction avec
 % {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul}
-% explique comment utiliser ces polices dans son document.
+% explique comment utiliser ces polices dans votre document.
 %
 % \section{Gabarits}
 % \label{sec:gabarits}
 %
 % Les gabarits livrés avec la classe comportent des commentaires
-% succincts pour vous guider dans la préparation de votre document.
+% succincts pour vous guider dans la préparation de votre manuscrit.
 % Les sections suivantes fournissent des détails additionnels, et ce,
 % dans l'ordre où les commandes apparaissent dans les gabarits.
 %
@@ -980,7 +982,7 @@
 % d'enregistrer --- les lettres accentuées et autres caractères
 % spéciaux (comme, par exemple, le symbole de l'euro) dans un
 % ordinateur. La méthode la plus répandue et celle standard sur les
-% versions récentes des systèmes d'exploitation Linux et OS~X est
+% versions récentes des systèmes d'exploitation Linux et macOS est
 % l'UTF-8 de la norme
 % \link{http://fr.wikipedia.org/wiki/Unicode}{Unicode}. Les gabarits
 % sont livrés dans ce type d'encodage.
@@ -1020,7 +1022,7 @@
 % chargement; voir ci-dessous.
 %
 % Si vous utilisez un paquetage non standard dans les distributions
-% courantes (MiK\TeX, \TeX~Live, Mac\TeX), vous devez le fournir avec
+% courantes (\TeX~Live, Mac\TeX, MiK\TeX), vous devez le fournir avec
 % le code source de votre document lors du dépôt final.
 %
 % \subsection{Changement de police de caractères}
@@ -1035,19 +1037,22 @@
 %
 % Le paquetage \pkg{hyperref} \citep{hyperref} permet de transformer
 % toutes les références en hyperliens cliquables lorsque le document
-% est produit avec pdf{\LaTeX}. L'interaction de ce paquetage avec les
-% autres est parfois (voire souvent) délicate. Pour cette raison, il
-% est habituellement nécessaire de charger \pkg{hyperref} en tout
-% dernier. C'est pourquoi il n'est pas chargé dans la classe, mais
-% plutôt dans les gabarits. Prenez soin de maintenir le dernier rang
-% de chargement lors de l'édition d'un gabarit.
+% est produit avec pdf{\LaTeX} ou {\XeLaTeX}. L'interaction de ce
+% paquetage avec les autres est parfois (voire souvent) délicate. Pour
+% cette raison, il est habituellement nécessaire de charger
+% \pkg{hyperref} en tout dernier. C'est pourquoi il n'est pas chargé
+% dans la classe, mais plutôt dans les gabarits. Prenez soin de
+% maintenir le dernier rang de chargement lors de l'édition d'un
+% gabarit.
 %
-% La configuration du paquetage dans les gabarits fait en sorte que
-% les liens sont simplement signalés par une couleur de texte
-% légèrement contrastante. L'utilisation de couleurs dans un document
-% requiert le paquetage |xcolor|, chargé par la classe. La couleur de
-% lien par défaut, |ULlinkcolor|, est définie dans la classe; voir la
-% \autoref{sec:couleurs}.
+% \begin{DescribeMacro}{\hyperrefsetup}
+%   La configuration du paquetage dans les gabarits fait en sorte que
+%   les liens sont simplement signalés par une couleur de texte
+%   légèrement contrastante. L'utilisation de couleurs dans un
+%   document requiert le paquetage |xcolor|, chargé par la classe. La
+%   couleur de lien par défaut, |ULlinkcolor|, est définie dans la
+%   classe; voir la \autoref{sec:couleurs}.
+% \end{DescribeMacro}
 %
 % \subsection{Options de \pkg{babel}}
 %
@@ -1109,7 +1114,7 @@
 % \item la page de titre (obligatoire);
 % \item la page frontispice (obligatoire);
 % \item un résumé en français (obligatoire);
-% \item un résumé en anglais (recommandé mais non obligatoire);
+% \item un résumé en anglais (recommandé, mais non obligatoire);
 % \item une table des matières (obligatoire);
 % \item une liste des tableaux;
 % \item une liste des figures;
@@ -1117,8 +1122,8 @@
 % \item une dédicace;
 % \item une épigraphe;
 % \item des remerciements;
-% \item un avant-propos (obligatoire dans le cas d'un mémoire ou d'une
-%   thèse avec insertion d'articles).
+% \item un avant-propos (obligatoire dans le cas d'une thèse ou d'un
+%   mémoire par articles).
 % \end{enumerate}
 %
 % \begin{rem}
@@ -1182,7 +1187,7 @@
 %   composer celles-ci comme des chapitres normaux insérés dans le
 %   document maître après la commande \cmd{\appendix}. Cette commande a
 %   pour effet de passer d'un mode de numération numérique (1, 1.1, 2, 2.1,
-%   \dots) à un mode alphabétique (A, A.1, B, B.1, \dots).
+%   \dots) à un mode alphanumérique (A, A.1, B, B.1, \dots).
 % \end{DescribeMacro}
 %
 % \subsection{Bibliographie}
@@ -1213,19 +1218,19 @@
 % \StopEventually{
 %   \begin{thebibliography}{15}
 %     \addcontentsline{toc}{section}{Références}
-%   \bibitem[{Arseneau(2015)}]{chapterbib}
+%   \bibitem[{Arseneau(2010)}]{chapterbib}
 %     Arseneau, D. 2010,
 %     {\selectlanguage{english}\emph{chapterbib. Multiple
 %     bibliographies in {\LaTeX}}}.
 %     URL~\url{http://www.ctan.org/pkg/chapterbib/}.
 %
-%   \bibitem[{Braams et Bezos(2015)}]{babel}
-%     Braams, J. et J.~Bezos. 2015,
+%   \bibitem[{Braams et Bezos(2016)}]{babel}
+%     Braams, J. et J.~Bezos. 2016,
 %     {\selectlanguage{english}\emph{Babel}}.
 %     URL~\url{http://www.ctan.org/pkg/babel/}.
 %
-%   \bibitem[{Carlisle et {The \LaTeX3\ Project}(2014)}]{graphicx}
-%     Carlisle, D. et {The \LaTeX3\ Project}. 2014,
+%   \bibitem[{Carlisle et {The \LaTeX3\ Project}(2016)}]{graphicx}
+%     Carlisle, D. et {The \LaTeX3\ Project}. 2016,
 %     {\selectlanguage{english}\emph{Packages in the `graphics'
 %     Bundle}}. URL~\url{http://www.ctan.org/pkg/graphics/}.
 %
@@ -1261,8 +1266,8 @@
 %     {\selectlanguage{english}\emph{inputenc.sty}}.
 %     URL~\url{http://www.ctan.org/pkg/inputenc/}.
 %
-%   \bibitem[{Kern(2007)}]{xcolor}
-%     Kern, D.~U. 2007, {\selectlanguage{english}\emph{Extending
+%   \bibitem[{Kern(2016)}]{xcolor}
+%     Kern, D.~U. 2016, {\selectlanguage{english}\emph{Extending
 %     {\LaTeX}’s color facilities: the \pkg{xcolor} package}}.
 %     URL~\url{http://www.ctan.org/pkg/xcolor/}.
 %
@@ -1271,27 +1276,27 @@
 %     communication écrite au cégep, à l'université et en
 %     entreprise}}, Québec Amérique. ISBN~978-2-8903-7875-9.
 %
-%   \bibitem[{Rahtz et Oberdiek(2012)}]{hyperref}
-%     Rahtz, S. et H.~Oberdiek. 2012,
+%   \bibitem[{Rahtz et Oberdiek(2017)}]{hyperref}
+%     Rahtz, S. et H.~Oberdiek. 2017,
 %     {\selectlanguage{english}\emph{Hypertext marks in {\LaTeX}: a
 %     manual for \pkg{hyperref}}}.
 %     URL~\url{http://www.ctan.org/pkg/hyperref/}.
 %
-%   \bibitem[{Robertson et Hosny(2015)}]{fontspec}
-%     Robertson, W. et K.~Hosny. 2015,
+%   \bibitem[{Robertson et Hosny(2017)}]{fontspec}
+%     Robertson, W. et K.~Hosny. 2017,
 %     {\selectlanguage{english}\emph{The \pkg{fontspec} package: Font
 %     selection for {\XeLaTeX} and {\LuaLaTeX}}}.
 %     URL~\url{http://www.ctan.org/pkg/fontspec/}.
 %
-%   \bibitem[{Robertson et coll.(2015)Robertson, Stephani et
+%   \bibitem[{Robertson et coll.(2017)Robertson, Stephani et
 %     Hosny}]{unicode-math}
-%     Robertson, W., P.~Stephani et K.~Hosny. 2015,
+%     Robertson, W., P.~Stephani et K.~Hosny. 2017,
 %     {\selectlanguage{english}\emph{Experimental {U}nicode
 %     Mathematical Typesetting: The \pkg{unicode-math} Package}}.
 %     ULR~\url{http://www.ctan.org/pkg/unicode-math/}.
 %
-%   \bibitem[{Wilson(2013)}]{memoir}
-%     Wilson, P. 2013, {\selectlanguage{english}\emph{The Memoir Class
+%   \bibitem[{Wilson(2016)}]{memoir}
+%     Wilson, P. 2016, {\selectlanguage{english}\emph{The Memoir Class
 %     for Configurable Typesetting}}, 8{\ieme} éd., The Herries Press.
 %     URL~\url{http://www.ctan.org/pkg/memoir/}, maintained by Lars
 %     Madsen.
