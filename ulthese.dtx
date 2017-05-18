@@ -1620,7 +1620,8 @@
 % Les paquetages \pkg{natbib} et \pkg{chapterbib} doivent être chargés
 % avant \pkg{babel} pour bien fonctionner, le cas échéant. Tel que
 % précisé dans la documentation de \pkg{natbib}, l'option |sectionbib|
-% est passée à ce paquetage est chargé, ou à \pkg{chapterbib} sinon.
+% est passée à ce paquetage lorsqu'il est chargé, ou à
+% \pkg{chapterbib} autrement.
 %    \begin{macrocode}
 \ifthenelse{\boolean{UL@natbib}}{%
   \ifthenelse{\boolean{UL@sectionbib}}{%
