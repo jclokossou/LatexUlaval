@@ -5,7 +5,8 @@
 ## 'make class' extrait la classe et les gabarits du fichier dtx;
 ## 'make doc' compile la documentation de la classe et le glossaire;
 ## 'make zip' crée l'archive pour le dépôt dans CTAN;
-## 'make all' fait toutes les étapes ci-dessus.
+## 'make create-release' crée une nouvelle version dans GitHub;
+## 'make all' fait les étapes 'class', 'doc' et 'zip'.
 ##
 ## Auteur: Vincent Goulet
 ##
@@ -17,7 +18,7 @@
 PACKAGENAME = ulthese
 
 ## Liste des fichiers à inclure dans l'archive (outre README.md)
-FILES=ulthese.ins ulthese.dtx ulthese.pdf ul_p.eps ul_p.pdf
+FILES=${PACKAGENAME}.ins ${PACKAGENAME}.dtx ${PACKAGENAME}.pdf ul_p.eps ul_p.pdf
 
 ## Numéro de version et date de publication extraits du fichier
 ## ulthese.dtx. Le résultat est une chaîne de caractères de la forme
@@ -25,7 +26,7 @@ FILES=ulthese.ins ulthese.dtx ulthese.pdf ul_p.eps ul_p.pdf
 VERSION = $(shell awk -F '[ \[]' '/^  \[.*\]/ \
 	    { gsub(/\//, "-", $$4); \
 	      printf("%s (%s)", substr($$5, 2), $$4); \
-	      exit }' ulthese.dtx)
+	      exit }' ${PACKAGENAME}.dtx)
 
 # Outils de travail
 LATEX = pdflatex
@@ -34,13 +35,13 @@ RM = rm -r
 
 all : class doc zip
 
-class : ulthese.dtx
-	${LATEX} ulthese.ins
+class : ${PACKAGENAME}.dtx
+	${LATEX} ${PACKAGENAME}.ins
 
-doc : ulthese.dtx
-	${LATEX} ulthese.dtx
-	${MAKEINDEX} -s gglo.ist -o ulthese.gls ulthese.glo
-	${LATEX} ulthese.dtx
+doc : ${PACKAGENAME}.dtx
+	${LATEX} $<
+	${MAKEINDEX} -s gglo.ist -o ${PACKAGENAME}.gls ${PACKAGENAME}.glo
+	${LATEX} $<
 
 zip : ${FILES} README.md
 	if [ -d ${PACKAGENAME} ]; then ${RM} ${PACKAGENAME}; fi
@@ -52,3 +53,39 @@ zip : ${FILES} README.md
 	cp ${FILES} ${PACKAGENAME}
 	zip --filesync -r ${PACKAGENAME}.zip ${PACKAGENAME}
 	rm -r ${PACKAGENAME}
+
+create-release :
+	@echo ----- Creating release on GitHub...
+	if [ -e relnotes.in ]; then rm relnotes.in; fi
+	touch relnotes.in
+	git commit -a -m "Version ${VERSION}" && git push
+	awk 'BEGIN { FS = "{"; \
+	             split("${VERSION}", v, " "); \
+	             printf "{\"tag_name\": \"v%s\", \"name\": \"Version %s\", \"body\": \"", \
+		            v[1], "${VERSION}" } \
+	     /\\changes/ && substr($$2, 1, length($$2) - 1) == v[1] { \
+	         out = $$4; \
+	         if ((i = index($$4, "}")) != 0) { \
+	             out = substr($$4, 1, i - 1) \
+	         } else { \
+	             while (i == 0) { \
+	                 getline; \
+	                 gsub(/^%[ \t]+/, "", $$0); \
+	                 i = index($$0, "}"); \
+	                 if (i != 0) { \
+	                     out = out " " substr($$0, 1, i - 1) \
+			 } else { \
+			     out = out " " $$0 \
+		         } \
+		     } \
+	         } \
+		 printf "- %s\\n", out \
+	     } \
+	     END { print "\", \"draft\": false, \"prerelease\": false}" }' \
+	     ${PACKAGENAME}.dtx >> relnotes.in
+	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
+	rm relnotes.in
+	@echo --- release notes:
+	@cat relnotes.in
+	@echo ----- Done creating the release
+
