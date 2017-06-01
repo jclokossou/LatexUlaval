@@ -109,9 +109,9 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{856}
+% \CheckSum{0}
 % \DoNotIndex{\',\^,\`,\ ,\ae}
-% \DoNotIndex{\RequirePackage,\ExecuteOptions,\ifthenelse,\ProcessOptions}
+% \DoNotIndex{\RequirePackage,\ExecuteOptions,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*,\newboolean}
 % \DoNotIndex{\setlength,\setboolean}
 % \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
@@ -1329,21 +1329,25 @@
 % explorer comment la classe est programmée.
 %
 % \subsection{Tests et valeurs booléennes}
+% \changes{4.4}{2017-06-01}{Tests et valeurs booléennes réalisés sans ifthen}
 %
-% Les paquetages \pkg{ifthen} et \pkg{ifxetex} sont nécessaires
-% pour effectuer divers tests dans la classe. Nous définissons ici
-% toutes les valeurs booléennes requises par la classe.
+% Le paquetage \pkg{ifxetex} permet de tester si un document est
+% compilé avec \XeTeX.
 %    \begin{macrocode}
 %<*class>
-\RequirePackage{ifthen}
 \RequirePackage{ifxetex}
-\newboolean{UL@babel}           % charger babel?
-\newboolean{UL@natbib}          % charger natbib?
-\newboolean{UL@chapterbib}      % charger chapterbib?
-\newboolean{UL@sectionbib}      % option sectionbib de chapterbib?
-\newboolean{UL@isprogmasc}      % nom de programme masculin?
-\newboolean{UL@isexam}          % examen de doctorat?
-\newboolean{UL@hassubtitle}     % document a un sous-titre?
+%    \end{macrocode}
+% Nous définissons ici toutes les valeurs booléennes requises par la
+% classe.
+%    \begin{macrocode}
+\newif\ifUL@babel       \UL@babeltrue        % charger babel?
+\newif\ifUL@natbib      \UL@natbibtrue       % charger natbib?
+\newif\ifUL@chapterbib  \UL@chapterbibfalse  % charger chapterbib?
+\newif\ifUL@sectionbib  \UL@sectionbibfalse  % option sectionbib de chapterbib?
+\newif\ifUL@isthesis                         % programme est une thèse?
+\newif\ifUL@iscotutelle \UL@iscotutellefalse % thèse en cotutelle?
+\newif\ifUL@isexam      \UL@isexamfalse      % examen de doctorat?
+\newif\ifUL@hassubtitle \UL@hassubtitlefalse % document a un sous-titre?
 %    \end{macrocode}
 %
 % \subsection{Options de la classe}
@@ -1359,8 +1363,7 @@
 %   paquetage \pkg{natbib} en cas d'incompatibilité avec d'autres
 %   paquetages spécialisés de mise en forme de la bibliographie.
 %    \begin{macrocode}
-\setboolean{UL@natbib}{true}
-\DeclareOption{nonatbib}{\setboolean{UL@natbib}{false}}
+\DeclareOption{nonatbib}{\UL@natbibfalse}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1373,12 +1376,8 @@
 %     présente sous la forme d'une section plutôt que d'un chapitre.
 %     La seconde option implique la première.
 %    \begin{macrocode}
-\setboolean{UL@chapterbib}{false}
-\setboolean{UL@sectionbib}{false}
-\DeclareOption{bibchapitre}{\setboolean{UL@chapterbib}{true}}
-\DeclareOption{bibsection}{%
-  \setboolean{UL@chapterbib}{true}
-  \setboolean{UL@sectionbib}{true}}
+\DeclareOption{bibchapitre}{\UL@chapterbibtrue}
+\DeclareOption{bibsection}{\UL@chapterbibtrue\UL@sectionbibtrue}
 %    \end{macrocode}
 %   \end{macro}
 % \end{macro}
@@ -1390,8 +1389,7 @@
 %   \pkg{poyglossia} pour le traitement des langues dans leur
 %   document.
 %    \begin{macrocode}
-\setboolean{UL@babel}{true}
-\DeclareOption{nobabel}{\setboolean{UL@babel}{false}}
+\DeclareOption{nobabel}{\UL@babelfalse}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1424,136 +1422,135 @@
 %   Définition du type de grade et si la thèse ou le mémoire est
 %   multifacultaire, effectué en cotutelle, en bidiplomation ou en
 %   extension. Certaines options ne sont valides que pour une thèse ou
-%   que pour un mémoire. On identifie également si le type de
-%   programme (doctorat ou maîtrise) est masculin ou non; cela servira
-%   à adapter la composition de la page de titre, plus loin.
+%   que pour un mémoire. La page de titre des programmes en extension
+%   comporte une mention «offert en extension» ou «offerte en
+%   extension» selon qu'il s'agit d'un doctorat ou d'une maîtrise; le
+%   bon terme est défini avec l'option correspondante.
 %    \begin{macrocode}
 \newcommand*{\UL@typenum}{}
 \DeclareOption{LLD}{%
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{true}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en droit (LL.~D.)}}
 \DeclareOption{DMus}{%
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{true}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en musique (D.~Mus.)}}
 \DeclareOption{DPsy}{%
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{true}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en psychologie (D.~Psy.)}}
 \DeclareOption{DThP}{%
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{true}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en th\'eologie pratique (D.~Th.~P.)}}
 \DeclareOption{PhD}{%
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{true}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Philosophi{\ae} doctor (Ph.~D.)}}
 \DeclareOption{MATDR}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en am\'enagement du territoire %
     et d\'eveloppement r\'egional (M.ATDR)}}
 \DeclareOption{MArch}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en architecture (M.~Arch.)}}
 \DeclareOption{MA}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre \`es arts (M.A.)}}
 \DeclareOption{LLM}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en droit (LL.~M.)}}
 \DeclareOption{MErg}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en ergoth\'erapie (M.~Erg.)}}
 \DeclareOption{MMus}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en musique (M.~Mus.)}}
 \DeclareOption{MPht}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en physioth\'erapie (M.~Pht.)}}
 \DeclareOption{MSc}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre \`es sciences (M.~Sc.)}}
 \DeclareOption{MScGeogr}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en sciences g\'eographiques (M.~Sc.~g\'eogr.)}}
 \DeclareOption{MServSoc}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en service social (M.~Serv.~soc.)}}
 \DeclareOption{MPsEd}{%
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \setboolean{UL@isprogmasc}{false}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en psycho\'education (M.~Ps.~\'ed.)}}
 \DeclareOption{multifacultaire}{%
-  \ifthenelse{\equal{\UL@typeofdoc}{Th\`ese}}{%
-    \renewcommand*{\UL@typenum}{1}}{%
+  \ifUL@isthesis
+    \renewcommand*{\UL@typenum}{1}
+  \else
     \ClassError{ulthese}{%
       Incompatible option multifacultaire}
-    {Use this option with a doctorate degree only.}}}
+    {Use this option with a doctorate degree only.}
+  \fi}
 \DeclareOption{cotutelle}{%
-  \ifthenelse{\equal{\UL@typeofdoc}{Th\`ese}}{%
+  \ifUL@isthesis
     \renewcommand*{\UL@typenum}{2}
-    \protected@edef\UL@typeofdoc{\UL@typeofdoc\ en cotutelle}}{%
+    \UL@iscotutelletrue
+  \else
     \ClassError{ulthese}{%
       Incompatible option cotutelle}
-    {Use this option with a doctorate degree only.}}}
+    {Use this option with a doctorate degree only.}
+  \fi}
 \DeclareOption{bidiplomation}{%
-  \ifthenelse{\equal{\UL@typeofdoc}{M\'emoire}}{%
-    \renewcommand*{\UL@typenum}{2}
-    \protected@edef\UL@typeofdoc{\UL@typeofdoc}}{%
+  \ifUL@isthesis
     \ClassError{ulthese}{%
       Incompatible option bidiplomation}
-    {Use this option with a master degree only.}}}
+    {Use this option with a master degree only.}
+  \else
+    \renewcommand*{\UL@typenum}{2}
+  \fi}
 \DeclareOption{extensionUdeS}{%
-  \ifthenelse{\equal{\UL@typeofdoc}{Th\`ese}}{%
+  \ifUL@isthesis
     \renewcommand*{\UL@typenum}{3}
+    \newcommand*{\UL@offered}{offert}
     \newcommand*{\UL@extensionat}{Universit\'e de Sherbrooke}
-    \newcommand*{\UL@extensionloc}{Sherbrooke, Canada}}{%
+    \newcommand*{\UL@extensionloc}{Sherbrooke, Canada}
+  \else
     \ClassError{ulthese}{%
       Incompatible option extensionUdeS}
-    {Use this option with a doctorate degree only.}}}
+    {Use this option with a doctorate degree only.}
+  \fi}
 \DeclareOption{extensionUQO}{%
-  \ifthenelse{\equal{\UL@typeofdoc}{Th\`ese}}{%
+  \ifUL@isthesis
     \renewcommand*{\UL@typenum}{3}
+    \newcommand*{\UL@offered}{offert}
     \newcommand*{\UL@extensionat}{Universit\'e du Qu\'ebec en Outaouais}
-    \newcommand*{\UL@extensionloc}{Gatineau, Canada}}{%
+    \newcommand*{\UL@extensionloc}{Gatineau, Canada}
+  \else
     \ClassError{ulthese}{%
       Incompatible option extensionUQO}
-    {Use this option with a doctorate degree only.}}}
+    {Use this option with a doctorate degree only.}
+  \fi}
 \DeclareOption{extensionUQAC}{%
-  \ifthenelse{\equal{\UL@typeofdoc}{M\'emoire}}{%
-    \renewcommand*{\UL@typenum}{3}
-    \newcommand*{\UL@extensionat}{Universit\'e du Qu\'ebec \`a Chicoutimi}
-    \newcommand*{\UL@extensionloc}{Chicoutimi, Canada}}{%
+  \ifUL@isthesis
     \ClassError{ulthese}{%
       Incompatible option extensionUQAC}
-    {Use this option with a master degree only.}}}
+    {Use this option with a master degree only.}
+  \else
+    \renewcommand*{\UL@typenum}{3}
+    \newcommand*{\UL@offered}{offerte}
+    \newcommand*{\UL@extensionat}{Universit\'e du Qu\'ebec \`a Chicoutimi}
+    \newcommand*{\UL@extensionloc}{Chicoutimi, Canada}
+  \fi}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1563,14 +1560,14 @@
 %   n'est compatible qu'avec l'une des options de thèse, autrement un
 %   message d'erreur est émis.
 %    \begin{macrocode}
-\setboolean{UL@isexam}{false}
 \DeclareOption{examen}{%
-  \ifthenelse{\equal{\UL@typeofdoc}{Th\`ese}}{%
-    \setboolean{UL@isexam}{true}
-    \renewcommand*{\UL@typeofdoc}{Examen de doctorat}}{%
+  \ifUL@isthesis
+    \UL@isexamtrue
+  \else
     \ClassError{ulthese}{%
       Incompatible option examen}
-    {Use this option with a thesis type only.}}}
+    {Use this option with a thesis type only.}
+  \fi}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1620,14 +1617,20 @@
 % est passée à ce paquetage lorsqu'il est chargé, ou à
 % \pkg{chapterbib} autrement.
 %    \begin{macrocode}
-\ifthenelse{\boolean{UL@natbib}}{%
-  \ifthenelse{\boolean{UL@sectionbib}}{%
-    \PassOptionsToPackage{sectionbib}{natbib}}{}
-  \RequirePackage[round,semicolon,authoryear]{natbib}}{}
-\ifthenelse{\boolean{UL@chapterbib}}{%
-  \ifthenelse{\boolean{UL@sectionbib}\AND\not{\boolean{UL@natbib}}}{%
-    \PassOptionsToPackage{sectionbib}{chapterbib}}{}
-  \RequirePackage{chapterbib}}{}
+\ifUL@natbib
+  \ifUL@sectionbib
+    \PassOptionsToPackage{sectionbib}{natbib}
+  \fi
+  \RequirePackage[round,semicolon,authoryear]{natbib}
+\fi
+\ifUL@chapterbib
+  \ifUL@sectionbib
+     \ifUL@natbib\else
+       \PassOptionsToPackage{sectionbib}{chapterbib}
+     \fi
+  \fi
+  \RequirePackage{chapterbib}
+\fi
 %    \end{macrocode}
 %
 % Le support pour les langues autres que l'anglais est offert par le
@@ -1637,9 +1640,10 @@
 % \pkg{numprint} est requis par \pkg{babel} pour la définition
 % de la commande de mise en forme des nombres \cmd{\nombre}.
 %    \begin{macrocode}
-\ifthenelse{\boolean{UL@babel}}{%
+\ifUL@babel
   \RequirePackage{babel}
-  \RequirePackage[autolanguage]{numprint}}{}
+  \RequirePackage[autolanguage]{numprint}
+\fi
 %    \end{macrocode}
 %
 % L'insertion du logo de l'Université sur la page de titre requiert
@@ -1828,7 +1832,7 @@
 %    \begin{macrocode}
 \newcommand{\titre}[1]{\renewcommand{\UL@maintitle}{#1}}
 \newcommand{\soustitre}[1]{%
-  \setboolean{UL@hassubtitle}{true}
+  \UL@hassubtitletrue
   \renewcommand{\UL@subtitle}{#1}}
 \newcommand*{\auteur}[1]{\renewcommand*{\UL@author}{#1}}
 \newcommand*{\annee}[1]{\renewcommand*{\UL@year}{#1}}
@@ -1871,21 +1875,43 @@
     \centering\UL@fonttitle\UL@maintitle}
   \setlength{\UL@titleboxtotht}{%
     \dimexpr\ht\UL@titlebox+\dp\UL@titlebox}
-  \ifthenelse{\boolean{UL@hassubtitle}}{%
+  \ifUL@hassubtitle
     \setbox\UL@subtitlebox=\vbox{%
       \centering\vspace*{0.5\baselineskip}\UL@fontsubtitle\UL@subtitle}
     \setlength{\UL@subtitleboxtotht}{%
-      \dimexpr\ht\UL@subtitlebox+\dp\UL@subtitlebox}}{}}
+      \dimexpr\ht\UL@subtitlebox+\dp\UL@subtitlebox}
+  \fi}
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsubsection{Type de document}
 %
-% \begin{macro}{\Ul@docid}
-%   La commande |\Ul@docid| prépare la mention du type de document. La
-%   thèse ou le mémoire en cotutelle ou en bidiplomation requiert un
-%   traitement différent puisque le programme d'étude apparaît
-%   immédiatement sous la mention.
+% \begin{macro}{\UL@typeofdoc}
+%   La commande |\UL@typeofdoc| contient le type de document qui est
+%   produit: thèse, thèse en cotutelle, maîtrise
+%   ou examen de doctorat.
+%    \begin{macrocode}
+\ifUL@isthesis
+  \ifUL@iscotutelle
+    \newcommand*{\UL@typeofdoc}{Th\`ese en cotutelle}
+  \else
+    \newcommand*{\UL@typeofdoc}{Th\`ese}
+  \fi
+\else
+  \newcommand*{\UL@typeofdoc}{M\'emoire}
+\fi
+\ifUL@isexam
+  \renewcommand*{\UL@typeofdoc}{Examen de doctorat}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\UL@docid}
+%   La commande |\UL@docid| prépare ensuite la mention mise en forme
+%   du type de document pour les pages de titre. La thèse ou le
+%   mémoire en cotutelle ou en bidiplomation requiert un traitement
+%   différent puisque le programme d'étude apparaît immédiatement sous
+%   la mention.
 %    \begin{macrocode}
 \newcommand{\UL@docid}{%
   {\UL@fontprogram\UL@typeofdoc\par
@@ -1945,8 +1971,7 @@
   \or%                      3 extension
     \vspace{48pt}
     {\UL@fontprogram\UL@program\ de l'Universit\'e Laval\par
-      \ifthenelse{\boolean{UL@isprogmasc}}{offert}{offerte}
-      en extension \`a l'\UL@extensionat}\par
+      \UL@offered\ en extension \`a l'\UL@extensionat}\par
     \vspace{36pt}
     \UL@degree\par
     \vspace{36pt}
@@ -2040,12 +2065,12 @@
     \UL@details
     \vfill
     {\textcopyright} \UL@author, \UL@year\par
-    \ifthenelse{\boolean{UL@isexam}}{}{%
+    \ifUL@isexam\else
       \clearpage
       \ifnum\UL@typenum>1\relax
-      \vspace*{0pt}\par
+        \vspace*{0pt}\par
       \else
-      \rule{0mm}{15mm}\par      % strut
+        \rule{0mm}{15mm}\par    % strut
       \fi
       \vspace{82pt}
       \box\UL@titlebox
@@ -2058,7 +2083,8 @@
       Sous la direction de:\par
       \vspace{\baselineskip}
       \UL@director\par
-      \UL@codirector}
+      \UL@codirector
+    \fi
     \clearpage}}
 %    \end{macrocode}
 % \end{macro}
@@ -2084,8 +2110,9 @@
 %   \cmd{\addto} est nécessaire pour éviter que \pkg{babel} redéfinisse
 %   le titre à |\begin{document}|.
 %    \begin{macrocode}
-\ifthenelse{\boolean{UL@babel}}{%
-  \addto\captionsfrench{\renewcommand{\listfigurename}{Liste des figures}}}{}
+\ifUL@babel
+  \addto\captionsfrench{\renewcommand{\listfigurename}{Liste des figures}}
+\fi
 %    \end{macrocode}
 %   Si \pkg{babel} n'est pas chargé, ce sera à l'utilisateur de faire
 %   une correction équivalente. Avec \pkg{polyglossia}, la commande à
