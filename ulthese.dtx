@@ -109,7 +109,7 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{856}
+% \CheckSum{0}
 % \DoNotIndex{\',\^,\`,\ ,\ae}
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*,\newboolean}
@@ -1343,7 +1343,8 @@
 \newif\ifUL@natbib      \UL@natbibtrue       % charger natbib?
 \newif\ifUL@chapterbib  \UL@chapterbibfalse  % charger chapterbib?
 \newif\ifUL@sectionbib  \UL@sectionbibfalse  % option sectionbib de chapterbib?
-\newif\ifUL@isprogmasc                       % nom de programme masculin?
+\newif\ifUL@isthesis                         % programme est une thèse?
+\newif\ifUL@iscotutelle \UL@iscotutellefalse % thèse en cotutelle?
 \newif\ifUL@isexam      \UL@isexamfalse      % examen de doctorat?
 \newif\ifUL@hassubtitle \UL@hassubtitlefalse % document a un sous-titre?
 %    \end{macrocode}
@@ -1426,88 +1427,72 @@
 %    \begin{macrocode}
 \newcommand*{\UL@typenum}{}
 \DeclareOption{LLD}{%
-  \UL@isprogmasctrue
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en droit (LL.~D.)}}
 \DeclareOption{DMus}{%
-  \UL@isprogmasctrue
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en musique (D.~Mus.)}}
 \DeclareOption{DPsy}{%
-  \setbooleanUL@isprogmasctrue
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en psychologie (D.~Psy.)}}
 \DeclareOption{DThP}{%
-  \UL@isprogmasctrue
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Docteur en th\'eologie pratique (D.~Th.~P.)}}
 \DeclareOption{PhD}{%
-  \UL@isprogmasctrue
+  \UL@isthesistrue
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{Th\`ese}
   \newcommand*{\UL@degree}{Philosophi{\ae} doctor (Ph.~D.)}}
 \DeclareOption{MATDR}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en am\'enagement du territoire %
     et d\'eveloppement r\'egional (M.ATDR)}}
 \DeclareOption{MArch}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en architecture (M.~Arch.)}}
 \DeclareOption{MA}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre \`es arts (M.A.)}}
 \DeclareOption{LLM}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en droit (LL.~M.)}}
 \DeclareOption{MErg}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en ergoth\'erapie (M.~Erg.)}}
 \DeclareOption{MMus}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en musique (M.~Mus.)}}
 \DeclareOption{MPht}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en physioth\'erapie (M.~Pht.)}}
 \DeclareOption{MSc}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre \`es sciences (M.~Sc.)}}
 \DeclareOption{MScGeogr}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en sciences g\'eographiques (M.~Sc.~g\'eogr.)}}
 \DeclareOption{MServSoc}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en service social (M.~Serv.~soc.)}}
 \DeclareOption{MPsEd}{%
-  \UL@isprogmascfalse
+  \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@typeofdoc}{M\'emoire}
   \newcommand*{\UL@degree}{Ma\^itre en psycho\'education (M.~Ps.~\'ed.)}}
 \DeclareOption{multifacultaire}{%
-  \ifx\UL@typeofdoc{Th\`ese}
+  \ifUL@isthesis
     \renewcommand*{\UL@typenum}{1}
   \else
     \ClassError{ulthese}{%
@@ -1515,26 +1500,26 @@
     {Use this option with a doctorate degree only.}
   \fi}
 \DeclareOption{cotutelle}{%
-  \ifx\UL@typeofdoc{Th\`ese}
+  \ifUL@isthesis
     \renewcommand*{\UL@typenum}{2}
-    \protected@edef\UL@typeofdoc{\UL@typeofdoc\ en cotutelle}
+    \UL@iscotutelletrue
   \else
     \ClassError{ulthese}{%
       Incompatible option cotutelle}
     {Use this option with a doctorate degree only.}
   \fi}
 \DeclareOption{bidiplomation}{%
-  \ifx\UL@typeofdoc{M\'emoire}
-    \renewcommand*{\UL@typenum}{2}
-    \protected@edef\UL@typeofdoc{\UL@typeofdoc}
-  \else
+  \ifUL@isthesis
     \ClassError{ulthese}{%
       Incompatible option bidiplomation}
     {Use this option with a master degree only.}
+  \else
+    \renewcommand*{\UL@typenum}{2}
   \fi}
 \DeclareOption{extensionUdeS}{%
-  \ifx\UL@typeofdoc{Th\`ese}
+  \ifUL@isthesis
     \renewcommand*{\UL@typenum}{3}
+    \newcommand*{\UL@offered}{offert}
     \newcommand*{\UL@extensionat}{Universit\'e de Sherbrooke}
     \newcommand*{\UL@extensionloc}{Sherbrooke, Canada}
   \else
@@ -1543,8 +1528,9 @@
     {Use this option with a doctorate degree only.}
   \fi}
 \DeclareOption{extensionUQO}{%
-  \ifx\UL@typeofdoc{Th\`ese}
+  \ifUL@isthesis
     \renewcommand*{\UL@typenum}{3}
+    \newcommand*{\UL@offered}{offert}
     \newcommand*{\UL@extensionat}{Universit\'e du Qu\'ebec en Outaouais}
     \newcommand*{\UL@extensionloc}{Gatineau, Canada}
   \else
@@ -1553,14 +1539,15 @@
     {Use this option with a doctorate degree only.}
   \fi}
 \DeclareOption{extensionUQAC}{%
-  \ifx\UL@typeofdoc{M\'emoire}
-    \renewcommand*{\UL@typenum}{3}
-    \newcommand*{\UL@extensionat}{Universit\'e du Qu\'ebec \`a Chicoutimi}
-    \newcommand*{\UL@extensionloc}{Chicoutimi, Canada}
-  \else
+  \ifUL@isthesis
     \ClassError{ulthese}{%
       Incompatible option extensionUQAC}
     {Use this option with a master degree only.}
+  \else
+    \renewcommand*{\UL@typenum}{3}
+    \newcommand*{\UL@offered}{offerte}
+    \newcommand*{\UL@extensionat}{Universit\'e du Qu\'ebec \`a Chicoutimi}
+    \newcommand*{\UL@extensionloc}{Chicoutimi, Canada}
   \fi}
 %    \end{macrocode}
 % \end{macro}
@@ -1572,7 +1559,7 @@
 %   message d'erreur est émis.
 %    \begin{macrocode}
 \DeclareOption{examen}{%
-  \ifx\UL@typeofdoc{Th\`ese}
+  \ifUL@isthesis
     \UL@isexamtrue
     \renewcommand*{\UL@typeofdoc}{Examen de doctorat}
   \else
@@ -1844,7 +1831,7 @@
 %    \begin{macrocode}
 \newcommand{\titre}[1]{\renewcommand{\UL@maintitle}{#1}}
 \newcommand{\soustitre}[1]{%
-  \setboolean{UL@hassubtitle}{true}
+  \UL@hassubtitletrue
   \renewcommand{\UL@subtitle}{#1}}
 \newcommand*{\auteur}[1]{\renewcommand*{\UL@author}{#1}}
 \newcommand*{\annee}[1]{\renewcommand*{\UL@year}{#1}}
@@ -1904,6 +1891,16 @@
 %   traitement différent puisque le programme d'étude apparaît
 %   immédiatement sous la mention.
 %    \begin{macrocode}
+\ifUL@isthesis
+  \ifUL@iscotutelle
+    \newcommand*{\UL@typeofdoc}{Th\`ese en cotutelle}
+  \else
+    \newcommand*{\UL@typeofdoc}{Th\`ese}
+  \fi
+\else
+  \newcommand*{\UL@typeofdoc}{M\'emoire}
+\fi
+
 \newcommand{\UL@docid}{%
   {\UL@fontprogram\UL@typeofdoc\par
   \ifnum\UL@typenum=2 \UL@program\par \fi}}
@@ -1962,8 +1959,7 @@
   \or%                      3 extension
     \vspace{48pt}
     {\UL@fontprogram\UL@program\ de l'Universit\'e Laval\par
-      \ifUL@isprogmasc offert\else offerte\fi
-      en extension \`a l'\UL@extensionat}\par
+      \UL@offered\ en extension \`a l'\UL@extensionat}\par
     \vspace{36pt}
     \UL@degree\par
     \vspace{36pt}
@@ -2060,9 +2056,9 @@
     \ifUL@isexam\else
       \clearpage
       \ifnum\UL@typenum>1\relax
-      \vspace*{0pt}\par
+        \vspace*{0pt}\par
       \else
-      \rule{0mm}{15mm}\par      % strut
+        \rule{0mm}{15mm}\par    % strut
       \fi
       \vspace{82pt}
       \box\UL@titlebox
