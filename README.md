@@ -102,7 +102,7 @@ source avec les commandes
 
 ## Historique des versions
 
-L'historique des versions de la classe se trouve dans la documentation.
+L'historique des versions de la classe se trouve en annexe de la documentation.
 
 ## Aide additionnelle
 
