@@ -37,7 +37,7 @@ all : class doc zip
 class : ulthese.dtx
 	${LATEX} ulthese.ins
 
-doc : ulthese.dtx ulthese.gls
+doc : ulthese.dtx
 	${LATEX} ulthese.dtx
 	${MAKEINDEX} -s gglo.ist -o ulthese.gls ulthese.glo
 	${LATEX} ulthese.dtx
