@@ -158,7 +158,7 @@
 %   Cette classe et sa documentation ont été rédigées par Vincent
 %   Goulet~(Faculté des sciences et de génie) avec la collaboration de
 %   Koassi D'Almeida~(Faculté des études supérieures et postdoctorales) et
-%   Pierre Lasou~(Bibliothèque).}}
+%   de Pierre Lasou~(Bibliothèque).}}
 % \date{}
 % \maketitle
 %
@@ -1332,13 +1332,17 @@
 % explorer comment la classe est programmée.
 %
 % \subsection{Tests et valeurs booléennes}
+% \changes{4.4}{2017-06-01}{Tests et valeurs booléennes réalisés sans ifthen}
 %
-% Les paquetages \pkg{ifthen} et \pkg{ifxetex} sont nécessaires
-% pour effectuer divers tests dans la classe. Nous définissons ici
-% toutes les valeurs booléennes requises par la classe.
+% Le paquetage \pkg{ifxetex} permet de tester si un document est
+% compilé avec \XeTeX.
 %    \begin{macrocode}
 %<*class>
 \RequirePackage{ifxetex}
+%    \end{macrocode}
+% Nous définissons ici toutes les valeurs booléennes requises par la
+% classe.
+%    \begin{macrocode}
 \newif\ifUL@babel       \UL@babeltrue        % charger babel?
 \newif\ifUL@natbib      \UL@natbibtrue       % charger natbib?
 \newif\ifUL@chapterbib  \UL@chapterbibfalse  % charger chapterbib?
@@ -1421,9 +1425,10 @@
 %   Définition du type de grade et si la thèse ou le mémoire est
 %   multifacultaire, effectué en cotutelle, en bidiplomation ou en
 %   extension. Certaines options ne sont valides que pour une thèse ou
-%   que pour un mémoire. On identifie également si le type de
-%   programme (doctorat ou maîtrise) est masculin ou non; cela servira
-%   à adapter la composition de la page de titre, plus loin.
+%   que pour un mémoire. La page de titre des programmes en extension
+%   comporte une mention «offert en extension» ou «offerte en
+%   extension» selon qu'il s'agit d'un doctorat ou d'une maîtrise; le
+%   bon terme est défini avec l'option correspondante.
 %    \begin{macrocode}
 \newcommand*{\UL@typenum}{}
 \DeclareOption{LLD}{%
@@ -1561,7 +1566,6 @@
 \DeclareOption{examen}{%
   \ifUL@isthesis
     \UL@isexamtrue
-    \renewcommand*{\UL@typeofdoc}{Examen de doctorat}
   \else
     \ClassError{ulthese}{%
       Incompatible option examen}
@@ -1885,11 +1889,10 @@
 %
 % \subsubsection{Type de document}
 %
-% \begin{macro}{\Ul@docid}
-%   La commande |\Ul@docid| prépare la mention du type de document. La
-%   thèse ou le mémoire en cotutelle ou en bidiplomation requiert un
-%   traitement différent puisque le programme d'étude apparaît
-%   immédiatement sous la mention.
+% \begin{macro}{\UL@typeofdoc}
+%   La commande |\UL@typeofdoc| contient le type de document qui est
+%   produit: thèse, thèse en cotutelle, maîtrise
+%   ou examen de doctorat.
 %    \begin{macrocode}
 \ifUL@isthesis
   \ifUL@iscotutelle
@@ -1900,7 +1903,19 @@
 \else
   \newcommand*{\UL@typeofdoc}{M\'emoire}
 \fi
-
+\ifUL@isexam
+  \renewcommand*{\UL@typeofdoc}{Examen de doctorat}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\UL@docid}
+%   La commande |\UL@docid| prépare ensuite la mention mise en forme
+%   du type de document pour les pages de titre. La thèse ou le
+%   mémoire en cotutelle ou en bidiplomation requiert un traitement
+%   différent puisque le programme d'étude apparaît immédiatement sous
+%   la mention.
+%    \begin{macrocode}
 \newcommand{\UL@docid}{%
   {\UL@fontprogram\UL@typeofdoc\par
   \ifnum\UL@typenum=2 \UL@program\par \fi}}
