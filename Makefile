@@ -33,6 +33,11 @@ LATEX = pdflatex
 MAKEINDEX = makeindex
 RM = rm -r
 
+## Dépôt GitHub et authentification
+REPOSURL = https://api.github.com/repos/vigou3/ulthese
+OAUTHTOKEN = $(shell cat ~/.github/token)
+
+
 all : class doc zip
 
 class : ${PACKAGENAME}.dtx
@@ -58,7 +63,7 @@ create-release :
 	@echo ----- Creating release on GitHub...
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
 	touch relnotes.in
-	git commit -a -m "Version ${VERSION}" && git push
+	#git commit -a -m "Version ${VERSION}" && git push
 	awk 'BEGIN { FS = "{"; \
 	             split("${VERSION}", v, " "); \
 	             printf "{\"tag_name\": \"v%s\", \"name\": \"Version %s\", \"body\": \"", \
@@ -85,7 +90,5 @@ create-release :
 	     ${PACKAGENAME}.dtx >> relnotes.in
 	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
 	rm relnotes.in
-	@echo --- release notes:
-	@cat relnotes.in
 	@echo ----- Done creating the release
 
