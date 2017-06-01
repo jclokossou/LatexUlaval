@@ -158,7 +158,7 @@
 %   Cette classe et sa documentation ont été rédigées par Vincent
 %   Goulet~(Faculté des sciences et de génie) avec la collaboration de
 %   Koassi D'Almeida~(Faculté des études supérieures et postdoctorales) et
-%   Pierre Lasou~(Bibliothèque).}}
+%   de Pierre Lasou~(Bibliothèque).}}
 % \date{}
 % \maketitle
 %
@@ -176,8 +176,7 @@
 % \citep{memoir}, une extension de la classe standard \class{book}
 % facilitant à plusieurs égards la préparation de documents d'allure
 % professionnelle dans {\LaTeX}. La classe \class{memoir} incorpore
-% d'office plus de 30 des paquetages (\emph{packages}) les plus
-% populaires\footnote{%
+% d'office plus de 30 des paquetages les plus populaires\footnote{%
 % Consulter la section~18.24 de la documentation de \class{memoir}
 % pour la liste ou encore le journal de la compilation (\emph{log})
 % d'un document utilisant la classe \class{ulthese}.}. %
@@ -200,7 +199,7 @@
 %
 % L'autre compagnon naturel de la présente documentation est
 % \doc[Rédaction avec {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul},^^A
-% \citep{Goulet:2016}, la formation {\LaTeX} de l'Université Laval.
+% \citep{formation-latex-ul}, la formation {\LaTeX} de l'Université Laval.
 % Vous y trouverez des informations additionnelles sur l'utilisation des
 % classes \class{ulthese} et \class{memoir}.
 %
@@ -225,7 +224,7 @@
 % La classe \class{ulthese} est livrée avec un ensemble de gabarits sur
 % lesquels se baser pour:
 % \begin{itemize}
-% \item les fichiers maîtres de divers types de thèses et mémoires
+% \item les fichiers maîtres de divers types de thèses et de mémoires
 %   (standard, par articles, sur mesure, en cotutelle, en
 %   bidiplomation, en extension, etc.);
 % \item les fichiers des parties les plus usuelles (résumés français
@@ -238,8 +237,8 @@
 % chapitres que |chapitre1.tex|).
 %
 % Dans {\TeX}~Live, les gabarits sont classés avec la documentation de
-% la classe. Pour les utiliser, copiez les fichiers appropriés dans
-% votre dossier de travail.
+% la classe. Pour utiliser un gabarit, copiez le fichier dans votre
+% dossier de travail.
 %
 % Pour débuter la rédaction, renommez le gabarit de document maître
 % approprié d'après votre numéro de dossier. Par exemple, l'étudiante
@@ -254,8 +253,8 @@
 % \end{quote}
 %
 % Les gabarits comportent des commentaires succincts pour vous guider
-% dans la préparation de votre document. Pour plus de détails sur les
-% gabarits, consultez la \autoref{sec:gabarits}.
+% dans la préparation de votre document. La \autoref{sec:gabarits}
+% fournit de plus amples informations.
 %
 % \section{Installation}
 %
@@ -305,11 +304,11 @@
 %
 % Cette section passe en revue les \meta{options} que l'on peut
 % spécifier au chargement de la classe. Les commandes mentionnées
-% ci-dessous font l'objet de la \autoref{sec:commandes}.
+% ci-dessous font quant à elles l'objet de la \autoref{sec:commandes}.
 %
 % \begin{DescribeMacro}{PhD,MSc,MA, ...}
-%   Identifie le type de grade (consulter le \autoref{tab:grades}
-%   pour la liste complète des options et les grades correspondants).
+%   Identifie le type de grade; consulter le \autoref{tab:grades}
+%   pour la liste complète des options et les grades correspondants.
 %   La déclaration d'un type de grade est obligatoire.
 % \end{DescribeMacro}
 %
@@ -828,14 +827,13 @@
 % \label{sec:bibliographie}
 %
 % \begin{DescribeMacro}{\bibliography}
-%   Il est fortement recommandé d'utiliser {\BibTeX} pour la
-%   préparation de la bibliographie, tel qu'expliqué en détail dans le
-%   chapitre~8 de %
-%   \doc[Rédaction avec {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul}.^^A
-%   La bibliographie est insérée dans le document à
-%   l'endroit où apparait la commande \cmd{\bibliography} dans le code
-%   source. Cette commande prend en arguments les noms des bases de
-%   données bibliographiques séparés par des virgules.
+%   Tel qu'expliqué au chapitre~8 de \citet{formation-latex-ul},
+%   il est fortement recommandé d'utiliser {\BibTeX} pour la
+%   préparation de la bibliographie d'un document. Celle-ci est
+%   insérée dans le document à l'endroit où apparait la commande
+%   \cmd{\bibliography} dans le code source. Cette commande prend en
+%   arguments les noms des bases de données bibliographiques séparés
+%   par des virgules.
 % \end{DescribeMacro}
 %
 % \subsection{Mise en forme des citations}
@@ -897,7 +895,7 @@
 % \begin{enumerate}
 % \item chaque chapitre comportant sa propre bibliographie doit
 %   absolument être inséré dans le document principal avec la commande
-%   \cmd{\include} \citep[section~3.5]{Goulet:2016};
+%   \cmd{\include} \citep[section~3.5]{formation-latex-ul};
 % \item chaque fichier visé doit contenir une commande
 %   \cmd{\bibliographystyle} (\autoref{sec:bibliographie:style}) et
 %   une commande \cmd{\bibliography};
@@ -966,10 +964,9 @@
 % titre.
 %
 % La FESP permet l'utilisation des polices Times, Palatino (la police
-% du présent document) et Lucida~Bright dans les thèse et mémoires. La
-% section~10.2 de \doc[Rédaction avec
-% {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul}
-% explique comment utiliser ces polices dans votre document.
+% du présent document) et Lucida~Bright dans les thèse et mémoires.
+% \citet[section~10.2]{formation-latex-ul} explique comment utiliser ces
+% polices dans votre document.
 %
 % \section{Gabarits}
 % \label{sec:gabarits}
@@ -1267,7 +1264,7 @@
 %     \pkg{francais-bst}»},
 %     URL~\url{http://www.ctan.org/pkg/francais-bst/}.
 %
-%   \bibitem[{Goulet(2016)}]{Goulet:2016}
+%   \bibitem[{Goulet(2016)}]{formation-latex-ul}
 %     Goulet, V. 2016, {\selectlanguage{french}\emph{Rédaction avec
 %     {\LaTeX}}}, document libre sous contrat Creative Commons.
 %     ISBN~978-2-9811416-7-5.
