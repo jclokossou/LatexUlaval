@@ -1,0 +1,13 @@
+*.aux
+*.log
+*.blg
+*.bbl
+*.glo
+*.gls
+*.ilg
+*.idx
+*.ind
+*.toc
+*.vrb
+auto/
+auto/*
