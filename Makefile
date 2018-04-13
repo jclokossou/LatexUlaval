@@ -10,8 +10,8 @@
 ##
 ## Auteur: Vincent Goulet
 ##
-## Ce fichier fait partie du projet formation-latex-ul
-## http://github.com/vigou3/formation-latex-ul
+## Ce fichier fait partie du projet ulthese
+## http://github.com/vigou3/ulthese
 
 
 ## Nom du paquetage sur CTAN
