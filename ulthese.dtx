@@ -1340,14 +1340,15 @@
 % Nous définissons ici toutes les valeurs booléennes requises par la
 % classe.
 %    \begin{macrocode}
-\newif\ifUL@babel       \UL@babeltrue        % charger babel?
-\newif\ifUL@natbib      \UL@natbibtrue       % charger natbib?
-\newif\ifUL@chapterbib  \UL@chapterbibfalse  % charger chapterbib?
-\newif\ifUL@sectionbib  \UL@sectionbibfalse  % option sectionbib de chapterbib?
-\newif\ifUL@isthesis                         % programme est une thèse?
-\newif\ifUL@iscotutelle \UL@iscotutellefalse % thèse en cotutelle?
-\newif\ifUL@isexam      \UL@isexamfalse      % examen de doctorat?
-\newif\ifUL@hassubtitle \UL@hassubtitlefalse % document a un sous-titre?
+\newif\ifUL@babel        \UL@babeltrue         % charger babel?
+\newif\ifUL@natbib       \UL@natbibtrue        % charger natbib?
+\newif\ifUL@chapterbib   \UL@chapterbibfalse   % charger chapterbib?
+\newif\ifUL@sectionbib   \UL@sectionbibfalse   % option sectionbib de chapterbib?
+\newif\ifUL@isthesis                           % programme est une thèse?
+\newif\ifUL@iscotutelle  \UL@iscotutellefalse  % thèse en cotutelle?
+\newif\ifUL@isexam       \UL@isexamfalse       % examen de doctorat?
+\newif\ifUL@hassubtitle  \UL@hassubtitlefalse  % document a un sous-titre?
+\newif\ifUL@hastitlepage \UL@hastitlepagefalse % page titre utilisée?
 %    \end{macrocode}
 %
 % \subsection{Options de la classe}
@@ -2037,19 +2038,22 @@
 \setlength{\UL@docidspacing}{82pt}
 \newlength{\UL@authorspacing}
 \setlength{\UL@authorspacing}{72pt}
-\newcommand{\pagestitre}{{%
+\newcommand{\UL@settitledims}{%
+  \UL@measuretitle
+  \addtolength{\UL@docidspacing}{-\UL@titleboxtotht}
+  \addtolength{\UL@docidspacing}{-\UL@subtitleboxtotht}
+  \ifdim\UL@docidspacing<\baselineskip\relax
+  \setlength{\UL@docidspacing}{\baselineskip}
+  \addtolength{\UL@authorspacing}{-\baselineskip}
+  \fi}
+\newcommand{\pagetitre}{{%
+    \UL@hastitlepagetrue
     \clearpage
     \pagestyle{empty}
     \SingleSpacing\setlength{\parskip}{0pt}
     \centering
     \UL@fontbase
-    \UL@measuretitle
-    \addtolength{\UL@docidspacing}{-\UL@titleboxtotht}
-    \addtolength{\UL@docidspacing}{-\UL@subtitleboxtotht}
-    \ifdim\UL@docidspacing<\baselineskip\relax
-      \setlength{\UL@docidspacing}{\baselineskip}
-      \addtolength{\UL@authorspacing}{-\baselineskip}
-    \fi
+    \UL@settitledims
     \ifnum\UL@typenum>1\relax
       \vspace*{0pt}\par
     \else
@@ -2065,8 +2069,17 @@
     \UL@details
     \vfill
     {\textcopyright} \UL@author, \UL@year\par
+    \clearpage}}
+\newcommand{\frontispice}{{%
     \ifUL@isexam\else
       \clearpage
+      \pagestyle{empty}
+      \SingleSpacing\setlength{\parskip}{0pt}
+      \centering
+      \UL@fontbase
+      \ifUL@hastitlepage\else
+        \UL@settitledims
+      \fi
       \ifnum\UL@typenum>1\relax
         \vspace*{0pt}\par
       \else
@@ -2086,17 +2099,6 @@
       \UL@codirector
     \fi
     \clearpage}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\pagetitre}
-%   La page de titre était produite avec la commande \cmd{\pagetitre} dans
-%   les versions précédentes de la classe. Émettre un avertissement et
-%   utiliser plutôt \cmd{\pagestitre} si la commande obsolète est utilisée.
-%    \begin{macrocode}
-\newcommand{\pagetitre}{
-  \ClassWarning{ulthese}{Command \protect\pagetitre\space is obsolete.\MessageBreak
-    Using \protect\pagestitre\space instead}\pagestitre}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2317,7 +2319,7 @@
 
 \frontmatter                    % pages liminaires
 
-\pagestitre                     % production des pages de titre
+\frontispice                    % production de la page frontispice
 
 \include{resume}                % résumé français
 \include{abstract}              % résumé anglais
