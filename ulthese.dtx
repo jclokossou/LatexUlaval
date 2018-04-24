@@ -2009,11 +2009,11 @@
 %
 % \subsubsection{Conception de la page frontispice}
 %
-% \begin{macro}{\pagestitre}
-%   Les thèses et mémoires comportent une page frontispice. Celle-ci
-%   comporte, de haut en bas:
+% \begin{macro}{\frontispice}
+%   Les thèses et mémoires doivent obligatoirement débuter par une
+%   page frontispice. Celle-ci comporte, de haut en bas:
 %   \begin{enumerate}
-%   \item un espace vide (créé avec une boîte de réglure invisible,
+%   \item un espace vide (créé avec une boîte de réglure invisible, ou
 %     \emph{strut}) de la même hauteur que le logo de l'Université
 %     Laval;
 %   \item le titre et le sous-titre, le cas échéant;
@@ -2273,7 +2273,7 @@
   %% Charger ici les autres paquetages nécessaires pour le document.
   %% Quelques exemples; décommenter au besoin.
   %\usepackage{amsmath}       % recommandé pour les mathématiques
-  %\usepackage{icomma}      % gestion de la virgule dans les nombres
+  %\usepackage{icomma}        % gestion de la virgule dans les nombres
 
   %% Utilisation d'une autre police de caractères pour le document.
   %% - Sous LaTeX
@@ -2308,7 +2308,7 @@
 %<articles>  %\addto\extrasfrench{%
 %<articles>  %  \renewcommand{\bibsection}{\section*{\bibname}\prebibhook}}
 
-  %% Déclarations des pages de titre. Remplacer les éléments entre < >.
+  %% Composition de la page frontispice. Remplacer les éléments entre < >.
   %% Supprimer les caractères < >. Couper un long titre ou un long
   %% sous-titre manuellement avec \\.
   \titre{<Titre principal>}
@@ -2318,7 +2318,6 @@
   % \soustitre{Ceci est un exemple de long sous-titre \\
   %   avec saut de ligne manuel}
   \auteur{<Prénom Nom>}
-  \annee{<20xx>}
 %<phd&(standard|multifac|cotutelle)>  \programme{Doctorat en <discipline> <-- majeure, s'il y a lieu>}
 %<phd&(mesure)>  \programme{Doctorat sur mesure en <discipline> <-- majeure, s'il y a lieu>}
 %<phd&(UdeS|UQO)>  \programme{Doctorat en <discipline>}
@@ -2334,14 +2333,18 @@
   % \codirection{<Prénom Nom>, <codirecteur ou codirectrice> de recherche}
   % \codirection{<Prénom Nom>, <codirecteur ou codirectrice> de recherche \\
   %              <Prénom Nom>, <codirecteur ou codirectrice> de recherche}
-%<cotutelle>  \univcotutelle{<Université de cotutelle> \\ <Ville>, <Pays>}
-%<bidiplomation>  \univcotutelle{<Université de bidiplomation> \\ <Ville>, <Pays>}
-%<cotutelle|bidiplomation>  \gradecotutelle{<Nom du grade> (<sigle du grade>)}
-%<multifac>  \faculteUL{<Faculté 1> \\ <Faculté 2>}
-%<UdeS|UQO|UQAC>  \faculteUL{<Nom de la faculté UL>}
-%<UdeS>  \faculteUdeS{<Nom de la faculté UdeS>}
-%<UQO>  \faculteUQO{<Nom de la faculté UQO>}
-%<UQAC>  \faculteUQAC{<Nom de la faculté UQAC>}
+
+  %% Les commandes ci-dessous servent uniquement pour la création
+  %% d'une page de titre (interdite lors du dépôt à la FESP).
+  % \annee{<20xx>}
+%<cotutelle>  % \univcotutelle{<Université de cotutelle> \\ <Ville>, <Pays>}
+%<bidiplomation>  % \univcotutelle{<Université de bidiplomation> \\ <Ville>, <Pays>}
+%<cotutelle|bidiplomation>  % \gradecotutelle{<Nom du grade> (<sigle du grade>)}
+%<multifac>  % \faculteUL{<Faculté 1> \\ <Faculté 2>}
+%<UdeS|UQO|UQAC>  % \faculteUL{<Nom de la faculté UL>}
+%<UdeS>  % \faculteUdeS{<Nom de la faculté UdeS>}
+%<UQO>  % \faculteUQO{<Nom de la faculté UQO>}
+%<UQAC>  % \faculteUQAC{<Nom de la faculté UQAC>}
 
 \begin{document}
 
