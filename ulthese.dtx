@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2017 Universite Laval
+% Copyright (C) 2018 Universite Laval
 %
 % This file may be distributed and/or modified under the conditions
 % of the LaTeX Project Public License, either version 1.3c of this
@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2017/06/01 v4.4 Universite Laval thesis and memoir class]
+  [2018/04/16 v5.0 Universite Laval thesis and memoir class]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -101,8 +101,7 @@
 
   %% Commandes pour les liens vers la documentation
   \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
-  \newcommand{\doc}[3][documentation]{%
-    \link{#3}{#1}\marginpar{\hfill\faBookmark~\texttt{#2}}}
+  \newcommand{\doc}[2][documentation]{\link{#2}{#1}}
 
 \begin{document}
   \DocInput{ulthese.dtx}
@@ -186,19 +185,13 @@
 % La classe \class{memoir} fait partie des distributions {\LaTeX}
 % modernes; elle devrait donc être installée et disponible sur votre
 % système. Elle est livrée avec une %
-% \doc{memman}{http://texdoc.net/pkg/memoir}\footnote{%
-% Première occurence d'une convention de ce document quand il s'agit
-% de documentation d'un paquetage: un hyperlien mène vers une version
-% en ligne dans le site \link{http://texdoc.net}{TeXdoc Online} et on
-% trouve dans la marge le nom du fichier correspondant (sans
-% l'extension \texttt{.pdf}) sur un système doté d'une installation de
-% {\TeX}~Live.} %
+% \doc{http://texdoc.net/pkg/memoir} %
 % exhaustive: le guide de l'utilisateur fait près de 600~pages!
 % N'hésitez pas à vous y référer pour réaliser une mise en page
 % particulière.
 %
 % L'autre compagnon naturel de la présente documentation est
-% \doc[Rédaction avec {\LaTeX}]{formation-latex-ul}{http://texdoc.net/pkg/formation-latex-ul} ^^A
+% \doc[Rédaction avec {\LaTeX}]{http://texdoc.net/pkg/formation-latex-ul} ^^A
 % \citep{formation-latex-ul}, la formation {\LaTeX} de l'Université Laval.
 % Vous y trouverez des informations additionnelles sur l'utilisation des
 % classes \class{ulthese} et \class{memoir}.
@@ -216,7 +209,7 @@
 %
 % Il est recommandé de segmenter tout document d'une certaine ampleur
 % dans des fichiers |.tex| distincts pour chaque partie ---
-% habituellement un fichier par chapitre. Le document complet est
+% habituellement un fichier par chapitre. Le document complet est alors
 % composé à l'aide d'un fichier maître qui contient le préambule
 % {\LaTeX} et un ensemble de commandes \cmd{\include} pour réunir les
 % parties dans un tout.
@@ -225,8 +218,7 @@
 % lesquels se baser pour:
 % \begin{itemize}
 % \item les fichiers maîtres de divers types de thèses et de mémoires
-%   (standard, par articles, sur mesure, en cotutelle, en
-%   bidiplomation, en extension, etc.);
+%   (standard, par articles, en cotutelle, en bidiplomation);
 % \item les fichiers des parties les plus usuelles (résumés français
 %   et anglais, avant-propos, introduction, chapitres, conclusion,
 %   etc.).
@@ -269,7 +261,7 @@
 % \end{quote}
 %
 % L'installation de la classe consiste à créer le fichier
-% |ulthese.cls| et plusieurs gabarits |.tex| à partir du code source
+% |ulthese.cls| et les gabarits |.tex| à partir du code source
 % documenté se trouvant dans le fichier |ulthese.dtx|. Il est
 % recommandé de simplement créer ces fichiers dans le dossier de
 % travail de la thèse ou du mémoire.
@@ -299,6 +291,12 @@
 % suivantes décrivent les options et les commandes définies par la
 % classe.
 %
+% Depuis la version 5.0, la classe ne crée plus de page de titre par
+% défaut, sa production étant désormais prise en charge par la FESP.
+% Néanmoins, les fonctionnalités de composition d'une page de titre
+% demeurent disponibles. Les commandes pertinentes sont regroupées à
+% la \autoref{sec:utilisation:pagetitre}.
+%
 % \subsection{Options de la classe}
 % \label{sec:utilisation:options}
 %
@@ -314,6 +312,9 @@
 %
 % \begin{table}[t]
 %   \centering
+%   \caption{Options de la classe pour la déclaration du grade et libellés
+%     correspondants}
+%   \label{tab:grades}
 %   \begin{tabularx}{0.85\linewidth}{lX}
 %     \toprule
 %     Option & Nom du grade (sigle) \\
@@ -355,50 +356,16 @@
 %       & Maître en psychoéducation (M.~Ps.~éd.) \\
 %     \bottomrule
 %   \end{tabularx}
-%   \caption{Options de la classe pour la déclaration du grade et libellés
-%     correspondants}
-%   \label{tab:grades}
 % \end{table}
-%
-% \begin{DescribeMacro}{multifacultaire}
-%   Identifie une thèse multifacultaire. Valide uniquement avec un
-%   grade de doctorat. Cette déclaration requiert ensuite d'utiliser
-%   la commande \cmd{\faculteUL}.
-% \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{cotutelle}
 %   Identifie une thèse effectuée en cotutelle avec une autre
-%   université. Valide uniquement avec un grade de doctorat. Cette
-%   déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\univcotutelle} et \cmd{\gradecotutelle}.
+%   université. Valide uniquement avec un grade de doctorat.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{bidiplomation}
 %   Identifie un mémoire effectué en bidiplomation avec une autre
-%   université. Valide uniquement avec un grade de maîtrise. Cette
-%   déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\univbidiplomation} et \cmd{\gradebidiplomation}.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{extensionUdeS}
-%   Identifie une thèse réalisée en extension à l'Université de
-%   Sherbrooke. Valide uniquement avec un grade de doctorat. Cette
-%   déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUdeS}.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{extensionUQO}
-%   Identifie une thèse réalisée en extension à l'Université du
-%   Québec en Outaouais (UQO). Valide uniquement avec un grade de doctorat.
-%   Cette déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUQO}.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{extensionUQAC}
-%   Identifie un mémoire réalisé en extension à l'Université du Québec
-%   à Chicoutimi (UQAC). Valide uniquement avec un grade de maîtrise.
-%   Cette déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUQAC}.
+%   université. Valide uniquement avec un grade de maîtrise.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{examen}
@@ -466,15 +433,18 @@
 % l'option |oneside|.
 %
 % \subsection{Commandes de la classe}
-% \label{sec:commandes}
+% \label{sec:utilisation:commandes}
 %
 % La classe \class{ulthese} définit quelques nouvelles commandes
-% servant principalement à créer les pages de titre et des éléments
-% des pages liminaires. On trouvera un sommaire des commandes au
-% \autoref{tab:commandes} et leurs descriptions détaillées ci-dessous.
+% servant principalement à créer la page frontispice et des éléments
+% des pages liminaires. Le sommaire des commandes se trouve dans le
+% \autoref{tab:commandes} et les descriptions détaillées, ci-dessous.
 %
 % \begin{table}[t]
 %   \centering
+%   \caption{Sommaire des commandes de la classe \class{ulthese}.
+%     Celles marquées d'une étoile $^\star$ sont obligatoires.}
+%   \label{tab:commandes}
 %   \begin{tabularx}{\linewidth}{lX}
 %     \toprule
 %     Commande & Usage \\
@@ -482,39 +452,27 @@
 %     \cmd{\titre}$^\star$ & titre principal du document \\
 %     \cmd{\soustitre} & sous-titre du document \\
 %     \cmd{\auteur}$^\star$ & nom complet de l'auteur \\
-%     \cmd{\annee}$^\star$ & année du dépôt final \\
 %     \cmd{\programme}$^\star$ & nom officiel du programme d'études \\
 %     \cmd{\direction}$^\star$ & nom du directeur (directrice) de recherche \\
 %     \cmd{\codirection} & noms des codirecteurs de recherche \\
-%     \cmd{\univcotutelle} & université de cotutelle \\
-%     \cmd{\gradecotutelle} & grade conféré par l'université de cotutelle \\
-%     \cmd{\univbidiplomation} & université de bidiplomation \\
-%     \cmd{\gradebidiplomation} & grade conféré par l'université de bidiplomation \\
-%     \cmd{\faculteUL} & noms des facultés de l'Université Laval \\
-%     \cmd{\faculteUdeS} & nom de la faculté de l'Université de Sherbrooke \\
-%     \cmd{\faculteUQO} & nom de la faculté de l'UQO \\
-%     \cmd{\faculteUQAC} & nom de la faculté de l'UQAC \\
-%     \cmd{\pagestitre}$^\star$ & production des pages de titre et frontispice \\
+%     \cmd{\frontispice}$^\star$ & production de la page frontispice \\
 %     \cmd{\dedicace} & dédicace du document \\
 %     \cmd{\epigraphe} & épigraphe du document \\
 %     \bottomrule
 %   \end{tabularx}
-%   \caption{Sommaire des commandes de la classe \class{ulthese}.
-%     Celles marquées d'une étoile $^\star$ sont obligatoires.}
-%   \label{tab:commandes}
 % \end{table}
 %
 % \begin{DescribeMacro}{\titre}
 %   Titre principal de la thèse ou du mémoire. Ne pas utiliser la
 %   commande \cmd{\title} de {\LaTeX} pour ce faire.
 %
-%   Un titre très long devra être coupé manuellement avec |\\| ou
-%   \cmd{\newline}. Par exemple, la déclaration d'un titre d'une seule
-%   ligne est:
+%   Vous devez couper manuellement avec |\\| ou \cmd{\newline} un
+%   titre très long. Par exemple, la déclaration d'un titre d'une
+%   seule ligne est:
 %   \begin{quote}
 %     |\titre{Ceci est un titre d'une seule ligne}|
 %   \end{quote}
-%   Pour un titre de deux lignes, utiliser:
+%   Pour un titre de deux lignes, ce sera plutôt:
 %   \begin{quote}
 %     |\titre{Ceci est la première ligne d'un long titre \\| \\
 %     |       et ceci est la seconde}|
@@ -531,10 +489,6 @@
 %   |Prénom Nom| avec seulement des majuscules initiales. Ne pas
 %   utiliser la commande \cmd{\author} de {\LaTeX} pour le nom de
 %   l'auteur.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\annee}
-%   Année du dépôt final de la thèse ou du mémoire.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\programme}
@@ -559,7 +513,7 @@
 %   \end{quote}
 %
 %   De même, les maîtrises en bidiplomation comptent deux directeurs
-%   ou directrices de recherche. Séparer chaque mention comme
+%   ou directrices de recherche. Séparer chaque mention tel que
 %   mentionné ci-dessus.
 % \end{DescribeMacro}
 %
@@ -572,6 +526,83 @@
 %     |\codirection{Prénom Nom, directrice de recherche \\| \\
 %     |             Prénom Nom, directeur de recherche}|
 %   \end{quote}
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\frontispice}
+%   Création de la page frontispice. De toutes les commandes
+%   ci-dessus, c'est la seule qui doit se trouver dans le corps du
+%   document plutôt que dans le préambule.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\dedicace}
+%   Ajout d'une dédicace («À mes parents», «À Camille») à la thèse ou
+%   au mémoire. La dédicace est disposée seule sur une page liminaire,
+%   à une dizaine de lignes de la marge du haut et alignée à droite.
+%   Par défaut, elle est composée en italique.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\epigraphe}
+%   Ajout d'une épigraphe au début du document. Comme la dédicace,
+%   l'épigraphe est disposée seule sur une page liminaire, à une
+%   dizaine de lignes de la marge du haut et alignée à droite. La
+%   commande accepte deux arguments, soit le texte de la citation et
+%   son auteur ou la source, dans l'ordre.
+%
+%   Pour ajouter une épigraphe au début d'un ou plusieurs chapitres,
+%   utiliser directement la commande \cmd{\epigraph} de
+%   \class{memoir}, sur laquelle \cmd{\dedicace} et \cmd{\epigraphe}
+%   sont d'ailleurs basées.
+% \end{DescribeMacro}
+%
+% \subsection{Création d'une page de titre}
+% \label{sec:utilisation:pagetitre}
+%
+% La thèse ou le mémoire déposé à la FESP ne doit pas comporter de
+% page de titre.
+%
+% Les options de classe et les commandes mentionnées dans cette
+% section sont fournies à titre gracieux aux auteurs qui
+% souhaiteraient néanmoins composer une page de titre conforme aux
+% normes de présentation matérielles, ou encore pour les examens de
+% doctorat.
+%
+% En premier lieu, les \meta{options} suivantes s'ajoutent à celles de
+% la \autoref{sec:utilisation:options} lorsque l'on souhaite créer une
+% page de titre.
+%
+% \begin{DescribeMacro}{multifacultaire}
+%   Identifie une thèse multifacultaire. Valide uniquement avec un
+%   grade de doctorat. Cette déclaration requiert ensuite d'utiliser
+%   la commande \cmd{\faculteUL}.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{extensionUdeS}
+%   Identifie une thèse réalisée en extension à l'Université de
+%   Sherbrooke. Valide uniquement avec un grade de doctorat. Cette
+%   déclaration requiert ensuite d'utiliser les commandes
+%   \cmd{\faculteUL} et \cmd{\faculteUdeS}.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{extensionUQO}
+%   Identifie une thèse réalisée en extension à l'Université du
+%   Québec en Outaouais (UQO). Valide uniquement avec un grade de doctorat.
+%   Cette déclaration requiert ensuite d'utiliser les commandes
+%   \cmd{\faculteUL} et \cmd{\faculteUQO}.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{extensionUQAC}
+%   Identifie un mémoire réalisé en extension à l'Université du Québec
+%   à Chicoutimi (UQAC). Valide uniquement avec un grade de maîtrise.
+%   Cette déclaration requiert ensuite d'utiliser les commandes
+%   \cmd{\faculteUL} et \cmd{\faculteUQAC}.
+% \end{DescribeMacro}
+%
+% Ensuite, la composition d'une page de titre peut nécessiter
+% d'utiliser les commandes ci-dessous en plus de celles de la
+% \autoref{sec:utilisation:commandes}.
+%
+% \begin{DescribeMacro}{\annee}
+%   Année du dépôt final de la thèse ou du mémoire.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\univcotutelle}
@@ -648,31 +679,11 @@
 %   |extensionUQAC|.
 % \end{DescribeMacro}
 %
-% \begin{DescribeMacro}{\pagestitre}
-%   Création de la page de titre et de la page frontispice. Ne pas
-%   utiliser la commande \cmd{\pagetitle} de {\LaTeX} pour ce faire.
-%   De toutes les commandes ci-dessus, c'est la seule qui doit se
-%   trouver dans le corps du document plutôt que dans le préambule.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\dedicace}
-%   Ajout d'une dédicace («À mes parents», «À Camille») à la thèse ou
-%   au mémoire. La dédicace est disposée seule sur une page liminaire,
-%   à une dizaine de lignes de la marge du haut et alignée à droite.
-%   Par défaut, elle est composée en italique.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\epigraphe}
-%   Ajout d'une épigraphe au début du document. Comme la dédicace,
-%   l'épigraphe est disposée seule sur une page liminaire, à une
-%   dizaine de lignes de la marge du haut et alignée à droite. La
-%   commande accepte deux arguments, soit le texte de la citation et
-%   son auteur ou la source, dans l'ordre.
-%
-%   Pour ajouter une épigraphe au début d'un ou plusieurs chapitres,
-%   utiliser directement la commande \cmd{\epigraph} de
-%   \class{memoir}, sur laquelle \cmd{\dedicace} et \cmd{\epigraphe}
-%   sont d'ailleurs basées.
+% \begin{DescribeMacro}{\pagetitre}
+%   Création de la page de titre. Ne pas utiliser la commande
+%   \cmd{\pagetitle} de {\LaTeX} pour ce faire. De toutes les
+%   commandes ci-dessus, c'est la seule qui doit se trouver dans le
+%   corps du document plutôt que dans le préambule.
 % \end{DescribeMacro}
 %
 % \subsection{Citations}
@@ -794,12 +805,12 @@
 %
 % Si vous n'êtes pas autrement familier avec le paquetage
 % \pkg{babel}, consultez sa %
-% \doc{babel}{http://texdoc.net/pkg/babel/}. %
+% \doc{http://texdoc.net/pkg/babel/}. %
 % Celle-ci est éclatée en un
 % document principal, pour le c{\oe}ur du paquetage et plusieurs
 % autres pour les fonctionnalités propres à une langue: %
-% \doc[anglais]{english}{http://texdoc.net/pkg/babel-english}, %
-% \doc[français]{frenchb}{http://texdoc.net/pkg/babel-french}, %
+% \doc[anglais]{http://texdoc.net/pkg/babel-english}, %
+% \doc[français]{http://texdoc.net/pkg/babel-french}, %
 % etc. Consultez au moins les documents consacrés aux
 % langues utilisées dans votre thèse ou mémoire. Le plus simple
 % consiste sans doute à consulter en ligne sur CTAN les
@@ -872,7 +883,7 @@
 % \end{quote}
 %
 % Consultez la %
-% \doc{natbib}{http://texdoc.net/pkg/natbib/} %
+% \doc{http://texdoc.net/pkg/natbib/} %
 % de \pkg{natbib} pour les détails.
 %
 % \subsection{Bibliographies multiples}
@@ -889,7 +900,7 @@
 %
 % La classe fait appel au paquetage \pkg{chapterbib}
 % \citep{chapterbib} pour composer des bibliographies multiples. La
-% \doc{chapterbib}{http://texdoc.net/pkg/chapterbib/} du paquetage
+% \doc{http://texdoc.net/pkg/chapterbib/} du paquetage
 % explique la procédure à suivre pour obtenir une bibliographie par
 % chapitre avec {\BibTeX}. En résumé:
 % \begin{enumerate}
@@ -1103,14 +1114,14 @@
 % commande devrait figurer dans les fichiers des chapitres
 % individuels dans une thèse ou un mémoire par articles.
 %
-% \subsection{Déclarations des pages de titre}
+% \subsection{Déclarations de la page frontispice}
 %
 % Les gabarits comportent toutes les déclarations nécessaires pour
-% composer les pages de titre des divers types de thèse ou de mémoires.
-% Vous devez remplacer les éléments se trouvant entre crochets <~> en
-% respectant la forme indiquée. Assurez-vous de supprimer les
-% caractères < et > afin qu'ils n'apparaissent pas sur les pages de titre de
-% votre document.
+% composer la page frontispice des divers types de thèse ou de
+% mémoires. Vous devez remplacer les éléments se trouvant entre
+% crochets |< >| en respectant la forme indiquée. Assurez-vous de
+% supprimer les caractères |<| et |>| afin qu'ils n'apparaissent pas
+% sur la page frontispice de votre document.
 %
 % \subsection{Pages liminaires}
 %
@@ -1125,31 +1136,23 @@
 % mémoires devraient comporter les pages liminaires suivantes, dans
 % l'ordre:
 % \begin{enumerate}
-% \item la page de titre (obligatoire);
-% \item la page frontispice (obligatoire);
-% \item un résumé en français (obligatoire);
-% \item un résumé en anglais (recommandé, mais non obligatoire);
-% \item une table des matières (obligatoire);
-% \item une liste des tableaux;
-% \item une liste des figures;
-% \item une liste des abbréviations et des sigles;
-% \item une dédicace;
-% \item une épigraphe;
-% \item des remerciements;
-% \item un avant-propos (obligatoire dans le cas d'une thèse ou d'un
+% \item page frontispice (obligatoire);
+% \item résumé en français (obligatoire);
+% \item résumé en anglais (recommandé, mais non obligatoire);
+% \item table des matières (obligatoire);
+% \item liste des tableaux;
+% \item liste des figures;
+% \item liste des abbréviations et des sigles;
+% \item dédicace;
+% \item épigraphe;
+% \item remerciements;
+% \item avant-propos (obligatoire dans le cas d'une thèse ou d'un
 %   mémoire par articles).
 % \end{enumerate}
 %
-% \begin{rem}
-%   Pour un examen de doctorat, on ne considère que la page de titre
-%   comme obligatoire. L'option de classe |examen| supprime d'ailleurs
-%   la page frontispice. Il est laissé aux auteurs le soin de
-%   supprimer les autres pages liminaires des gabarits.
-% \end{rem}
-%
 % Les commandes
 % \begin{quote}
-%   \cmd{\pagestitre} \\
+%   \cmd{\frontispice} \\
 %   \cmd{\tableofcontents} \\
 %   \cmd{\listoftables} \\
 %   \cmd{\listoffigures} \\
@@ -1158,6 +1161,14 @@
 % \end{quote}
 % permettent de générer les pages correspondantes. Seules les deux
 % dernières commandes admettent des arguments.
+%
+% \begin{rem}
+%   Un examen de doctorat comporte une page de titre en lieu et place
+%   de la page frontispice. L'option de classe |examen| supprime
+%   d'ailleurs cette dernière. Il est laissé aux auteurs le soin de
+%   d'ajouter la commande \cmd{\pagetitre} dans les gabarits et d'en
+%   supprimer les autres pages liminaires.
+% \end{rem}
 %
 % \begin{DescribeMacro}{\chapter*}
 %   Les résumés, la liste des abbréviations et des sigles, les
@@ -1324,8 +1335,8 @@
 % \section{Mise en {\oe}uvre}
 % \label{sec:meo}
 %
-% Cette annexe passe en revue le code {\TeX} et {\LaTeX} de la
-% classe. Elle ne risque d'intéresser que les personnes qui souhaitent
+% Cette annexe passe en revue le code {\TeX} et {\LaTeX} de la classe.
+% Elle n'est susceptible d'intéresser que les personnes qui souhaitent
 % explorer comment la classe est programmée.
 %
 % \subsection{Tests et valeurs booléennes}
@@ -1421,9 +1432,11 @@
 %
 % \begin{macro}{PhD,MSc,MA,...}
 %   Définition du type de grade et si la thèse ou le mémoire est
-%   multifacultaire, effectué en cotutelle, en bidiplomation ou en
-%   extension. Certaines options ne sont valides que pour une thèse ou
-%   que pour un mémoire. La page de titre des programmes en extension
+%   en cotutelle, en bidiplomation, multifacultaire ou en
+%   extension. Seuls les doctorats sont offerts en cotutelle et seules
+%   les maîtrises offrent l'option d'une bidiplomation. Les options
+%   «multifacultaire» et «en extension» ne sont pertinentes que pour créer
+%   une page de titre. D'ailleurs, la page de titre des programmes en extension
 %   comporte une mention «offert en extension» ou «offerte en
 %   extension» selon qu'il s'agit d'un doctorat ou d'une maîtrise; le
 %   bon terme est défini avec l'option correspondante.
@@ -1743,8 +1756,8 @@
 %
 % \subsection{Pages de titre}
 %
-% Le code pour traiter et composer la page de titre et la page
-% frontispice constitue l'essentiel de la classe.
+% Le code pour traiter et composer la page de titre (le cas échéant)
+% et la page frontispice constitue l'essentiel de la classe.
 %
 % \subsubsection{Famille et style de la police de caractères}
 %
@@ -1930,10 +1943,10 @@
 %   standard; multifacultaire; en cotutelle ou en bidiplomation
 %   (disposition identique); en extension.
 %
-%   Tel qu'expliqué à la \autoref{sec:utilisation:options}, certains
+%   Tel qu'expliqué à la \autoref{sec:utilisation:pagetitre}, certains
 %   types de grade requièrent expressément que certaines informations
-%   soient fournies. Si un élément d'information manque, un
-%   avertissement est émis.
+%   soient fournies pour la composition d'une page de titre. Si un
+%   élément d'information manque, un avertissement est émis.
 %    \begin{macrocode}
 \newcommand{\UL@details}{%
   \ifcase\UL@typenum\relax% 0 standard
@@ -1994,31 +2007,25 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{Conception des pages de titre}
+% \subsubsection{Conception de la page frontispice}
 %
 % \begin{macro}{\pagestitre}
-%   Les thèses et mémoires comportent une page de titre et une page
-%   frontispice. La première comporte:
+%   Les thèses et mémoires comportent une page frontispice. Celle-ci
+%   comporte, de haut en bas:
 %   \begin{enumerate}
-%   \item le logo de l'Université Laval (sauf pour les thèses ou
-%     mémoires réalisés en cotutelle, en bidiplomation ou en
-%     extension);
+%   \item un espace vide (créé avec une boîte de réglure invisible,
+%     \emph{strut}) de la même hauteur que le logo de l'Université
+%     Laval;
 %   \item le titre et le sous-titre, le cas échéant;
 %   \item le type de document (thèse, thèse en cotutelle,
 %     mémoire, etc.);
 %   \item le nom complet de l'auteur;
-%   \item une description du programme, du grade obtenu et des
-%     facultés ou universités d'attache, le cas échéant;
-%   \item la mention «Québec, Canada» si le logo de l'Université
-%     Laval est présent;
-%   \item la notice de copyright.
+%   \item les noms des directeur et codirecteurs de recherche.
 %   \end{enumerate}
-%   La page frontispice reprend les éléments 2--4 et ajoute les
-%   noms des directeur et codirecteurs de recherche.
 %
-%   On doit rétablir pour les pages de titre l'interligne simple et
-%   l'espacement nul entre les paragraphes (\cmd{\parskip}). Ensuite, on
-%   doit ajuster la distance entre le bloc de titre et le type de
+%   Nous devons rétablir pour les pages de titre l'interligne simple et
+%   l'espacement nul entre les paragraphes (\cmd{\parskip}). Ensuite, nous
+%   devons ajuster la distance entre le bloc de titre et le type de
 %   document (\cmd{\UL@docidspacing}) et celle entre ce dernier et le nom
 %   de l'auteur (\cmd{\UL@authorspacing}). Cela fait en sorte que les
 %   éléments des pages de titre se retrouvent (presque) toujours au même
@@ -2027,12 +2034,9 @@
 %   (précaution nécessaire pour l'éventuel cas d'un bloc de titre
 %   s'étendant sur plusieurs lignes).
 %
-%   Sur la page frontispice, le logo de l'Université est remplacé par
-%   une boîte de réglure invisible (\emph{strut}) de la même hauteur.
-%
-%   Le nom de l'auteur, les directeurs et codirecteurs de recherche et
-%   la notice de copyright sont insérées directement dans le code de
-%   la commande \cmd{\pagestitre}.
+%   Le nom de l'auteur et ceux des directeurs et codirecteurs de
+%   recherche sont insérées directement dans le code de la commande
+%   \cmd{\frontispice}.
 %    \begin{macrocode}
 \newlength{\UL@docidspacing}
 \setlength{\UL@docidspacing}{82pt}
@@ -2046,30 +2050,6 @@
   \setlength{\UL@docidspacing}{\baselineskip}
   \addtolength{\UL@authorspacing}{-\baselineskip}
   \fi}
-\newcommand{\pagetitre}{{%
-    \UL@hastitlepagetrue
-    \clearpage
-    \pagestyle{empty}
-    \SingleSpacing\setlength{\parskip}{0pt}
-    \centering
-    \UL@fontbase
-    \UL@settitledims
-    \ifnum\UL@typenum>1\relax
-      \vspace*{0pt}\par
-    \else
-      \includegraphics[height=15mm,keepaspectratio=true]{ul_p}\par
-    \fi
-    \vspace{82pt}
-    \copy\UL@titlebox
-    \copy\UL@subtitlebox
-    \vspace{\UL@docidspacing}
-    \UL@docid
-    \vspace{\UL@authorspacing}
-    {\UL@fontauthor\UL@author}\par
-    \UL@details
-    \vfill
-    {\textcopyright} \UL@author, \UL@year\par
-    \clearpage}}
 \newcommand{\frontispice}{{%
     \ifUL@isexam\else
       \clearpage
@@ -2098,6 +2078,54 @@
       \UL@director\par
       \UL@codirector
     \fi
+    \clearpage}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\pagetitre}
+%   La composition d'une page de titre est optionnelle pour les thèses
+%   et mémoires de l'Université Laval. La commande \cmd{\pagetitre}
+%   permet néanmoins d'en créer une conforme aux normes de
+%   présentation matérielle de la FESP. La page de titre comporte, de
+%   haut en bas:
+%   \begin{enumerate}
+%   \item le logo de l'Université Laval (sauf pour les thèses ou
+%     mémoires réalisés en cotutelle, en bidiplomation ou en
+%     extension);
+%   \item le titre et le sous-titre, le cas échéant;
+%   \item le type de document (thèse, thèse en cotutelle,
+%     mémoire, etc.);
+%   \item le nom complet de l'auteur;
+%   \item une description du programme, du grade obtenu et des
+%     facultés ou universités d'attache, le cas échéant;
+%   \item la mention «Québec, Canada» si le logo de l'Université
+%     Laval est présent;
+%   \item la notice de copyright.
+%   \end{enumerate}
+%    \begin{macrocode}
+\newcommand{\pagetitre}{{%
+    \UL@hastitlepagetrue
+    \clearpage
+    \pagestyle{empty}
+    \SingleSpacing\setlength{\parskip}{0pt}
+    \centering
+    \UL@fontbase
+    \UL@settitledims
+    \ifnum\UL@typenum>1\relax
+      \vspace*{0pt}\par
+    \else
+      \includegraphics[height=15mm,keepaspectratio=true]{ul_p}\par
+    \fi
+    \vspace{82pt}
+    \copy\UL@titlebox
+    \copy\UL@subtitlebox
+    \vspace{\UL@docidspacing}
+    \UL@docid
+    \vspace{\UL@authorspacing}
+    {\UL@fontauthor\UL@author}\par
+    \UL@details
+    \vfill
+    {\textcopyright} \UL@author, \UL@year\par
     \clearpage}}
 %    \end{macrocode}
 % \end{macro}
@@ -2426,10 +2454,4 @@ traitée comme un chapitre normal, sauf qu'elle n'est pas numérotée.
 
 Texte de l'annexe.
 %</annexe>
-% Local Variables:
-% mode: doctex
-% coding: utf-8
-% TeX-master: t
-% TeX-engine: xetex
-% End:
 % \fi
