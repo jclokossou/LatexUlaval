@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2018/04/16 v5.0 Universite Laval thesis and memoir class]
+  [2018/04/24 v5.0 Universite Laval thesis and memoir class]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -291,18 +291,21 @@
 % suivantes décrivent les options et les commandes définies par la
 % classe.
 %
+% \changes{5.0}{2018-04-24}{Nouvelle directive de la FESP: suppression
+%   de la page de titre.}
 % Depuis la version 5.0, la classe ne crée plus de page de titre par
 % défaut, sa production étant désormais prise en charge par la FESP.
 % Néanmoins, les fonctionnalités de composition d'une page de titre
-% demeurent disponibles. Les commandes pertinentes sont regroupées à
-% la \autoref{sec:utilisation:pagetitre}.
+% demeurent disponibles dans la classe. Les commandes pertinentes sont
+% regroupées à la \autoref{sec:utilisation:pagetitre}.
 %
 % \subsection{Options de la classe}
 % \label{sec:utilisation:options}
 %
 % Cette section passe en revue les \meta{options} que l'on peut
 % spécifier au chargement de la classe. Les commandes mentionnées
-% ci-dessous font quant à elles l'objet de la \autoref{sec:commandes}.
+% ci-dessous font quant à elles l'objet de la
+% \autoref{sec:utilisation:commandes}.
 %
 % \begin{DescribeMacro}{PhD,MSc,MA, ...}
 %   Identifie le type de grade; consulter le \autoref{tab:grades}
@@ -557,11 +560,9 @@
 % \subsection{Création d'une page de titre}
 % \label{sec:utilisation:pagetitre}
 %
-% La thèse ou le mémoire déposé à la FESP ne doit pas comporter de
-% page de titre.
-%
-% Les options de classe et les commandes mentionnées dans cette
-% section sont fournies à titre gracieux aux auteurs qui
+% La thèse ou le mémoire déposé à la FESP ne doit \emph{pas} comporter
+% de page de titre. Les options de classe et les commandes mentionnées
+% dans cette section sont fournies à titre gracieux aux auteurs qui
 % souhaiteraient néanmoins composer une page de titre conforme aux
 % normes de présentation matérielles, ou encore pour les examens de
 % doctorat.
@@ -1841,8 +1842,8 @@
 \newcommand*{\UL@facother}{}
 %    \end{macrocode}
 % Puis les commandes visibles pour les utilisateurs, qui redéfinissent
-% les commandes internes. Voir la \autoref{sec:commandes} pour leur
-% signification.
+% les commandes internes. Voir la \autoref{sec:utilisation:commandes}
+% pour leur signification.
 %    \begin{macrocode}
 \newcommand{\titre}[1]{\renewcommand{\UL@maintitle}{#1}}
 \newcommand{\soustitre}[1]{%
