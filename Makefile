@@ -61,9 +61,13 @@ zip : ${FILES} README.md
 
 create-release :
 	@echo ----- Creating release on GitHub...
+	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
+	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
+	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
+	    echo "unpushed commits in repository; pushing to origin"; \
+	     git push; fi
 	if [ -e relnotes.in ]; then rm relnotes.in; fi
 	touch relnotes.in
-	#git commit -a -m "Version ${VERSION}" && git push
 	awk 'BEGIN { FS = "{"; \
 	             split("${VERSION}", v, " "); \
 	             printf "{\"tag_name\": \"v%s\", \"name\": \"Version %s\", \"body\": \"", \
