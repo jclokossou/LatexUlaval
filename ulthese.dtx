@@ -293,11 +293,13 @@
 %
 % \changes{5.0}{2018-04-24}{Nouvelle directive de la FESP: suppression
 %   de la page de titre.}
-% Depuis la version 5.0, la classe ne crée plus de page de titre par
-% défaut, sa production étant désormais prise en charge par la FESP.
-% Néanmoins, les fonctionnalités de composition d'une page de titre
-% demeurent disponibles dans la classe. Les commandes pertinentes sont
-% regroupées à la \autoref{sec:utilisation:pagetitre}.
+% \begin{rem}
+%   Depuis la version 5.0, la classe ne crée plus de page de titre
+%   par défaut, sa production étant désormais prise en charge par la
+%   FESP. Néanmoins, les fonctionnalités de composition d'une page
+%   de titre demeurent disponibles dans la classe. Les commandes
+%   pertinentes sont regroupées à l'\autoref{sec:pagetitre}.
+% \end{rem}
 %
 % \subsection{Options de la classe}
 % \label{sec:utilisation:options}
@@ -555,136 +557,6 @@
 %   utiliser directement la commande \cmd{\epigraph} de
 %   \class{memoir}, sur laquelle \cmd{\dedicace} et \cmd{\epigraphe}
 %   sont d'ailleurs basées.
-% \end{DescribeMacro}
-%
-% \subsection{Création d'une page de titre}
-% \label{sec:utilisation:pagetitre}
-%
-% La thèse ou le mémoire déposé à la FESP ne doit \emph{pas} comporter
-% de page de titre. Les options de classe et les commandes mentionnées
-% dans cette section sont fournies à titre gracieux aux auteurs qui
-% souhaiteraient néanmoins composer une page de titre conforme aux
-% normes de présentation matérielles, ou encore pour les examens de
-% doctorat.
-%
-% En premier lieu, les \meta{options} suivantes s'ajoutent à celles de
-% la \autoref{sec:utilisation:options} lorsque l'on souhaite créer une
-% page de titre.
-%
-% \begin{DescribeMacro}{multifacultaire}
-%   Identifie une thèse multifacultaire. Valide uniquement avec un
-%   grade de doctorat. Cette déclaration requiert ensuite d'utiliser
-%   la commande \cmd{\faculteUL}.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{extensionUdeS}
-%   Identifie une thèse réalisée en extension à l'Université de
-%   Sherbrooke. Valide uniquement avec un grade de doctorat. Cette
-%   déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUdeS}.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{extensionUQO}
-%   Identifie une thèse réalisée en extension à l'Université du
-%   Québec en Outaouais (UQO). Valide uniquement avec un grade de doctorat.
-%   Cette déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUQO}.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{extensionUQAC}
-%   Identifie un mémoire réalisé en extension à l'Université du Québec
-%   à Chicoutimi (UQAC). Valide uniquement avec un grade de maîtrise.
-%   Cette déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUQAC}.
-% \end{DescribeMacro}
-%
-% Ensuite, la composition d'une page de titre peut nécessiter
-% d'utiliser les commandes ci-dessous en plus de celles de la
-% \autoref{sec:utilisation:commandes}.
-%
-% \begin{DescribeMacro}{\annee}
-%   Année du dépôt final de la thèse ou du mémoire.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\univcotutelle}
-%   Nom, ville et pays de l'université de cotutelle, déclarés sous la
-%   forme
-%   \begin{quote}
-%     |\univcotutelle{Nom de l'université \\ Ville, Pays}|
-%   \end{quote}
-%   Cette commande prend effet seulement lorsque la classe est chargée
-%   avec l'option |cotutelle|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\gradecotutelle}
-%   Grade conféré par l'université de cotutelle, déclaré
-%   sous la forme
-%   \begin{quote}
-%     |\gradecotutelle{Nom du grade (sigle)}|
-%   \end{quote}
-%   Cette commande prend effet seulement lorsque la classe est chargée
-%   avec l'option |cotutelle|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\univbidiplomation}
-%   Nom, ville et pays de l'université de bidiplomation, déclarés sous
-%   la forme
-%   \begin{quote}
-%     |\univbidiplomation{Nom de l'université \\ Ville, Pays}|
-%   \end{quote}
-%   Cette commande prend effet seulement lorsque la classe est chargée
-%   avec l'option |bidiplomation|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\gradebidiplomation}
-%   Grade conféré par l'université de bidiplomation, déclaré sous la
-%   forme
-%   \begin{quote}
-%     |\gradebidiplomation{Nom du grade (sigle)}|
-%   \end{quote}
-%   Cette commande prend effet seulement lorsque la classe est chargée
-%   avec l'option |bidiplomation|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\faculteUL}
-%   La commande a deux usages:
-%   \begin{enumerate}
-%   \item noms des facultés pour les thèses et mémoires
-%     multifacultaires, séparés par des commandes |\\|;
-%   \item nom de la faculté de l'Université Laval où sont réalisés les
-%     thèses et mémoires en extension à l'Université de Sherbrooke, à
-%     l'UQO ou à l'UQAC.
-%   \end{enumerate}
-%   Cette commande prend effet seulement lorsque la classe est chargée
-%   avec l'une ou l'autre des options |multifacultaire|,
-%   |extensionUdeS|, |extensionUQO| ou |extensionUQAC|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\faculteUdeS}
-%   Nom de la faculté de l'Université de Sherbrooke hébergeant la
-%   thèse en extension. Cette commande prend effet seulement lorsque
-%   la classe est chargée avec l'option |extensionUdeS|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\faculteUQO}
-%   Nom de la faculté de l'Université du Québec en Outaouais
-%   hébergeant la thèse en extension. Cette commande prend effet
-%   seulement lorsque la classe est chargée avec l'option
-%   |extensionUQO|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\faculteUQAC}
-%   Nom de la faculté de l'Université du Québec à Chicoutimi
-%   hébergeant le mémoire en extension. Cette commande prend effet
-%   seulement lorsque la classe est chargée avec l'option
-%   |extensionUQAC|.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\pagetitre}
-%   Création de la page de titre. Ne pas utiliser la commande
-%   \cmd{\pagetitle} de {\LaTeX} pour ce faire. De toutes les
-%   commandes ci-dessus, c'est la seule qui doit se trouver dans le
-%   corps du document plutôt que dans le préambule.
 % \end{DescribeMacro}
 %
 % \subsection{Citations}
@@ -1330,9 +1202,141 @@
 %   \PrintChanges
 % }
 %
+% \appendix
+%
+% \section{Création d'une page de titre}
+% \label{sec:pagetitre}
+%
+% La thèse ou le mémoire déposé à la FESP ne doit \emph{pas} comporter
+% de page de titre. Les options de classe et les commandes mentionnées
+% dans cette section sont fournies à titre gracieux aux auteurs qui
+% souhaiteraient néanmoins composer une page de titre conforme aux
+% normes de présentation matérielles, ou encore pour les examens de
+% doctorat.
+%
+% En premier lieu, les \meta{options} suivantes s'ajoutent à celles de
+% la \autoref{sec:utilisation:options} lorsque l'on souhaite créer une
+% page de titre.
+%
+% \begin{DescribeMacro}{multifacultaire}
+%   Identifie une thèse multifacultaire. Valide uniquement avec un
+%   grade de doctorat. Cette déclaration requiert ensuite d'utiliser
+%   la commande \cmd{\faculteUL}.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{extensionUdeS}
+%   Identifie une thèse réalisée en extension à l'Université de
+%   Sherbrooke. Valide uniquement avec un grade de doctorat. Cette
+%   déclaration requiert ensuite d'utiliser les commandes
+%   \cmd{\faculteUL} et \cmd{\faculteUdeS}.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{extensionUQO}
+%   Identifie une thèse réalisée en extension à l'Université du
+%   Québec en Outaouais (UQO). Valide uniquement avec un grade de doctorat.
+%   Cette déclaration requiert ensuite d'utiliser les commandes
+%   \cmd{\faculteUL} et \cmd{\faculteUQO}.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{extensionUQAC}
+%   Identifie un mémoire réalisé en extension à l'Université du Québec
+%   à Chicoutimi (UQAC). Valide uniquement avec un grade de maîtrise.
+%   Cette déclaration requiert ensuite d'utiliser les commandes
+%   \cmd{\faculteUL} et \cmd{\faculteUQAC}.
+% \end{DescribeMacro}
+%
+% Ensuite, la composition d'une page de titre peut nécessiter
+% d'utiliser les commandes ci-dessous en plus de celles de la
+% \autoref{sec:utilisation:commandes}.
+%
+% \begin{DescribeMacro}{\annee}
+%   Année du dépôt final de la thèse ou du mémoire.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\univcotutelle}
+%   Nom, ville et pays de l'université de cotutelle, déclarés sous la
+%   forme
+%   \begin{quote}
+%     |\univcotutelle{Nom de l'université \\ Ville, Pays}|
+%   \end{quote}
+%   Cette commande prend effet seulement lorsque la classe est chargée
+%   avec l'option |cotutelle|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\gradecotutelle}
+%   Grade conféré par l'université de cotutelle, déclaré
+%   sous la forme
+%   \begin{quote}
+%     |\gradecotutelle{Nom du grade (sigle)}|
+%   \end{quote}
+%   Cette commande prend effet seulement lorsque la classe est chargée
+%   avec l'option |cotutelle|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\univbidiplomation}
+%   Nom, ville et pays de l'université de bidiplomation, déclarés sous
+%   la forme
+%   \begin{quote}
+%     |\univbidiplomation{Nom de l'université \\ Ville, Pays}|
+%   \end{quote}
+%   Cette commande prend effet seulement lorsque la classe est chargée
+%   avec l'option |bidiplomation|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\gradebidiplomation}
+%   Grade conféré par l'université de bidiplomation, déclaré sous la
+%   forme
+%   \begin{quote}
+%     |\gradebidiplomation{Nom du grade (sigle)}|
+%   \end{quote}
+%   Cette commande prend effet seulement lorsque la classe est chargée
+%   avec l'option |bidiplomation|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\faculteUL}
+%   La commande a deux usages:
+%   \begin{enumerate}
+%   \item noms des facultés pour les thèses et mémoires
+%     multifacultaires, séparés par des commandes |\\|;
+%   \item nom de la faculté de l'Université Laval où sont réalisés les
+%     thèses et mémoires en extension à l'Université de Sherbrooke, à
+%     l'UQO ou à l'UQAC.
+%   \end{enumerate}
+%   Cette commande prend effet seulement lorsque la classe est chargée
+%   avec l'une ou l'autre des options |multifacultaire|,
+%   |extensionUdeS|, |extensionUQO| ou |extensionUQAC|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\faculteUdeS}
+%   Nom de la faculté de l'Université de Sherbrooke hébergeant la
+%   thèse en extension. Cette commande prend effet seulement lorsque
+%   la classe est chargée avec l'option |extensionUdeS|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\faculteUQO}
+%   Nom de la faculté de l'Université du Québec en Outaouais
+%   hébergeant la thèse en extension. Cette commande prend effet
+%   seulement lorsque la classe est chargée avec l'option
+%   |extensionUQO|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\faculteUQAC}
+%   Nom de la faculté de l'Université du Québec à Chicoutimi
+%   hébergeant le mémoire en extension. Cette commande prend effet
+%   seulement lorsque la classe est chargée avec l'option
+%   |extensionUQAC|.
+% \end{DescribeMacro}
+%
+% \begin{DescribeMacro}{\pagetitre}
+%   Création de la page de titre. Ne pas utiliser la commande
+%   \cmd{\pagetitle} de {\LaTeX} pour ce faire. De toutes les
+%   commandes ci-dessus, c'est la seule qui doit se trouver dans le
+%   corps du document plutôt que dans le préambule.
+% \end{DescribeMacro}
+%
+%
 % ^^A Début du code de la classe
 %
-% \appendix
 % \section{Mise en {\oe}uvre}
 % \label{sec:meo}
 %
@@ -1944,7 +1948,7 @@
 %   standard; multifacultaire; en cotutelle ou en bidiplomation
 %   (disposition identique); en extension.
 %
-%   Tel qu'expliqué à la \autoref{sec:utilisation:pagetitre}, certains
+%   Tel qu'expliqué à l'\autoref{sec:pagetitre}, certains
 %   types de grade requièrent expressément que certaines informations
 %   soient fournies pour la composition d'une page de titre. Si un
 %   élément d'information manque, un avertissement est émis.
