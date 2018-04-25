@@ -268,14 +268,14 @@
 %
 % Pour procéder à l'installation, décompressez l'archive |ulthese.zip|
 % dans votre dossier de travail, puis compilez avec {\LaTeX} le fichier
-% |ulthese.ins| en exécutant
+% |ulthese.ins| en exécutant la commande suivante depuis une invite
+% de commande:
 % \begin{quote}
 %   |latex ulthese.ins|
 % \end{quote}
-% depuis une invite de commande. Il est aussi possible d'ouvrir le
-% fichier |ulthese.ins| dans votre éditeur de texte favori et de
-% lancer depuis celui-ci la compilation avec {\LaTeX}, pdf{\LaTeX},
-% {\XeLaTeX} ou un autre moteur {\TeX}.
+% Vous pouvez aussi ouvrir le fichier |ulthese.ins| dans votre éditeur
+% de texte favori et lancer depuis celui-ci la compilation avec
+% {\LaTeX}, pdf{\LaTeX}, {\XeLaTeX} ou un autre moteur {\TeX}.
 %
 % \section{Utilisation}
 %
@@ -1073,7 +1073,8 @@
 %   \end{DescribeMacro}
 % \end{DescribeMacro}
 % \begin{quote}
-%   |\phantomsection\addcontentsline{toc}{chapter}{\nameref|\marg{nom}|}|
+%   |\phantomsection\addcontentsline{toc}{chapter}{%| \\
+%   |  \nameref|\marg{nom}|}|
 % \end{quote}
 % Celles-ci ajoutent à la table des matières (|toc|) une section de
 % niveau |chapter| dont le titre est celui du chapitre auquel
