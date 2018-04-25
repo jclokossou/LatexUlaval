@@ -1051,22 +1051,35 @@
 %   avec la commande \cmd{\chapter*}.
 % \end{DescribeMacro}
 %
+% \begin{DescribeMacro}{\label}
+%   La commande \cmd{\label} permet d'utiliser le système de renvois
+%   automatiques de {\LaTeX} \citep[section~3.4]{formation-latex-ul}.
+%   Les étiquettes des chapitres non numérotés sont déjà configurées
+%   pour l'ajout de ces chapitres dans la table des matières (voir
+%   ci-dessous). Nous recommandons fortement de définir vos propres
+%   étiquettes pour les chapitres normaux.
+% \end{DescribeMacro}
+%
 % \begin{DescribeMacro}{\phantomsection}
 %   \begin{DescribeMacro}{\addcontentsline}
-%     Les sections declarées avec la commande \cmd{\chapter*}
-%     n'apparaissent pas dans la table des matières. Comme les normes
-%     de présentation de la FESP exigent que toutes les pages
-%     liminaires y figurent, on fait suivre les commandes
-%     \cmd{\chapter*}\marg{Titre} des commandes
+%     \begin{DescribeMacro}{\nameref}
+%       Les chapitres déclarés avec la commande \cmd{\chapter*}
+%       n'apparaissent pas dans la table des matières. Comme les
+%       normes de présentation de la FESP exigent que toutes les pages
+%       liminaires y figurent, nous faisons suivre les commandes
+%       \cmd{\chapter*}\marg{Titre} et \cmd{\label}\marg{nom} des
+%       commandes
+%     \end{DescribeMacro}
 %   \end{DescribeMacro}
 % \end{DescribeMacro}
 % \begin{quote}
-%   |\phantomsection\addcontentsline{toc}{chapter}|\marg{Titre}
+%   |\phantomsection\addcontentsline{toc}{chapter}{\nameref|\marg{nom}|}|
 % \end{quote}
 % Celles-ci ajoutent à la table des matières (|toc|) une section de
-% niveau |chapter| dont le titre est \meta{Titre}. La commande
-% \cmd{\phantomsection} est rendue nécessaire (ou recommandée) par le
-% paquetage \pkg{hyperref}.
+% niveau |chapter| dont le titre est celui du chapitre auquel
+% correspond l'étiquette \meta{nom}. La commande \cmd{\phantomsection}
+% est rendue nécessaire (ou recommandée) par le paquetage
+% \pkg{hyperref}.
 %
 % \subsection{Corps du document}
 %
