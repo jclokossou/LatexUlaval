@@ -1039,7 +1039,8 @@
 %   Un examen de doctorat comporte une page de titre en lieu et place
 %   de la page frontispice. L'option de classe |examen| supprime
 %   d'ailleurs cette dernière. Il est laissé aux auteurs le soin de
-%   d'ajouter la commande \cmd{\pagetitre} dans les gabarits et d'en
+%   d'ajouter dans les gabarits les commandes nécessaires pour la
+%   production de la page de titre (\autoref{sec:pagetitre}) et de
 %   supprimer les autres pages liminaires.
 % \end{rem}
 %
@@ -2229,6 +2230,13 @@
 %    \end{macrocode}
 % ^^A Fin du code de la classe
 %
+% ^^A Il faut placer ces notes de changement relatives aux gabarits
+% ^^A avant \Finale
+% \changes{5.0}{2018-04-25}{Ajout d'étiquettes et de renvois dans les
+%   gabarits des parties du document.}
+% \changes{5.0}{2018-04-25}{Automatisation de l'ajout d'entrées dans
+%   la table des matières à l'aide d'étiquettes et de renvois.}
+%
 % \Finale
 %
 % \iffalse
@@ -2399,8 +2407,9 @@
 %
 % ^^A Gabarits des parties du document
 %<*resume>
-\chapter*{Résumé}                      % ne pas numéroter
-\phantomsection\addcontentsline{toc}{chapter}{Résumé} % inclure dans TdM
+\chapter*{Résumé}               % ne pas numéroter
+\label{chap:resume}
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:resume}} % inclure dans TdM
 
 \begin{otherlanguage*}{french}
   Texte du résumé en français.
@@ -2408,8 +2417,9 @@
 %</resume>
 %
 %<*abstract>
-\chapter*{Abstract}                      % ne pas numéroter
-\phantomsection\addcontentsline{toc}{chapter}{Abstract} % inclure dans TdM
+\chapter*{Abstract}             % ne pas numéroter
+\label{chap:abstract}           % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:abstract}} % inclure dans TdM
 
 \begin{otherlanguage*}{english}
   Text of English abstract.
@@ -2417,22 +2427,25 @@
 %</abstract>
 %
 %<*remerciements>
-\chapter*{Remerciements}         % ne pas numéroter
-\phantomsection\addcontentsline{toc}{chapter}{Remerciements} % inclure dans TdM
+\chapter*{Remerciements}        % ne pas numéroter
+\label{chap:remerciements}      % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:remerciements}} % inclure dans TdM
 
 Texte des remerciements en prose.
 %</remerciements>
 %
 %<*avantpropos>
 \chapter*{Avant-propos}         % ne pas numéroter
-\phantomsection\addcontentsline{toc}{chapter}{Avant-propos} % inclure dans TdM
+\label{chap:avantpropos}        % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:avantpropos}} % inclure dans TdM
 
 L'avant-propos est surtout nécessaire pour une thèse par article.
 %</avantpropos>
 %
 %<*introduction>
 \chapter*{Introduction}         % ne pas numéroter
-\phantomsection\addcontentsline{toc}{chapter}{Introduction} % inclure dans TdM
+\label{chap:introduction}       % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:introduction}} % inclure dans TdM
 
 Une thèse ou un mémoire devrait normalement débuter par une
 introduction. Celle-ci est traitée comme un chapitre normal, sauf
@@ -2441,6 +2454,7 @@ qu'elle n'est pas numérotée.
 %
 %<*chapitre>
 \chapter{Titre du chapitre}     % numéroté
+\label{chap:}                   % étiquette pour renvois (à compléter!)
 
 Texte du chapitre.
 %<articles>
@@ -2449,8 +2463,9 @@ Texte du chapitre.
 %</chapitre>
 %
 %<*conclusion>
-\chapter*{Conclusion}         % ne pas numéroter
-\phantomsection\addcontentsline{toc}{chapter}{Conclusion} % dans TdM
+\chapter*{Conclusion}           % ne pas numéroter
+\label{chap:conclusion}         % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:conclusion}} % inclure dans TdM
 
 Une thèse ou un mémoire devrait normalement se terminer par une
 conclusion, placée avant les annexes, le cas échéant. Celle-ci est
@@ -2459,6 +2474,7 @@ traitée comme un chapitre normal, sauf qu'elle n'est pas numérotée.
 %
 %<*annexe>
 \chapter{Titre de l'annexe}     % numérotée
+\label{chap:}                   % étiquette pour renvois (à compléter!)
 
 Texte de l'annexe.
 %</annexe>
