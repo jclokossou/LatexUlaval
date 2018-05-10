@@ -383,6 +383,17 @@
 %   doctorat.
 % \end{DescribeMacro}
 %
+% \changes{5.0}{2018-05-09}{Ajout d'une option «essai» pour les
+%   maîtrises analogue à «examen» pour les doctorats.}
+% \begin{DescribeMacro}{essai}
+%   Identifie un essai de maîtrise. Cette option permet d'utiliser la
+%   classe pour la rédaction d'un essai de maîtrise respectant les
+%   règles de présentation matérielle de la FESP. Elle a pour effet de
+%   changer l'appellation «Maîtrise» sur la page couverture pour
+%   «Essai». Elle supprime également la page frontispice. L'option
+%   n'est compatible qu'avec l'une des options de grade de maîtrise.
+% \end{DescribeMacro}
+%
 % \begin{DescribeMacro}{10pt,11pt,12pt}
 %   Sélectionne une taille de police de 10, 11 ou 12~points. Par
 %   défaut la classe utilise une police de 11~points. Ces options
@@ -861,9 +872,10 @@
 % dans l'ordre où les commandes apparaissent dans les gabarits.
 %
 % \begin{rem}
-%   Il n'y a pas de gabarit spécifique pour un examen de doctorat. On
-%   utilise le gabarit de thèse approprié en ajoutant simplement
-%   l'option |examen| dans la commande \cmd{\documentclass}.
+%   Il n'y a pas de gabarit spécifique pour un examen de doctorat ou
+%   pour un essai de maîtrise. On utilise le gabarit de thèse ou de
+%   maîtrise approprié en ajoutant simplement l'option |examen| ou
+%   |essai| dans la commande \cmd{\documentclass}.
 % \end{rem}
 %
 % \subsection{Encodage des fichiers}
@@ -1036,12 +1048,13 @@
 % dernières commandes admettent des arguments.
 %
 % \begin{rem}
-%   Un examen de doctorat comporte une page de titre en lieu et place
-%   de la page frontispice. L'option de classe |examen| supprime
-%   d'ailleurs cette dernière. Il est laissé aux auteurs le soin de
-%   d'ajouter dans les gabarits les commandes nécessaires pour la
-%   production de la page de titre (\autoref{sec:pagetitre}) et de
-%   supprimer les autres pages liminaires.
+%   L'examen de doctorat et l'essai de maîtrise comportent une page de
+%   titre en lieu et place de la page frontispice. Les options de
+%   classe |examen| et |essai| suppriment d'ailleurs cette dernière.
+%   Il est laissé aux auteurs le soin de d'ajouter dans les gabarits
+%   les commandes nécessaires pour la production de la page de titre
+%   (\autoref{sec:pagetitre}) et de supprimer les autres pages
+%   liminaires.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\chapter*}
@@ -1227,7 +1240,7 @@
 % dans cette section sont fournies à titre gracieux aux auteurs qui
 % souhaiteraient néanmoins composer une page de titre conforme aux
 % normes de présentation matérielles, ou encore pour les examens de
-% doctorat.
+% doctorat et les essais de maîtrise.
 %
 % En premier lieu, les \meta{options} suivantes s'ajoutent à celles de
 % la \autoref{sec:utilisation:options} lorsque l'on souhaite créer une
@@ -1378,6 +1391,7 @@
 \newif\ifUL@isthesis                           % programme est une thèse?
 \newif\ifUL@iscotutelle  \UL@iscotutellefalse  % thèse en cotutelle?
 \newif\ifUL@isexam       \UL@isexamfalse       % examen de doctorat?
+\newif\ifUL@isessay      \UL@isessayfalse      % essai de maîtrise?
 \newif\ifUL@hassubtitle  \UL@hassubtitlefalse  % document a un sous-titre?
 \newif\ifUL@hastitlepage \UL@hastitlepagefalse % page titre utilisée?
 %    \end{macrocode}
@@ -1385,10 +1399,11 @@
 % \subsection{Options de la classe}
 %
 % Il y a cinq grandes catégories d'options propres à la classe: la
-% possibilité d'empêcher le chargement du paquetage \pkg{natbib};
-% la possibilité d'empêcher le chargement du paquetage \pkg{babel};
-% la taille de la police de caractères en points; le type de grade; la
-% déclaration qu'il s'agit d'un examen de doctorat.
+% possibilité d'empêcher le chargement du paquetage \pkg{natbib}; la
+% possibilité d'empêcher le chargement du paquetage \pkg{babel}; la
+% taille de la police de caractères en points; le type de grade; la
+% déclaration qu'il s'agit d'un examen de doctorat ou d'un essai de
+% maîtrise.
 %
 % \begin{macro}{nonatbib}
 %   L'option |nonatbib| permet d'empêcher la classe de charger le
@@ -1588,11 +1603,14 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{examen}
+% \begin{macro}{examen,essai}
 %   L'option |examen| change l'appellation «Thèse» sur la couverture
-%   pour «Examen de doctorat» et supprime la page frontispice. Elle
-%   n'est compatible qu'avec l'une des options de thèse, autrement un
-%   message d'erreur est émis.
+%   pour «Examen de doctorat». L'option |essai|, quant à elle, change
+%   l'appellation «Maîtrise» oiyr pour «Essai». Les deux options
+%   suppriment la page frontispice. L'option |examen|
+%   n'est compatible qu'avec l'une des options de thèse, alors que
+%   |essai| n'est compatible qu'avec une option de maîtrise. Dans le
+%   cas contraire, un message d'erreur est émis.
 %    \begin{macrocode}
 \DeclareOption{examen}{%
   \ifUL@isthesis
@@ -1601,6 +1619,14 @@
     \ClassError{ulthese}{%
       Incompatible option examen}
     {Use this option with a thesis type only.}
+  \fi}
+\DeclareOption{essai}{%
+  \ifUL@isthesis
+    \ClassError{ulthese}{%
+      Incompatible option essai}
+    {Use this option with a Master's type only.}
+  \else
+    \UL@isessaytrue
   \fi}
 %    \end{macrocode}
 % \end{macro}
@@ -1922,8 +1948,8 @@
 %
 % \begin{macro}{\UL@typeofdoc}
 %   La commande |\UL@typeofdoc| contient le type de document qui est
-%   produit: thèse, thèse en cotutelle, maîtrise
-%   ou examen de doctorat.
+%   produit: thèse, thèse en cotutelle, maîtrise, examen de doctorat
+%   ou essai.
 %    \begin{macrocode}
 \ifUL@isthesis
   \ifUL@iscotutelle
@@ -1936,6 +1962,9 @@
 \fi
 \ifUL@isexam
   \renewcommand*{\UL@typeofdoc}{Examen de doctorat}
+\fi
+\ifUL@isessay
+  \renewcommand*{\UL@typeofdoc}{Essai}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -2071,7 +2100,7 @@
   \addtolength{\UL@authorspacing}{-\baselineskip}
   \fi}
 \newcommand{\frontispice}{{%
-    \ifUL@isexam\else
+    \ifUL@isexam\else\ifUL@isessay\else
       \clearpage
       \pagestyle{empty}
       \SingleSpacing\setlength{\parskip}{0pt}
@@ -2097,7 +2126,7 @@
       \vspace{\baselineskip}
       \UL@director\par
       \UL@codirector
-    \fi
+    \fi\fi
     \clearpage}}
 %    \end{macrocode}
 % \end{macro}
