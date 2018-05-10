@@ -103,6 +103,9 @@
   \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
   \newcommand{\doc}[2][documentation]{\link{#2}{#1}}
 
+  %% Francisation d'un mot clé de l'historique des commandes
+  \def\generalname{Général}
+
 \begin{document}
   \DocInput{ulthese.dtx}
 \end{document}
@@ -2275,10 +2278,11 @@
 %
 % ^^A Il faut placer ces notes de changement relatives aux gabarits
 % ^^A avant \Finale
-% \changes{5.0}{2018-04-25}{Ajout d'étiquettes et de renvois dans les
-%   gabarits des parties du document.}
-% \changes{5.0}{2018-04-25}{Automatisation de l'ajout d'entrées dans
-%   la table des matières à l'aide d'étiquettes et de renvois.}
+% \changes{5.0}{2018-04-25}{Gabarits: ajout d'étiquettes et de renvois
+%   dans les gabarits des parties du document.}
+% \changes{5.0}{2018-04-25}{Gabarits: automatisation de l'ajout
+%   d'entrées dans la table des matières à l'aide d'étiquettes et de
+%   renvois.}
 %
 % \Finale
 %
