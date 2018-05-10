@@ -1606,11 +1606,11 @@
 % \begin{macro}{examen,essai}
 %   L'option |examen| change l'appellation «Thèse» sur la couverture
 %   pour «Examen de doctorat». L'option |essai|, quant à elle, change
-%   l'appellation «Maîtrise» oiyr pour «Essai». Les deux options
+%   l'appellation «Maîtrise» pour «Essai». Les deux options
 %   suppriment la page frontispice. L'option |examen|
 %   n'est compatible qu'avec l'une des options de thèse, alors que
-%   |essai| n'est compatible qu'avec une option de maîtrise. Dans le
-%   cas contraire, un message d'erreur est émis.
+%   |essai| n'est compatible qu'avec une option de maîtrise. Un
+%   message d'erreur est émis en cas d'incompatibilité.
 %    \begin{macrocode}
 \DeclareOption{examen}{%
   \ifUL@isthesis
