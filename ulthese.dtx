@@ -2293,6 +2293,8 @@
 %
 % ^^A Il faut placer ces notes de changement relatives aux gabarits
 % ^^A avant \Finale
+% \changes{5.0}{2018-06-08}{Gabarits: meilleure indication du texte à
+%   remplacer.}
 % \changes{5.0}{2018-06-08}{Gabarits: bonification de la structure
 %   d'un chapitre de thèse ou de mémoire par articles.}
 % \changes{5.0}{2018-04-25}{Gabarits: ajout d'étiquettes et de renvois
@@ -2336,15 +2338,12 @@
 %<articles>%% défaut du document. L'option 'bibsection' permet de créer des
 %<articles>%% bibliographies par chapitre présentées sous forme de section
 %<articles>%% numérotée.
-%<phd&(standard|mesure)>\documentclass[PhD,english,french]{ulthese}
+%<phd&standard>\documentclass[PhD,english,french]{ulthese}
 %<phd&articles>\documentclass[PhD,bibsection,english,french]{ulthese}
-%<phd&multifac>\documentclass[PhD,multifacultaire,english,french]{ulthese}
 %<phd&cotutelle>\documentclass[PhD,cotutelle,english,french]{ulthese}
-%<phd&UdeS>\documentclass[PhD,extensionUdeS,english,french]{ulthese}
-%<phd&UQO>\documentclass[PhD,extensionUQO,english,french]{ulthese}
-%<m&(standard|mesure)>\documentclass[MSc,english,french]{ulthese}
+%<m&standard>\documentclass[MSc,english,french]{ulthese}
+%<m&articles>\documentclass[MSc,bibsection,english,french]{ulthese}
 %<m&bidiplomation>\documentclass[MA,bidiplomation,english,french]{ulthese}
-%<m&UQAC>\documentclass[MSc,extensionUQAC,english,french]{ulthese}
   %% Encodage utilisé pour les caractères accentués dans les fichiers
   %% source du document. Les gabarits sont encodés en UTF-8. Inutile
   %% avec XeLaTeX, qui gère Unicode nativement.
@@ -2436,10 +2435,10 @@
 \listoffigures                  % production de la liste des figures
 \cleardoublepage
 
-\dedicace{Dédicace si désiré}
+\dedicace{<Dédicace si désiré>}
 \cleardoublepage
 
-\epigraphe{Texte de l'épigraphe}{Source ou auteur}
+\epigraphe{<Texte de l'épigraphe>}{<Source ou auteur>}
 \cleardoublepage
 
 \include{remerciements}         % remerciements
@@ -2470,7 +2469,7 @@
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:resume}} % inclure dans TdM
 
 \begin{otherlanguage*}{french}
-  Texte du résumé en français.
+  <Texte du résumé en français. Obligatoire.>
 \end{otherlanguage*}
 %</resume>
 %
@@ -2480,7 +2479,7 @@
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:abstract}} % inclure dans TdM
 
 \begin{otherlanguage*}{english}
-  Text of English abstract.
+  <Text of English abstract. Optionnel, mais recommandé.>
 \end{otherlanguage*}
 %</abstract>
 %
@@ -2489,7 +2488,7 @@
 \label{chap:remerciements}      % étiquette pour renvois
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:remerciements}} % inclure dans TdM
 
-Texte des remerciements en prose.
+<Texte des remerciements en prose.>
 %</remerciements>
 %
 %<*avantpropos>
@@ -2497,8 +2496,8 @@ Texte des remerciements en prose.
 \label{chap:avantpropos}        % étiquette pour renvois
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:avantpropos}} % inclure dans TdM
 
-L'avant-propos est obligatoire dans une thèse ou un mémoire par
-articles, mais optionnel autrement.
+<Texte de l'avant-propos. Obligatoire dans une thèse ou un mémoire par
+articles.>
 %</avantpropos>
 %
 %<*introduction>
@@ -2506,28 +2505,28 @@ articles, mais optionnel autrement.
 \label{chap:introduction}       % étiquette pour renvois
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:introduction}} % inclure dans TdM
 
-Une thèse ou un mémoire devrait normalement débuter par une
-introduction. Celle-ci est traitée comme un chapitre normal, sauf
-qu'elle n'est pas numérotée.
+<Texte de l'introduction. La thèse ou le mémoire devrait normalement
+débuter par une introduction. Celle-ci est traitée comme un chapitre
+normal, sauf qu'elle n'est pas numérotée.>
 %</introduction>
 %
 %<*chapitre>
-\chapter{Titre du chapitre}     % numéroté
+\chapter{<Titre du chapitre ou de l'article>}     % numéroté
 \label{chap:}                   % étiquette pour renvois (à compléter!)
 
 %<articles>\section{Résumé}
 %<articles>
 %<articles>\begin{otherlanguage*}{french}
-%<articles>  Texte du résumé en français.
+%<articles>  <Résumé de l'article en français. Obligatoire.>
 %<articles>\end{otherlanguage*}
 %<articles>
 %<articles>\section{Abstract}
 %<articles>
 %<articles>\begin{otherlanguage*}{english}
-%<articles>  Text of English abstract.
+%<articles>  <English abstract of the paper. Optionnel, mais recommandé.>
 %<articles>\end{otherlanguage*}
 %<articles>
-Texte du chapitre.
+<Texte du chapitre ou de l'article.>
 %<articles>
 %<articles>\bibliographystyle{}              % style de la bibliographie
 %<articles>\bibliography{}                   % production de la bibliographie
@@ -2538,15 +2537,16 @@ Texte du chapitre.
 \label{chap:conclusion}         % étiquette pour renvois
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:conclusion}} % inclure dans TdM
 
-Une thèse ou un mémoire devrait normalement se terminer par une
-conclusion, placée avant les annexes, le cas échéant. Celle-ci est
-traitée comme un chapitre normal, sauf qu'elle n'est pas numérotée.
+<Texte de la conclusion. Une thèse ou un mémoire devrait normalement
+se terminer par une conclusion placée avant les annexes, le cas
+échéant. La conclusion est traitée comme un chapitre normal, sauf
+qu'elle n'est pas numérotée.>
 %</conclusion>
 %
 %<*annexe>
-\chapter{Titre de l'annexe}     % numérotée
+\chapter{<Titre de l'annexe>}     % numérotée
 \label{chap:}                   % étiquette pour renvois (à compléter!)
 
-Texte de l'annexe.
+<Texte de l'annexe.>
 %</annexe>
 % \fi
