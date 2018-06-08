@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2018/04/24 v5.0 Universite Laval thesis and memoir class]
+  [2018/06/08 v5.0 Universite Laval thesis and memoir class]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -246,7 +246,7 @@
 %
 % Les gabarits comportent des commentaires succincts pour vous guider
 % dans la préparation de votre document. La \autoref{sec:gabarits}
-% fournit de plus amples informations.
+% fournit les informations détaillées.
 %
 % \section{Installation}
 %
@@ -658,6 +658,29 @@
 % de sa mauvaise interaction avec \class{memoir}. Son chargement dans
 % le préambule du document cause une erreur lors de la compilation.
 %
+% \section{Thèses et mémoires par articles}
+% \changes{5.0}{2018-06-08}{Ajout d'une section spécifique sur les
+% thèses et mémoires par articlesn.}
+%
+% La rédaction de la thèse ou du mémoire par articles est une pratique
+% qui gagne en popularité. Elle consiste à remplacer le corps
+% principal du manuscrit par un ou des articles scientifiques.
+%
+% Chaque article fait normalement l'objet d'un chapitre dans le
+% document. Les résumés en français (obligatoire) et dans la langue de
+% la thèse ou du mémoire (le cas échéant) apparaissent sous forme de
+% sections numérotées. Les gabarits |gabarit-doctorat-articles| et
+% |gabarit-maitrise-articles| et les fichiers liés fournissent la
+% structure de base; consulter la \autoref{sec:gabarits} pour en
+% savoir davantage.
+%
+% Dans une thèse ou un mémoire par articles, on souhaitera utiliser
+% une bibliographie distincte pour chacun des chapitres. Les options
+% de la classe |bibchapitre| et |bibsection| permettent de réaliser
+% cette mise en forme particulière. La
+% \autoref{sec:bibliographie:multiples} explique comment en tirer
+% profit.
+%
 % \section{Français et autres langues}
 % \label{sec:langues}
 %
@@ -775,14 +798,10 @@
 % \subsection{Bibliographies multiples}
 % \label{sec:bibliographie:multiples}
 %
-% La rédaction de la thèse ou du mémoire par articles est une pratique
-% qui gagne en popularité. Elle consiste à remplacer le corps
-% principal du manuscrit par un ou des articles scientifiques,
-% habituellement à raison d'un par chapitre. Dans de tels cas, on
-% souhaitera utiliser une bibliographie distincte pour chacun de ces
-% chapitres. L'ajout de |bibchapitre| ou de |bibsection| dans les
-% options de la classe permet de réaliser cette mise en forme
-% particulière.
+% L'ajout de |bibchapitre| ou de |bibsection| dans les options de la
+% classe permet de générer une bibliographie distincte pour chaque
+% chapitre, une chose particulièrement utile pour les thèses et
+% mémoire par articles.
 %
 % La classe fait appel au paquetage \pkg{chapterbib}
 % \citep{chapterbib} pour composer des bibliographies multiples. La
@@ -811,9 +830,6 @@
 % \end{quote}
 % où \meta{langue} est la langue par défaut du document
 % (\autoref{sec:langues}).
-%
-% Le gabarit |gabarit-doctorat-articles| fournit la structure de base
-% d'une thèse par articles.
 %
 % \subsection{Style de la bibliographie}
 % \label{sec:bibliographie:style}
@@ -2277,6 +2293,8 @@
 %
 % ^^A Il faut placer ces notes de changement relatives aux gabarits
 % ^^A avant \Finale
+% \changes{5.0}{2018-06-08}{Gabarits: bonification de la structure
+%   d'un chapitre de thèse ou de mémoire par articles.}
 % \changes{5.0}{2018-04-25}{Gabarits: ajout d'étiquettes et de renvois
 %   dans les gabarits des parties du document.}
 % \changes{5.0}{2018-04-25}{Gabarits: automatisation de l'ajout
@@ -2457,7 +2475,7 @@
 % ^^A Gabarits des parties du document
 %<*resume>
 \chapter*{Résumé}               % ne pas numéroter
-\label{chap:resume}
+\label{chap:resume}             % étiquette pour renvois
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:resume}} % inclure dans TdM
 
 \begin{otherlanguage*}{french}
@@ -2488,7 +2506,8 @@ Texte des remerciements en prose.
 \label{chap:avantpropos}        % étiquette pour renvois
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:avantpropos}} % inclure dans TdM
 
-L'avant-propos est surtout nécessaire pour une thèse par article.
+L'avant-propos est obligatoire dans une thèse ou un mémoire par
+articles, mais optionnel autrement.
 %</avantpropos>
 %
 %<*introduction>
@@ -2505,6 +2524,18 @@ qu'elle n'est pas numérotée.
 \chapter{Titre du chapitre}     % numéroté
 \label{chap:}                   % étiquette pour renvois (à compléter!)
 
+%<articles>\section{Résumé}
+%<articles>
+%<articles>\begin{otherlanguage*}{french}
+%<articles>  Texte du résumé en français.
+%<articles>\end{otherlanguage*}
+%<articles>
+%<articles>\section{Abstract}
+%<articles>
+%<articles>\begin{otherlanguage*}{english}
+%<articles>  Text of English abstract.
+%<articles>\end{otherlanguage*}
+%<articles>
 Texte du chapitre.
 %<articles>
 %<articles>\bibliographystyle{}              % style de la bibliographie
