@@ -65,15 +65,10 @@ La compilation du fichier ulthese.ins générera plusieurs fichiers:
    thèses et de mémoires:
    - `gabarit-doctorat.tex`
    - `gabarit-doctorat-articles.tex`
-   - `gabarit-doctorat-mesure.tex`
-   - `gabarit-doctorat-multifacultaire.tex`
    - `gabarit-doctorat-cotutelle.tex`
-   - `gabarit-doctorat-extension-UdeS.tex`
-   - `gabarit-doctorat-extension-UQO.tex`
    - `gabarit-maitrise.tex`
-   - `gabarit-maitrise-mesure.tex`
+   - `gabarit-maitrise-articles.tex`
    - `gabarit-maitrise-bidiplomation.tex`
-   - `gabarit-maitrise-extension-UQAC.tex`
 
 3. des gabarits pour quelques parties d'un document:
    - `resume.tex`
