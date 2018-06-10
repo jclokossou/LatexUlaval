@@ -13,7 +13,7 @@ extensive set of templates for the various types of theses and memoirs
 offered at Laval.
 
 Please note that the documentation for the class and the comments in
-the templates are all written in French, the language of the target
+the templates are written in French, the language of the target
 audience.
 
 ## Licence
@@ -24,6 +24,10 @@ later version.
 ## Author
 
 Université Laval <ulthese-dev@bibl.ulaval.ca>
+
+## Source code repository
+
+https://github.com/vigou3/ulthese/
 
 > The rest of this file is in French for the target audience.
 
@@ -98,6 +102,12 @@ source avec les commandes
 ## Historique des versions
 
 L'historique des versions de la classe se trouve en annexe de la documentation.
+
+## Commentaires et suggestions
+
+Le [dépôt du projet](https://github.com/vigou3/ulthese/) dans GitHub
+demeure le meilleur endroit pour rapporter des bogues ou pour proposer
+des améliorations à la classe.
 
 ## Aide additionnelle
 
