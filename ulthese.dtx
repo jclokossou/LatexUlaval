@@ -637,9 +637,6 @@
 % \item[\normalfont\pkg{fontspec}] \citep{fontspec} gestion des
 %   polices OpenType sous {\XeLaTeX} (chargé avec ce moteur
 %   seulement);
-% \item[\normalfont\pkg{unicode-math}] \citep{unicode-math} gestion
-%   des polices mathématiques {\XeLaTeX} (chargé avec ce moteur
-%   seulement);
 % \item[\normalfont\pkg{graphicx}] \citep{graphicx} insertion et
 %   manipulation de graphiques;
 % \item[\normalfont\pkg{xcolor}] \citep{xcolor} gestion des couleurs
@@ -1232,13 +1229,6 @@
 %     selection for {\XeLaTeX} and {\LuaLaTeX}}}.
 %     URL~\url{http://www.ctan.org/pkg/fontspec/}.
 %
-%   \bibitem[{Robertson et coll.(2017)Robertson, Stephani et
-%     Hosny}]{unicode-math}
-%     Robertson, W., P.~Stephani et K.~Hosny. 2017,
-%     {\selectlanguage{english}\emph{Experimental {U}nicode
-%     Mathematical Typesetting: The \pkg{unicode-math} Package}}.
-%     ULR~\url{http://www.ctan.org/pkg/unicode-math/}.
-%
 %   \bibitem[{Wilson(2016)}]{memoir}
 %     Wilson, P. 2016, {\selectlanguage{english}\emph{The Memoir Class
 %     for Configurable Typesetting}}, 8{\ieme} éd., The Herries Press.
@@ -1670,19 +1660,18 @@
 %    \end{macrocode}
 %
 % \subsection{Paquetages requis}
+% \changes{5.0}{2018-06-10}{Le paquetage unicode-math n'est plus
+%   chargé par défaut par la classe.}
 %
 % La classe s'efforce de charger un minimum de paquetages afin d'éviter
 % les conflits potentiels.
 %
-% {\XeLaTeX} requiert le paquetage \pkg{fontspec} pour le
-% traitement des polices. Le paquetage \pkg{unicode-math} facilite
-% également le traitement des polices et des symboles mathématiques
-% avec ce moteur. Sous {\LaTeX}, il est aujourd'hui préférable
-% d'utiliser les polices T1.
+% {\XeLaTeX} requiert le paquetage \pkg{fontspec} pour le traitement
+% des polices. Sous {\LaTeX}, il est aujourd'hui préférable d'utiliser
+% les polices T1.
 %    \begin{macrocode}
 \ifxetex
   \RequirePackage{fontspec}
-  \RequirePackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX}
 \else
   \RequirePackage[T1]{fontenc}
