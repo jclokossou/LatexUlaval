@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2018/06/08 v5.0 Universite Laval thesis and memoir class]
+  [2018/06/11 v5.0 Universite Laval thesis and memoir class]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -217,7 +217,7 @@
 % La classe \class{ulthese} est livrée avec un ensemble de gabarits sur
 % lesquels se baser pour:
 % \begin{itemize}
-% \item les fichiers maîtres de divers types de thèses et de mémoires
+% \item le document maître de divers types de thèses et de mémoires
 %   (standard, par articles, en cotutelle, en bidiplomation);
 % \item les fichiers des parties les plus usuelles (résumés français
 %   et anglais, avant-propos, introduction, chapitres, conclusion,
@@ -661,22 +661,24 @@
 %
 % La rédaction de la thèse ou du mémoire par articles est une pratique
 % qui gagne en popularité. Elle consiste à remplacer le corps
-% principal du manuscrit par un ou des articles scientifiques.
+% principal du manuscrit par un ou des articles scientifiques. Chaque
+% article fait normalement l'objet d'un chapitre dans le document. Les
+% résumés en français (obligatoire) et dans la langue de la thèse ou
+% du mémoire (le cas échéant) y apparaissent sous forme de
+% sections numérotées.
 %
-% Chaque article fait normalement l'objet d'un chapitre dans le
-% document. Les résumés en français (obligatoire) et dans la langue de
-% la thèse ou du mémoire (le cas échéant) apparaissent sous forme de
-% sections numérotées. Les gabarits |gabarit-doctorat-articles| et
-% |gabarit-maitrise-articles| et les fichiers liés fournissent la
-% structure de base; consulter la \autoref{sec:gabarits} pour en
-% savoir davantage.
+% L'autre caractéristique qui distingue la thèse et le mémoire par
+% articles des versions standards, c'est la nécessité d'utiliser une
+% bibliographie distincte pour chacun des chapitres. Les options de la
+% classe |bibchapitre| et |bibsection| permettent de réaliser cette
+% mise en forme particulière. La \autoref{sec:bibliographie:multiples}
+% explique comment en tirer profit.
 %
-% Dans une thèse ou un mémoire par articles, on souhaitera utiliser
-% une bibliographie distincte pour chacun des chapitres. Les options
-% de la classe |bibchapitre| et |bibsection| permettent de réaliser
-% cette mise en forme particulière. La
-% \autoref{sec:bibliographie:multiples} explique comment en tirer
-% profit.
+% Des gabarits de document maître et de chapitre fournissent la
+% structure de base pour la thèse et le mémoire par articles. Vous
+% pouvez, au besoin, combiner les caractéristiques de ces gabarits à
+% celles de la thèse en cotutelle ou du mémoire en bidiplomation. La
+% \autoref{sec:gabarits} fournit les détails sur les gabarits.
 %
 % \section{Français et autres langues}
 % \label{sec:langues}
@@ -881,10 +883,40 @@
 % \section{Gabarits}
 % \label{sec:gabarits}
 %
-% Les gabarits livrés avec la classe comportent des commentaires
-% succincts pour vous guider dans la préparation de votre manuscrit.
-% Les sections suivantes fournissent des détails additionnels, et ce,
-% dans l'ordre où les commandes apparaissent dans les gabarits.
+% Afin de vous épauler dans la préparation de votre manuscrit, la
+% classe \class{ulthese} est livrée avec un ensemble de gabarits. Tout
+% d'abord, pour le document maître de différents types de thèses et de
+% mémoires:
+% \begin{itemize}[noitemsep]
+% \item |gabarit-doctorat.tex|;
+% \item |gabarit-doctorat-articles.tex|;
+% \item |gabarit-doctorat-cotutelle.tex|;
+% \item |gabarit-maitrise.tex|;
+% \item |gabarit-maitrise-articles.tex|;
+% \item |gabarit-maitrise-bidiplomation.tex|.
+% \end{itemize}
+% Ensuite, pour quelques parties d'un document:
+% \begin{itemize}[noitemsep]
+% \item |resume.tex|;
+% \item |abstract.tex|;
+% \item |remerciements.tex|;
+% \item |avantpropos.tex|;
+% \item |introduction.tex|;
+% \item |chapitre1.tex|;
+% \item |chapitre1-articles.tex|;
+% \item |chapitre2.tex|;
+% \item |chapitre2-articles.tex|;
+% \item |conclusion.tex|;
+% \item |annexe.tex|.
+% \end{itemize}
+% Vous pourriez devoir combiner les caractéristiques de deux gabarits
+% de document maître comme, par exemple, pour une thèse en cotutelle
+% par articles.
+%
+% Les gabarits comportent des commentaires succincts pour vous guider
+% dans leur utilisation. Les sections suivantes fournissent des
+% détails additionnels, et ce, dans l'ordre où les commandes
+% apparaissent dans les fichiers.
 %
 % \begin{rem}
 %   Il n'y a pas de gabarit spécifique pour un examen de doctorat ou
@@ -1035,7 +1067,7 @@
 % Les normes de présentation de la FESP édictent que les thèses et
 % mémoires devraient comporter les pages liminaires suivantes, dans
 % l'ordre:
-% \begin{enumerate}
+% \begin{enumerate}[noitemsep]
 % \item page frontispice (obligatoire);
 % \item résumé en français (obligatoire);
 % \item résumé en anglais (recommandé, mais non obligatoire);
@@ -1139,11 +1171,14 @@
 % \cmd{\bibliography} doit plutôt se trouver dans les fichiers des
 % chapitres dans une thèse ou un mémoire par articles.
 %
-% \section{Aide additionnelle}
+% \section{Commentaires, suggestions et aide}
+%
+% Le \link{https://github.com/vigou3/ulthese/}{dépôt du projet} dans
+% GitHub demeure le meilleur endroit pour rapporter des bogues ou pour
+% proposer des améliorations à la classe \class{ulthese}.
 %
 % Pour obtenir de l'aide additionnelle sur l'utilisation de la classe
-% \class{ulthese} (et non sur celle de {\LaTeX} en général), prière
-% de consulter d'abord
+% --- et non sur celle de {\LaTeX} en général --- consultez d'abord:
 % \begin{enumerate}
 % \item le \link{http://www.theses.ulaval.ca/wiki/}{WikiThèse} de
 %   l'Université Laval, en particulier la
@@ -1153,7 +1188,7 @@
 %   de la liste de distribution \texttt{ulthese-aide}.
 % \end{enumerate}
 % Si la réponse à votre question ne se trouve ni dans le wiki, ni dans
-% les archives, alors écrire à l'adresse
+% les archives, alors écrivez à l'adresse
 % \href{mailto:ulthese-aide@listes.ulaval.ca}{\url{ulthese-aide@listes.ulaval.ca}}.
 %
 % \StopEventually{
@@ -1188,7 +1223,7 @@
 %
 %   \bibitem[{Goulet(2013)}]{francais-bst}
 %     Goulet, V. 2013, {\selectlanguage{french}«Paquetage
-%     \pkg{francais-bst}»},
+%     francais-bst»},
 %     URL~\url{http://www.ctan.org/pkg/francais-bst/}.
 %
 %   \bibitem[{Goulet(2016)}]{formation-latex-ul}
@@ -1199,7 +1234,7 @@
 %
 %   \bibitem[{Harders(2012)}]{numprint}
 %     Harders, H. 2012, {\selectlanguage{english}\emph{The
-%     \pkg{numprint} package}}.
+%     numprint package}}.
 %     URL~\url{http://www.ctan.org/pkg/numprint/}.
 %
 %   \bibitem[{Jeffrey et Mittelbach(2015)}]{inputenc}
@@ -1209,7 +1244,7 @@
 %
 %   \bibitem[{Kern(2016)}]{xcolor}
 %     Kern, D.~U. 2016, {\selectlanguage{english}\emph{Extending
-%     {\LaTeX}’s color facilities: the \pkg{xcolor} package}}.
+%     {\LaTeX}’s color facilities: the xcolor package}}.
 %     URL~\url{http://www.ctan.org/pkg/xcolor/}.
 %
 %   \bibitem[{Malo(1996)}]{Malo:1996}
@@ -1220,12 +1255,12 @@
 %   \bibitem[{Rahtz et Oberdiek(2017)}]{hyperref}
 %     Rahtz, S. et H.~Oberdiek. 2017,
 %     {\selectlanguage{english}\emph{Hypertext marks in {\LaTeX}: a
-%     manual for \pkg{hyperref}}}.
+%     manual for hyperref}}.
 %     URL~\url{http://www.ctan.org/pkg/hyperref/}.
 %
 %   \bibitem[{Robertson et Hosny(2017)}]{fontspec}
 %     Robertson, W. et K.~Hosny. 2017,
-%     {\selectlanguage{english}\emph{The \pkg{fontspec} package: Font
+%     {\selectlanguage{english}\emph{The fontspec package: Font
 %     selection for {\XeLaTeX} and {\LuaLaTeX}}}.
 %     URL~\url{http://www.ctan.org/pkg/fontspec/}.
 %
