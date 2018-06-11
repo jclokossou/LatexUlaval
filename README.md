@@ -65,7 +65,7 @@ La compilation du fichier ulthese.ins générera plusieurs fichiers:
 1. la classe elle-même:
    - `ulthese.cls`
 
-2. des gabarits pour les documents maîtres de différents types de
+2. des gabarits pour le document maître de différents types de
    thèses et de mémoires:
    - `gabarit-doctorat.tex`
    - `gabarit-doctorat-articles.tex`
