@@ -2,10 +2,14 @@
 ##
 ## Copyright (C) 2017 Vincent Goulet
 ##
-## 'make class' extrait la classe et les gabarits du fichier dtx;
-## 'make doc' compile la documentation de la classe et le glossaire;
-## 'make zip' crée l'archive pour le dépôt dans CTAN;
-## 'make create-release' crée une nouvelle version dans GitLab;
+## 'make class' extrait la classe et les gabarits du fichier dtx.
+##
+## 'make doc' compile la documentation de la classe et le glossaire.
+##
+## 'make zip' crée l'archive pour le dépôt dans CTAN.
+##
+## 'make create-release' crée une nouvelle version dans GitLab.
+##
 ## 'make all' fait les étapes 'class', 'doc' et 'zip'.
 ##
 ## Auteur: Vincent Goulet
