@@ -27,7 +27,7 @@ Université Laval <ulthese-dev@bibl.ulaval.ca>
 
 ## Source code repository
 
-https://github.com/vigou3/ulthese/
+https://gitlab.com/vigou3/ulthese/
 
 > The rest of this file is in French for the target audience.
 
@@ -105,7 +105,7 @@ L'historique des versions de la classe se trouve en annexe de la documentation.
 
 ## Commentaires et suggestions
 
-Le [dépôt du projet](https://github.com/vigou3/ulthese/) dans GitHub
+Le [dépôt du projet](https://gitlab.com/vigou3/ulthese/) dans GitLab
 demeure le meilleur endroit pour rapporter des bogues ou pour proposer
 des améliorations à la classe.
 
