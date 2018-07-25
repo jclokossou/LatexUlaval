@@ -76,17 +76,6 @@ zip : ${FILES} README.md
 	zip --filesync -r ${PACKAGENAME}.zip ${PACKAGENAME}
 	rm -r ${PACKAGENAME}
 
-upload :
-	@echo ----- Uploading archive to GitLab...
-	$(eval upload_url_markdown=$(shell curl --form "file=@${PACKAGENAME}.zip" \
-	                                        --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                                        --silent \
-	                                        ${APIURL}/uploads \
-	                                   | awk -F '"' '{ print $$12 }'))
-	@echo Markdown ready url to file:
-	@echo "${upload_url_markdown}"
-	@echo ----- Done uploading files
-
 create-release :
 	@echo ----- Creating release on GitLab...
 	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
