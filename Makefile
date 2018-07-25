@@ -5,20 +5,28 @@
 ## 'make class' extrait la classe et les gabarits du fichier dtx;
 ## 'make doc' compile la documentation de la classe et le glossaire;
 ## 'make zip' crée l'archive pour le dépôt dans CTAN;
-## 'make create-release' crée une nouvelle version dans GitHub;
+## 'make create-release' crée une nouvelle version dans GitLab;
 ## 'make all' fait les étapes 'class', 'doc' et 'zip'.
 ##
 ## Auteur: Vincent Goulet
 ##
 ## Ce fichier fait partie du projet ulthese
-## http://github.com/vigou3/ulthese
+## https://gitlab.com/vigou3/ulthese
 
 
 ## Nom du paquetage sur CTAN
 PACKAGENAME = ulthese
 
+## Nom du dépôt dans GitLab
+REPOSURL = https://gitlab.com/vigou3/ulthese
+
 ## Liste des fichiers à inclure dans l'archive (outre README.md)
-FILES=${PACKAGENAME}.ins ${PACKAGENAME}.dtx ${PACKAGENAME}.pdf ul_p.eps ul_p.pdf
+FILES = \
+	${PACKAGENAME}.ins \
+	${PACKAGENAME}.dtx \
+	${PACKAGENAME}.pdf \
+	ul_p.eps \
+	ul_p.pdf
 
 ## Numéro de version et date de publication extraits du fichier
 ## ulthese.dtx. Le résultat est une chaîne de caractères de la forme
@@ -28,14 +36,19 @@ VERSION = $(shell awk -F '[ \[]' '/^  \[.*\]/ \
 	      printf("%s (%s)", substr($$5, 2), $$4); \
 	      exit }' ${PACKAGENAME}.dtx)
 
-# Outils de travail
+## Outils de travail
 LATEX = pdflatex
 MAKEINDEX = makeindex
+CP = cp -p
 RM = rm -r
 
-## Dépôt GitHub et authentification
-REPOSURL = https://api.github.com/repos/vigou3/ulthese
-OAUTHTOKEN = $(shell cat ~/.github/token)
+## Dépôt GitLab et authentification
+REPOSNAME = $(shell basename ${REPOSURL})
+APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
+OAUTHTOKEN = $(shell cat ~/.gitlab/token)
+
+## Variable automatique
+TAGNAME = v$(word 1,${VERSION})
 
 
 all : class doc zip
@@ -55,24 +68,35 @@ zip : ${FILES} README.md
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Author/ { printf("## Version\n\n%s\n\n", "${VERSION}") } \
 	       state' README.md >> ${PACKAGENAME}/README.md
-	cp ${FILES} ${PACKAGENAME}
+	${CP} ${FILES} ${PACKAGENAME}
 	zip --filesync -r ${PACKAGENAME}.zip ${PACKAGENAME}
 	rm -r ${PACKAGENAME}
 
+upload :
+	@echo ----- Uploading archive to GitLab...
+	$(eval upload_url_markdown=$(shell curl --form "file=@${PACKAGENAME}.zip" \
+	                                        --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
+	                                        --silent \
+	                                        ${APIURL}/uploads \
+	                                   | awk -F '"' '{ print $$12 }'))
+	@echo Markdown ready url to file:
+	@echo "${upload_url_markdown}"
+	@echo ----- Done uploading files
+
 create-release :
-	@echo ----- Creating release on GitHub...
+	@echo ----- Creating release on GitLab...
 	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
-	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
+	    echo "uncommitted changes in repository; not creating release"; exit 2; fi
 	@if [ -n "$(shell git log origin/master..HEAD)" ]; then \
 	    echo "unpushed commits in repository; pushing to origin"; \
-	     git push; fi
-	if [ -e relnotes.in ]; then rm relnotes.in; fi
+	      git push; fi
+	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
 	touch relnotes.in
 	awk 'BEGIN { FS = "{"; \
-	             split("${VERSION}", v, " "); \
-	             printf "{\"tag_name\": \"v%s\", \"name\": \"Version %s\", \"body\": \"", \
-		            v[1], "${VERSION}" } \
-	     /\\changes/ && substr($$2, 1, length($$2) - 1) == v[1] { \
+	             v = substr("${TAGNAME}", 2); \
+	             printf "{\"tag_name\": \"%s\", \"description\": \"# Version %s\\n", \
+		            "${TAGNAME}", "${VERSION}" } \
+	     /\\changes/ && substr($$2, 1, length($$2) - 1) == v { \
 	         out = $$4; \
 	         if ((i = index($$4, "}")) != 0) { \
 	             out = substr($$4, 1, i - 1) \
@@ -90,9 +114,14 @@ create-release :
 	         } \
 		 printf "- %s\\n", out \
 	     } \
-	     END { print "\", \"draft\": false, \"prerelease\": false}" }' \
+	     END { print "\"}" }' \
 	     ${PACKAGENAME}.dtx >> relnotes.in
-	curl --data @relnotes.in ${REPOSURL}/releases?access_token=${OAUTHTOKEN}
-	rm relnotes.in
+	curl --request POST \
+	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	     "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master"
+	curl --data @relnotes.in \
+	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	     --header "Content-Type: application/json" \
+	     ${APIURL}/repository/tags/${TAGNAME}/release
+	${RM} relnotes.in
 	@echo ----- Done creating the release
-
