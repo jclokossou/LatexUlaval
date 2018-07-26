@@ -8,7 +8,7 @@
 ##
 ## 'make zip' crée l'archive pour le dépôt dans CTAN.
 ##
-## 'make create-release' crée une nouvelle version dans GitLab.
+## 'make release' crée une nouvelle version dans GitLab.
 ##
 ## 'make all' fait les étapes 'class', 'doc' et 'zip'.
 ##
@@ -76,7 +76,7 @@ zip : ${FILES} README.md
 	zip --filesync -r ${PACKAGENAME}.zip ${PACKAGENAME}
 	rm -r ${PACKAGENAME}
 
-create-release :
+release :
 	@echo ----- Creating release on GitLab...
 	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
 	    echo "uncommitted changes in repository; not creating release"; exit 2; fi
