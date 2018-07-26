@@ -1,6 +1,6 @@
 ### -*-Makefile-*- pour préparer le paquetage ulthese
 ##
-## Copyright (C) 2017 Vincent Goulet
+## Copyright (C) 2018 Vincent Goulet
 ##
 ## 'make class' extrait la classe et les gabarits du fichier dtx.
 ##
