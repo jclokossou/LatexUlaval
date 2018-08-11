@@ -34,7 +34,7 @@ https://gitlab.com/vigou3/ulthese/
 # Paquetage ulthese
 
 Le paquetage **ulthese** fournit la classe du même nom permettant de
-composer des thèses et mémoires immédiatement conformes aux règles
+composer des thèses et des mémoires immédiatement conformes aux règles
 générales de présentation matérielle de la Faculté des études
 supérieures et postdoctorales (FESP) de
 l'[Université Laval](https://www.ulaval.ca). La classe est
