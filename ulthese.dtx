@@ -610,6 +610,20 @@
 %   commande \cmd{\SingleSpacing} permet de passer à l'interligne simple.
 % \end{DescribeMacro}
 %
+% \subsection{Hyperliens}
+% \label{sec:hyperliens}
+%
+% Lorsque le document est produit avec pdf{\LaTeX} ou {\XeLaTeX},
+% toutes les références internes et externes sont automatiquement
+% transformées en hyperliens cliquables. Ceux-ci apparaissent dans une
+% teinte de bleu assez foncée tout à la fois visible en couleur et peu
+% contrastante si le document est imprimé en noir et blanc.
+%
+% \begin{DescribeMacro}{\hypersetup}
+%   Vous pouvez ajouter des options de configuration pour les
+%   hyperliens ou les métadonnées du document PDF avec la commande
+%   \cmd{\hypersetup} du paquetage \class{hyperref}.
+% \end{DescribeMacro}
 %
 % \subsection{Autres paquetages chargés}
 % \label{sec:paquetages}
@@ -634,13 +648,19 @@
 %   bibliographies multiples (si l'une ou l'autre des options
 %   |bibchapitre| ou |bibsection| est spécifiée;
 %   voir aussi la \autoref{sec:bibliographie:multiples});
+% \item[\normalfont\pkg{hyperref}] \citep{hyperref} permet de
+%   transformer toutes les références en hyperliens cliquables lorsque
+%   le document est produit avec pdf{\LaTeX} ou {\XeLaTeX};
+% \item[\normalfont\pkg{etoolbox}] \citep{etoolbox} outils
+%   additionnels pour la conception de classes et de paquetages
+%   (utilisé pour le chargement de \pkg{hyperref});
 % \item[\normalfont\pkg{fontspec}] \citep{fontspec} gestion des
 %   polices OpenType sous {\XeLaTeX} (chargé avec ce moteur
 %   seulement);
 % \item[\normalfont\pkg{graphicx}] \citep{graphicx} insertion et
 %   manipulation de graphiques;
 % \item[\normalfont\pkg{xcolor}] \citep{xcolor} gestion des couleurs
-%   dans le document;
+%   dans le document, notamment celle des hyperliens;
 % \item[\normalfont\pkg{textcomp}] multitude de symboles spéciaux,
 %   dont un beau symbole de copyright, \textcopyright.
 % \end{description}
@@ -657,7 +677,7 @@
 %
 % \section{Thèses et mémoires par articles}
 % \changes{5.0}{2018-06-08}{Ajout d'une section spécifique sur les
-% thèses et mémoires par articles.}
+%   thèses et mémoires par articles.}
 %
 % La rédaction de la thèse ou du mémoire par articles est une pratique
 % qui gagne en popularité. Elle consiste à remplacer le corps
@@ -722,7 +742,7 @@
 % etc. Consultez au moins les documents consacrés aux
 % langues utilisées dans votre thèse ou mémoire. Le plus simple
 % consiste sans doute à consulter en ligne sur CTAN les
-% \link{http://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
+% \link{https://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
 % documents spécifiques par langue}.
 % \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
 %   de babel.}
@@ -848,7 +868,7 @@
 % numéros ISBN et les URL. Le paquetage fournit des styles de
 % bibliographie |plainnat|, |unsrtnat| et |abbrvnat| similaires aux
 % styles standards, mais plus complets. Il existe des
-% \link{http://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/}{versions
+% \link{https://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/}{versions
 % francisées} de ces styles (et de quelques autres) dans CTAN.
 %
 % Le paquetage \pkg{francais-bst} \citep{francais-bst} fournit une
@@ -941,7 +961,7 @@
 % ordinateur. La méthode la plus répandue et celle standard sur les
 % versions récentes des systèmes d'exploitation Linux et macOS est
 % l'UTF-8 de la norme
-% \link{http://fr.wikipedia.org/wiki/Unicode}{Unicode}. Les gabarits
+% \link{https://fr.wikipedia.org/wiki/Unicode}{Unicode}. Les gabarits
 % sont livrés dans ce type d'encodage.
 %
 % La déclaration
@@ -955,11 +975,11 @@
 % Selon l'éditeur de texte employé et la version du système
 % d'exploitation, il peut être nécessaire d'utiliser les normes
 % d'encodage %
-% \link{http://fr.wikipedia.org/wiki/ISO_8859-1}{ISO~8859-1} %
+% \link{https://fr.wikipedia.org/wiki/ISO_8859-1}{ISO~8859-1} %
 % (ou Latin-1; option |latin1| de \pkg{inputenc}), %
-% \link{http://fr.wikipedia.org/wiki/ISO_8859-15}{ISO~8859-15} %
+% \link{https://fr.wikipedia.org/wiki/ISO_8859-15}{ISO~8859-15} %
 % (ou Latin-9; option |latin9|) ou %
-% \link{http://fr.wikipedia.org/wiki/Windows-1252}{Windows-1252} %
+% \link{https://fr.wikipedia.org/wiki/Windows-1252}{Windows-1252} %
 % (options |cp1252| ou |ansinew|).
 %
 % La situation est plus simple avec {\XeLaTeX} puisqu'il gère
@@ -970,13 +990,10 @@
 %
 % \subsection{Paquetages additionnels}
 %
-% Tel qu'expliqué à la \autoref{sec:paquetages}, la classe
-% charge déjà quelques paquetages. Cependant, il est fort probable que
-% vous devrez en charger d'autres pour composer votre document. Les
-% gabarits prévoient un endroit pour le chargement de paquetages
-% additionnels. Il est recommandé d'inscrire vos commandes
-% \cmd{\usepackage} à cet endroit afin de respecter un certain ordre de
-% chargement; voir ci-dessous.
+% Tel qu'expliqué à la \autoref{sec:paquetages}, la classe charge déjà
+% quelques paquetages. Cependant, il est fort probable que vous devrez
+% en charger d'autres pour composer votre document. Les gabarits
+% prévoient un endroit pour le chargement de paquetages additionnels.
 %
 % Si vous utilisez un paquetage non standard dans les distributions
 % courantes (\TeX~Live, Mac\TeX, MiK\TeX), vous devez le fournir avec
@@ -987,29 +1004,7 @@
 % Les gabarits comportent des déclarations types pour utiliser les
 % polices Palatino ou Times sous {\LaTeX} ou, sous {\XeLaTeX}, leurs
 % équivalents Pagella et Termes du projet
-% \link{http://www.gust.org.pl/projects/e-foundry/tex-gyre/}{TeX~Gyre}.
-%
-% \subsection{Hyperliens}
-% \label{sec:hyperref}
-%
-% Le paquetage \pkg{hyperref} \citep{hyperref} permet de transformer
-% toutes les références en hyperliens cliquables lorsque le document
-% est produit avec pdf{\LaTeX} ou {\XeLaTeX}. L'interaction de ce
-% paquetage avec les autres est parfois (voire souvent) délicate. Pour
-% cette raison, il est habituellement nécessaire de charger
-% \pkg{hyperref} en tout dernier. C'est pourquoi il n'est pas chargé
-% dans la classe, mais plutôt dans les gabarits. Prenez soin de
-% maintenir le dernier rang de chargement lors de l'édition d'un
-% gabarit.
-%
-% \begin{DescribeMacro}{\hyperrefsetup}
-%   La configuration du paquetage dans les gabarits fait en sorte que
-%   les liens sont simplement signalés par une couleur de texte
-%   légèrement contrastante. L'utilisation de couleurs dans un
-%   document requiert le paquetage |xcolor|, chargé par la classe. La
-%   couleur de lien par défaut, |ULlinkcolor|, est définie dans la
-%   classe; voir la \autoref{sec:couleurs}.
-% \end{DescribeMacro}
+% \link{https://www.gust.org.pl/projects/e-foundry/tex-gyre/}{TeX~Gyre}.
 %
 % \subsection{Options de \pkg{babel}}
 %
@@ -1200,54 +1195,59 @@
 %     Arseneau, D. 2010,
 %     {\selectlanguage{english}\emph{chapterbib. Multiple
 %     bibliographies in {\LaTeX}}}.
-%     URL~\url{http://www.ctan.org/pkg/chapterbib/}.
+%     URL~\url{https://www.ctan.org/pkg/chapterbib/}.
 %
 %   \bibitem[{Braams et Bezos(2016)}]{babel}
 %     Braams, J. et J.~Bezos. 2016,
 %     {\selectlanguage{english}\emph{Babel}}.
-%     URL~\url{http://www.ctan.org/pkg/babel/}.
+%     URL~\url{https://www.ctan.org/pkg/babel/}.
 %
 %   \bibitem[{Carlisle et {The \LaTeX3\ Project}(2016)}]{graphicx}
 %     Carlisle, D. et {The \LaTeX3\ Project}. 2016,
 %     {\selectlanguage{english}\emph{Packages in the `graphics'
-%     Bundle}}. URL~\url{http://www.ctan.org/pkg/graphics/}.
+%     Bundle}}. URL~\url{https://www.ctan.org/pkg/graphics/}.
 %
 %   \bibitem[{Charette(2015)}]{polyglossia}
 %     Charette, F. 2015, {\selectlanguage{english}\emph{Polyglossia:
 %     An Alternative to Babel for {\XeLaTeX} and {\LuaLaTeX}}}.
-%     URL~\url{http://www.ctan.org/pkg/polyglossia/}, current
+%     URL~\url{https://www.ctan.org/pkg/polyglossia/}, current
 %     maintainer Arthur Reutenauer.
 %
 %   \bibitem[{Daly(2010)}]{natbib}
 %     Daly, P.~W. 2010, {\selectlanguage{english}\emph{Natural
 %     Sciences Citations and References}}.
-%     URL~\url{http://www.ctan.org/pkg/natbib/}.
+%     URL~\url{https://www.ctan.org/pkg/natbib/}.
 %
 %   \bibitem[{Goulet(2013)}]{francais-bst}
 %     Goulet, V. 2013, {\selectlanguage{french}«Paquetage
 %     francais-bst»},
-%     URL~\url{http://www.ctan.org/pkg/francais-bst/}.
+%     URL~\url{https://www.ctan.org/pkg/francais-bst/}.
 %
 %   \bibitem[{Goulet(2016)}]{formation-latex-ul}
 %     Goulet, V. 2016, {\selectlanguage{french}\emph{Rédaction avec
 %     {\LaTeX}}}, document libre sous contrat Creative Commons.
 %     ISBN~978-2-9811416-7-5.
-%     URL~\url{https://ctan.org/pkg/formation-latex-ul}.
+%     URL~\url{httpss://ctan.org/pkg/formation-latex-ul}.
 %
 %   \bibitem[{Harders(2012)}]{numprint}
 %     Harders, H. 2012, {\selectlanguage{english}\emph{The
 %     numprint package}}.
-%     URL~\url{http://www.ctan.org/pkg/numprint/}.
+%     URL~\url{https://www.ctan.org/pkg/numprint/}.
 %
 %   \bibitem[{Jeffrey et Mittelbach(2015)}]{inputenc}
 %     Jeffrey, A. et F.~Mittelbach. 2015,
 %     {\selectlanguage{english}\emph{inputenc.sty}}.
-%     URL~\url{http://www.ctan.org/pkg/inputenc/}.
+%     URL~\url{https://www.ctan.org/pkg/inputenc/}.
 %
 %   \bibitem[{Kern(2016)}]{xcolor}
 %     Kern, D.~U. 2016, {\selectlanguage{english}\emph{Extending
 %     {\LaTeX}’s color facilities: the xcolor package}}.
-%     URL~\url{http://www.ctan.org/pkg/xcolor/}.
+%     URL~\url{https://www.ctan.org/pkg/xcolor/}.
+%
+%   \bibitem[{Lehman et Wright(2018)}]{etoolbox}
+%     Lehman, P. et J.~Wright. 2018,
+%     {\selectlanguage{english}\emph{The etoolbox package}}.
+%     URL~\url{https://www.ctan.org/pkg/etoolbox/}.
 %
 %   \bibitem[{Malo(1996)}]{Malo:1996}
 %     Malo, M. 1996, {\selectlanguage{french}\emph{Guide de la
@@ -1258,18 +1258,18 @@
 %     Rahtz, S. et H.~Oberdiek. 2017,
 %     {\selectlanguage{english}\emph{Hypertext marks in {\LaTeX}: a
 %     manual for hyperref}}.
-%     URL~\url{http://www.ctan.org/pkg/hyperref/}.
+%     URL~\url{https://www.ctan.org/pkg/hyperref/}.
 %
 %   \bibitem[{Robertson et Hosny(2017)}]{fontspec}
 %     Robertson, W. et K.~Hosny. 2017,
 %     {\selectlanguage{english}\emph{The fontspec package: Font
 %     selection for {\XeLaTeX} and {\LuaLaTeX}}}.
-%     URL~\url{http://www.ctan.org/pkg/fontspec/}.
+%     URL~\url{https://www.ctan.org/pkg/fontspec/}.
 %
 %   \bibitem[{Wilson(2016)}]{memoir}
 %     Wilson, P. 2016, {\selectlanguage{english}\emph{The Memoir Class
 %     for Configurable Typesetting}}, 8{\ieme} éd., The Herries Press.
-%     URL~\url{http://www.ctan.org/pkg/memoir/}, maintained by Lars
+%     URL~\url{https://www.ctan.org/pkg/memoir/}, maintained by Lars
 %     Madsen.
 %   \end{thebibliography}
 %   \PrintChanges
@@ -1699,6 +1699,9 @@
 % \subsection{Paquetages requis}
 % \changes{5.0}{2018-06-10}{Le paquetage unicode-math n'est plus
 %   chargé par défaut par la classe.}
+% \changes{5.0}{2018-09-11}{Le paquetage hyperref est désormais chargé
+%   dans la classe plutôt que dans les gabarits. Requiert le paquetage
+%   etoolbox.}
 %
 % La classe s'efforce de charger un minimum de paquetages afin d'éviter
 % les conflits potentiels.
@@ -1750,9 +1753,20 @@
 \fi
 %    \end{macrocode}
 %
+% L'interaction du paquetage \pkg{hyperref} avec les autres est
+% parfois --- voire souvent --- délicate. Pour cette raison, il est
+% recommandé de charger \pkg{hyperref} en tout dernier avec la
+% commande \cmd{\AtEndPreamble} du paquetage \pkg{etoolbox}. La
+% configuration de base de la classe fait en sorte que tous les liens
+% sont signalés par la couleur |ULlinkcolor| définie à la
+% \autoref{sec:couleurs}.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\AtEndPreamble{\RequirePackage[colorlinks,allcolors=ULlinkcolor]{hyperref}}
+%    \end{macrocode}
+%
 % L'insertion du logo de l'Université sur la page de titre requiert
 % \pkg{graphicx}. Les coloration des hyperliens requiert \pkg{xcolor}.
-% \autoref{sec:hyperref}).
 %    \begin{macrocode}
 \RequirePackage{graphicx}
 \RequirePackage{xcolor}
@@ -1780,12 +1794,9 @@
 % \subsection{Couleur des hyperliens}
 % \label{sec:couleurs}
 %
-% Le paquetage \pkg{hyperref} est chargé dans les gabarits afin de
-% demeurer le dernier paquetage chargé; voir la
-% \autoref{sec:hyperref}. La classe définit néanmoins une couleur standard pour
-% les hyperliens, une teinte de bleu assez foncée pour être à fois
-% visible en couleur et peu contrastante si le document est imprimé en
-% noir et blanc.
+% La classe définit une couleur standard pour les hyperliens, une
+% teinte de bleu assez foncée pour être à la fois visible en couleur
+% et peu contrastante si le document est imprimé en noir et blanc.
 %    \begin{macrocode}
 \definecolor{ULlinkcolor}{rgb}{0,0,0.3}
 %    \end{macrocode}
@@ -2389,11 +2400,6 @@
   %\setmathfont{TeX Gyre Pagella Math} % mathématiques en Pagella (Palatino)
   %\setmainfont{TeX Gyre Termes}       % texte en Termes (Times)
   %\setmathfont{TeX Gyre Termes Math}  % mathématiques en Termes (Times)
-
-  %% Gestion des hyperliens dans le document. S'assurer que hyperref
-  %% est le dernier paquetage chargé.
-  \usepackage{hyperref}
-  \hypersetup{colorlinks,allcolors=ULlinkcolor}
 
   %% Options de mise en forme du mode français de babel. Consulter la
   %% documentation du paquetage babel pour les options disponibles.
