@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2018/08/11 v5.0 Universite Laval thesis and memoir class]
+  [2018/09/30 v5.1 Universite Laval thesis and memoir class]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -435,6 +435,18 @@
 %   un document produit avec le moteur {\XeLaTeX}.
 % \end{DescribeMacro}
 %
+% \changes{5.1}{2018-09-30}{Ajout de l'option nohyperref.}
+% \begin{DescribeMacro}{nohyperref}
+%   Empêche le chargement du paquetage \pkg{hyperref}. L'interaction
+%   de ce paquetage avec les autres est parfois --- voire souvent ---
+%   délicate. La classe se charge de le charger en tout dernier tel
+%   que généralement recommandé. L'option |nohyperref| permet
+%   d'empêcher son chargement s'il est absolument nécessaire de
+%   charger d'autres paquetages avant \pkg{hyperref}. Si vous utilisez
+%   cette option, vous devez obligatoirement charger \pkg{hyperref}
+%   dans le préambule du document.
+% \end{DescribeMacro}
+%
 % \begin{DescribeMacro}{english, french, ...}
 %   Déclare les langues utilisées dans le document. Ces options sont
 %   transférées au paquetage \pkg{babel} (dans la mesure où |nobabel|
@@ -650,7 +662,9 @@
 %   voir aussi la \autoref{sec:bibliographie:multiples});
 % \item[\normalfont\pkg{hyperref}] \citep{hyperref} permet de
 %   transformer toutes les références en hyperliens cliquables lorsque
-%   le document est produit avec pdf{\LaTeX} ou {\XeLaTeX};
+%   le document est produit avec pdf{\LaTeX} ou {\XeLaTeX} (si
+%   l'option |nohyperref| est spécifiée, vous devez obligatoirement
+%   charger le paquetage vous-même);
 % \item[\normalfont\pkg{etoolbox}] \citep{etoolbox} outils
 %   additionnels pour la conception de classes et de paquetages
 %   (utilisé pour le chargement de \pkg{hyperref});
@@ -1431,6 +1445,7 @@
 %    \begin{macrocode}
 \newif\ifUL@babel        \UL@babeltrue         % charger babel?
 \newif\ifUL@natbib       \UL@natbibtrue        % charger natbib?
+\newif\ifUL@hyperref     \UL@hyperreftrue      % charger hyperref?
 \newif\ifUL@chapterbib   \UL@chapterbibfalse   % charger chapterbib?
 \newif\ifUL@sectionbib   \UL@sectionbibfalse   % option sectionbib de chapterbib?
 \newif\ifUL@isthesis                           % programme est une thèse?
@@ -1443,9 +1458,11 @@
 %
 % \subsection{Options de la classe}
 %
-% Il y a cinq grandes catégories d'options propres à la classe: la
-% possibilité d'empêcher le chargement du paquetage \pkg{natbib}; la
+% Les grandes catégories d'options propres à la classe sont: la
+% possibilité d'empêcher le chargement du paquetage \pkg{natbib};
+% l'activation des bibliographies par chapitre ou par section; la
 % possibilité d'empêcher le chargement du paquetage \pkg{babel}; la
+% possibilité d'empêcher le chargement du paquetage \pkg{hyperref}; la
 % taille de la police de caractères en points; le type de grade; la
 % déclaration qu'il s'agit d'un examen de doctorat ou d'un essai de
 % maîtrise.
@@ -1482,6 +1499,16 @@
 %   document.
 %    \begin{macrocode}
 \DeclareOption{nobabel}{\UL@babelfalse}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{nohyperref}
+%   L'option |nohyperref| permet d'empêcher la classe de charger le
+%   paquetage \pkg{hyperref}. Cette option peut s'avérer utile pour
+%   charger d'autres paquetages comme \pkg{cleverref} ou
+%   \pkg{glossaries} avant \pkg{hyperref}.
+%    \begin{macrocode}
+\DeclareOption{nohyperref}{\UL@hyperreffalse}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1753,16 +1780,24 @@
 \fi
 %    \end{macrocode}
 %
-% L'interaction du paquetage \pkg{hyperref} avec les autres est
-% parfois --- voire souvent --- délicate. Pour cette raison, il est
-% recommandé de charger \pkg{hyperref} en tout dernier avec la
-% commande \cmd{\AtEndPreamble} du paquetage \pkg{etoolbox}. La
-% configuration de base de la classe fait en sorte que tous les liens
-% sont signalés par la couleur |ULlinkcolor| définie à la
-% \autoref{sec:couleurs}.
+% Le paquetage obligatoire \pkg{hyperref} est chargé en tout dernier
+% avec la commande \cmd{\AtEndPreamble} du paquetage \pkg{etoolbox}.
+% Si l'option |nohyperref| a été spécifiée, la classe vérifie que le
+% paquetage a été chargé. La configuration de base de la classe fait
+% en sorte que tous les liens sont signalés par la couleur
+% |ULlinkcolor| définie à la \autoref{sec:couleurs}.
 %    \begin{macrocode}
-\RequirePackage{etoolbox}
-\AtEndPreamble{\RequirePackage[colorlinks,allcolors=ULlinkcolor]{hyperref}}
+\ifUL@hyperref
+  \RequirePackage{etoolbox}
+  \AtEndPreamble{\RequirePackage{hyperref}}
+\else
+  \AtBeginDocument{%
+    \@ifpackageloaded{hyperref}{\relax}{%
+      \ClassError{ulthese}{%
+        Package hyperref is required}
+      {Delete option nohyperref or load the package in the preamble.}}}
+\fi
+\PassOptionsToPackage{colorlinks,allcolors=ULlinkcolor}{hyperref}
 %    \end{macrocode}
 %
 % L'insertion du logo de l'Université sur la page de titre requiert
