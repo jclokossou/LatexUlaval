@@ -385,15 +385,17 @@
 %
 % \changes{5.0}{2018-05-09}{Ajout d'une option «essai» pour les
 %   maîtrises analogue à «examen» pour les doctorats.}
+% \changes{5.1}{2019-05-06}{L'option «essai» n'empêche plus
+%   l'utilisation d'une page frontispice.}
 % \begin{DescribeMacro}{essai}
 %   Identifie un essai de maîtrise. Cette option permet d'utiliser la
 %   classe pour la rédaction d'un essai de maîtrise respectant les
 %   règles de présentation matérielle de la FESP. Elle a pour effet de
 %   changer l'appellation «Maîtrise» sur la page couverture pour
-%   «Essai». Elle supprime également la page frontispice. L'option
-%   n'est compatible qu'avec l'une des options de grade de maîtrise.
-%   Pour un essai de maîtrise, l'utilisation simultanée de l'option
-%   |article| de la classe \class{memoir} peut s'avérer tout indiquée.
+%   «Essai». L'option n'est compatible qu'avec l'une des options de
+%   grade de maîtrise. Pour un essai de maîtrise, l'utilisation
+%   simultanée de l'option |article| de la classe \class{memoir} peut
+%   s'avérer tout indiquée.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{10pt,11pt,12pt}
@@ -954,7 +956,7 @@
 %
 % \begin{rem}
 %   Il n'y a pas de gabarit spécifique pour un examen de doctorat ou
-%   pour un essai de maîtrise. On utilise le gabarit de thèse ou de
+%   pour un essai de maîtrise. Utilisez le gabarit de thèse ou de
 %   maîtrise approprié en ajoutant simplement l'option |examen| ou
 %   |essai| dans la commande \cmd{\documentclass}.
 % \end{rem}
@@ -1105,12 +1107,11 @@
 %
 % \begin{rem}
 %   L'examen de doctorat et l'essai de maîtrise comportent une page de
-%   titre en lieu et place de la page frontispice. Les options de
-%   classe |examen| et |essai| suppriment d'ailleurs cette dernière.
-%   Il est laissé aux auteurs le soin de d'ajouter dans les gabarits
-%   les commandes nécessaires pour la production de la page de titre
-%   (\autoref{sec:pagetitre}) et de supprimer les autres pages
-%   liminaires.
+%   titre. Vous devez ajouter dans les gabarits les commandes
+%   nécessaires pour la production de la page de titre
+%   (\autoref{sec:pagetitre}) et supprimer les autres pages
+%   liminaires. Rappelons que l'option de classe |examen| a pour effet
+%   de supprimer la page frontispice.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\chapter*}
@@ -2190,7 +2191,7 @@
   \addtolength{\UL@authorspacing}{-\baselineskip}
   \fi}
 \newcommand{\frontispice}{{%
-    \ifUL@isexam\else\ifUL@isessay\else
+    \ifUL@isexam\else
       \clearpage
       \pagestyle{empty}
       \SingleSpacing\setlength{\parskip}{0pt}
@@ -2216,7 +2217,7 @@
       \vspace{\baselineskip}
       \UL@director\par
       \UL@codirector
-    \fi\fi
+    \fi
     \clearpage}}
 %    \end{macrocode}
 % \end{macro}
