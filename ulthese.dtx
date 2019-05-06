@@ -310,9 +310,10 @@
 % \autoref{sec:utilisation:commandes}.
 %
 % \begin{DescribeMacro}{PhD,MSc,MA, ...}
-%   Identifie le type de grade; consulter le \autoref{tab:grades}
-%   pour la liste complète des options et les grades correspondants.
-%   La déclaration d'un type de grade est obligatoire.
+%   Identifie le type de grade; consulter le \autoref{tab:grades} pour
+%   la liste complète des options et les grades correspondants. La
+%   déclaration d'un type de grade est obligatoire, sauf en cas de
+%   l'utilisation de l'option |projet| (voir ci-dessous).
 % \end{DescribeMacro}
 %
 % \begin{table}[t]
@@ -394,6 +395,20 @@
 %   changer l'appellation «Maîtrise» sur la page couverture pour
 %   «Essai». L'option n'est compatible qu'avec l'une des options de
 %   grade de maîtrise. Pour un essai de maîtrise, l'utilisation
+%   simultanée de l'option |article| de la classe \class{memoir} peut
+%   s'avérer tout indiquée.
+% \end{DescribeMacro}
+%
+% \changes{5.1}{2019-05-06}{Ajout d'une option «projet» pour les
+%   cours de projet de recherche.}
+% \begin{DescribeMacro}{projet}
+%   Identifie un projet de recherche. Cette option permet d'utiliser
+%   la classe pour la rédaction d'un rapport de projet de recherche de
+%   premier cycle respectant les règles de présentation matérielle de
+%   la FESP. Elle a pour effet d'inscrire l'appellation «Projet de
+%   recherche» sur la page couverture. L'utilisation de cette option
+%   rend non ogligatoire la déclaration de grade qui, si présente, est
+%   ignorée. Comme pour pour un essai de maîtrise, l'utilisation
 %   simultanée de l'option |article| de la classe \class{memoir} peut
 %   s'avérer tout indiquée.
 % \end{DescribeMacro}
@@ -680,7 +695,7 @@
 % \item[\normalfont\pkg{textcomp}] multitude de symboles spéciaux,
 %   dont un beau symbole de copyright, \textcopyright.
 % \end{description}
-% L'\autoref{sec:meo} sur la mise en {\oe}uvre de la classe fournit
+% L'\autoref{sec:meo} sur la mise en œuvre de la classe fournit
 % plus de détails sur la liste des paquetages chargés et les raisons
 % pour lesquelles ils sont requis dans la classe.
 %
@@ -719,21 +734,20 @@
 % \section{Français et autres langues}
 % \label{sec:langues}
 %
-% Une complication additionnelle pour les auteurs rédigeant dans une
-% langue autre que l'anglais consiste à adapter {\LaTeX} à leur
-% langue, qu'il s'agisse des mots clés, de la typographie ou de la
-% césure des mots. La solution standard à ce problème provient du
-% paquetage \pkg{babel}. Celui-ci permet de combiner plusieurs
-% langues dans un même document et de passer de l'une à l'autre
-% facilement. Il est chargé par défaut par la classe \class{ulthese}.
+% Une complication additionnelle si vous rédigez dans une langue autre
+% que l'anglais consiste à adapter {\LaTeX} à votre langue, qu'il
+% s'agisse des mots clés, de la typographie ou de la césure des mots.
+% La solution standard à ce problème provient du paquetage
+% \pkg{babel}. Celui-ci permet de combiner plusieurs langues dans un
+% même document et de passer de l'une à l'autre facilement. Il est
+% chargé par défaut par la classe \class{ulthese}.
 %
-% Aucune langue n'est spécifiée dans la classe. La plupart des auteurs
-% auront recours à l'anglais et au français, ne serait-ce que pour les
-% deux résumés demandés par la FESP. Les langues utilisées dans le
-% document doivent être spécifiées comme options à la classe, tel que
-% mentionné à la \autoref{sec:utilisation:options}. La
-% \emph{dernière} langue spécifiée devient par défaut la langue active
-% du document.
+% Aucune langue n'est spécifiée dans la classe. Vous aurez sans doute
+% recours à l'anglais et au français, ne serait-ce que pour les deux
+% résumés demandés par la FESP. Vous devez spécifier les langues
+% utilisées dans le document en options à la classe, tel que mentionné
+% à la \autoref{sec:utilisation:options}. La \emph{dernière} langue
+% spécifiée devient par défaut la langue active du document.
 %
 % \begin{DescribeMacro}{\selectlanguage}
 %   La commande \cmd{\selectlanguage} de \pkg{babel} permet de passer de
@@ -751,7 +765,7 @@
 % \pkg{babel}, consultez sa %
 % \doc{http://texdoc.net/pkg/babel/}. %
 % Celle-ci est éclatée en un
-% document principal, pour le c{\oe}ur du paquetage et plusieurs
+% document principal, pour le cœur du paquetage et plusieurs
 % autres pour les fonctionnalités propres à une langue: %
 % \doc[anglais]{http://texdoc.net/pkg/babel-english}, %
 % \doc[français]{http://texdoc.net/pkg/babel-french}, %
@@ -955,10 +969,10 @@
 % apparaissent dans les fichiers.
 %
 % \begin{rem}
-%   Il n'y a pas de gabarit spécifique pour un examen de doctorat ou
-%   pour un essai de maîtrise. Utilisez le gabarit de thèse ou de
-%   maîtrise approprié en ajoutant simplement l'option |examen| ou
-%   |essai| dans la commande \cmd{\documentclass}.
+%   Il n'y a pas de gabarit spécifique pour un examen de doctorat,
+%   pour un essai de maîtrise ou pour un projet de recherche. Utilisez
+%   un gabarit de thèse ou de maîtrise et inscrivez l'option |examen|,
+%   |essai| ou |projet| dans la commande \cmd{\documentclass}.
 % \end{rem}
 %
 % \subsection{Encodage des fichiers}
@@ -1106,12 +1120,12 @@
 % dernières commandes admettent des arguments.
 %
 % \begin{rem}
-%   L'examen de doctorat et l'essai de maîtrise comportent une page de
-%   titre. Vous devez ajouter dans les gabarits les commandes
-%   nécessaires pour la production de la page de titre
-%   (\autoref{sec:pagetitre}) et supprimer les autres pages
-%   liminaires. Rappelons que l'option de classe |examen| a pour effet
-%   de supprimer la page frontispice.
+%   L'examen de doctorat, l'essai de maîtrise et le projet de
+%   recherche comportent une page de titre. Vous devez ajouter dans
+%   les gabarits les commandes nécessaires pour la production de la
+%   page de titre (\autoref{sec:pagetitre}) et supprimer les autres
+%   pages liminaires. Rappelons que l'option de classe |examen| a pour
+%   effet de supprimer la page frontispice.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\chapter*}
@@ -1297,10 +1311,10 @@
 %
 % La thèse ou le mémoire déposé à la FESP ne doit \emph{pas} comporter
 % de page de titre. Les options de classe et les commandes mentionnées
-% dans cette section sont fournies à titre gracieux aux auteurs qui
-% souhaiteraient néanmoins composer une page de titre conforme aux
-% normes de présentation matérielles, ou encore pour les examens de
-% doctorat et les essais de maîtrise.
+% dans cette section permettent néanmoins de composer une page de
+% titre conforme aux normes de présentation matérielles, ou encore
+% pour les examens de doctorat, les essais de maîtrise ou les projets
+% de recherche de premier cycle.
 %
 % En premier lieu, les \meta{options} suivantes s'ajoutent à celles de
 % la \autoref{sec:utilisation:options} lorsque l'on souhaite créer une
@@ -1425,7 +1439,7 @@
 %
 % ^^A Début du code de la classe
 %
-% \section{Mise en {\oe}uvre}
+% \section{Mise en œuvre}
 % \label{sec:meo}
 %
 % Cette annexe passe en revue le code {\TeX} et {\LaTeX} de la classe.
@@ -1453,6 +1467,7 @@
 \newif\ifUL@iscotutelle  \UL@iscotutellefalse  % thèse en cotutelle?
 \newif\ifUL@isexam       \UL@isexamfalse       % examen de doctorat?
 \newif\ifUL@isessay      \UL@isessayfalse      % essai de maîtrise?
+\newif\ifUL@isproject    \UL@isprojectfalse    % projet de recherche?
 \newif\ifUL@hassubtitle  \UL@hassubtitlefalse  % document a un sous-titre?
 \newif\ifUL@hastitlepage \UL@hastitlepagefalse % page titre utilisée?
 %    \end{macrocode}
@@ -1679,8 +1694,7 @@
 % \begin{macro}{examen,essai}
 %   L'option |examen| change l'appellation «Thèse» sur la couverture
 %   pour «Examen de doctorat». L'option |essai|, quant à elle, change
-%   l'appellation «Maîtrise» pour «Essai». Les deux options
-%   suppriment la page frontispice. L'option |examen|
+%   l'appellation «Maîtrise» pour «Essai». L'option |examen|
 %   n'est compatible qu'avec l'une des options de thèse, alors que
 %   |essai| n'est compatible qu'avec une option de maîtrise. Un
 %   message d'erreur est émis en cas d'incompatibilité.
@@ -1704,22 +1718,39 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{projet}
+%   L'option |projet| inscrit l'appellation «Projet de recherche» sur
+%   la couverture et aucun type de diplôme. La page titre est
+%   autrement traitée comme celle d'une thèse ou d'un mémoire
+%   standard. L'option a préséance sur toute déclaration de type de
+%   doctorat ou de maîtrise. Il faut donc l'utiliser avec prudence.
+%    \begin{macrocode}
+\DeclareOption{projet}{%
+  \UL@isprojecttrue
+  \renewcommand*{\UL@typenum}{0}
+  \def\UL@degree{\mbox{}}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Chargement de la classe \class{memoir}}
 %
 % Toutes les options de la classe sont passées à \class{memoir}. Le
 % format de papier et la taille de police par défaut sont, dans
 % l'ordre, |letterpaper| et |11pt|. On vérifie qu'un type de grade a
-% bien été déclaré. L'option de \class{memoir} |oneside| est
-% explicitement déclarée afin d'éviter toute tentative de passer outre
-% à cette exigence de la FESP.
+% bien été déclaré (à moins que l'option |projet| ne soit présente).
+% L'option de \class{memoir} |oneside| est explicitement déclarée afin
+% d'éviter toute tentative de passer outre à cette exigence de la
+% FESP.
 %    \begin{macrocode}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ExecuteOptions{11pt,letterpaper}
 \ProcessOptions\relax
 \ifx\UL@typenum\empty
-  \ClassError{ulthese}{%
-    No thesis type specified}
-    {Declare the thesis type as a class option.}
+  \ifUL@isproject\else
+    \ClassError{ulthese}{%
+      No thesis type specified}
+      {Declare the thesis type as a class option.}
+    \fi
 \fi
 \LoadClass[oneside]{memoir}
 %    \end{macrocode}
@@ -1866,7 +1897,7 @@
 % L'espacement entre les lignes est d'un interligne et demi.
 % L'espacement «double» entre les paragraphes est fixé à
 % |0.5\baselineskip| afin d'en arriver à une disposition agréable à
-% l'{\oe}il. Le retrait de première ligne est supprimé puisque plus
+% l'œil. Le retrait de première ligne est supprimé puisque plus
 % nécessaire suite à l'ajout de l'espacement entre les paragraphes.
 %    \begin{macrocode}
 \OnehalfSpacing
@@ -2039,8 +2070,8 @@
 %
 % \begin{macro}{\UL@typeofdoc}
 %   La commande |\UL@typeofdoc| contient le type de document qui est
-%   produit: thèse, thèse en cotutelle, maîtrise, examen de doctorat
-%   ou essai.
+%   produit: thèse, thèse en cotutelle, maîtrise, examen de doctorat,
+%   essai ou projet de recherche.
 %    \begin{macrocode}
 \ifUL@isthesis
   \ifUL@iscotutelle
@@ -2056,6 +2087,9 @@
 \fi
 \ifUL@isessay
   \renewcommand*{\UL@typeofdoc}{Essai}
+\fi
+\ifUL@isproject
+  \renewcommand*{\UL@typeofdoc}{Projet de recherche}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -2092,7 +2126,7 @@
   \ifcase\UL@typenum\relax% 0 standard
     \vspace{96pt}
     {\UL@fontprogram\UL@program}\par
-    \UL@degree\par
+    \ifUL@isproject\vspace{\baselineskip}\else\UL@degree\fi\par
     \vspace{112pt}
     Qu\'ebec, Canada\par
   \or%                      1 multifacultaire
