@@ -19,7 +19,7 @@ pour la Faculté des études supérieures de l'[Université Laval](https://ulava
 
 ## Version
 
-5.2 ([notes de mise à jour](https://gitlab.com/vigou3/ulthese/tags/v5.2/))
+5.3 ([notes de mise à jour](https://gitlab.com/vigou3/ulthese/tags/v5.3/))
 
 ## Obtenir et installer la classe
 
