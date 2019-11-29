@@ -36,9 +36,15 @@ https://gitlab.com/vigou3/ulthese/
 Le paquetage **ulthese** fournit la classe du même nom permettant de
 composer des thèses et des mémoires immédiatement conformes aux règles
 générales de présentation matérielle de la Faculté des études
-supérieures et postdoctorales (FESP) de
-l'[Université Laval](https://www.ulaval.ca). La classe est
-compatible avec LaTeX et XeLaTeX.
+supérieures et postdoctorales (FESP) de l'[Université
+Laval](https://www.ulaval.ca). 
+
+La classe permet également de produire les types de documents suivants
+selon les mêmes règles de présentation que les thèses et mémoires:
+examen de doctorat, essai de maîtrise, projet de recherche, rapport de
+stage.
+
+La classe est compatible avec LaTeX et XeLaTeX.
 
 ## Contenu du paquetage
 
@@ -56,7 +62,7 @@ Pour installer la classe ulthese, compiler avec LaTeX le fichier
 
     latex ulthese.ins
 
-depuis une invite de commande. On peut aussi ouvrir le fichier
+depuis une ligne de commande. On peut aussi ouvrir le fichier
 `ulthese.ins` dans son éditeur LaTeX et lancer la compilation avec
 LaTeX, pdfTeX, pdfLaTeX ou XeLaTeX depuis celui-ci.
 

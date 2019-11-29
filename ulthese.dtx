@@ -29,7 +29,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2019/05/06 v5.2 Universite Laval thesis and memoir class]
+  [2019/11/28 v5.3 Universite Laval thesis and memoir class]
 %</class>
 %<*driver>
 \documentclass[11pt,english,french]{ltxdoc}
@@ -378,7 +378,7 @@
 %   Identifie un examen de doctorat. Cette option permet d'utiliser la
 %   classe pour la rédaction d'un examen de doctorat respectant les
 %   règles de présentation matérielle de la FESP. Elle a pour effet de
-%   changer l'appellation «Thèse» sur la page couverture pour «Examen
+%   changer l'appellation «Thèse» sur la page de titre pour «Examen
 %   de doctorat». Elle supprime également la page frontispice.
 %   L'option n'est compatible qu'avec l'une des options de grade de
 %   doctorat.
@@ -392,7 +392,7 @@
 %   Identifie un essai de maîtrise. Cette option permet d'utiliser la
 %   classe pour la rédaction d'un essai de maîtrise respectant les
 %   règles de présentation matérielle de la FESP. Elle a pour effet de
-%   changer l'appellation «Maîtrise» sur la page couverture pour
+%   changer l'appellation «Maîtrise» sur la page de titre pour
 %   «Essai». L'option n'est compatible qu'avec l'une des options de
 %   grade de maîtrise. Pour un essai de maîtrise, l'utilisation
 %   simultanée de l'option |article| de la classe \class{memoir} peut
@@ -403,14 +403,24 @@
 %   cours de projet de recherche.}
 % \begin{DescribeMacro}{projet}
 %   Identifie un projet de recherche. Cette option permet d'utiliser
-%   la classe pour la rédaction d'un rapport de projet de recherche de
-%   premier cycle respectant les règles de présentation matérielle de
-%   la FESP. Elle a pour effet d'inscrire l'appellation «Projet de
-%   recherche» sur la page couverture. L'utilisation de cette option
-%   rend non ogligatoire la déclaration de grade qui, si présente, est
-%   ignorée. Comme pour pour un essai de maîtrise, l'utilisation
-%   simultanée de l'option |article| de la classe \class{memoir} peut
-%   s'avérer tout indiquée.
+%   la classe pour la rédaction d'un rapport de projet de recherche
+%   respectant les règles de présentation matérielle de la FESP. Elle
+%   a pour effet d'inscrire l'appellation «Projet de recherche» sur la
+%   page de titre et de supprimer la mention du grade. L'utilisation
+%   de cette option rend d'ailleurs non ogligatoire la déclaration de
+%   grade qui, si elle est présente, est simplement ignorée. Comme
+%   pour pour un essai de maîtrise, l'utilisation simultanée de
+%   l'option |article| de la classe \class{memoir} peut s'avérer tout
+%   indiquée avec les cette option.
+% \end{DescribeMacro}
+%
+% \changes{5.3}{2019-11-28}{Ajout d'une option «stage» pour les
+% rapports de stage.}
+% \begin{DescribeMacro}{stage}
+%   Identifie un rapport de stage. L'effet de cette option est
+%   identique à celui de l'option |projet|, sauf que l'inscription sur
+%   la page de titre est «Rapport de stage». L'option |stage| supprime
+%   également la page frontispice.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{10pt,11pt,12pt}
@@ -970,9 +980,10 @@
 %
 % \begin{rem}
 %   Il n'y a pas de gabarit spécifique pour un examen de doctorat,
-%   pour un essai de maîtrise ou pour un projet de recherche. Utilisez
-%   un gabarit de thèse ou de maîtrise et inscrivez l'option |examen|,
-%   |essai| ou |projet| dans la commande \cmd{\documentclass}.
+%   pour un essai de maîtrise, pour un projet de recherche ou pour un
+%   rapport de stage. Utilisez un gabarit de thèse ou de maîtrise et
+%   inscrivez l'option |examen|, |essai|, |projet| ou |stage| dans la
+%   commande \cmd{\documentclass}.
 % \end{rem}
 %
 % \subsection{Encodage des fichiers}
@@ -1120,12 +1131,12 @@
 % dernières commandes admettent des arguments.
 %
 % \begin{rem}
-%   L'examen de doctorat, l'essai de maîtrise et le projet de
-%   recherche comportent une page de titre. Vous devez ajouter dans
-%   les gabarits les commandes nécessaires pour la production de la
-%   page de titre (\autoref{sec:pagetitre}) et supprimer les autres
-%   pages liminaires. Rappelons que l'option de classe |examen| a pour
-%   effet de supprimer la page frontispice.
+%   L'examen de doctorat, l'essai de maîtrise, le rapport de projet de
+%   recherche et le rapport de stage comportent une page de titre.
+%   Vous devez ajouter dans les gabarits les commandes nécessaires
+%   pour la production de la page de titre (\autoref{sec:pagetitre})
+%   et supprimer les autres pages liminaires. Rappelons que l'option
+%   de classe |examen| a pour effet de supprimer la page frontispice.
 % \end{rem}
 %
 % \begin{DescribeMacro}{\chapter*}
@@ -1312,9 +1323,9 @@
 % La thèse ou le mémoire déposé à la FESP ne doit \emph{pas} comporter
 % de page de titre. Les options de classe et les commandes mentionnées
 % dans cette section permettent néanmoins de composer une page de
-% titre conforme aux normes de présentation matérielles, ou encore
-% pour les examens de doctorat, les essais de maîtrise ou les projets
-% de recherche de premier cycle.
+% titre conforme aux normes de présentation matérielles, notamment
+% pour les examens de doctorat, les essais de maîtrise ou les rapports
+% de projet de recherche ou de stage.
 %
 % En premier lieu, les \meta{options} suivantes s'ajoutent à celles de
 % la \autoref{sec:utilisation:options} lorsque l'on souhaite créer une
@@ -1467,7 +1478,8 @@
 \newif\ifUL@iscotutelle  \UL@iscotutellefalse  % thèse en cotutelle?
 \newif\ifUL@isexam       \UL@isexamfalse       % examen de doctorat?
 \newif\ifUL@isessay      \UL@isessayfalse      % essai de maîtrise?
-\newif\ifUL@isproject    \UL@isprojectfalse    % projet de recherche?
+\newif\ifUL@isresearch   \UL@isresearchfalse   % projet de recherche?
+\newif\ifUL@isworkterm   \UL@isworktermfalse   % rapport de stage?
 \newif\ifUL@hassubtitle  \UL@hassubtitlefalse  % document a un sous-titre?
 \newif\ifUL@hastitlepage \UL@hastitlepagefalse % page titre utilisée?
 %    \end{macrocode}
@@ -1718,15 +1730,20 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{projet}
+% \begin{macro}{projet,stage}
 %   L'option |projet| inscrit l'appellation «Projet de recherche» sur
-%   la couverture et aucun type de diplôme. La page titre est
+%   la page de titre et aucun type de diplôme, alors que l'option
+%   |stage| inscrit «Rapport de stage». La page de titre est
 %   autrement traitée comme celle d'une thèse ou d'un mémoire
-%   standard. L'option a préséance sur toute déclaration de type de
-%   doctorat ou de maîtrise. Il faut donc l'utiliser avec prudence.
+%   standard. Ces options ont préséance sur toute déclaration de type de
+%   doctorat ou de maîtrise. Il faut donc les utiliser avec prudence.
 %    \begin{macrocode}
 \DeclareOption{projet}{%
-  \UL@isprojecttrue
+  \UL@isresearchtrue
+  \renewcommand*{\UL@typenum}{0}
+  \def\UL@degree{\mbox{}}}
+\DeclareOption{stage}{%
+  \UL@isworktermtrue
   \renewcommand*{\UL@typenum}{0}
   \def\UL@degree{\mbox{}}}
 %    \end{macrocode}
@@ -1737,20 +1754,22 @@
 % Toutes les options de la classe sont passées à \class{memoir}. Le
 % format de papier et la taille de police par défaut sont, dans
 % l'ordre, |letterpaper| et |11pt|. On vérifie qu'un type de grade a
-% bien été déclaré (à moins que l'option |projet| ne soit présente).
-% L'option de \class{memoir} |oneside| est explicitement déclarée afin
-% d'éviter toute tentative de passer outre à cette exigence de la
-% FESP.
+% bien été déclaré (à moins que l'option |projet| ou l'option |stage|
+% ne soit présente). L'option de \class{memoir} |oneside| est
+% explicitement déclarée afin d'éviter toute tentative de passer outre
+% à cette exigence de la FESP.
 %    \begin{macrocode}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ExecuteOptions{11pt,letterpaper}
 \ProcessOptions\relax
 \ifx\UL@typenum\empty
-  \ifUL@isproject\else
-    \ClassError{ulthese}{%
-      No thesis type specified}
-      {Declare the thesis type as a class option.}
+  \ifUL@isresearch\else
+    \ifUL@isworkterm\else
+      \ClassError{ulthese}{%
+        No thesis type specified}
+        {Declare the thesis type as a class option.}
     \fi
+  \fi
 \fi
 \LoadClass[oneside]{memoir}
 %    \end{macrocode}
@@ -2071,7 +2090,7 @@
 % \begin{macro}{\UL@typeofdoc}
 %   La commande |\UL@typeofdoc| contient le type de document qui est
 %   produit: thèse, thèse en cotutelle, maîtrise, examen de doctorat,
-%   essai ou projet de recherche.
+%   essai, projet de recherche ou rapport de stage.
 %    \begin{macrocode}
 \ifUL@isthesis
   \ifUL@iscotutelle
@@ -2088,8 +2107,11 @@
 \ifUL@isessay
   \renewcommand*{\UL@typeofdoc}{Essai}
 \fi
-\ifUL@isproject
+\ifUL@isresearch
   \renewcommand*{\UL@typeofdoc}{Projet de recherche}
+\fi
+\ifUL@isworkterm
+  \renewcommand*{\UL@typeofdoc}{Rapport de stage}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -2126,7 +2148,12 @@
   \ifcase\UL@typenum\relax% 0 standard
     \vspace{96pt}
     {\UL@fontprogram\UL@program}\par
-    \ifUL@isproject\vspace{\baselineskip}\else\UL@degree\fi\par
+    \ifnum\ifUL@isresearch 1\else\ifUL@isworkterm 1\else 0\fi\fi
+      =1 %
+      \vspace{\baselineskip}
+    \else
+      \UL@degree
+    \fi\par
     \vspace{112pt}
     Qu\'ebec, Canada\par
   \or%                      1 multifacultaire
@@ -2225,7 +2252,7 @@
   \addtolength{\UL@authorspacing}{-\baselineskip}
   \fi}
 \newcommand{\frontispice}{{%
-    \ifUL@isexam\else
+    \ifUL@isexam\else\ifUL@isworkterm\else
       \clearpage
       \pagestyle{empty}
       \SingleSpacing\setlength{\parskip}{0pt}
@@ -2251,7 +2278,7 @@
       \vspace{\baselineskip}
       \UL@director\par
       \UL@codirector
-    \fi
+    \fi\fi
     \clearpage}}
 %    \end{macrocode}
 % \end{macro}
