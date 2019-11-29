@@ -88,12 +88,12 @@ zip : ${FILES} README.md
 check-status:
 	@echo ----- Checking status of working directory...
 	@if [ "master" != $(shell git branch --list | grep '^*' | cut -d " " -f 2-) ]; then \
-	     echo "not on branch master"; exit 2; fi
+	    echo "not on branch master"; exit 2; fi
 	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
-	     echo "uncommitted changes in repository; not creating release"; exit 2; fi
+	    echo "uncommitted changes in repository; not creating release"; exit 2; fi
 	@if [ -n "$(shell git log origin/master..HEAD | head -n1)" ]; then \
 	    echo "unpushed commits in repository; pushing to origin"; \
-	     git push; fi
+	      git push; fi
 
 .PHONY: upload
 upload:
