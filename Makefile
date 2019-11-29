@@ -30,6 +30,11 @@ all: files commit
 
 files:
 	$(eval url=$(subst /,\/,$(patsubst %/,%,${REPOSURL})))
+	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	                             --silent \
+	                             ${APIURL}/releases/${TAGNAME}/assets/links \
+	                        | grep -o "/uploads/[a-z0-9]*/" \
+	                        | cut -d/ -f3))
 	cd content && \
 	  awk 'BEGIN { FS = "/"; OFS = "/" } \
 	       /^## Version/ { print; getline; print; getline; \
@@ -37,17 +42,9 @@ files:
 	       1' \
 	      _index.md > tmpfile && \
 	  mv tmpfile _index.md
-	cd layouts/partials && \
-	  awk 'BEGIN { FS = "/"; OFS = "/" } \
-	       /${url}\/tags/ { if (NF != 8) { \
-		                    print "invalid number of fields in the tags url" > "/dev/stderr"; \
-				    exit 1; } \
-		                $$7 = "${TAGNAME}" } 1' \
-	       site-header.html > tmpfile && \
-	  mv tmpfile site-header.html
 
 commit:
-	git commit content/_index.md layouts/partials/site-header.html \
+	git commit content/_index.md \
 	    -m "Updated web page for version ${VERSION}"
 	git push
 
