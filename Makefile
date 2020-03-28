@@ -33,8 +33,8 @@ files:
 	$(eval file_id=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	                             --silent \
 	                             ${APIURL}/releases/${TAGNAME}/assets/links \
-	                        | grep -o "/uploads/[a-z0-9]*/" \
-	                        | cut -d/ -f3))
+				| sed -E 's/.*\"direct_asset_url\":\"([^"]*)\".*/\1/' \
+				| cut -d/ -f7))
 	cd content && \
 	  awk 'BEGIN { FS = "/"; OFS = "/" } \
 	       /^## Version/ { print; getline; print; getline; \
