@@ -1533,8 +1533,8 @@
 % \begin{macro}{nohyperref}
 %   L'option |nohyperref| permet d'empêcher la classe de charger le
 %   paquetage \pkg{hyperref}. Cette option peut s'avérer utile pour
-%   charger d'autres paquetages comme \pkg{cleverref} ou
-%   \pkg{glossaries} avant \pkg{hyperref}.
+%   charger d'autres paquetages comme \pkg{cleveref} ou
+%   \pkg{glossaries} après \pkg{hyperref}.
 %    \begin{macrocode}
 \DeclareOption{nohyperref}{\UL@hyperreffalse}
 %    \end{macrocode}
@@ -2594,8 +2594,8 @@
 % ^^A Gabarits des parties du document
 %<*resume>
 \chapter*{Résumé}               % ne pas numéroter
-\label{chap:resume}             % étiquette pour renvois
-\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:resume}} % inclure dans TdM
+\label{chap-resume}             % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap-resume}} % inclure dans TdM
 
 \begin{otherlanguage*}{french}
   <Texte du résumé en français. Obligatoire.>
@@ -2604,8 +2604,8 @@
 %
 %<*abstract>
 \chapter*{Abstract}             % ne pas numéroter
-\label{chap:abstract}           % étiquette pour renvois
-\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:abstract}} % inclure dans TdM
+\label{chap-abstract}           % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap-abstract}} % inclure dans TdM
 
 \begin{otherlanguage*}{english}
   <Text of English abstract. Optional, but recommended.>
@@ -2614,16 +2614,16 @@
 %
 %<*remerciements>
 \chapter*{Remerciements}        % ne pas numéroter
-\label{chap:remerciements}      % étiquette pour renvois
-\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:remerciements}} % inclure dans TdM
+\label{chap-remerciements}      % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap-remerciements}} % inclure dans TdM
 
 <Texte des remerciements en prose.>
 %</remerciements>
 %
 %<*avantpropos>
 \chapter*{Avant-propos}         % ne pas numéroter
-\label{chap:avantpropos}        % étiquette pour renvois
-\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:avantpropos}} % inclure dans TdM
+\label{chap-avantpropos}        % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap-avantpropos}} % inclure dans TdM
 
 <Texte de l'avant-propos. Obligatoire dans une thèse ou un mémoire par
 articles.>
@@ -2631,8 +2631,8 @@ articles.>
 %
 %<*introduction>
 \chapter*{Introduction}         % ne pas numéroter
-\label{chap:introduction}       % étiquette pour renvois
-\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:introduction}} % inclure dans TdM
+\label{chap-introduction}       % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap-introduction}} % inclure dans TdM
 
 <Texte de l'introduction. La thèse ou le mémoire devrait normalement
 débuter par une introduction. Celle-ci est traitée comme un chapitre
@@ -2641,7 +2641,7 @@ normal, sauf qu'elle n'est pas numérotée.>
 %
 %<*chapitre>
 \chapter{<Titre du chapitre ou de l'article>}     % numéroté
-\label{chap:}                   % étiquette pour renvois (à compléter!)
+\label{chap-}                   % étiquette pour renvois (à compléter!)
 
 %<articles>\section{Résumé}
 %<articles>
@@ -2663,8 +2663,8 @@ normal, sauf qu'elle n'est pas numérotée.>
 %
 %<*conclusion>
 \chapter*{Conclusion}           % ne pas numéroter
-\label{chap:conclusion}         % étiquette pour renvois
-\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:conclusion}} % inclure dans TdM
+\label{chap-conclusion}         % étiquette pour renvois
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap-conclusion}} % inclure dans TdM
 
 <Texte de la conclusion. Une thèse ou un mémoire devrait normalement
 se terminer par une conclusion placée avant les annexes, le cas
@@ -2674,7 +2674,7 @@ qu'elle n'est pas numérotée.>
 %
 %<*annexe>
 \chapter{<Titre de l'annexe>}     % numérotée
-\label{chap:}                   % étiquette pour renvois (à compléter!)
+\label{chap-}                   % étiquette pour renvois (à compléter!)
 
 <Texte de l'annexe.>
 %</annexe>
