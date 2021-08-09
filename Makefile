@@ -148,7 +148,7 @@ create-release:
 	         } \
 		 printf "- %s\\n", out \
 	     } \
-	     END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url_dist}\" }, { \"name\": \"${ARCHIVENOTEX}\", \"url\": \"${REPOSURL}${upload_url_notex}\" }] }}" }' \
+	     END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url_dist}\", \"link_type\": \"package\"}, { \"name\": \"${ARCHIVENOTEX}\", \"url\": \"${REPOSURL}${upload_url_notex}\", \"link_type\": \"package\" }] }}" }' \
 	    ${PACKAGENAME}.dtx >> relnotes.in
 	curl --request POST \
 	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
