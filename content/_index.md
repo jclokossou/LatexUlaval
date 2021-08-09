@@ -15,7 +15,7 @@ avec LaTeX et XeLaTeX.
 ## Auteur
 
 Vincent Goulet, professeur titulaire, [École d'actuariat](https://www.act.ulaval.ca), 
-pour la Faculté des études supérieures de l'[Université Laval](https://ulaval.ca)
+pour la Faculté des études supérieures de l'[Université Laval](https://ulaval.ca).
 
 ## Version
 
