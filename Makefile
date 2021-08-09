@@ -22,17 +22,15 @@
 ## Nom du paquetage sur CTAN
 PACKAGENAME = ulthese
 ARCHIVE = ${PACKAGENAME}.zip
+ARCHIVENOTEX = ${PACKAGENAME}-sans-tex-local.zip
 
 ## Nom du dépôt dans GitLab
 REPOSURL = https://gitlab.com/vigou3/ulthese
 
 ## Liste des fichiers à inclure dans l'archive (outre README.md)
-FILES = \
-	${PACKAGENAME}.ins \
-	${PACKAGENAME}.dtx \
-	${PACKAGENAME}.pdf \
-	ul_p.eps \
-	ul_p.pdf
+SOURCES = ${PACKAGENAME}.ins ${PACKAGENAME}.dtx
+DOC = ${PACKAGENAME}.pdf
+IMAGES = ul_p.eps ul_p.pdf
 
 ## Numéro de version et date de publication extraits du fichier
 ## ulthese.dtx. Le résultat est une chaîne de caractères de la forme
@@ -47,6 +45,10 @@ LATEX = pdflatex
 MAKEINDEX = makeindex
 CP = cp -p
 RM = rm -r
+MD := mkdir -p
+
+## Dossier temporaire pour construire l'archive
+BUILDDIR := builddir
 
 ## Dépôt GitLab et authentification
 REPOSNAME = $(shell basename ${REPOSURL})
@@ -59,30 +61,37 @@ TAGNAME = v$(word 1,${VERSION})
 
 all : class doc
 
-.PHONY: class
-class : ${PACKAGENAME}.dtx
+${PACKAGENAME}.cls: ${PACKAGENAME}.dtx
 	${LATEX} ${PACKAGENAME}.ins
 
-.PHONY: doc
-doc : ${PACKAGENAME}.dtx
+${PACKAGENAME}.pdf: ${PACKAGENAME}.dtx
 	${LATEX} $<
 	${MAKEINDEX} -s gglo.ist -o ${PACKAGENAME}.gls ${PACKAGENAME}.glo
 	${LATEX} $<
+
+.PHONY: class
+class : ${PACKAGENAME}.cls
+
+.PHONY: doc
+doc : ${PACKAGENAME}.pdf
 
 .PHONY: release
 release: zip check-status upload create-release publish
 
 .PHONY: zip
-zip : ${FILES} README.md
-	if [ -d ${PACKAGENAME} ]; then ${RM} ${PACKAGENAME}; fi
-	mkdir ${PACKAGENAME}
-	touch ${PACKAGENAME}/README.md && \
+zip : ${SOURCES} ${DOC} ${IMAGES} README.md
+	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
+	${MD} ${BUILDDIR}
+	touch ${BUILDDIR}/README.md && \
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Author/ { printf("## Version\n\n%s\n\n", "${VERSION}") } \
-	       state' README.md >> ${PACKAGENAME}/README.md
-	${CP} ${FILES} ${PACKAGENAME}
-	zip --filesync -r ${ARCHIVE} ${PACKAGENAME}
-	rm -r ${PACKAGENAME}
+	       state' README.md >> ${BUILDDIR}/README.md
+	${CP} ${SOURCES} ${DOC} ${IMAGES} ${BUILDDIR}
+	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
+	cd ${BUILDDIR} && ${LATEX} ${PACKAGENAME}.ins
+	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVENOTEX} * \
+	  -x ${SOURCES} \*.log
+	rm -r ${BUILDDIR}
 
 .PHONY: check-status
 check-status:
@@ -98,13 +107,18 @@ check-status:
 .PHONY: upload
 upload:
 	@echo ----- Uploading archive to GitLab...
-	$(eval upload_url=$(shell curl --form "file=@${ARCHIVE}" \
-	                                        --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                                        --silent \
-	                                        ${APIURL}/uploads \
-	                                   | awk -F '"' '{ print $$8 }'))
-	@echo url to file:
-	@echo "${upload_url}"
+	$(eval upload_url_dist=$(shell curl --form "file=@${ARCHIVE}" \
+	                                    --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
+	                                    --silent \
+	                               ${APIURL}/uploads \
+	                               | awk -F '"' '{ print $$8 }'))
+	$(eval upload_url_notex=$(shell curl --form "file=@${ARCHIVENOTEX}" \
+	                                     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
+	                                     --silent \
+	                                ${APIURL}/uploads \
+	                                | awk -F '"' '{ print $$8 }'))
+	@echo url to files:
+	@echo "${upload_url_dist}\n${upload_url_notex}"
 	@echo ----- Done uploading files
 
 .PHONY: create-release
@@ -134,8 +148,8 @@ create-release:
 	         } \
 		 printf "- %s\\n", out \
 	     } \
-	     END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url}\" }] }}" }' \
-	     ${PACKAGENAME}.dtx >> relnotes.in
+	     END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url_dist}\" }, { \"name\": \"${ARCHIVENOTEX}\", \"url\": \"${REPOSURL}${upload_url_notex}\" }] }}" }' \
+	    ${PACKAGENAME}.dtx >> relnotes.in
 	curl --request POST \
 	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	     "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master"
