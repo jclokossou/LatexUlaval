@@ -32,13 +32,22 @@ Elle fait partie des distributions
 [MiKTeX](https://miktex.org).
 
 Si vous ne disposez pas de la plus récente version de la classe
-mentionnée ci-dessus, il est fortement recommandé d'utiliser l'assistant de
+mentionnée ci-dessus, il est fortement recommandé d'utiliser
+l'assistant de
 [mise à jour](http://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution)
 de votre distribution pour l'installer.
 
 Autrement, [téléchargez le paquetage](https://ctan.org/pkg/ulthese)
 depuis CTAN et consultez le fichier `README.md` livré avec la classe
 pour les instructions d'installation manuelles.
+
+> Si vous ne disposez pas d'une version de TeX sur votre poste de
+> travail parce que vous utilisez une plateforme de rédaction en
+> ligne comme [Overleaf](https://www.overleaf.com), téléchargez l'archive
+> `ulthese-sans-tex-local.zip` depuis le
+> [dépôt du projet](https://gitlab.com/vigou3/ulthese/-/releases).
+> Celle-ci contient tous les fichiers normalement créés lors
+> de l'installation de la classe.
 
 ## Documentation
 
