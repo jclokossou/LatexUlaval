@@ -78,19 +78,22 @@ doc : ${PACKAGENAME}.pdf
 .PHONY: release
 release: zip check-status upload create-release publish
 
+## CTAN archive should start with a directory $PACKAGENAME
 .PHONY: zip
 zip : ${SOURCES} ${DOC} ${IMAGES} README.md
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
-	${MD} ${BUILDDIR}
+	${MD} ${BUILDDIR}/${PACKAGENAME}
 	touch ${BUILDDIR}/README.md && \
 	  awk 'state==0 && /^# / { state=1 }; \
 	       /^## Author/ { printf("## Version\n\n%s\n\n", "${VERSION}") } \
-	       state' README.md >> ${BUILDDIR}/README.md
-	${CP} ${SOURCES} ${DOC} ${IMAGES} ${BUILDDIR}
-	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVE} *
-	cd ${BUILDDIR} && ${LATEX} ${PACKAGENAME}.ins
-	cd ${BUILDDIR} && zip --filesync -r ../${ARCHIVENOTEX} * \
-	  -x ${SOURCES} \*.log
+	       state' README.md >> ${BUILDDIR}/${PACKAGENAME}/README.md
+	${CP} ${SOURCES} ${DOC} ${IMAGES} ${BUILDDIR}/${PACKAGENAME}
+	cd ${BUILDDIR} && \
+	  zip --filesync -r ../${ARCHIVE} ${PACKAGENAME}
+	cd ${BUILDDIR}/${PACKAGENAME} && \
+	  ${LATEX} ${PACKAGENAME}.ins
+	cd ${BUILDDIR}/${PACKAGENAME} && \
+	  zip --filesync -r ../../${ARCHIVENOTEX} * -x ${SOURCES} \*.log
 	rm -r ${BUILDDIR}
 
 .PHONY: check-status
