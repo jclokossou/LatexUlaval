@@ -1,7 +1,11 @@
 .gitlab {
-  fill: #BABABA;
+    fill: #BABABA;
 }
 
 .gitlab:hover {
-  fill: #fca326;
+    fill: #fca326;
+}
+
+a:any-link {
+    text-decoration: none;
 }
