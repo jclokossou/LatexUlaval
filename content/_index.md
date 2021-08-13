@@ -24,12 +24,9 @@ pour la Faculté des études supérieures de l'[Université Laval](https://ulava
 ## Obtenir et installer la classe
 
 La classe **ulthese** est distribuée sous forme de paquetage dans
-[CTAN](https://ctan.org/pkg/ulthese).
-
-Elle fait partie des distributions 
-[TeX Live](https://tug.org/texlive), 
-[MacTeX](https://tug.org/mactex) et 
-[MiKTeX](https://miktex.org).
+[CTAN](https://ctan.org/pkg/ulthese). Elle fait partie des
+distributions [TeX Live](https://tug.org/texlive),
+[MacTeX](https://tug.org/mactex) et [MiKTeX](https://miktex.org).
 
 Si vous ne disposez pas de la plus récente version de la classe
 mentionnée ci-dessus, il est fortement recommandé d'utiliser
@@ -41,13 +38,13 @@ Autrement, [téléchargez le paquetage](https://ctan.org/pkg/ulthese)
 depuis CTAN et consultez le fichier `README.md` livré avec la classe
 pour les instructions d'installation manuelles.
 
-> Si vous ne disposez pas d'une version de TeX sur votre poste de
-> travail parce que vous utilisez une plateforme de rédaction en
-> ligne comme [Overleaf](https://www.overleaf.com), téléchargez l'archive
-> `ulthese-sans-tex-local.zip` depuis le
-> [dépôt du projet](https://gitlab.com/vigou3/ulthese/-/releases).
-> Celle-ci contient tous les fichiers normalement créés lors
-> de l'installation de la classe.
+**Utilisation avec Overleaf**&nbsp; Si vous ne disposez pas d'une version de TeX sur votre poste de
+travail parce que vous utilisez une plateforme de rédaction en
+ligne comme [Overleaf](https://www.overleaf.com), téléchargez l'archive
+`ulthese-sans-tex-local.zip` depuis le
+[dépôt du projet](https://gitlab.com/vigou3/ulthese/-/releases).
+Celle-ci contient tous les fichiers normalement créés lors
+de l'installation de la classe.
 
 ## Documentation
 
