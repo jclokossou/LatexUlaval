@@ -1,14 +1,14 @@
 title = "Vincent Goulet"
 baseURL = "https://vigou3.gitlab.io/ulthese"
 languageCode = "fr-ca"
-theme = "ananke"
+theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 
 MetaDataFormat = "yaml"
 DefaultContentLanguage = "fr"
 enableRobotsTXT = true
 
 [params]
-  pages_home = "https://vigou3.gitlab.io/"
+  pages_home = "https://vigou3.gitlab.io/fr"
   gitlab = "https://gitlab.com/vigou3"
   repos = "ulthese"
   ctan = "https://ctan.org/pkg"
