@@ -8,14 +8,19 @@ DefaultContentLanguage = "fr"
 enableRobotsTXT = true
 
 [params]
+  ## Links
   pages_home = "https://vigou3.gitlab.io/fr"
   gitlab = "https://gitlab.com/vigou3"
   repos = "ulthese"
   ctan = "https://ctan.org/pkg"
+  version = "5.3a"
   release_notes = "-/releases/"
+
+  ## Look and feel
   custom_css = ["/css/custom.css"]
   background_color_class = "bg-black"
   featured_image = "/images/csm_stade-telus-universite-laval-interieur-credit-peps_570905cc15.jpg"
+  body_classes = "bg-near-white"
 
   ## Google Fonts integration using the implementation of
   ## https://jeremybise.com/google-fonts-in-hugo-themes/
