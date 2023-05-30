@@ -1,6 +1,6 @@
 ### -*-Makefile-*- pour préparer le paquetage ulthese
 ##
-## Copyright (C) 2021 Vincent Goulet
+## Copyright (C) 2017-2023 Vincent Goulet
 ##
 ## 'make class' extrait la classe et les gabarits du fichier dtx.
 ##
@@ -83,8 +83,8 @@ release: zip check-status upload create-release publish
 zip : ${SOURCES} ${DOC} ${IMAGES} README.md
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
 	${MD} ${BUILDDIR}/${PACKAGENAME}
-	touch ${BUILDDIR}/README.md && \
-	  awk 'state==0 && /^# / { state=1 }; \
+	touch ${BUILDDIR}/${PACKAGENAME}/README.md && \
+	  awk '(state == 0) && /^# / { state = 1 }; \
 	       /^## Author/ { printf("## Version\n\n%s\n\n", "${VERSION}") } \
 	       state' README.md >> ${BUILDDIR}/${PACKAGENAME}/README.md
 	${CP} ${SOURCES} ${DOC} ${IMAGES} ${BUILDDIR}/${PACKAGENAME}
