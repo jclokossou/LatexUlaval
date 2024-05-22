@@ -188,37 +188,42 @@
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*}
 % \DoNotIndex{\setlength}
+% \changes{5.4}{2024-05-22}{Prise en compte des règles de présentation
+% entrées en vigueur à l'automne 2023 qui n'exigent plus une
+% bibliographie par chapitre pour les thèses et mémoire par
+% intégration d'articles.}
 % \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
-%   multiples pour les thèses et mémoires par articles.}
+% multiples pour les thèses et mémoires par articles.}
 % \changes{4.4}{2017-05-16}{Documentation révisée, principalement ce
-%   qui touche à la préparation de la bibliographie.}
+% qui touche à la préparation de la bibliographie.}
 % \changes{4.3}{2017-03-01}{Nouvelles options pour les titres de
-%   docteur en musique, maître en architecture, maître en
-%   ergothérapie, maître en physiothérapie et maître en
-%   psychoéducation.}
-% \changes{4.3}{2017-03-01}{Modifications à la composition des sigles de
-%   grades.}
+% docteur en musique, maître en architecture, maître en ergothérapie,
+% maître en physiothérapie et maître en psychoéducation.}
+% \changes{4.3}{2017-03-01}{Modifications à la composition des sigles
+% de grades.}
 % \changes{4.3}{2017-03-01}{Vérification de la compatibilité entre le
-%   grade et les options multifacultaire, cotutelle, bidiplomation et
-%   extension.}
+% grade et les options \texttt{multifacultaire}, \texttt{cotutelle},
+% \texttt{bidiplomation} et \texttt{extension}.}
 % \changes{4.3}{2017-03-01}{Améliorations à la documentation.}
-% \changes{4.2}{2016-03-29}{Ajout de l'option «examen».}
+% \changes{4.2}{2016-03-29}{Ajout de l'option \texttt{examen}.}
 % \changes{4.1}{2016-02-13}{Paquetage geometry déclaré incompatible
-%   avec la classe.}
-% \changes{4.0}{2015-06-12}{Nouvelles règles de présentation matérielle
-%   de la FESP: recto seulement, page frontispice.}
-% \changes{3.1}{2014-05-23}{Prise en charge de la maîtrise en bidiplomation.}
+% avec la classe.}
+% \changes{4.0}{2015-06-12}{Nouvelles règles de présentation
+% matérielle de la FESP: recto seulement, page frontispice.}
+% \changes{3.1}{2014-05-23}{Prise en charge de la maîtrise en
+% bidiplomation.}
 % \changes{3.0a}{2014-03-24}{Modifications et corrections à la
-%   documentation, notamment relativement à la configuration de natbib.}
+% documentation, notamment relativement à la configuration de
+% \textbf{natbib}.}
 % \changes{3.0}{2014-01-06}{Déclaration du grade en option de la
-%   classe.}
-% \changes{3.0}{2014-01-06}{Moteur XeLaTeX supporté.}
-% \changes{3.0}{2014-01-06}{Ajout de l'option nobabel.}
+% classe.}
+% \changes{3.0}{2014-01-06}{Moteur {\XeLaTeX} supporté.}
+% \changes{3.0}{2014-01-06}{Ajout de l'option \texttt{nobabel}.}
 % \changes{2.1}{2013-01-16}{Utilisation transparente de la police
-%   Helvetica pour la page de titre.}
+% Helvetica pour la page de titre.}
 % \changes{2.0}{2013-01-13}{Traitement automatique des longs titres.}
 % \changes{1.0b}{2012-11-11}{Ajouts et corrections mineures dans la
-%   documentation.}
+% documentation.}
 % \changes{1.0a}{2012-10-17}{Précisions dans la documentation.}
 % \changes{1.0}{2012-09-30}{Version initiale.}
 % \GetFileInfo{ulthese.dtx}
@@ -350,8 +355,8 @@
 % {\LaTeX}, pdf{\LaTeX}, {\XeLaTeX} ou un autre moteur {\TeX}.
 %
 % \changes{5.3a}{2021-08-09}{Ajout à la documentation de la
-%   disponibilité d'une archive pour les personnes qui ne disposent
-%   pas d'une installation de {\TeX} locale.}
+% disponibilité d'une archive pour les personnes qui ne disposent pas
+% d'une installation de {\TeX} locale.}
 % \begin{rem}
 %   Si vous ne disposez pas d'une version de {\TeX} sur votre poste de
 %   travail --- vraisemblablement parce que vous utilisez une
@@ -377,7 +382,7 @@
 % classe.
 %
 % \changes{5.0}{2018-04-24}{La classe ne crée plus de page de titre
-%   suite à une nouvelle directive de la FESP.}
+% suite à une nouvelle directive de la FESP.}
 % \begin{rem}
 %   Depuis la version 5.0, la classe ne crée plus de page de titre
 %   par défaut, sa production étant désormais prise en charge par la
@@ -469,10 +474,10 @@
 %   doctorat.
 % \end{DescribeMacro}
 %
-% \changes{5.0}{2018-05-09}{Ajout d'une option «essai» pour les
-%   maîtrises analogue à «examen» pour les doctorats.}
-% \changes{5.2}{2019-05-06}{L'option «essai» n'empêche plus
-%   l'utilisation d'une page frontispice.}
+% \changes{5.0}{2018-05-09}{Ajout d'une option \texttt{essai} pour les
+% maîtrises analogue à \texttt{examen} pour les doctorats.}
+% \changes{5.2}{2019-05-06}{L'option \texttt{essai} n'empêche plus
+% l'utilisation d'une page frontispice.}
 % \begin{DescribeMacro}{essai}
 %   Identifie un essai de maîtrise. Cette option permet d'utiliser la
 %   classe pour la rédaction d'un essai de maîtrise respectant les
@@ -484,8 +489,8 @@
 %   s'avérer tout indiquée.
 % \end{DescribeMacro}
 %
-% \changes{5.2}{2019-05-06}{Ajout d'une option «projet» pour les
-%   cours de projet de recherche.}
+% \changes{5.2}{2019-05-06}{Ajout d'une option \texttt{projet} pour
+% les cours de projet de recherche.}
 % \begin{DescribeMacro}{projet}
 %   Identifie un projet de recherche. Cette option permet d'utiliser
 %   la classe pour la rédaction d'un rapport de projet de recherche
@@ -499,8 +504,8 @@
 %   avec les cette option.
 % \end{DescribeMacro}
 %
-% \changes{5.3}{2019-11-29}{Ajout d'une option «stage» pour les
-%   rapports de stage.}
+% \changes{5.3}{2019-11-29}{Ajout d'une option \texttt{stage} pour les
+% rapports de stage.}
 % \begin{DescribeMacro}{stage}
 %   Identifie un rapport de stage. L'effet de cette option est
 %   identique à celui de l'option |projet| à deux exceptions près:
@@ -514,20 +519,10 @@
 %   n'ont aucun effet sur la taille des polices des pages de titre.
 % \end{DescribeMacro}
 %
-% \changes{4.4}{2017-05-15}{Ajout de l'option bibchapitre.}
-% \changes{4.4}{2017-05-15}{Ajout de l'option bibsection.}
-% \begin{DescribeMacro}{bibchapitre}
-%   \begin{DescribeMacro}{bibsection}
-%     Permettent de composer une bibliographie distincte après chaque
-%     fichier inséré dans le document avec \cmd{\include},
-%     habituellement un chapitre; voir la
-%     \autoref{sec:bibliographie:multiples}. Ces options sont
-%     principalement utiles pour les thèses et mémoires par articles.
-%     La bibliographie se présente sous la forme d'un chapitre non
-%     numéroté avec |bibchapitre|, et sous la forme d'une section
-%     numérotée avec |bibsection|.
-%   \end{DescribeMacro}
-% \end{DescribeMacro}
+% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibchapitre}.}
+% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibsection}.}
+% \changes{5.4}{2024-05-22}{Suppression des options
+% \texttt{bibchapitre} et \texttt{bibsection}.}
 %
 % \begin{DescribeMacro}{nonatbib}
 %   Empêche le chargement du paquetage \pkg{natbib}. La paquetage est
@@ -547,7 +542,7 @@
 %   un document produit avec le moteur {\XeLaTeX}.
 % \end{DescribeMacro}
 %
-% \changes{5.1}{2018-09-30}{Ajout de l'option nohyperref.}
+% \changes{5.1}{2018-09-30}{Ajout de l'option \texttt{nohyperref}.}
 % \begin{DescribeMacro}{nohyperref}
 %   Empêche le chargement du paquetage \pkg{hyperref}. L'interaction
 %   de ce paquetage avec les autres est parfois --- voire souvent ---
@@ -768,10 +763,6 @@
 % \item[\normalfont\pkg{natbib}] \citep{natbib} gestion de la
 %   bibliographie (si l'option |nonatbib| de la classe est absente;
 %   voir aussi la \autoref{sec:bibliographie});
-% \item[\normalfont\pkg{chapterbib}] \citep{chapterbib} gestion de
-%   bibliographies multiples (si l'une ou l'autre des options
-%   |bibchapitre| ou |bibsection| est spécifiée;
-%   voir aussi la \autoref{sec:bibliographie:multiples});
 % \item[\normalfont\pkg{hyperref}] \citep{hyperref} permet de
 %   transformer toutes les références en hyperliens cliquables lorsque
 %   le document est produit avec pdf{\LaTeX} ou {\XeLaTeX} (si
@@ -803,7 +794,9 @@
 %
 % \section{Thèses et mémoires par articles}
 % \changes{5.0}{2018-06-08}{Ajout d'une section spécifique sur les
-%   thèses et mémoires par articles.}
+% thèses et mémoires par articles.}
+% \changes{5.4}{2024-05-22}{La section sur les thèses et mémoire par
+% articles explique maintenant qu'une seule bibliographie est exigée.}
 %
 % La rédaction de la thèse ou du mémoire par articles est une pratique
 % qui gagne en popularité. Elle consiste à remplacer le corps
@@ -813,18 +806,18 @@
 % du mémoire (le cas échéant) y apparaissent sous forme de
 % sections numérotées.
 %
-% L'autre caractéristique qui distingue la thèse et le mémoire par
-% articles des versions standards, c'est la nécessité d'utiliser une
-% bibliographie distincte pour chacun des chapitres. Les options de la
-% classe |bibchapitre| et |bibsection| permettent de réaliser cette
-% mise en forme particulière. La \autoref{sec:bibliographie:multiples}
-% explique comment en tirer profit.
-%
 % Des gabarits de document maître et de chapitre fournissent la
 % structure de base pour la thèse et le mémoire par articles. Vous
 % pouvez, au besoin, combiner les caractéristiques de ces gabarits à
 % celles de la thèse en cotutelle ou du mémoire en bidiplomation. La
 % \autoref{sec:gabarits} fournit les détails sur les gabarits.
+%
+% \begin{rem}
+%   À l'automne~2023, la FESP a retiré l'exigence de produire une
+%   bibliographie par chapitre pour les thèses et mémoires par
+%   articles. La thèse ou le mémoire doit désormais contenir une seule
+%   bibliographie regroupant l’ensemble des références du document.
+% \end{rem}
 %
 % \section{Français et autres langues}
 % \label{sec:langues}
@@ -870,7 +863,7 @@
 % \link{https://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
 % documents spécifiques par langue}.
 % \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
-%   de babel.}
+% de \textbf{babel}.}
 %
 % \begin{DescribeMacro}{\nombre}
 %   Le paquetage \pkg{numprint} étant chargé dans la classe avec
@@ -889,6 +882,8 @@
 %
 % \section{Bibliographie}
 % \label{sec:bibliographie}
+% \changes{5.4}{2024-05-22}{Suppression de la section sur les
+% bibliographies multiples.}
 %
 % \begin{DescribeMacro}{\bibliography}
 %   Tel qu'expliqué au chapitre~8 de \citet{formation-latex-ul},
@@ -938,42 +933,6 @@
 % Consultez la %
 % \doc{http://texdoc.net/pkg/natbib/} %
 % de \pkg{natbib} pour les détails.
-%
-% \subsection{Bibliographies multiples}
-% \label{sec:bibliographie:multiples}
-%
-% L'ajout de |bibchapitre| ou de |bibsection| dans les options de la
-% classe permet de générer une bibliographie distincte pour chaque
-% chapitre, une chose particulièrement utile pour les thèses et
-% mémoire par articles.
-%
-% La classe fait appel au paquetage \pkg{chapterbib}
-% \citep{chapterbib} pour composer des bibliographies multiples. La
-% \doc{http://texdoc.net/pkg/chapterbib/} du paquetage
-% explique la procédure à suivre pour obtenir une bibliographie par
-% chapitre avec {\BibTeX}. En résumé:
-% \begin{enumerate}
-% \item chaque chapitre comportant sa propre bibliographie doit
-%   absolument être inséré dans le document principal avec la commande
-%   \cmd{\include} \citep[section~3.5]{formation-latex-ul};
-% \item chaque fichier visé doit contenir une commande
-%   \cmd{\bibliographystyle} (\autoref{sec:bibliographie:style}) et
-%   une commande \cmd{\bibliography};
-% \item on obtient les diverses bibliographies en compilant avec
-%   {\BibTeX} les fichiers individuels, et non le document maître.
-% \end{enumerate}
-%
-% La plupart des auteurs préféreront sans doute l'effet de l'option
-% |bibsection|, où la bibliographie apparait comme une section normale
-% à la fin d'un chapitre. Lorsque \pkg{babel} est chargé, la section
-% sera numérotée. Pour supprimer la numérotation, insérer dans le
-% préambule du document la commande
-% \begin{quote}
-%   |\addto\extras|\meta{langue}|{\renewcommand{\bibsection}{%| \\
-%   |  \section*{\bibname}\prebibhook}}|
-% \end{quote}
-% où \meta{langue} est la langue par défaut du document
-% (\autoref{sec:langues}).
 %
 % \subsection{Style de la bibliographie}
 % \label{sec:bibliographie:style}
@@ -1293,7 +1252,7 @@
 %
 % \section{Commentaires, suggestions et aide}
 % \changes{5.0}{2018-08-09}{Code source du projet déplacé de GitHub
-%   vers GitLab.}
+% vers GitLab.}
 %
 % Le \link{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
 % GitLab demeure le meilleur endroit pour rapporter des bogues ou pour
@@ -1316,12 +1275,6 @@
 % \StopEventually{
 %   \begin{thebibliography}{15}
 %     \addcontentsline{toc}{section}{Références}
-%   \bibitem[{Arseneau(2010)}]{chapterbib}
-%     Arseneau, D. 2010,
-%     {\selectlanguage{english}\emph{chapterbib. Multiple
-%     bibliographies in {\LaTeX}}}.
-%     URL~\url{https://www.ctan.org/pkg/chapterbib/}.
-%
 %   \bibitem[{Braams et Bezos(2016)}]{babel}
 %     Braams, J. et J.~Bezos. 2016,
 %     {\selectlanguage{english}\emph{Babel}}.
@@ -1542,10 +1495,11 @@
 % explorer comment la classe est programmée.
 %
 % \subsection{Tests et valeurs booléennes}
-% \changes{4.4}{2017-06-01}{Tests et valeurs booléennes réalisés sans ifthen.}
+% \changes{4.4}{2017-06-01}{Tests et valeurs booléennes réalisés sans
+% \textbf{ifthen}.}
 %
 % Le paquetage \pkg{ifxetex} permet de tester si un document est
-% compilé avec \XeTeX.
+% compilé avec {\XeTeX}.
 %    \begin{macrocode}
 %<*class>
 \RequirePackage{ifxetex}
@@ -1556,8 +1510,6 @@
 \newif\ifUL@babel        \UL@babeltrue         % charger babel?
 \newif\ifUL@natbib       \UL@natbibtrue        % charger natbib?
 \newif\ifUL@hyperref     \UL@hyperreftrue      % charger hyperref?
-\newif\ifUL@chapterbib   \UL@chapterbibfalse   % charger chapterbib?
-\newif\ifUL@sectionbib   \UL@sectionbibfalse   % option sectionbib de chapterbib?
 \newif\ifUL@isthesis                           % programme est une thèse?
 \newif\ifUL@iscotutelle  \UL@iscotutellefalse  % thèse en cotutelle?
 \newif\ifUL@isexam       \UL@isexamfalse       % examen de doctorat?
@@ -1586,21 +1538,6 @@
 %    \begin{macrocode}
 \DeclareOption{nonatbib}{\UL@natbibfalse}
 %    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{bibchapitre}
-%   \begin{macro}{bibsection}
-%     L'option |bibchapitre| entraine le chargement du paquetage
-%     \pkg{chapterbib} qui permet de composer des bibliographies
-%     multiples dans un document, habituellement une par
-%     chapitre. Avec l'option |bibsection|, la bibliographie se
-%     présente sous la forme d'une section plutôt que d'un chapitre.
-%     La seconde option implique la première.
-%    \begin{macrocode}
-\DeclareOption{bibchapitre}{\UL@chapterbibtrue}
-\DeclareOption{bibsection}{\UL@chapterbibtrue\UL@sectionbibtrue}
-%    \end{macrocode}
-%   \end{macro}
 % \end{macro}
 %
 % \begin{macro}{nobabel}
@@ -1859,11 +1796,11 @@
 %    \end{macrocode}
 %
 % \subsection{Paquetages requis}
-% \changes{5.0}{2018-06-10}{Le paquetage unicode-math n'est plus
-%   chargé par défaut par la classe.}
-% \changes{5.0}{2018-08-11}{Le paquetage hyperref est désormais chargé
-%   dans la classe plutôt que dans les gabarits. Requiert le paquetage
-%   etoolbox.}
+% \changes{5.0}{2018-06-10}{Le paquetage \textbf{unicode-math} n'est
+% plus chargé par défaut par la classe.}
+% \changes{5.0}{2018-08-11}{Le paquetage \textbf{hyperref} est
+% désormais chargé dans la classe plutôt que dans les gabarits.
+% Requiert le paquetage etoolbox.}
 %
 % La classe s'efforce de charger un minimum de paquetages afin d'éviter
 % les conflits potentiels.
@@ -1880,25 +1817,11 @@
 \fi
 %    \end{macrocode}
 %
-% Les paquetages \pkg{natbib} et \pkg{chapterbib} doivent être chargés
-% avant \pkg{babel} pour bien fonctionner, le cas échéant. Tel que
-% précisé dans la documentation de \pkg{natbib}, l'option |sectionbib|
-% est passée à ce paquetage lorsqu'il est chargé, ou à
-% \pkg{chapterbib} autrement.
+% Le paquetage \pkg{natbib} doit être chargé avant \pkg{babel} pour
+% bien fonctionner, le cas échéant.
 %    \begin{macrocode}
 \ifUL@natbib
-  \ifUL@sectionbib
-    \PassOptionsToPackage{sectionbib}{natbib}
-  \fi
   \RequirePackage[round,semicolon,authoryear]{natbib}
-\fi
-\ifUL@chapterbib
-  \ifUL@sectionbib
-     \ifUL@natbib\else
-       \PassOptionsToPackage{sectionbib}{chapterbib}
-     \fi
-  \fi
-  \RequirePackage{chapterbib}
 \fi
 %    \end{macrocode}
 %
@@ -2512,17 +2435,19 @@
 % ^^A Il faut placer ces notes de changement relatives aux gabarits
 % ^^A avant \Finale
 % \changes{5.0}{2018-06-08}{Gabarits: meilleure indication du texte à
-%   remplacer.}
+% remplacer.}
 % \changes{5.0}{2018-06-08}{Gabarits: bonification de la structure
-%   d'un chapitre de thèse ou de mémoire par articles.}
+% d'un chapitre de thèse ou de mémoire par articles.}
 % \changes{5.0}{2018-04-25}{Gabarits: ajout d'étiquettes et de renvois
-%   dans les gabarits des parties du document.}
+% dans les gabarits des parties du document.}
 % \changes{5.0}{2018-04-25}{Gabarits: automatisation de l'ajout
-%   d'entrées dans la table des matières à l'aide d'étiquettes et de
-%   renvois.}
+% d'entrées dans la table des matières à l'aide d'étiquettes et de
+% renvois.}
 % \changes{4.4}{2017-05-16}{Gabarits: nouveau gabarit pour une thèse
-%   par articles.}
+% par articles.}
 % \changes{4.2}{2016-03-29}{Gabarits: nouvelles options de babel.}
+% \changes{5.4}{2024-05-22}{Gabarits: gabarits pour une thèse par
+% articles révisés suites aux changements aux règles de présentation.}
 %
 % \Finale
 %
@@ -2552,15 +2477,10 @@
 %<m>%%   [l'un de MATDR, MArch, MA, LLM, MErg, MMus, MPht, MSc, MScGeogr,
 %<m>%%    MServSoc, MPsEd]
 %% et les langues les plus courantes. Le français sera la langue par
-%<!articles>%% défaut du document.
-%<articles>%% défaut du document. L'option 'bibsection' permet de créer des
-%<articles>%% bibliographies par chapitre présentées sous forme de section
-%<articles>%% numérotée.
+%% défaut du document.
 %<phd&standard>\documentclass[PhD,english,french]{ulthese}
-%<phd&articles>\documentclass[PhD,bibsection,english,french]{ulthese}
 %<phd&cotutelle>\documentclass[PhD,cotutelle,english,french]{ulthese}
 %<m&standard>\documentclass[MSc,english,french]{ulthese}
-%<m&articles>\documentclass[MSc,bibsection,english,french]{ulthese}
 %<m&bidiplomation>\documentclass[MA,bidiplomation,english,french]{ulthese}
   %% Encodage utilisé pour les caractères accentués dans les fichiers
   %% source du document. Les gabarits sont encodés en UTF-8. Inutile
@@ -2592,13 +2512,8 @@
     og=«, fg=»                     % caractères « et » sont les guillemets
   }
 
-%<!articles>  %% Style de la bibliographie.
-%<!articles> \bibliographystyle{}
-%<articles>  %% Suppression du numéro de section de la bibliographie. Utilisation
-%<articles>  %% de \extrasfrench parce que c'est la dernière langue déclarée dans
-%<articles>  %% \documentclass, ci-dessus.
-%<articles>  %\addto\extrasfrench{%
-%<articles>  %  \renewcommand{\bibsection}{\section*{\bibname}\prebibhook}}
+  %% Style de la bibliographie.
+  \bibliographystyle{}
 
   %% Composition de la page frontispice. Remplacer les éléments entre < >.
   %% Supprimer les caractères < >. Couper un long titre ou un long
@@ -2670,8 +2585,7 @@
 
 \include{annexe}                % annexe A
 
-%<!articles>\bibliography{}                 % production de la bibliographie
-%<!articles>
+\bibliography{}                 % production de la bibliographie
 \end{document}
 %</gabarit>
 %
@@ -2709,8 +2623,8 @@
 \label{chap-avantpropos}        % étiquette pour renvois
 \phantomsection\addcontentsline{toc}{chapter}{\nameref{chap-avantpropos}} % inclure dans TdM
 
-<Texte de l'avant-propos. Obligatoire dans une thèse ou un mémoire par
-articles.>
+<Texte de l'avant-propos. Obligatoire seulement pour une thèse ou un
+mémoire par intégration d'articles.>
 %</avantpropos>
 %
 %<*introduction>
@@ -2741,8 +2655,6 @@ normal, sauf qu'elle n'est pas numérotée.>
 %<articles>
 <Texte du chapitre ou de l'article.>
 %<articles>
-%<articles>\bibliographystyle{}              % style de la bibliographie
-%<articles>\bibliography{}                   % production de la bibliographie
 %</chapitre>
 %
 %<*conclusion>
