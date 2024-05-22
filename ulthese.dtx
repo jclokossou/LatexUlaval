@@ -1,6 +1,8 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2021 Universite Laval
+% Thesis class and templates for Université Laval
+%
+% Copyright (C) 2012-2024 Universite Laval
 %
 % This file may be distributed and/or modified under the conditions
 % of the LaTeX Project Public License, either version 1.3c of this
@@ -8,9 +10,6 @@
 % of this license is in:
 %
 %   http://www.latex-project.org/lppl.txt
-%
-% and version 1.3c or later is part of all distributions of LaTeX
-% version 2006/05/20 or later.
 %
 % This work has the LPPL maintenance status `maintained'.
 %
@@ -29,82 +28,155 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2021/08/09 v5.3a Universite Laval thesis and memoir class]
+  [2024/05/22 v5.4 Thesis class for Université Laval]
 %</class>
 %<*driver>
-\documentclass[11pt,english,french]{ltxdoc}
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage{natbib}
+\documentclass[article,oneside,11pt,x11names,french]{memoir}
   \usepackage{babel}
-  \usepackage[autolanguage]{numprint}
-  \usepackage{microtype}
-  \usepackage[scaled=0.92]{helvet}
-  \usepackage[scaled=1.02]{inconsolata}
-  \usepackage[sc]{mathpazo}
-  \usepackage{fontawesome}
+  \usepackage[round,semicolon,authoryear,sectionbib]{natbib}
   \usepackage{metalogo}
-  \usepackage{tabularx,booktabs,caption}
+  \usepackage{enumitem}
+  \usepackage{relsize}
+  \usepackage{fontawesome5}
+
+  %% Le chargement de doc.sty cause des conflits avec memoir. Il faut:
+  %%
+  %% - annuler la définition de l'environnement 'glossary' de memoir;
+  %% - remettre en place les définitions standards des commandes pour
+  %%   le glossaire sur lesquelles se base doc.sty (nécessaire aussi
+  %%   pour l'index, mais il n'est pas utilisé).
+  \let\theglossary\relax        % avoid conflict with doc.sty
+  \let\endtheglossary\relax     % avoid conflict with doc.sty
+  \makeatletter
+  \def\makeglossary{%
+    \newwrite\@glossaryfile
+    \immediate\openout\@glossaryfile=\jobname.glo
+    \def\glossary{\@bsphack\begingroup
+                  \@sanitize
+                  \@wrglossary}\typeout
+      {Writing glossary file \jobname.glo }%
+    \let\makeglossary\@empty
+  }
+  \@onlypreamble\makeglossary
+  \def\@wrglossary#1{%
+     \protected@write\@glossaryfile{}%
+        {\string\glossaryentry{#1}{\thepage}}%
+   \endgroup
+   \@esphack}
+  \def\glossary{\@bsphack\begingroup\@sanitize\@index}
+  \@twosidefalse\@mparswitchfalse % turn off twoside option
+  \makeatother
+  \usepackage{doc}
+  \def\changes#1#2#3{\glossary{#1>#3}} % simplification
   \DisableCrossrefs
   \CodelineNumbered
   \RecordChanges
-  \GlossaryPrologue{\section*{Historique des versions}%
-    \addcontentsline{toc}{section}{Historique des versions}}
+  \OnlyDescription
+  \DontCheckModules
+
+  %% Polices de caractères
+  \iftutex
+    \usepackage[babel=true]{microtype}
+    \usepackage{fontspec}
+    \usepackage{unicode-math}
+    \setmainfont{STIXTwoText}
+    [
+      Extension = .otf,
+      UprightFont = *-Regular,
+      BoldFont = *-SemiBold,
+      ItalicFont = *-Italic,
+      BoldItalicFont = *-SemiBoldItalic,
+      Numbers = {Proportional,OldStyle},
+      Scale = 1,
+      Ligatures = TeX
+    ]
+    \setsecheadstyle{\normalfont\Large\sffamily\bfseries\raggedright}
+    \setsubsecheadstyle{\normalfont\large\sffamily\bfseries\raggedright}
+    \setsubsubsecheadstyle{\normalfont\sffamily\bfseries\raggedright}
+  \else
+    \usepackage[babel=true]{microtype}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage[stix2]{newtxmath}
+  \fi
+  \usepackage[book,medium,proportional,oldstyle,scale=0.92]{FiraSans}
+  \usepackage[medium,lining,scale=0.90]{FiraMono}
 
   %% Couleurs
   \usepackage{xcolor}
-  \definecolor{link}{rgb}{0,0.4,0.6}   % ~RoyalBlue de dvips
-  \definecolor{url}{rgb}{0.6,0,0}      % rouge foncé
-  \definecolor{citation}{rgb}{0,0.5,0} % vert foncé
-
-  %% Liste description alignée à gauche
-  \usepackage{enumitem}
-  \setlist[description]{leftmargin=*,align=left}
-
-  %% Environnement pour remarques
-  \usepackage{amsthm}
-  \theoremstyle{definition}
-  \newtheorem*{rem}{Remarque}
+  \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
+  \definecolor{url}{rgb}{0.6,0,0}           % liens externes
+  \definecolor{citation}{rgb}{0,0.5,0}      % citations
 
   %% Hyperliens
-  \usepackage{hyperref}
-  \hypersetup{%
-    pdfauthor = {Faculté des études supérieures et postdoctorales},
-    pdftitle = {Guide de l'utilisateur de la classe ulthese},
-    colorlinks = {true},
-    linktocpage = {true},
-    urlcolor = {url},
-    linkcolor = {link},
-    citecolor = {citation},
-    pdfpagemode = {UseOutlines},
-    pdfstartview = {Fit},
-    bookmarksopen = {true},
-    bookmarksnumbered = {true},
-    bookmarksdepth = {subsubsection}}
+  \AtEndPreamble{%
+    \usepackage{bookmark}       % charge hyperref
+    \hypersetup{%
+      pdftitle = {Guide d'utilisation de la classe ulthese},
+      pdfauthor = {Faculté des études supérieures et postdoctorales},
+      colorlinks = {true},
+      urlcolor = {url},
+      linkcolor = {link},
+      citecolor = {citation}}
+    \bookmarksetup{%
+      open = true,
+      depth = 3,
+      numbered = true}
+  }
+
+  %% Paramétrage de babel
+  \frenchbsetup{%
+    SmallCapsFigTabCaptions=false, % pas de petites capitales
+    ThinSpaceInFrenchNumbers=true, % espace fine dans les nombres
+    og=«, fg=»                     % « et » sont les guillemets
+  }
   \addto\extrasfrench{%
     \def\appendixautorefname{annexe}%
     \def\tableautorefname{tableau}%
     \def\subsectionautorefname{section}%
   }
+  \renewcommand*\frenchtablename{Tableau}
+  \renewcommand*\generalname{Général} % mot clé du glossaire
 
-  %% Paramétrage de babel
-  \frenchbsetup{%
-    StandardItemizeEnv=true,       % listes standards
-    ThinSpaceInFrenchNumbers=true, % espace fine dans les nombres
-    og=«, fg=»                     % « et » sont les guillemets
-  }
-  \def\frenchtablename{{\scshape Tab.}}
+  %% Désactiver le niveau des chapitres de memoir
+  \let\chapter\relax
+  \counterwithout{section}{chapter}
 
-  %% Commandes de mise en forme spéciales
-  \newcommand{\class}[1]{\textsf{#1}}
-  \newcommand{\pkg}[1]{\textbf{#1}}
+  %% Aligner à gauche l'environnement description
+  \setlist[description]{leftmargin=*,align=left}
+
+  %% Environnement pour remarques
+  \usepackage{amsthm}
+  \theoremstyle{remark}
+  \newtheorem{rem}{Remarque}
+
+  %% Configurer le glossaire
+  \addto\extrasfrench{%
+    \def\glossaryname{Historique des versions}}
+  \GlossaryPrologue{\section*{\glossaryname}%
+    \addcontentsline{toc}{section}{\glossaryname}}
+  \setcounter{GlossaryColumns}{2}
+  \setlength{\GlossaryMin}{5cm}
+
+  %% Commandes sémantiques additionnelles
+  \let\class\textsf
+  \let\pkg\textbf
+  \newcommand*\ulthesename{ulthese}
+  \newcommand*\ulth{\class{\ulthesename}}
+  \newcommand*\btx{\textsc{Bib}\TeX}
+
+  %% Redéfinir \year pour utiliser l'information de \filedate plutôt
+  %% que la date de compilation
+  \def\parsedate#1/#2/#3\relax{\def\year{#1}}
+
+  %% Convertir la date en format ISO
+  \def\isodate#1/#2/#3\relax{#1-#2-#3}
+
+  \MakeShortVerb{\|}
 
   %% Commandes pour les liens vers la documentation
-  \newcommand{\link}[2]{\href{#1}{#2~\raisebox{-0.2ex}{\faExternalLink}}}
+  \newcommand{\link}[2]{\href{#1}{#2~{\smaller\faExternalLink*}}}
   \newcommand{\doc}[2][documentation]{\link{#2}{#1}}
-
-  %% Francisation d'un mot clé de l'historique des commandes
-  \def\generalname{Général}
 
 \begin{document}
   \DocInput{ulthese.dtx}
@@ -150,20 +222,20 @@
 % \changes{1.0a}{2012-10-17}{Précisions dans la documentation.}
 % \changes{1.0}{2012-09-30}{Version initiale.}
 % \GetFileInfo{ulthese.dtx}
-% \title{\class{ulthese}: la classe pour les thèses et mémoires de
-%   l'Université Laval\thanks{Ce document décrit la classe
-%   \class{ulthese}~\fileversion, datée du \filedate.}}
+%
+% \title{Guide d'utilisation de la classe {\ulth} pour les thèses et
+%   mémoires de l'Université Laval}
 % \author{Faculté des études supérieures et postdoctorales\thanks{%
 %   Cette classe et sa documentation ont été rédigées par Vincent
 %   Goulet~(Faculté des sciences et de génie) avec la collaboration de
 %   Koassi D'Almeida~(Faculté des études supérieures et postdoctorales) et
 %   de Pierre Lasou~(Bibliothèque).}}
-% \date{}
+% \date{Version {\fileversion} du {\expandafter\isodate\filedate\relax}}
 % \maketitle
 %
 % \section{Introduction}
 %
-% La classe \class{ulthese} permet de composer avec {\LaTeX} ou
+% La classe {\ulth} permet de composer avec {\LaTeX} ou
 % {\XeLaTeX} des thèses et mémoires immédiatement conformes aux règles
 % générales de présentation matérielle de la Faculté des études
 % supérieures et postdoctorales (FESP) de l'Université Laval. Ces
@@ -171,16 +243,16 @@
 % des thèses et mémoires ainsi que la disposition du texte sur la
 % page. La classe en elle-même est donc relativement simple.
 %
-% Cependant, \class{ulthese} est basée sur la classe \class{memoir}
+% Cependant, {\ulth} est basée sur la classe \class{memoir}
 % \citep{memoir}, une extension de la classe standard \class{book}
 % facilitant à plusieurs égards la préparation de documents d'allure
 % professionnelle dans {\LaTeX}. La classe \class{memoir} incorpore
 % d'office plus de 30 des paquetages les plus populaires\footnote{%
 % Consulter la section~18.24 de la documentation de \class{memoir}
 % pour la liste ou encore le journal de la compilation (\emph{log})
-% d'un document utilisant la classe \class{ulthese}.}. %
+% d'un document utilisant la classe {\ulth}.}. %
 % L'intégralité des fonctionnalités de \class{memoir} se retrouve donc
-% dans \class{ulthese}.
+% dans {\ulth}.
 %
 % La classe \class{memoir} fait partie des distributions {\LaTeX}
 % modernes; elle devrait donc être installée et disponible sur votre
@@ -194,7 +266,7 @@
 % \doc[Rédaction avec {\LaTeX}]{http://texdoc.net/pkg/formation-latex-ul} ^^A
 % \citep{formation-latex-ul}, la formation {\LaTeX} de l'Université Laval.
 % Vous y trouverez des informations additionnelles sur l'utilisation des
-% classes \class{ulthese} et \class{memoir}.
+% classes {\ulth} et \class{memoir}.
 %
 % \section{Démarrage rapide (pour les impatients)}
 % \label{sec:utilisation:rapide}
@@ -204,7 +276,7 @@
 % qu'elle est à jour\footnote{%
 %   Validez à l'aide de l'assistant de mise à jour de votre
 %   distribution.}, %
-% vous devriez pouvoir utiliser \class{ulthese} sans autre
+% vous devriez pouvoir utiliser {\ulth} sans autre
 % intervention.
 %
 % Il est recommandé de segmenter tout document d'une certaine ampleur
@@ -214,7 +286,7 @@
 % {\LaTeX} et un ensemble de commandes \cmd{\include} pour réunir les
 % parties dans un tout.
 %
-% La classe \class{ulthese} est livrée avec un ensemble de gabarits sur
+% La classe {\ulth} est livrée avec un ensemble de gabarits sur
 % lesquels se baser pour:
 % \begin{itemize}
 % \item le document maître de divers types de thèses et de mémoires
@@ -250,7 +322,7 @@
 %
 % \section{Installation}
 %
-% Cette section explique comment installer la classe \class{ulthese}
+% Cette section explique comment installer la classe {\ulth}
 % si elle n'est pas disponible sur votre système ou si la version
 % n'est pas à jour.
 %
@@ -505,14 +577,14 @@
 % \subsection{Commandes de la classe}
 % \label{sec:utilisation:commandes}
 %
-% La classe \class{ulthese} définit quelques nouvelles commandes
+% La classe {\ulth} définit quelques nouvelles commandes
 % servant principalement à créer la page frontispice et des éléments
 % des pages liminaires. Le sommaire des commandes se trouve dans le
 % \autoref{tab:commandes} et les descriptions détaillées, ci-dessous.
 %
 % \begin{table}[t]
 %   \centering
-%   \caption{Sommaire des commandes de la classe \class{ulthese}.
+%   \caption{Sommaire des commandes de la classe {\ulth}.
 %     Celles marquées d'une étoile $^\star$ sont obligatoires.}
 %   \label{tab:commandes}
 %   \begin{tabularx}{\linewidth}{lX}
@@ -680,7 +752,7 @@
 % \subsection{Autres paquetages chargés}
 % \label{sec:paquetages}
 %
-% Outre \class{memoir}, la classe \class{ulthese} charge quelques
+% Outre \class{memoir}, la classe {\ulth} charge quelques
 % paquetages qui peuvent aussi vous être utiles. Il n'est donc pas
 % nécessaire de charger de nouveau les paquetages suivants:
 % \begin{description}
@@ -763,7 +835,7 @@
 % La solution standard à ce problème provient du paquetage
 % \pkg{babel}. Celui-ci permet de combiner plusieurs langues dans un
 % même document et de passer de l'une à l'autre facilement. Il est
-% chargé par défaut par la classe \class{ulthese}.
+% chargé par défaut par la classe {\ulth}.
 %
 % Aucune langue n'est spécifiée dans la classe. Vous aurez sans doute
 % recours à l'anglais et au français, ne serait-ce que pour les deux
@@ -831,7 +903,7 @@
 % \subsection{Mise en forme des citations}
 % \label{sec:bibliographie:options}
 %
-% Dans la classe \class{ulthese}, la mise en forme des citations est
+% Dans la classe {\ulth}, la mise en forme des citations est
 % confiée au paquetage \pkg{natbib} (à moins que l'option |nonatbib|
 % ne soit spécifiée). Le paquetage est chargé avec les options par
 % défaut, soit |round|, |semicolon| et |authoryear|. Pour spécifier
@@ -944,7 +1016,7 @@
 % police de caractères par défaut, {\fontfamily{cmr}\selectfont
 % Computer Modern}. Avec toute distribution {\LaTeX} moderne, il est
 % maintenant simple d'utiliser l'une ou l'autre des polices PostScript
-% standards. D'ailleurs la classe \class{ulthese} utilise la police
+% standards. D'ailleurs la classe {\ulth} utilise la police
 % sans empattements \textsf{Helvetica} pour composer les pages de
 % titre.
 %
@@ -957,7 +1029,7 @@
 % \label{sec:gabarits}
 %
 % Afin de vous épauler dans la préparation de votre manuscrit, la
-% classe \class{ulthese} est livrée avec un ensemble de gabarits. Tout
+% classe {\ulth} est livrée avec un ensemble de gabarits. Tout
 % d'abord, pour le document maître de différents types de thèses et de
 % mémoires:
 % \begin{itemize}[noitemsep]
@@ -1060,7 +1132,7 @@
 % équivalents Pagella et Termes du projet
 % \link{https://www.gust.org.pl/projects/e-foundry/tex-gyre/}{TeX~Gyre}.
 %
-% \subsection{Options de \pkg{babel}}
+% \subsection{Options de \texorpdfstring{protect\pkg{babel}}{babel}}
 %
 % \begin{DescribeMacro}{\frenchbsetup}
 %   La commande \cmd{\frenchbsetup} de \pkg{babel} permet de contrôler
@@ -1069,7 +1141,7 @@
 %   liste des options de configuration disponibles.
 % \end{DescribeMacro}
 %
-% Les concepteurs de la classe \class{ulthese}  proposent trois
+% Les concepteurs de la classe {\ulth}  proposent trois
 % ajustements dans les gabarits:
 % \begin{enumerate}
 % \item l'option |StandardItemizeEnv=true| évite que le mode français de
@@ -1225,7 +1297,7 @@
 %
 % Le \link{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
 % GitLab demeure le meilleur endroit pour rapporter des bogues ou pour
-% proposer des améliorations à la classe \class{ulthese}.
+% proposer des améliorations à la classe {\ulth}.
 %
 % Pour obtenir de l'aide additionnelle sur l'utilisation de la classe
 % --- et non sur celle de {\LaTeX} en général --- consultez d'abord:
