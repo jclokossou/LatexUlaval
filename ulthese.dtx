@@ -37,7 +37,7 @@
   \usepackage{metalogo}
   \usepackage{enumitem}
   \usepackage{relsize}
-  \usepackage{fontawesome5}
+  \usepackage{awesomebox}
 
   %% Le chargement de doc.sty cause des conflits avec memoir. Il faut:
   %%
@@ -135,12 +135,17 @@
     \def\tableautorefname{tableau}%
     \def\subsectionautorefname{section}%
   }
-  \renewcommand*\frenchtablename{Tableau}
+  \renewcommand*\frenchtablename{Tab.}
+  \renewcommand*\frenchfigurename{Fig.}
   \renewcommand*\generalname{Général} % mot clé du glossaire
 
   %% Désactiver le niveau des chapitres de memoir
   \let\chapter\relax
   \counterwithout{section}{chapter}
+
+  %% Utiliser une numérotation des sections à trois niveaux
+  \setsecnumdepth{subsubsection}
+  \maxsecnumdepth{subsubsection}
 
   %% Aligner à gauche l'environnement description
   \setlist[description]{leftmargin=*,align=left}
@@ -158,11 +163,19 @@
   \setcounter{GlossaryColumns}{2}
   \setlength{\GlossaryMin}{5cm}
 
+  %% Nouvel environnement de type \DescribeMacro pour les options de
+  %% la classe
+  \NewDocElement[envlike,notoplevel,printtype=\emph{option}]{Option}{option}
+
   %% Commandes sémantiques additionnelles
   \let\class\textsf
   \let\pkg\textbf
+  \makeatletter
+  \renewcommand\code{\bgroup\@makeother\_\@makeother\~\@makeother\$\code@}
+  \def\code@#1{{\normalfont\ttfamily\hyphenchar\font=-1 #1}\egroup}
+  \makeatother
   \newcommand*\ulthesename{ulthese}
-  \newcommand*\ulth{\class{\ulthesename}}
+  \newcommand*\ulclass{\class{\ulthesename}}
   \newcommand*\btx{\textsc{Bib}\TeX}
 
   %% Redéfinir \year pour utiliser l'information de \filedate plutôt
@@ -228,7 +241,7 @@
 % \changes{1.0}{2012-09-30}{Version initiale.}
 % \GetFileInfo{ulthese.dtx}
 %
-% \title{Guide d'utilisation de la classe {\ulth} pour les thèses et
+% \title{Guide d'utilisation de la classe {\ulclass} pour les thèses et
 %   mémoires de l'Université Laval}
 % \author{Faculté des études supérieures et postdoctorales\thanks{%
 %   Cette classe et sa documentation ont été rédigées par Vincent
@@ -240,59 +253,142 @@
 %
 % \section{Introduction}
 %
-% La classe {\ulth} permet de composer avec {\LaTeX} ou
-% {\XeLaTeX} des thèses et mémoires immédiatement conformes aux règles
-% générales de présentation matérielle de la Faculté des études
+% La classe {\ulclass} permet de composer des thèses et mémoires
+% immédiatement conformes aux règles générales et complémentaires de
+% présentation du mémore ou de la thèses de la Faculté des études
 % supérieures et postdoctorales (FESP) de l'Université Laval. Ces
 % règles définissent principalement la présentation des pages de titre
 % des thèses et mémoires ainsi que la disposition du texte sur la
-% page. La classe en elle-même est donc relativement simple.
+% page.
 %
-% Cependant, {\ulth} est basée sur la classe \class{memoir}
+% La composition d'un manuscript avec la classe {\ulclass} requiert une
+% distribution {\TeX} récente et à jour. Nous recommandons les
+% distributions %
+% \link{https://tug.org/texlive}{{\TeX}~Live} %
+% --- %
+% ou sa variante pour macOS %
+% \link{https://tug.org/mactex}{Mac{\TeX}} %
+% --- %
+% et %
+% \link{https://miktex.org}{MiK{\TeX}}. %
+% Vous pouvez également avoir recours à une plateforme de rédaction en
+% ligne comme %
+% \link{https://overleaf.com}{Overleaf}; %
+% leurs distributions {\TeX} satisfont généralement les conditions
+% ci-dessus.
+%
+% La classe {\ulclass} fait partie des distributions {\TeX} standards via
+% le paquetage \pkg{ulthese}. Dans la mesure où votre distribution est
+% à jour, vous devriez pouvoir l'utiliser sans autre intervention.
+%
+% Le compagnon naturel de la présente documentation est
+% \doc[Rédaction avec {\LaTeX}]{http://texdoc.net/pkg/formation-latex-ul} %
+% \citep{formation-latex-ul}, la formation {\LaTeX} de l'Université Laval.
+% Vous y trouverez sans doute une foule d'informations utiles pour la
+% préparation de votre thèse ou de votre mémoire.
+%
+% \section{Démarrage rapide (pour les impatients)}
+% \label{sec:utilisation:rapide}
+%
+% La classe {\ulclass} est livrée avec un ensemble de gabarits sur
+% lesquels se baser pour le document maître de divers types de thèses
+% et de mémoires (standard, par articles, en cotutelle, en
+% bidiplomation), ainsi que pour les parties les plus usuelles
+% (résumés français et anglais, avant-propos, introduction, chapitres,
+% conclusion). Les noms des fichiers devraient permettre de facilement
+% identifier leur contenu. Dans la distribution {\TeX}~Live, les
+% gabarits sont classés avec la documentation.
+%
+% Pour débuter rapidement la rédaction de votre manuscrit, copiez les
+% gabarits appropriés dans votre dossier de travail et suivez les
+% directives qui s'y trouvent. La \autoref{sec:gabarits} fournit les
+% informations détaillées.
+%
+% Dès que le texte contient des caractères non-ASCII (comme des
+% lettres accentuées), vous devez enregistrer votre fichier dans le
+% codage de caractères
+% \href{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}. Nous recommandons
+% de compiler votre manuscript avec {\XeLaTeX}. %
+%
+% Le reste de ce guide contient les informations détaillées sur les
+% caractéristiques et fonctionnalités de la classe.
+%
+% \changes{5.3a}{2021-08-09}{Ajout à la documentation de la
+% disponibilité d'une archive pour les personnes qui ne disposent pas
+% d'une installation de {\TeX} locale.}
+% \tipbox{Si vous n'avez pas accès aux gabarits parce qu'ils ne sont
+%   pas inclus dans votre distribution ou parce que vous utilisez une
+%   plateforme de rédaction en ligne, poursuivez votre lecture à la
+%   \autoref{sec:installation}.}
+%
+% \section{Installation}
+% \label{sec:installation}
+%
+% Cette section explique comment installer la classe {\ulclass}
+% si elle n'est pas disponible sur votre système ou si la version
+% n'est pas à jour.
+%
+% La classe {\ulclass} est distribuée dans le paquetage %
+% \link{https://ctan.org/pkg/ulthese}{\pkg{ulthese}} %
+% via le réseau de sites \emph{Comprehensive {\TeX} Archive Network}
+% (CTAN). Elle fait partie des distributions {\TeX} standards telles
+% que {TeX}~Live, Mac{\TeX} et MiK{\TeX}. Nous recommandons fortement
+% d'installer ou de mettre à jour le paquetage à l'aide du
+% gestionnaire de paquetages de votre distribution {\TeX}. Par
+% exemple, avec {\TeX}~Live, vous pouvez effectuer ces opérations dans
+% l'assistant graphique, ou encore avec l'une ou l'autre des commandes
+% ci-dessous:
+% \begin{quote}
+%   \code{tlmgr install cjs-rcs-article}
+% \end{quote}
+% ou
+% \begin{quote}
+% \code{tlmgr update cjs-rcs-article}
+% \end{quote}
+%
+% S'il vous est impossible d'installer des paquetages ou de mettre à
+% jour la distribution {\TeX} --- notamment si vous utilisez une
+% plateforme de rédaction en ligne --- vous pouvez procéder à une
+% installation simplifiée de la classe, mais dont la portée sera
+% limitée à votre projet. Pour ce faire, téléchargez l'archive
+% \code{ulthese-installation-projet.zip} depuis le
+% \link{https://gitlab.com/vigou3/ulthese/-/releases}{dépôt du projet}
+% et décompressez celle-ci dans le répertoire de votre document. Vous
+% disposerez alors de tous les fichiers essentiels de la classe à
+% l'intérieur de ce projet.
+%
+% Si votre expertise {\TeX} vous pousse à préférer une installation
+% manuelle avec accès à l'intégralité du code source de la classe,
+% consultez les instructions qui se trouvent dans le fichier
+% \code{README.md} du paquetage.
+%
+% \section{Utilisation}
+% \label{sec:utilisation}
+%
+% La classe {\ulclass} est basée sur la classe \class{memoir}
 % \citep{memoir}, une extension de la classe standard \class{book}
 % facilitant à plusieurs égards la préparation de documents d'allure
-% professionnelle dans {\LaTeX}. La classe \class{memoir} incorpore
-% d'office plus de 30 des paquetages les plus populaires\footnote{%
-% Consulter la section~18.24 de la documentation de \class{memoir}
-% pour la liste ou encore le journal de la compilation (\emph{log})
-% d'un document utilisant la classe {\ulth}.}. %
-% L'intégralité des fonctionnalités de \class{memoir} se retrouve donc
-% dans {\ulth}.
+% professionnelle dans {\LaTeX}. L'intégralité des fonctionnalités de
+% \class{memoir} se retrouve donc dans {\ulclass}.
 %
-% La classe \class{memoir} fait partie des distributions {\LaTeX}
-% modernes; elle devrait donc être installée et disponible sur votre
-% système. Elle est livrée avec une %
+% La classe \class{memoir} fait partie des distributions {\TeX}
+% récentes; elle devrait donc être installée et disponible sur votre
+% système. La classe est livrée avec une %
 % \doc{http://texdoc.net/pkg/memoir} %
 % exhaustive: le guide de l'utilisateur fait près de 600~pages!
 % N'hésitez pas à vous y référer pour réaliser une mise en page
 % particulière.
 %
-% L'autre compagnon naturel de la présente documentation est
-% \doc[Rédaction avec {\LaTeX}]{http://texdoc.net/pkg/formation-latex-ul} ^^A
-% \citep{formation-latex-ul}, la formation {\LaTeX} de l'Université Laval.
-% Vous y trouverez des informations additionnelles sur l'utilisation des
-% classes {\ulth} et \class{memoir}.
+% La classe {\ulclass} est compatible avec le moteur {pdf\LaTeX}.
+% Cependant, pour faciliter la gestion du codage des fichiers et des
+% polices de caractères, nous recommandons de compiler votre
+% manuscript avec le plus moderne moteur {\XeLaTeX}.
 %
-% \section{Démarrage rapide (pour les impatients)}
-% \label{sec:utilisation:rapide}
+% \subsection{Gabarits}
+% \label{sec:utilisation:gabarits}
 %
-% La classe est livrée avec les distributions {\TeX}~Live, Mac{\TeX} et
-% MiK{\TeX}. Si vous utilisez l'une ou l'autre de ces distributions et
-% qu'elle est à jour\footnote{%
-%   Validez à l'aide de l'assistant de mise à jour de votre
-%   distribution.}, %
-% vous devriez pouvoir utiliser {\ulth} sans autre
-% intervention.
-%
-% Il est recommandé de segmenter tout document d'une certaine ampleur
-% dans des fichiers |.tex| distincts pour chaque partie ---
-% habituellement un fichier par chapitre. Le document complet est alors
-% composé à l'aide d'un fichier maître qui contient le préambule
-% {\LaTeX} et un ensemble de commandes \cmd{\include} pour réunir les
-% parties dans un tout.
-%
-% La classe {\ulth} est livrée avec un ensemble de gabarits sur
-% lesquels se baser pour:
+% La classe est livrée avec un ensemble de gabarits sur lesquels se
+% baser pour:
 % \begin{itemize}
 % \item le document maître de divers types de thèses et de mémoires
 %   (standard, par articles, en cotutelle, en bidiplomation);
@@ -300,111 +396,65 @@
 %   et anglais, avant-propos, introduction, chapitres, conclusion,
 %   etc.).
 % \end{itemize}
-% Les noms des fichiers devraient permettre de facilement identifier
-% leur contenu (c'est là une bonne pratique: le nom |rappels.tex|
-% parle de lui-même et résiste mieux aux changements à l'ordre des
-% chapitres que |chapitre1.tex|).
+% Les gabarits vous incitent à adopter le mode d'organisation des
+% fichiers de tout document d'une certaine ampleur, soit: un fichier
+% |.tex| par partie et un fichier maître contenant le préambule
+% {\LaTeX} et un ensemble de commandes \cmd{\include} pour réunir les
+% parties dans un tout.
 %
-% Dans {\TeX}~Live, les gabarits sont classés avec la documentation de
-% la classe. Pour les utiliser, copiez les fichiers appropriés dans votre
+% Si vous utilisez la version de la classe fournie avec votre
+% distribution {\TeX}, les gabarits peuvent être classés avec la
+% documentation (c'est le cas dans {\TeX}~Live). Si vous avez plutôt
+% installé la classe manuellement en suivant les instructions de la
+% \autoref{sec:installation}, les gabarits se trouvent dans votre
 % dossier de travail.
 %
-% Pour débuter la rédaction, renommez le gabarit de document maître
-% approprié d'après votre numéro de dossier. Par exemple, l'étudiante
-% dont le numéro de dossier est 111555555 et qui entame la rédaction
-% d'une thèse par articles renommera le fichier
-% \begin{quote}
-%   |gabarit-doctorat-articles.tex|
-% \end{quote}
-% en
-% \begin{quote}
-%   |111555555.tex|.
-% \end{quote}
+% Nous recommandons fortement de rédiger votre manuscript à partir des
+% gabarits. Il peut aussi s'avérer utile de suivre un gabarit en lisant
+% la présente section.
 %
-% Les gabarits comportent des commentaires succincts pour vous guider
-% dans la préparation de votre document. La \autoref{sec:gabarits}
-% fournit les informations détaillées.
+% \subsection{Codage du code source}
+% \label{sec:utilisation:codage}
 %
-% \section{Installation}
+% Lorsqu'il contient du texte avec des accents ou tout autre symbole
+% non-ASCII, le code source de votre manuscript doit obligatoirement
+% être enregistré dans le codage de caractères
+% \link{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}.\footnote{%
+%   L'UTF-8 n'étant pas le codage par défaut sous Windows, portez une
+%   attention toute particulière à ce point si vous utilisez ce système
+%   d'exploitation.}
 %
-% Cette section explique comment installer la classe {\ulth}
-% si elle n'est pas disponible sur votre système ou si la version
-% n'est pas à jour.
-%
-% La classe est distribuée sous forme d'une archive |ulthese.zip| via
-% le réseau de sites \emph{Comprehensive {\TeX} Archive Network} (CTAN):
-% \begin{quote}
-%   \url{https://www.ctan.org/pkg/ulthese}
-% \end{quote}
-%
-% L'installation de la classe consiste à créer le fichier
-% |ulthese.cls| et les gabarits |.tex| à partir du code source
-% documenté se trouvant dans le fichier |ulthese.dtx|. Il est
-% recommandé de simplement créer ces fichiers dans le dossier de
-% travail de la thèse ou du mémoire.
-%
-% Pour procéder à l'installation, décompressez l'archive |ulthese.zip|
-% dans votre dossier de travail, puis compilez avec {\LaTeX} le fichier
-% |ulthese.ins| en exécutant la commande suivante depuis une invite
-% de commande:
-% \begin{quote}
-%   |latex ulthese.ins|
-% \end{quote}
-% Vous pouvez aussi ouvrir le fichier |ulthese.ins| dans votre éditeur
-% de texte favori et lancer depuis celui-ci la compilation avec
-% {\LaTeX}, pdf{\LaTeX}, {\XeLaTeX} ou un autre moteur {\TeX}.
-%
-% \changes{5.3a}{2021-08-09}{Ajout à la documentation de la
-% disponibilité d'une archive pour les personnes qui ne disposent pas
-% d'une installation de {\TeX} locale.}
-% \begin{rem}
-%   Si vous ne disposez pas d'une version de {\TeX} sur votre poste de
-%   travail --- vraisemblablement parce que vous utilisez une
-%   plateforme de rédaction en ligne --- téléchargez
-%   l'archive |ulthese-sans-tex-local.zip| depuis le
-%   \link{https://gitlab.com/vigou3/ulthese/-/releases}{dépôt du
-%   projet}. Celle-ci contient tous les fichiers
-%   normalement créés lors de l'installation de la classe.
-% \end{rem}
-%
-% \section{Utilisation}
-%
-% La classe est compatible avec les moteurs {\LaTeX} traditionnels
-% ainsi qu'avec le plus récent moteur {\XeLaTeX}.
+% \subsection{Déclaration de la classe et options}
+% \label{sec:utilisation:options}
 %
 % On charge la classe avec la commande
 % \begin{quote}
-% |\documentclass|\oarg{options}|{ulthese}|
+%   |\documentclass|\oarg{options}|{ulthese}|
 % \end{quote}
 % Les marges, l'interligne et la numérotation des pages sont adaptées
-% aux règles de présentation matérielle de la FESP. Les sections
-% suivantes décrivent les options et les commandes définies par la
-% classe.
+% aux règles de présentation de la FESP. La classe ne crée pas de page
+% de titre par défaut\footnote{%
+%   Depuis la version 5.0 de la classe.}, %
+% sa production étant prise en charge par la FESP.
 %
 % \changes{5.0}{2018-04-24}{La classe ne crée plus de page de titre
 % suite à une nouvelle directive de la FESP.}
-% \begin{rem}
-%   Depuis la version 5.0, la classe ne crée plus de page de titre
-%   par défaut, sa production étant désormais prise en charge par la
-%   FESP. Néanmoins, les fonctionnalités de composition d'une page
-%   de titre demeurent disponibles dans la classe. Les commandes
-%   pertinentes sont regroupées à l'\autoref{sec:pagetitre}.
-% \end{rem}
-%
-% \subsection{Options de la classe}
-% \label{sec:utilisation:options}
+% \tipbox{Des fonctionnalités de composition d'une page de titre
+%   demeurent disponibles dans la classe. Les commandes pertinentes
+%   sont regroupées à l'\autoref{sec:pagetitre}.}
 %
 % Cette section passe en revue les \meta{options} que l'on peut
 % spécifier au chargement de la classe. Les commandes mentionnées
 % ci-dessous font quant à elles l'objet de la
 % \autoref{sec:utilisation:commandes}.
 %
-% \begin{DescribeMacro}{PhD,MSc,MA, ...}
-%   Identifie le type de grade; consulter le \autoref{tab:grades} pour
-%   la liste complète des options et les grades correspondants. La
-%   déclaration d'un type de grade est obligatoire, sauf en cas de
-%   l'utilisation de l'option |projet| (voir ci-dessous).
-% \end{DescribeMacro}
+% \begin{DescribeOption}{PhD,MSc,MA, ...}
+%   Les options telles que |PhD|, |MSc| ou |MA| identifient le type de
+%   grade; le \autoref{tab:grades} fournit la liste complète des
+%   options et les grades correspondants. La déclaration d'un type de
+%   grade est obligatoire, sauf en cas de l'utilisation de l'option
+%   |projet| (voir ci-dessous).
+% \end{DescribeOption}
 %
 % \begin{table}[t]
 %   \centering
@@ -454,113 +504,117 @@
 %   \end{tabularx}
 % \end{table}
 %
-% \begin{DescribeMacro}{cotutelle}
-%   Identifie une thèse effectuée en cotutelle avec une autre
-%   université. Valide uniquement avec un grade de doctorat.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{bidiplomation}
-%   Identifie un mémoire effectué en bidiplomation avec une autre
-%   université. Valide uniquement avec un grade de maîtrise.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{examen}
-%   Identifie un examen de doctorat. Cette option permet d'utiliser la
-%   classe pour la rédaction d'un examen de doctorat respectant les
-%   règles de présentation matérielle de la FESP. Elle a pour effet de
-%   changer l'appellation «Thèse» sur la page de titre pour «Examen
-%   de doctorat». Elle supprime également la page frontispice.
-%   L'option n'est compatible qu'avec l'une des options de grade de
+% \begin{DescribeOption}{cotutelle}
+%   L'option |cotutelle| identifie une thèse effectuée en cotutelle
+%   avec une autre université. Valide uniquement avec un grade de
 %   doctorat.
-% \end{DescribeMacro}
+% \end{DescribeOption}
+%
+% \begin{DescribeOption}{bidiplomation}
+%   L'option |bidiplomation| identifie un mémoire effectué en
+%   bidiplomation avec une autre université. Valide uniquement avec un
+%   grade de maîtrise.
+% \end{DescribeOption}
+%
+% \begin{DescribeOption}{examen}
+%   L'option |examen| identifie un examen de doctorat. Elle permet
+%   d'utiliser la classe pour la rédaction d'un examen de doctorat
+%   respectant les règles de présentation matérielle de la FESP.
+%   L'option a pour effet de changer l'appellation «Thèse» sur la page
+%   de titre pour «Examen de doctorat». Elle supprime également la
+%   page frontispice. L'option n'est compatible qu'avec l'une des
+%   options de grade de doctorat.
+% \end{DescribeOption}
 %
 % \changes{5.0}{2018-05-09}{Ajout d'une option \texttt{essai} pour les
 % maîtrises analogue à \texttt{examen} pour les doctorats.}
 % \changes{5.2}{2019-05-06}{L'option \texttt{essai} n'empêche plus
 % l'utilisation d'une page frontispice.}
-% \begin{DescribeMacro}{essai}
-%   Identifie un essai de maîtrise. Cette option permet d'utiliser la
-%   classe pour la rédaction d'un essai de maîtrise respectant les
-%   règles de présentation matérielle de la FESP. Elle a pour effet de
-%   changer l'appellation «Maîtrise» sur la page de titre pour
-%   «Essai». L'option n'est compatible qu'avec l'une des options de
-%   grade de maîtrise. Pour un essai de maîtrise, l'utilisation
-%   simultanée de l'option |article| de la classe \class{memoir} peut
-%   s'avérer tout indiquée.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{essai}
+%   L'option |essai| identifie un essai de maîtrise. Elle permet
+%   d'utiliser la classe pour la rédaction d'un essai de maîtrise
+%   respectant les règles de présentation matérielle de la FESP.
+%   L'option a pour effet de changer l'appellation «Maîtrise» sur la
+%   page de titre pour «Essai». Elle n'est compatible qu'avec l'une
+%   des options de grade de maîtrise. Pour un essai de maîtrise,
+%   l'utilisation simultanée de l'option |article| de la classe
+%   \class{memoir} peut s'avérer tout indiquée.
+% \end{DescribeOption}
 %
 % \changes{5.2}{2019-05-06}{Ajout d'une option \texttt{projet} pour
 % les cours de projet de recherche.}
-% \begin{DescribeMacro}{projet}
-%   Identifie un projet de recherche. Cette option permet d'utiliser
-%   la classe pour la rédaction d'un rapport de projet de recherche
-%   respectant les règles de présentation matérielle de la FESP. Elle
-%   a pour effet d'inscrire l'appellation «Projet de recherche» sur la
-%   page de titre et de supprimer la mention du grade. L'utilisation
-%   de cette option rend d'ailleurs non obligatoire la déclaration de
-%   grade qui, si elle est présente, est simplement ignorée. Comme
-%   pour un essai de maîtrise, l'utilisation simultanée de l'option
-%   |article| de la classe \class{memoir} peut s'avérer tout indiquée
-%   avec les cette option.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{projet}
+%   L'option |projet| identifie un projet de recherche. Elle permet
+%   d'utiliser la classe pour la rédaction d'un rapport de projet de
+%   recherche respectant les règles de présentation matérielle de la
+%   FESP. L'option a pour effet d'inscrire l'appellation «Projet de
+%   recherche» sur la page de titre et de supprimer la mention du
+%   grade. Son utilisation rend d'ailleurs non obligatoire la
+%   déclaration de grade qui, si elle est présente, est simplement
+%   ignorée. Comme pour un essai de maîtrise, l'utilisation simultanée
+%   de l'option |article| de la classe \class{memoir} peut s'avérer
+%   tout indiquée avec cette option.
+% \end{DescribeOption}
 %
 % \changes{5.3}{2019-11-29}{Ajout d'une option \texttt{stage} pour les
 % rapports de stage.}
-% \begin{DescribeMacro}{stage}
-%   Identifie un rapport de stage. L'effet de cette option est
-%   identique à celui de l'option |projet| à deux exceptions près:
-%   l'inscription sur la page de titre est «Rapport de stage» et la
-%   page frontispice est supprimée.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{stage}
+%   L'option |stage| identifie un rapport de stage. L'effet de cette
+%   option est identique à celui de l'option |projet| à deux
+%   exceptions près: l'inscription sur la page de titre est «Rapport
+%   de stage» et la page frontispice est supprimée.
+% \end{DescribeOption}
 %
-% \begin{DescribeMacro}{10pt,11pt,12pt}
-%   Sélectionne une taille de police de 10, 11 ou 12~points. Par
-%   défaut la classe utilise une police de 11~points. Ces options
-%   n'ont aucun effet sur la taille des polices des pages de titre.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{10pt,11pt,12pt}
+%   Les options standards |10pt|, |11pt| et |12pt| sélectionnent une
+%   taille de police de 10, 11 ou 12~points. Par défaut la classe
+%   utilise une police de 11~points. Ces options n'ont aucun effet sur
+%   la taille des polices des pages de titre.
+% \end{DescribeOption}
 %
 % \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibchapitre}.}
 % \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibsection}.}
 % \changes{5.4}{2024-05-22}{Suppression des options
 % \texttt{bibchapitre} et \texttt{bibsection}.}
 %
-% \begin{DescribeMacro}{nonatbib}
-%   Empêche le chargement du paquetage \pkg{natbib}. La paquetage est
-%   normalement chargé par la classe; voir la
-%   \autoref{sec:bibliographie}. L'option |nonatbib| permet d'empêcher
-%   le chargement pour modifier les options du paquetage ou en cas de
-%   conflit avec un autre paquetage de mise en forme de la
+% \begin{DescribeOption}{nonatbib}
+%   L'option |nonatbib| empêche le chargement du paquetage
+%   \pkg{natbib}. Celui-ci est normalement chargé par la classe;
+%   voir la \autoref{sec:bibliographie}. L'option |nonatbib| permet
+%   d'empêcher le chargement pour modifier les options du paquetage ou
+%   en cas de conflit avec un autre paquetage de mise en forme de la
 %   bibliographie.
-% \end{DescribeMacro}
+% \end{DescribeOption}
 %
-% \begin{DescribeMacro}{nobabel}
-%   Empêche le chargement du paquetage \pkg{babel}. La classe utilise
-%   par défaut ce paquetage pour le traitement des langues dans le
-%   document; voir la \autoref{sec:langues}. L'option |nobabel| permet
-%   d'empêcher son chargement si un autre paquetage devait être
-%   utilisé --- on pense ici principalement à \pkg{polyglossia} pour
-%   un document produit avec le moteur {\XeLaTeX}.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{nobabel}
+%   L'option |nobabel| empêche le chargement du paquetage \pkg{babel}.
+%   La classe utilise par défaut ce paquetage pour le traitement des
+%   langues dans le document; voir la \autoref{sec:langues}. L'option
+%   |nobabel| permet d'empêcher son chargement si un autre paquetage
+%   devait être utilisé --- on pense ici principalement à
+%   \pkg{polyglossia} pour un document produit avec le moteur
+%   {\XeLaTeX}.
+% \end{DescribeOption}
 %
 % \changes{5.1}{2018-09-30}{Ajout de l'option \texttt{nohyperref}.}
-% \begin{DescribeMacro}{nohyperref}
-%   Empêche le chargement du paquetage \pkg{hyperref}. L'interaction
-%   de ce paquetage avec les autres est parfois --- voire souvent ---
-%   délicate. La classe se charge de le charger en tout dernier tel
-%   que généralement recommandé. L'option |nohyperref| permet
-%   d'empêcher son chargement s'il est absolument nécessaire de
-%   charger d'autres paquetages avant \pkg{hyperref}. Si vous utilisez
-%   cette option, vous devez obligatoirement charger \pkg{hyperref}
-%   dans le préambule du document.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{nohyperref}
+%   L'option |nohyperref| empêche le chargement du paquetage
+%   \pkg{hyperref}. L'interaction de ce paquetage avec les autres est
+%   parfois --- voire souvent --- délicate. La classe tâche de le
+%   charger en tout dernier, tel que généralement recommandé. L'option
+%   |nohyperref| permet d'empêcher son chargement s'il est absolument
+%   nécessaire de charger d'autres paquetages avant \pkg{hyperref}. Si
+%   vous utilisez cette option, vous devez obligatoirement charger
+%   \pkg{hyperref} dans le préambule du document.
+% \end{DescribeOption}
 %
-% \begin{DescribeMacro}{english, french, ...}
+% \begin{DescribeOption}{english, french, ...}
 %   Déclare les langues utilisées dans le document. Ces options sont
 %   transférées au paquetage \pkg{babel} (dans la mesure où |nobabel|
 %   n'est pas spécifié, bien entendu). Le libellé des langues devrait
 %   donc correspondre aux options de \pkg{babel}. La dernière langue
 %   spécifiée est la langue active par défaut dans le document.
-% \end{DescribeMacro}
+% \end{DescribeOption}
 %
 % Toute autre option sera passée à la classe \class{memoir} dont,
 % entre autres, le format du papier. Le format lettre nord-américain
@@ -572,14 +626,14 @@
 % \subsection{Commandes de la classe}
 % \label{sec:utilisation:commandes}
 %
-% La classe {\ulth} définit quelques nouvelles commandes
+% La classe {\ulclass} définit quelques nouvelles commandes
 % servant principalement à créer la page frontispice et des éléments
 % des pages liminaires. Le sommaire des commandes se trouve dans le
 % \autoref{tab:commandes} et les descriptions détaillées, ci-dessous.
 %
 % \begin{table}[t]
 %   \centering
-%   \caption{Sommaire des commandes de la classe {\ulth}.
+%   \caption{Sommaire des commandes de la classe {\ulclass}.
 %     Celles marquées d'une étoile $^\star$ sont obligatoires.}
 %   \label{tab:commandes}
 %   \begin{tabularx}{\linewidth}{lX}
@@ -747,7 +801,7 @@
 % \subsection{Autres paquetages chargés}
 % \label{sec:paquetages}
 %
-% Outre \class{memoir}, la classe {\ulth} charge quelques
+% Outre \class{memoir}, la classe {\ulclass} charge quelques
 % paquetages qui peuvent aussi vous être utiles. Il n'est donc pas
 % nécessaire de charger de nouveau les paquetages suivants:
 % \begin{description}
@@ -828,7 +882,7 @@
 % La solution standard à ce problème provient du paquetage
 % \pkg{babel}. Celui-ci permet de combiner plusieurs langues dans un
 % même document et de passer de l'une à l'autre facilement. Il est
-% chargé par défaut par la classe {\ulth}.
+% chargé par défaut par la classe {\ulclass}.
 %
 % Aucune langue n'est spécifiée dans la classe. Vous aurez sans doute
 % recours à l'anglais et au français, ne serait-ce que pour les deux
@@ -898,7 +952,7 @@
 % \subsection{Mise en forme des citations}
 % \label{sec:bibliographie:options}
 %
-% Dans la classe {\ulth}, la mise en forme des citations est
+% Dans la classe {\ulclass}, la mise en forme des citations est
 % confiée au paquetage \pkg{natbib} (à moins que l'option |nonatbib|
 % ne soit spécifiée). Le paquetage est chargé avec les options par
 % défaut, soit |round|, |semicolon| et |authoryear|. Pour spécifier
@@ -975,7 +1029,7 @@
 % police de caractères par défaut, {\fontfamily{cmr}\selectfont
 % Computer Modern}. Avec toute distribution {\LaTeX} moderne, il est
 % maintenant simple d'utiliser l'une ou l'autre des polices PostScript
-% standards. D'ailleurs la classe {\ulth} utilise la police
+% standards. D'ailleurs la classe {\ulclass} utilise la police
 % sans empattements \textsf{Helvetica} pour composer les pages de
 % titre.
 %
@@ -988,7 +1042,7 @@
 % \label{sec:gabarits}
 %
 % Afin de vous épauler dans la préparation de votre manuscrit, la
-% classe {\ulth} est livrée avec un ensemble de gabarits. Tout
+% classe {\ulclass} est livrée avec un ensemble de gabarits. Tout
 % d'abord, pour le document maître de différents types de thèses et de
 % mémoires:
 % \begin{itemize}[noitemsep]
@@ -1100,7 +1154,7 @@
 %   liste des options de configuration disponibles.
 % \end{DescribeMacro}
 %
-% Les concepteurs de la classe {\ulth}  proposent trois
+% Les concepteurs de la classe {\ulclass}  proposent trois
 % ajustements dans les gabarits:
 % \begin{enumerate}
 % \item l'option |StandardItemizeEnv=true| évite que le mode français de
@@ -1256,7 +1310,7 @@
 %
 % Le \link{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
 % GitLab demeure le meilleur endroit pour rapporter des bogues ou pour
-% proposer des améliorations à la classe {\ulth}.
+% proposer des améliorations à la classe {\ulclass}.
 %
 % Pour obtenir de l'aide additionnelle sur l'utilisation de la classe
 % --- et non sur celle de {\LaTeX} en général --- consultez d'abord:
@@ -2448,6 +2502,11 @@
 % \changes{4.2}{2016-03-29}{Gabarits: nouvelles options de babel.}
 % \changes{5.4}{2024-05-22}{Gabarits: gabarits pour une thèse par
 % articles révisés suites aux changements aux règles de présentation.}
+% \changes{5.4}{2024-05-22}{Gabarits: meilleure sélection automatique
+% des paquetages pour les polices et pour le codage selon le moteur
+% {\TeX}.}
+% \changes{5.4}{2024-05-22}{Gabarits: ajout d'exemples pour
+% l'utilisation des polices STIX Two.}
 %
 % \Finale
 %
@@ -2482,10 +2541,16 @@
 %<phd&cotutelle>\documentclass[PhD,cotutelle,english,french]{ulthese}
 %<m&standard>\documentclass[MSc,english,french]{ulthese}
 %<m&bidiplomation>\documentclass[MA,bidiplomation,english,french]{ulthese}
-  %% Encodage utilisé pour les caractères accentués dans les fichiers
-  %% source du document. Les gabarits sont encodés en UTF-8. Inutile
-  %% avec XeLaTeX, qui gère Unicode nativement.
-  \ifxetex\else \usepackage[utf8]{inputenc} \fi
+  %% Version des polices de caractères et codage du code source:
+  %% OpenType (si disponible) et UTF-8 (par défaut) pour les moteurs
+  %% modernes (XeTeX et LuaTeX); version T1 des polices et UTF-8
+  %% (explicite) pour pdfLaTeX.
+  \iftutex                      % XeLaTeX et LuaLaTeX
+    \usepackage{fontspec}
+  \else                         % pdfLaTeX
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+  \fi
 
   %% Charger ici les autres paquetages nécessaires pour le document.
   %% Quelques exemples; décommenter au besoin.
@@ -2496,11 +2561,14 @@
   %% - Sous LaTeX
   %\usepackage{mathpazo}      % texte et mathématiques en Palatino
   %\usepackage{mathptmx}      % texte et mathématiques en Times
+  %\usepackage{stix2}         % texte et mathématiques en STIX Two
   %% - Sous XeLaTeX
   %\setmainfont{TeX Gyre Pagella}      % texte en Pagella (Palatino)
   %\setmathfont{TeX Gyre Pagella Math} % mathématiques en Pagella (Palatino)
   %\setmainfont{TeX Gyre Termes}       % texte en Termes (Times)
   %\setmathfont{TeX Gyre Termes Math}  % mathématiques en Termes (Times)
+  %\setmainfont{STIX Two Text}         % texte en STIX Two
+  %\setmainfont{STIX Two Math}         % mathématiques en STIX Two
 
   %% Options de mise en forme du mode français de babel. Consulter la
   %% documentation du paquetage babel pour les options disponibles.
