@@ -57,16 +57,18 @@ La classe est compatible avec LaTeX et XeLaTeX.
 
 ## Installation
 
-Pour installer la classe ulthese, compiler avec LaTeX le fichier
-`ulthese.ins`, en exécutant
+Le paquetage **ulthese** est distribué via le réseau de sites
+Comprehensive TeX Archive Network (CTAN) et il fait partie des
+distributions TeX standards. Par conséquent, nous recommandons
+fortement d'installer ou de mettre à jour le paquetage à l'aide du
+gestionnaire de paquetages de votre distribution.
+
+Les experts TeX peuvent générer la classe en compilant le fichier
+`ulthese.ins` avec LaTeX:
 
     latex ulthese.ins
 
-depuis une ligne de commande. On peut aussi ouvrir le fichier
-`ulthese.ins` dans son éditeur LaTeX et lancer la compilation avec
-LaTeX, pdfTeX, pdfLaTeX ou XeLaTeX depuis celui-ci.
-
-La compilation du fichier ulthese.ins générera plusieurs fichiers:
+La compilation générera plusieurs fichiers:
 
 1. la classe elle-même:
    - `ulthese.cls`
@@ -101,9 +103,10 @@ Le fichier `ulthese.pdf` contient la documentation complète de la
 classe et des gabarits. Le document peut être recréé à partir du code
 source avec les commandes
 
-    pdflatex ulthese.dtx
+    xelatex ulthese.dtx
     makeindex -s gglo.ist -o ulthese.gls ulthese.glo
-    pdflatex ulthese.dtx
+    xelatex ulthese.dtx
+    xelatex ulthese.dtx
 
 ## Historique des versions
 
@@ -117,11 +120,5 @@ des améliorations à la classe.
 
 ## Aide additionnelle
 
-Faire appel aux ressources suivantes, dans l'ordre:
-
-1. consulter le [WikiThèse de l'Université Laval](http://www.theses.ulaval.ca/wiki/);
-
-2. consulter les archives de la liste de distribution
-   [ulthese-aide](http://listes.ulaval.ca/listserv/archives/ulthese-aide.html);
-
-3. écrire à la liste de distribution [ulthese-aide](mailto:ulthese-aide@listes.ulaval.ca).
+Vous pouvez obtenir de l'aide additionnelle sur l'utilisation de la
+classe en écrivant à l'adresse: ulthese-aide@listes.ulaval.ca.
