@@ -205,6 +205,9 @@
 % entrées en vigueur à l'automne 2023 qui n'exigent plus une
 % bibliographie par chapitre pour les thèses et mémoire par
 % intégration d'articles.}
+% \changes{5.4}{2024-05-22}{Le codage de caractères UTF-8 est
+% maintenant obligatoire pour les fichiers contenant des caractères
+% non-ASCII.}
 % \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
 % multiples pour les thèses et mémoires par articles.}
 % \changes{4.4}{2017-05-16}{Documentation révisée, principalement ce
@@ -305,8 +308,8 @@
 % informations détaillées.
 %
 % Dès que le texte contient des caractères non-ASCII (comme des
-% lettres accentuées), vous devez enregistrer votre fichier dans le
-% codage de caractères
+% lettres accentuées), vous devez obligatoirement enregistrer vos
+% fichiers dans le codage de caractères
 % \href{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}. Nous recommandons
 % de compiler votre manuscript avec {\XeLaTeX}. %
 %
@@ -339,20 +342,23 @@
 % l'assistant graphique, ou encore avec l'une ou l'autre des commandes
 % ci-dessous:
 % \begin{quote}
-%   \code{tlmgr install cjs-rcs-article}
+%   \code{tlmgr install ulthese}
 % \end{quote}
 % ou
 % \begin{quote}
-% \code{tlmgr update cjs-rcs-article}
+%   \code{tlmgr update ulthese}
 % \end{quote}
 %
 % S'il vous est impossible d'installer des paquetages ou de mettre à
 % jour la distribution {\TeX} --- notamment si vous utilisez une
 % plateforme de rédaction en ligne --- vous pouvez procéder à une
-% installation simplifiée de la classe, mais dont la portée sera
-% limitée à votre projet. Pour ce faire, téléchargez l'archive
-% \code{ulthese-installation-projet.zip} depuis le
-% \link{https://gitlab.com/vigou3/ulthese/-/releases}{dépôt du projet}
+% installation simplifiée de la classe dont la portée sera limitée à
+% votre projet. Pour ce faire, téléchargez l'archive %
+% \begin{quote}
+%   \code{ulthese-installation-projet.zip}
+% \end{quote}
+% depuis le
+% \link{https://gitlab.com/vigou3/ulthese/-/releases}{dépôt du projet ulthese}
 % et décompressez celle-ci dans le répertoire de votre document. Vous
 % disposerez alors de tous les fichiers essentiels de la classe à
 % l'intérieur de ce projet.
@@ -413,12 +419,14 @@
 % gabarits. Il peut aussi s'avérer utile de suivre un gabarit en lisant
 % la présente section.
 %
+% \changes{5.4}{2024-05-22}{Nouvelle section de la documentation sur
+% le codage du code source.}
 % \subsection{Codage du code source}
 % \label{sec:utilisation:codage}
 %
-% Lorsqu'il contient du texte avec des accents ou tout autre symbole
-% non-ASCII, le code source de votre manuscript doit obligatoirement
-% être enregistré dans le codage de caractères
+% Tout fichier contenant contenant du texte avec des accents ou tout
+% autre symbole non-ASCII doit oblgatoirement être enregistré dans le
+% codage de caractères
 % \link{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}.\footnote{%
 %   L'UTF-8 n'étant pas le codage par défaut sous Windows, portez une
 %   attention toute particulière à ce point si vous utilisez ce système
@@ -1859,14 +1867,26 @@
 % La classe s'efforce de charger un minimum de paquetages afin d'éviter
 % les conflits potentiels.
 %
-% {\XeLaTeX} requiert le paquetage \pkg{fontspec} pour le traitement
-% des polices. Sous {\LaTeX}, il est aujourd'hui préférable d'utiliser
-% les polices T1.
+% \changes{5.4}{2024-05-22}{Le paquetage \textbf{inputenc} est
+% désormais chargé avec l'option \texttt{utf8} lorsque la compilation
+% est effectuée par {pdf\LaTeX}.}
+% Le code source doit obligatoirement être enregistré dans le codage
+% UTF-8. Avec {pdf\LaTeX}, cela requiert le paquetage \pkg{inputenc}.
+%
+% \changes{5.4}{2024-05-22}{Le paquetage \textbf{microtype} est
+% désormais chargé par la classe avec \textbf{fontspec} ou
+% \textbf{fontenc}.}
+% La classe charge également les paquetages minimalement nécessaires
+% pour la gestion des polices de caractères, soit \pkg{fontspec} avec
+% les moteurs modernes et \pkg{fontenc} avec {pdf\LaTeX}.
 %    \begin{macrocode}
-\ifxetex
+\iftutex
+  \RequirePackage[babel=true]{microtype}
   \RequirePackage{fontspec}
   \defaultfontfeatures{Ligatures=TeX}
 \else
+  \RequirePackage[babel=true]{microtype}
+  \RequirePackage[utf8]{inputenc}
   \RequirePackage[T1]{fontenc}
 \fi
 %    \end{macrocode}
@@ -2017,8 +2037,9 @@
 %   utilisées dans la classe sont toutes quelques points inférieures à
 %   celles des gabarits Word.}%
 % et les graisses présentées au \autoref{tab:polices}. La
-% déclaration |\fontencoding{T1}| est nécessaire avec {\XeLaTeX} pour
-% explicitement charger la même police que sous {\LaTeX}.
+% déclaration |\fontencoding{T1}| est nécessaire avec les moteurs
+% modernes pour explicitement charger la même police qu'avec
+% {pdf\LaTeX}.
 %
 % \begin{table}
 %   \centering
@@ -2529,6 +2550,10 @@
 %% description détaillée de la classe, de ce gabarit et des options
 %% disponibles.
 %%
+%% Vous devez obligatoirement enregistrer tout fichier contenant des
+%% caractères non-ASCII (comme des lettres accentuées) dans le codage
+%% de caractères UTF-8.
+%%
 %% [Ne pas hésiter à supprimer les commentaires après les avoir lus.]
 %%
 %% Déclaration de la classe avec le type de grade
@@ -2541,17 +2566,6 @@
 %<phd&cotutelle>\documentclass[PhD,cotutelle,english,french]{ulthese}
 %<m&standard>\documentclass[MSc,english,french]{ulthese}
 %<m&bidiplomation>\documentclass[MA,bidiplomation,english,french]{ulthese}
-  %% Version des polices de caractères et codage du code source:
-  %% OpenType (si disponible) et UTF-8 (par défaut) pour les moteurs
-  %% modernes (XeTeX et LuaTeX); version T1 des polices et UTF-8
-  %% (explicite) pour pdfLaTeX.
-  \iftutex                      % XeLaTeX et LuaLaTeX
-    \usepackage{fontspec}
-  \else                         % pdfLaTeX
-    \usepackage[utf8]{inputenc}
-    \usepackage[T1]{fontenc}
-  \fi
-
   %% Charger ici les autres paquetages nécessaires pour le document.
   %% Quelques exemples; décommenter au besoin.
   %\usepackage{amsmath}       % recommandé pour les mathématiques
@@ -2559,9 +2573,9 @@
 
   %% Utilisation d'une autre police de caractères pour le document.
   %% - Sous LaTeX
+  %\usepackage{stix2}         % texte et mathématiques en STIX Two
   %\usepackage{mathpazo}      % texte et mathématiques en Palatino
   %\usepackage{mathptmx}      % texte et mathématiques en Times
-  %\usepackage{stix2}         % texte et mathématiques en STIX Two
   %% - Sous XeLaTeX
   %\setmainfont{TeX Gyre Pagella}      % texte en Pagella (Palatino)
   %\setmathfont{TeX Gyre Pagella Math} % mathématiques en Pagella (Palatino)
