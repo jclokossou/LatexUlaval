@@ -205,9 +205,9 @@
 % entrées en vigueur à l'automne 2023 qui n'exigent plus une
 % bibliographie par chapitre pour les thèses et mémoire par
 % intégration d'articles.}
-% \changes{5.4}{2024-05-22}{Le codage de caractères UTF-8 est
-% maintenant obligatoire pour les fichiers contenant des caractères
-% non-ASCII.}
+% \changes{5.4}{2024-05-22}{L'UTF-8 est maintenant le codage de
+% caractères par défaut de la classe. Les gabarits sont modifiés en
+% conséquence.}
 % \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
 % multiples pour les thèses et mémoires par articles.}
 % \changes{4.4}{2017-05-16}{Documentation révisée, principalement ce
@@ -402,6 +402,10 @@
 %   et anglais, avant-propos, introduction, chapitres, conclusion,
 %   etc.).
 % \end{itemize}
+% Vous pourriez devoir combiner les caractéristiques de deux gabarits
+% de document maître, par exemple pour une thèse en cotutelle par
+% articles.
+%
 % Les gabarits vous incitent à adopter le mode d'organisation des
 % fichiers de tout document d'une certaine ampleur, soit: un fichier
 % |.tex| par partie et un fichier maître contenant le préambule
@@ -419,15 +423,23 @@
 % gabarits. Il peut aussi s'avérer utile de suivre un gabarit en lisant
 % la présente section.
 %
+% \tipbox{Il n'y a pas de gabarit spécifique pour un examen de
+%   doctorat, pour un essai de maîtrise, pour un projet de recherche ou
+%   pour un rapport de stage. Utilisez un gabarit de thèse ou de
+%   maîtrise avec l'une ou l'autre des options |examen|, |essai|,
+%   |projet| ou |stage|.}
+%
 % \changes{5.4}{2024-05-22}{Nouvelle section de la documentation sur
-% le codage du code source.}
-% \subsection{Codage du code source}
+% le codage de caractères du code source.}
+% \subsection{Codage de caractères du code source}
 % \label{sec:utilisation:codage}
 %
-% Tout fichier contenant contenant du texte avec des accents ou tout
-% autre symbole non-ASCII doit oblgatoirement être enregistré dans le
-% codage de caractères
-% \link{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}.\footnote{%
+% La classe utilise par défaut le codage de caractères
+% \link{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8},
+% et ce, tant avec {pdf\LaTeX} qu'avec {\XeLaTeX}. Les fichiers
+% contenant du texte avec des accents ou tout autre symbole non-ASCII
+% doivent donc obligatoirement être enregistrés dans ce codage de
+% caractères\footnote{%
 %   L'UTF-8 n'étant pas le codage par défaut sous Windows, portez une
 %   attention toute particulière à ce point si vous utilisez ce système
 %   d'exploitation.}
@@ -794,7 +806,7 @@
 % \subsection{Hyperliens}
 % \label{sec:hyperliens}
 %
-% Lorsque le document est produit avec pdf{\LaTeX} ou {\XeLaTeX},
+% Lorsque le document est produit avec {pdf\LaTeX} ou {\XeLaTeX},
 % toutes les références internes et externes sont automatiquement
 % transformées en hyperliens cliquables. Ceux-ci apparaissent dans une
 % teinte de bleu assez foncée tout à la fois visible en couleur et peu
@@ -827,7 +839,7 @@
 %   voir aussi la \autoref{sec:bibliographie});
 % \item[\normalfont\pkg{hyperref}] \citep{hyperref} permet de
 %   transformer toutes les références en hyperliens cliquables lorsque
-%   le document est produit avec pdf{\LaTeX} ou {\XeLaTeX} (si
+%   le document est produit avec {pdf\LaTeX} ou {\XeLaTeX} (si
 %   l'option |nohyperref| est spécifiée, vous devez obligatoirement
 %   charger le paquetage vous-même);
 % \item[\normalfont\pkg{etoolbox}] \citep{etoolbox} outils
@@ -1046,271 +1058,9 @@
 % \citet[section~10.2]{formation-latex-ul} explique comment utiliser ces
 % polices dans votre document.
 %
-% \section{Gabarits}
-% \label{sec:gabarits}
-%
-% Afin de vous épauler dans la préparation de votre manuscrit, la
-% classe {\ulclass} est livrée avec un ensemble de gabarits. Tout
-% d'abord, pour le document maître de différents types de thèses et de
-% mémoires:
-% \begin{itemize}[noitemsep]
-% \item |gabarit-doctorat.tex|;
-% \item |gabarit-doctorat-articles.tex|;
-% \item |gabarit-doctorat-cotutelle.tex|;
-% \item |gabarit-maitrise.tex|;
-% \item |gabarit-maitrise-articles.tex|;
-% \item |gabarit-maitrise-bidiplomation.tex|.
-% \end{itemize}
-% Ensuite, pour quelques parties d'un document:
-% \begin{itemize}[noitemsep]
-% \item |resume.tex|;
-% \item |abstract.tex|;
-% \item |remerciements.tex|;
-% \item |avantpropos.tex|;
-% \item |introduction.tex|;
-% \item |chapitre1.tex|;
-% \item |chapitre1-articles.tex|;
-% \item |chapitre2.tex|;
-% \item |chapitre2-articles.tex|;
-% \item |conclusion.tex|;
-% \item |annexe.tex|.
-% \end{itemize}
-% Vous pourriez devoir combiner les caractéristiques de deux gabarits
-% de document maître comme, par exemple, pour une thèse en cotutelle
-% par articles.
-%
-% Les gabarits comportent des commentaires succincts pour vous guider
-% dans leur utilisation. Les sections suivantes fournissent des
-% détails additionnels, et ce, dans l'ordre où les commandes
-% apparaissent dans les fichiers.
-%
-% \begin{rem}
-%   Il n'y a pas de gabarit spécifique pour un examen de doctorat,
-%   pour un essai de maîtrise, pour un projet de recherche ou pour un
-%   rapport de stage. Utilisez un gabarit de thèse ou de maîtrise et
-%   inscrivez l'option |examen|, |essai|, |projet| ou |stage| dans la
-%   commande \cmd{\documentclass}.
-% \end{rem}
-%
-% \subsection{Encodage des fichiers}
-%
-% Composer en {\LaTeX} de longs textes dans une langue ayant recours
-% aux signes diacritiques devient rapidement pénible si l'on utilise
-% des commandes telles que |\'e|, |\`a| ou |\"o| pour entrer des lettres
-% accentuées. Afin de pouvoir plutôt entrer directement |é|, |à| ou
-% |ö|, {\LaTeX} doit être configuré pour reconnaître les lettres
-% accentuées. C'est le rôle du paquetage \pkg{inputenc}
-% \citep{inputenc}.
-%
-% Il existe plusieurs manières différentes d'encoder --- ou
-% d'enregistrer --- les lettres accentuées et autres caractères
-% spéciaux (comme, par exemple, le symbole de l'euro) dans un
-% ordinateur. La méthode la plus répandue et celle standard sur les
-% versions récentes des systèmes d'exploitation Linux et macOS est
-% l'UTF-8 de la norme
-% \link{https://fr.wikipedia.org/wiki/Unicode}{Unicode}. Les gabarits
-% sont livrés dans ce type d'encodage.
-%
-% La déclaration
-% \begin{quote}
-%   |\usepackage[utf8]{inputenc}|
-% \end{quote}
-% dans le préambule assure que {\LaTeX} traitera correctement des
-% fichiers source encodés en UTF-8.
-%
-% La norme Unicode n'est pas aussi uniformément supportée par Windows.
-% Selon l'éditeur de texte employé et la version du système
-% d'exploitation, il peut être nécessaire d'utiliser les normes
-% d'encodage %
-% \link{https://fr.wikipedia.org/wiki/ISO_8859-1}{ISO~8859-1} %
-% (ou Latin-1; option |latin1| de \pkg{inputenc}), %
-% \link{https://fr.wikipedia.org/wiki/ISO_8859-15}{ISO~8859-15} %
-% (ou Latin-9; option |latin9|) ou %
-% \link{https://fr.wikipedia.org/wiki/Windows-1252}{Windows-1252} %
-% (options |cp1252| ou |ansinew|).
-%
-% La situation est plus simple avec {\XeLaTeX} puisqu'il gère
-% nativement Unicode. Le paquetage \pkg{inputenc} est non seulement
-% inutile, mais incompatible avec {\XeLaTeX}. C'est pourquoi, dans les
-% gabarits, \pkg{inputenc} est chargé seulement lorsque {\XeTeX}
-% n'est pas le moteur employé pour compiler le document.
-%
-% \subsection{Paquetages additionnels}
-%
-% Tel qu'expliqué à la \autoref{sec:paquetages}, la classe charge déjà
-% quelques paquetages. Cependant, il est fort probable que vous devrez
-% en charger d'autres pour composer votre document. Les gabarits
-% prévoient un endroit pour le chargement de paquetages additionnels.
-%
-% Si vous utilisez un paquetage non standard dans les distributions
-% courantes (\TeX~Live, Mac\TeX, MiK\TeX), vous devez le fournir avec
-% le code source de votre document lors du dépôt final.
-%
-% \subsection{Changement de police de caractères}
-%
-% Les gabarits comportent des déclarations types pour utiliser les
-% polices Palatino ou Times sous {\LaTeX} ou, sous {\XeLaTeX}, leurs
-% équivalents Pagella et Termes du projet
-% \link{https://www.gust.org.pl/projects/e-foundry/tex-gyre/}{TeX~Gyre}.
-%
-% \subsection{Options de \texorpdfstring{protect\pkg{babel}}{babel}}
-%
-% \begin{DescribeMacro}{\frenchbsetup}
-%   La commande \cmd{\frenchbsetup} de \pkg{babel} permet de contrôler
-%   certains ajustements typographiques apportés par le paquetage en
-%   mode français. Consultez la documentation de \pkg{babel} pour la
-%   liste des options de configuration disponibles.
-% \end{DescribeMacro}
-%
-% Les concepteurs de la classe {\ulclass}  proposent trois
-% ajustements dans les gabarits:
-% \begin{enumerate}
-% \item l'option |StandardItemizeEnv=true| évite que le mode français de
-%   \pkg{babel} ne diminue l'espacement vertical dans les listes;
-% \item l'option |ThinSpaceInFrenchNumbers=true| fait en sorte qu'une espace fine
-%   sera utilisée comme séparateur des milliers dans les nombres plutôt
-%   qu'une espace pleine;
-% \item les options |og=«| et |fg=»| déclarent que les caractères « et
-%   » utilisés dans le code source représentent les guillemets ouvrant
-%   et fermant, respectivement. Cela évite de devoir utiliser les
-%   commandes \cmd{\og} et \cmd{\fg} de \pkg{babel} tout en bénéficiant de
-%   l'ajutement automatique des espaces autour des symboles.
-% \end{enumerate}
-% Vous devez évidemment désactiver ces ajustements si l'option
-% |nobabel| est spécifiée au chargement de la classe.
-%
-% \subsection{Style de la bibliographie}
-% \label{sec:bibliographystyle}
-%
-% Tel qu'expliqué à la \autoref{sec:bibliographie:style}, la commande
-% \cmd{\bibliographystyle} permet de définir le mode de citation dans
-% le texte et la présentation des notices bibliographiques. Cette
-% commande devrait figurer dans les fichiers des chapitres
-% individuels dans une thèse ou un mémoire par articles.
-%
-% \subsection{Déclarations de la page frontispice}
-%
-% Les gabarits comportent toutes les déclarations nécessaires pour
-% composer la page frontispice des divers types de thèse ou de
-% mémoires. Vous devez remplacer les éléments se trouvant entre
-% crochets |< >| en respectant la forme indiquée. Assurez-vous de
-% supprimer les caractères |<| et |>| afin qu'ils n'apparaissent pas
-% sur la page frontispice de votre document.
-%
-% \subsection{Pages liminaires}
-%
-% \begin{DescribeMacro}{\frontmatter}
-%   La commande \cmd{\frontmatter} déclare que {\LaTeX} doit considérer le
-%   matériel qui suit comme des pages liminaires. En pratique, cela
-%   résulte essentiellement en une numérotation des pages en chiffres
-%   romains.
-% \end{DescribeMacro}
-%
-% Les normes de présentation de la FESP édictent que les thèses et
-% mémoires devraient comporter les pages liminaires suivantes, dans
-% l'ordre:
-% \begin{enumerate}[noitemsep]
-% \item page frontispice (obligatoire);
-% \item résumé en français (obligatoire);
-% \item résumé en anglais (recommandé, mais non obligatoire);
-% \item table des matières (obligatoire);
-% \item liste des tableaux;
-% \item liste des figures;
-% \item liste des abbréviations et des sigles;
-% \item dédicace;
-% \item épigraphe;
-% \item remerciements;
-% \item avant-propos (obligatoire dans le cas d'une thèse ou d'un
-%   mémoire par articles).
-% \end{enumerate}
-%
-% Les commandes
-% \begin{quote}
-%   \cmd{\frontispice} \\
-%   \cmd{\tableofcontents} \\
-%   \cmd{\listoftables} \\
-%   \cmd{\listoffigures} \\
-%   \cmd{\dedicace}\marg{texte} \\
-%   \cmd{\epigraphe}\marg{texte}\marg{auteur}
-% \end{quote}
-% permettent de générer les pages correspondantes. Seules les deux
-% dernières commandes admettent des arguments.
-%
-% \begin{rem}
-%   L'examen de doctorat, l'essai de maîtrise, le rapport de projet de
-%   recherche et le rapport de stage comportent une page de titre.
-%   Vous devez ajouter dans les gabarits les commandes nécessaires
-%   pour la production de la page de titre (\autoref{sec:pagetitre})
-%   et supprimer les autres pages liminaires. Rappelons que l'option
-%   de classe |examen| a pour effet de supprimer la page frontispice.
-% \end{rem}
-%
-% \begin{DescribeMacro}{\chapter*}
-%   Les résumés, la liste des abbréviations et des sigles, les
-%   remerciements et l'avant-propos sont composés comme des chapitres
-%   normaux, mais sans être numérotés. Il faut donc définir ces éléments
-%   avec la commande \cmd{\chapter*}.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\label}
-%   La commande \cmd{\label} permet d'utiliser le système de renvois
-%   automatiques de {\LaTeX} \citep[section~3.4]{formation-latex-ul}.
-%   Les étiquettes des chapitres non numérotés sont déjà configurées
-%   pour l'ajout de ces chapitres dans la table des matières (voir
-%   ci-dessous). Nous recommandons fortement de définir vos propres
-%   étiquettes pour les chapitres normaux.
-% \end{DescribeMacro}
-%
-% \begin{DescribeMacro}{\phantomsection}
-%   \begin{DescribeMacro}{\addcontentsline}
-%     \begin{DescribeMacro}{\nameref}
-%       Les chapitres déclarés avec la commande \cmd{\chapter*}
-%       n'apparaissent pas dans la table des matières. Comme les
-%       normes de présentation de la FESP exigent que toutes les pages
-%       liminaires y figurent, nous faisons suivre les commandes
-%       \cmd{\chapter*}\marg{Titre} et \cmd{\label}\marg{nom} des
-%       commandes
-%     \end{DescribeMacro}
-%   \end{DescribeMacro}
-% \end{DescribeMacro}
-% \begin{quote}
-%   |\phantomsection\addcontentsline{toc}{chapter}{%| \\
-%   |  \nameref|\marg{nom}|}|
-% \end{quote}
-% Celles-ci ajoutent à la table des matières (|toc|) une section de
-% niveau |chapter| dont le titre est celui du chapitre auquel
-% correspond l'étiquette \meta{nom}. La commande \cmd{\phantomsection}
-% est rendue nécessaire (ou recommandée) par le paquetage
-% \pkg{hyperref}.
-%
-% \subsection{Corps du document}
-%
-% \begin{DescribeMacro}{\mainmatter}
-%   La commande \cmd{\mainmatter} délimite le début du corps du document. La
-%   numérotation des pages passe en chiffres arabes.
-% \end{DescribeMacro}
-%
-% Le corps du document devrait normalement compter une introduction (non
-% numérotée), un développement divisé en chapitres (numérotés) et une
-% conclusion (non numérotée).
-%
-% \subsection{Annexes}
-%
-% \begin{DescribeMacro}{\appendix}
-%   Si la thèse ou le mémoire comporte une ou plusieurs annexes,
-%   composer celles-ci comme des chapitres normaux insérés dans le
-%   document maître après la commande \cmd{\appendix}. Cette commande a
-%   pour effet de passer d'un mode de numération numérique (1, 1.1, 2, 2.1,
-%   \dots) à un mode alphanumérique (A, A.1, B, B.1, \dots).
-% \end{DescribeMacro}
-%
-% \subsection{Bibliographie}
-%
-% La bibliographie figure normalement à la toute fin du document, sous
-% forme de chapitre non numéroté. Tel qu'expliqué à la
-% \autoref{sec:bibliographie:multiples}, la commande
-% \cmd{\bibliography} doit plutôt se trouver dans les fichiers des
-% chapitres dans une thèse ou un mémoire par articles.
+% \changes{5.4}{2024-05-22}{La section de la documentation portant sur
+% l'explication détaillée des gabarits a été supprimée en faveur de
+% commentaires additionnels dans les gabarits.}
 %
 % \section{Commentaires, suggestions et aide}
 % \changes{5.0}{2018-08-09}{Code source du projet déplacé de GitHub
@@ -2630,19 +2380,19 @@
 
 \frontmatter                    % pages liminaires
 
-\frontispice                    % production de la page frontispice
+\frontispice                    % page frontispice (obligatoire)
 
-\include{resume}                % résumé français
-\include{abstract}              % résumé anglais
+\include{resume}                % résumé français (obligatoire)
+\include{abstract}              % résumé anglais (optionnel)
 \cleardoublepage
 
-\tableofcontents                % production de la TdM
+\tableofcontents                % table des matières (obligatoire)
 \cleardoublepage
 
-\listoftables                   % production de la liste des tableaux
+\listoftables                   % liste des tableaux
 \cleardoublepage
 
-\listoffigures                  % production de la liste des figures
+\listoffigures                  % liste des figures
 \cleardoublepage
 
 \dedicace{<Dédicace si désiré>}
@@ -2652,7 +2402,8 @@
 \cleardoublepage
 
 \include{remerciements}         % remerciements
-\include{avantpropos}           % avant-propos
+%<!articles>\include{avantpropos}           % avant-propos (optionnel)
+%<articles>\include{avantpropos}           % avant-propos (obligatoire)
 
 \mainmatter                     % corps du document
 
