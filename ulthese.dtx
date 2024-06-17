@@ -9,7 +9,7 @@
 % license or (at your option) any later version. The latest version
 % of this license is in:
 %
-%   http://www.latex-project.org/lppl.txt
+%   https://www.latex-project.org/lppl.txt
 %
 % This work has the LPPL maintenance status `maintained'.
 %
@@ -191,9 +191,6 @@
 
   \MakeShortVerb{\|}
 
-  %% Commandes pour les liens vers la documentation
-  \newcommand{\doc}[2][documentation]{\href{#2}{#1}}
-
 \begin{document}
   \DocInput{ulthese.dtx}
 \end{document}
@@ -285,11 +282,13 @@
 % le paquetage \pkg{ulthese}. Dans la mesure où votre distribution est
 % à jour, vous devriez pouvoir l'utiliser sans autre intervention.
 %
-% Le compagnon naturel de la présente documentation est
-% \doc[Rédaction avec {\LaTeX}]{http://texdoc.net/pkg/formation-latex-ul} %
-% \citep{formation-latex-ul}, la formation {\LaTeX} de l'Université Laval.
-% Vous y trouverez sans doute une foule d'informations utiles pour la
-% préparation de votre thèse ou de votre mémoire.
+% Le compagnon naturel de la présente documentation est «Rédaction
+% avec {\LaTeX}», la formation {\LaTeX} de l'Université Laval. Vous y
+% trouverez sans doute une foule d'informations utiles pour la
+% préparation de votre thèse ou de votre mémoire. L'ouvrage fait
+% lui aussi partie des distributions {\TeX} standards, via le
+% paquetage %
+% \href{https://ctan.org/pkg/formation-latex-ul}{\pkg{formation-latex-ul}}. %
 %
 % \section{Démarrage rapide (pour les impatients)}
 % \label{sec:utilisation:rapide}
@@ -371,19 +370,18 @@
 % \section{Utilisation}
 % \label{sec:utilisation}
 %
-% La classe {\ulclass} est basée sur la classe \class{memoir}
-% \citep{memoir}, une extension de la classe standard \class{book}
-% facilitant à plusieurs égards la préparation de documents d'allure
+% La classe {\ulclass} est basée sur la classe %
+% \href{https://ctan.org/pkg/memoir}{\class{memoir}}, %
+% une extension de la classe standard \class{book} facilitant à
+% plusieurs égards la préparation de documents d'allure
 % professionnelle dans {\LaTeX}. L'intégralité des fonctionnalités de
 % \class{memoir} se retrouve donc dans {\ulclass}.
 %
 % La classe \class{memoir} fait partie des distributions {\TeX}
 % récentes; elle devrait donc être installée et disponible sur votre
-% système. La classe est livrée avec une %
-% \doc{http://texdoc.net/pkg/memoir} %
-% exhaustive: le guide de l'utilisateur fait près de 600~pages!
-% N'hésitez pas à vous y référer pour réaliser une mise en page
-% particulière.
+% système. La classe est livrée avec une documentation exhaustive: le
+% guide de l'utilisateur fait près de 600~pages! N'hésitez pas à vous
+% y référer pour réaliser une mise en page particulière.
 %
 % La classe {\ulclass} est compatible avec le moteur pdf{\LaTeX}.
 % Cependant, pour faciliter la gestion du codage des fichiers et des
@@ -591,34 +589,37 @@
 % \texttt{bibchapitre} et \texttt{bibsection}.}
 %
 % \begin{DescribeOption}{nonatbib}
-%   L'option |nonatbib| empêche le chargement du paquetage
-%   \pkg{natbib}. Celui-ci est normalement chargé par la classe;
-%   voir la \autoref{sec:bibliographie}. L'option |nonatbib| permet
-%   d'empêcher le chargement pour modifier les options du paquetage ou
-%   en cas de conflit avec un autre paquetage de mise en forme de la
+%   L'option |nonatbib| empêche le chargement du paquetage %
+%   \href{https://ctan.org/pkg/natbib}{\pkg{natbib}}. %
+%   Celui-ci est normalement chargé par la classe; voir la
+%   \autoref{sec:bibliographie}. L'option |nonatbib| permet d'empêcher
+%   le chargement pour modifier les options du paquetage ou en cas de
+%   conflit avec un autre paquetage de mise en forme de la
 %   bibliographie.
 % \end{DescribeOption}
 %
 % \begin{DescribeOption}{nobabel}
-%   L'option |nobabel| empêche le chargement du paquetage \pkg{babel}.
+%   L'option |nobabel| empêche le chargement du paquetage %
+%   \href{https://ctan.org/pkg/babel}{\pkg{babel}}. %
 %   La classe utilise par défaut ce paquetage pour le traitement des
 %   langues dans le document; voir la \autoref{sec:langues}. L'option
 %   |nobabel| permet d'empêcher son chargement si un autre paquetage
-%   devait être utilisé --- on pense ici principalement à
-%   \pkg{polyglossia} pour un document produit avec le moteur
-%   {\XeLaTeX}.
+%   devait être utilisé --- on pense ici principalement à %
+%   \href{https://ctan.org/pkg/polyglossia}{\pkg{polyglossia}} %
+%   pour un document produit avec le moteur {\XeLaTeX}.
 % \end{DescribeOption}
 %
 % \changes{5.1}{2018-09-30}{Ajout de l'option \texttt{nohyperref}.}
 % \begin{DescribeOption}{nohyperref}
-%   L'option |nohyperref| empêche le chargement du paquetage
-%   \pkg{hyperref}. L'interaction de ce paquetage avec les autres est
-%   parfois --- voire souvent --- délicate. La classe tâche de le
-%   charger en tout dernier, tel que généralement recommandé. L'option
-%   |nohyperref| permet d'empêcher son chargement s'il est absolument
-%   nécessaire de charger d'autres paquetages avant \pkg{hyperref}. Si
-%   vous utilisez cette option, vous devez obligatoirement charger
-%   \pkg{hyperref} dans le préambule du document.
+%   L'option |nohyperref| empêche le chargement du paquetage %
+%   \href{https://ctan.org/pkg/hyperref}{\pkg{hyperref}}. %
+%   L'interaction de ce paquetage avec les autres est parfois ---
+%   voire souvent --- délicate. La classe tâche de le charger en tout
+%   dernier, tel que généralement recommandé. L'option |nohyperref|
+%   permet d'empêcher son chargement s'il est absolument nécessaire de
+%   charger d'autres paquetages avant \pkg{hyperref}. Si vous utilisez
+%   cette option, vous devez obligatoirement charger \pkg{hyperref}
+%   dans le préambule du document.
 % \end{DescribeOption}
 %
 % \begin{DescribeOption}{english, french, ...}
@@ -826,14 +827,15 @@
 % documentation sur les autres paquetages chargés par la classe.}
 % La classe {\ulclass} charge par défaut les paquetages suivants qui
 % peuvent vous être utiles: %
-% \pkg{babel} \citep[voir aussi la \autoref{sec:langues}]{babel}, %
-% \pkg{fontspec} \citep[avec {\XeLaTeX} uniquement]{fontspec}, %
-% \pkg{graphicx} \citep{graphicx}, %
-% \pkg{hyperref} \citep{hyperref}, %
-% \pkg{microtype} \citep{microtype}, %
-% \pkg{natbib} \citep[voir aussi la \autoref{sec:bibliographie}]{natbib},
-% \pkg{numprint} \citep{numprint}, %
-% \pkg{xcolor} \citep{xcolor}. %
+% \href{https://ctan.org/pkg/babel}{\pkg{babel}} (voir aussi la \autoref{sec:langues}) %
+% \href{https://ctan.org/pkg/fontspec}{\pkg{fontspec}}, %
+% \href{https://ctan.org/pkg/graphicx}{\pkg{graphicx}}, %
+% \href{https://ctan.org/pkg/hyperref}{\pkg{hyperref}}, %
+% \href{https://ctan.org/pkg/microtype}{\pkg{microtype}}, %
+% \href{https://ctan.org/pkg/natbib}{\pkg{natbib}} (voir aussi la
+% \autoref{sec:bibliographie}, %
+% \href{https://ctan.org/pkg/numprint}{\pkg{numprint}}, %
+% \href{https://ctan.org/pkg/xcolor}{\pkg{xcolor}}. %
 % Tel que mentionné précédemment, la classe est basée sur
 % \class{memoir} qui, elle-même, incorpore d'office une trentaine de
 % paquetages\footnote{%
@@ -850,9 +852,11 @@
 % \subsection{Paquetage incompatible}
 % \label{sec:incompatible}
 %
-% Le paquetage \pkg{geometry} est incompatible avec la classe à cause
-% de sa mauvaise interaction avec \class{memoir}. Son chargement dans
-% le préambule du document cause une erreur lors de la compilation.
+% Le paquetage %
+% \href{https://ctan.org/pkg/geometry}{\pkg{geometry}} %
+% est incompatible avec la classe à cause de sa mauvaise interaction
+% avec \class{memoir}. Son chargement dans le préambule du document
+% cause une erreur lors de la compilation.
 %
 % \section{Thèses et mémoires par articles}
 % \changes{5.0}{2018-06-08}{Ajout d'une section spécifique sur les
@@ -884,10 +888,11 @@
 % Une complication additionnelle si vous rédigez dans une langue autre
 % que l'anglais consiste à adapter {\LaTeX} à votre langue, qu'il
 % s'agisse des mots clés, de la typographie ou de la césure des mots.
-% La solution standard à ce problème provient du paquetage
-% \pkg{babel}. Celui-ci permet de combiner plusieurs langues dans un
-% même document et de passer de l'une à l'autre facilement. Il est
-% chargé par défaut par la classe {\ulclass}.
+% La solution standard à ce problème provient du paquetage %
+% \href{https://ctan.org/pkg/babel}{\pkg{babel}}. %
+% Celui-ci permet de combiner plusieurs langues dans un même document
+% et de passer de l'une à l'autre facilement. Il est chargé par défaut
+% par la classe {\ulclass}.
 %
 % Aucune langue n'est spécifiée dans la classe. Vous aurez sans doute
 % recours à l'anglais et au français, ne serait-ce que pour les deux
@@ -908,34 +913,32 @@
 %   les brefs changements de langue.
 % \end{DescribeEnv}
 %
-% Si vous n'êtes pas autrement familier avec le paquetage
-% \pkg{babel}, consultez sa %
-% \doc{http://texdoc.net/pkg/babel/}. %
-% Celle-ci est éclatée en un document principal pour le cœur du
-% paquetage et plusieurs autres pour les fonctionnalités propres à une
-% langue: %
-% \doc[anglais]{http://texdoc.net/pkg/babel-english}, %
-% \doc[français]{http://texdoc.net/pkg/babel-french}, %
-% etc. Consultez au moins les documents consacrés aux
-% langues utilisées dans votre thèse ou mémoire. Le plus simple
-% consiste sans doute à consulter en ligne sur CTAN les
+% Si vous n'êtes pas autrement familier avec le paquetage \pkg{babel},
+% consultez sa documentation. Celle-ci est éclatée en un document
+% principal pour le cœur du paquetage et plusieurs autres pour les
+% fonctionnalités propres à une langue. Consultez au moins les
+% documents consacrés aux langues utilisées dans votre thèse ou
+% mémoire. Le plus simple consiste sans doute à consulter en ligne sur
+% CTAN les
 % \href{https://ctan.org/pkg/babel-contrib/}{%
 % documents spécifiques par langue}.
 % \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
 % de \textbf{babel}.}
 %
 % \begin{DescribeMacro}{\nombre}
-%   Le paquetage \pkg{numprint} étant chargé dans la classe avec
-%   \pkg{babel}, vous pouvez utiliser la commande \cmd{\nombre} pour
-%   formater automatiquement les nombres. Par exemple, le résultat de
-%   |\nombre{123456789}| est \nombre{123456789}.
+%   Le paquetage %
+%   \href{https://ctan.org/pkg/numprint}{\pkg{numprint}} %
+%   étant chargé dans la classe avec \pkg{babel}, vous pouvez utiliser
+%   la commande \cmd{\nombre} pour formater automatiquement les
+%   nombres. Par exemple, le résultat de |\nombre{123456789}| est
+%   \nombre{123456789}.
 % \end{DescribeMacro}
 %
-% Les utilisateurs de {\XeLaTeX} qui souhaiteraient plutôt utiliser le
-% plus récent paquetage \pkg{polyglossia} \citep{polyglossia} peuvent
-% empêcher le chargement de \pkg{babel} avec l'option |nobabel| de la
-% classe. Ils devront toutefois charger et configurer
-% \pkg{polyglossia} eux-mêmes dans l'entête de leur document. Ce
+% Si vous souhaitez plutôt utiliser le plus récent paquetage %
+% \href{https://ctan.org/pkg/polyglossia}{\pkg{polyglossia}} %
+% avec {\XeLaTeX}, vous devez empêcher le chargement de \pkg{babel}
+% avec l'option |nobabel| de la classe, puis  charger et configurer
+% \pkg{polyglossia} vous-même dans l'entête de votre document. Ce
 % paquetage est moins évolué que \pkg{babel} pour la typographie
 % française.
 %
@@ -945,8 +948,7 @@
 % bibliographies multiples.}
 %
 % \begin{DescribeMacro}{\bibliography}
-%   Tel qu'expliqué au chapitre~8 de \citet{formation-latex-ul},
-%   il est fortement recommandé d'utiliser {\BibTeX} pour la
+%   Il est fortement recommandé d'utiliser {\BibTeX} pour la
 %   préparation de la bibliographie d'un document. Celle-ci est
 %   insérée dans le document à l'endroit où apparait la commande
 %   \cmd{\bibliography} dans le code source. Cette commande prend en
@@ -958,10 +960,12 @@
 % \label{sec:bibliographie:options}
 %
 % Dans la classe {\ulclass}, la mise en forme des citations est
-% confiée au paquetage \pkg{natbib} (à moins que l'option |nonatbib|
-% ne soit spécifiée). Le paquetage est chargé avec les options par
-% défaut, soit |round|, |semicolon| et |authoryear|. Pour spécifier
-% d'autres options, vous avez deux possibilités:
+% confiée au paquetage %
+% \href{https://ctan.org/pkg/natbib}{\pkg{natbib}} %
+% (à moins que l'option |nonatbib| ne soit spécifiée). Le paquetage
+% est chargé avec les options par défaut, soit |round|, |semicolon| et
+% |authoryear|. Pour spécifier d'autres options, vous avez deux
+% possibilités:
 % \begin{enumerate}
 % \item utiliser l'option |nonatbib| de la classe et ensuite charger
 %   explicitement \pkg{natbib} avec ses options;
@@ -989,9 +993,7 @@
 %   |\bibliographystyle{plain-fr}|
 % \end{quote}
 %
-% Consultez la %
-% \doc{http://texdoc.net/pkg/natbib/} %
-% de \pkg{natbib} pour les détails.
+% Consultez la documentation de \pkg{natbib} pour les détails.
 %
 % \subsection{Style de la bibliographie}
 % \label{sec:bibliographie:style}
@@ -1004,21 +1006,22 @@
 %   {\LaTeX} sont |plain|, |unsrt|, |alpha| et |abbrv|.
 % \end{DescribeMacro}
 %
-% Le paquetage \pkg{natbib} chargé par défaut par la classe supporte
-% le style de citation auteur-année fréquemment employé en sciences
-% naturelles, plusieurs commandes de citation, un grand nombre de
-% styles de bibliographie ainsi que des entrées spécifiques pour les
-% numéros ISBN et les URL. Le paquetage fournit des styles de
-% bibliographie |plainnat|, |unsrtnat| et |abbrvnat| similaires aux
-% styles standards, mais plus complets. Il existe des
-% \href{https://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/}{versions
-% francisées} de ces styles (et de quelques autres) dans CTAN.
+% Le paquetage \pkg{natbib} supporte le style de citation auteur-année
+% fréquemment employé en sciences naturelles, plusieurs commandes de
+% citation, un grand nombre de styles de bibliographie ainsi que des
+% entrées spécifiques pour les numéros ISBN et les URL. Le paquetage
+% fournit des styles de bibliographie |plainnat|, |unsrtnat| et
+% |abbrvnat| similaires aux styles standards, mais plus complets. Il
+% existe des %
+% \href{https://ctan.org/pkg/bib-fr}{versions francisées} %
+% de ces styles (et de quelques autres) dans CTAN.
 %
-% Le paquetage \pkg{francais-bst} \citep{francais-bst} fournit une
-% feuille de style compatible avec \pkg{natbib} permettant de composer
-% des bibliographies auteur-année respectant les normes de typographie
-% française proposées dans \cite{Malo:1996}. Pour utiliser ce style,
-% spécifier dans le préambule du document LaTeX
+% Le paquetage %
+% \href{https://ctan.org/pkg/francais-bst}{\pkg{francais-bst}} %
+% fournit une feuille de style compatible avec \pkg{natbib} permettant
+% de composer des bibliographies auteur-année respectant les normes de
+% typographie française. Pour utiliser ce style, spécifier dans le
+% préambule du document LaTeX
 % \begin{quote}
 %   |\bibliographystyle{francais}|
 % \end{quote}
@@ -1042,7 +1045,7 @@
 %
 % La FESP permet l'utilisation des polices Times, Palatino (la police
 % du présent document) et Lucida~Bright dans les thèse et mémoires.
-% \citet[section~10.2]{formation-latex-ul} explique comment utiliser ces
+%  explique comment utiliser ces
 % polices dans votre document.
 %
 % \changes{5.4}{2024-05-22}{La section de la documentation portant sur
@@ -1070,83 +1073,6 @@
 % Si la réponse à votre question ne se trouve ni dans le wiki, ni dans
 % les archives, alors écrivez à l'adresse
 % \href{mailto:ulthese-aide@listes.ulaval.ca}{\url{ulthese-aide@listes.ulaval.ca}}.
-%
-% \begin{thebibliography}{15}
-%   \addcontentsline{toc}{section}{Références}
-% \bibitem[{Braams et Bezos(2016)}]{babel}
-%   Braams, J. et J.~Bezos. 2016,
-%   {\selectlanguage{english}\emph{Babel}}.
-%   URL~\url{https://www.ctan.org/pkg/babel/}.
-%
-% \bibitem[{Carlisle et {The \LaTeX3\ Project}(2016)}]{graphicx}
-%   Carlisle, D. et {The \LaTeX3\ Project}. 2016,
-%   {\selectlanguage{english}\emph{Packages in the `graphics'
-%   Bundle}}. URL~\url{https://www.ctan.org/pkg/graphics/}.
-%
-% \bibitem[{Charette(2015)}]{polyglossia}
-%   Charette, F. 2015, {\selectlanguage{english}\emph{Polyglossia:
-%   An Alternative to Babel for {\XeLaTeX} and {\LuaLaTeX}}}.
-%   URL~\url{https://www.ctan.org/pkg/polyglossia/}, current
-%   maintainer Arthur Reutenauer.
-%
-% \bibitem[{Daly(2010)}]{natbib}
-%   Daly, P.~W. 2010, {\selectlanguage{english}\emph{Natural
-%   Sciences Citations and References}}.
-%   URL~\url{https://www.ctan.org/pkg/natbib/}.
-%
-% \bibitem[{Goulet(2013)}]{francais-bst}
-%   Goulet, V. 2013, {\selectlanguage{french}«Paquetage
-%   francais-bst»},
-%   URL~\url{https://www.ctan.org/pkg/francais-bst/}.
-%
-% \bibitem[{Goulet(2020)}]{formation-latex-ul}
-%   Goulet, V. 2020, {\selectlanguage{french}\emph{Rédaction avec
-%   {\LaTeX}}}, document libre sous contrat Creative Commons.
-%   URL~\url{httpss://ctan.org/pkg/formation-latex-ul}.
-%
-% \bibitem[{Harders(2012)}]{numprint}
-%   Harders, H. 2012, {\selectlanguage{english}\emph{The
-%   numprint package}}.
-%   URL~\url{https://www.ctan.org/pkg/numprint/}.
-%
-% \bibitem[{Jeffrey et Mittelbach(2015)}]{inputenc}
-%   Jeffrey, A. et F.~Mittelbach. 2015,
-%   {\selectlanguage{english}\emph{inputenc.sty}}.
-%   URL~\url{https://www.ctan.org/pkg/inputenc/}.
-%
-% \bibitem[{Kern(2016)}]{xcolor}
-%   Kern, D.~U. 2016, {\selectlanguage{english}\emph{Extending
-%   {\LaTeX}’s color facilities: the xcolor package}}.
-%   URL~\url{https://www.ctan.org/pkg/xcolor/}.
-%
-% \bibitem[{Lehman et Wright(2018)}]{etoolbox}
-%   Lehman, P. et J.~Wright. 2018,
-%   {\selectlanguage{english}\emph{The etoolbox package}}.
-%   URL~\url{https://www.ctan.org/pkg/etoolbox/}.
-%
-% \bibitem[{Malo(1996)}]{Malo:1996}
-%   Malo, M. 1996, {\selectlanguage{french}\emph{Guide de la
-%   communication écrite au cégep, à l'université et en
-%   entreprise}}, Québec Amérique. ISBN~978-2-8903-7875-9.
-%
-% \bibitem[{Rahtz et Oberdiek(2017)}]{hyperref}
-%   Rahtz, S. et H.~Oberdiek. 2017,
-%   {\selectlanguage{english}\emph{Hypertext marks in {\LaTeX}: a
-%   manual for hyperref}}.
-%   URL~\url{https://www.ctan.org/pkg/hyperref/}.
-%
-% \bibitem[{Robertson et Hosny(2017)}]{fontspec}
-%   Robertson, W. et K.~Hosny. 2017,
-%   {\selectlanguage{english}\emph{The fontspec package: Font
-%   selection for {\XeLaTeX} and {\LuaLaTeX}}}.
-%   URL~\url{https://www.ctan.org/pkg/fontspec/}.
-%
-% \bibitem[{Wilson(2016)}]{memoir}
-%   Wilson, P. 2016, {\selectlanguage{english}\emph{The Memoir Class
-%   for Configurable Typesetting}}, 8{\ieme} éd., The Herries Press.
-%   URL~\url{https://www.ctan.org/pkg/memoir/}, maintained by Lars
-%   Madsen.
-% \end{thebibliography}
 %
 % \appendix
 %
