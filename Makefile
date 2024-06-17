@@ -1,6 +1,7 @@
 ### -*-Makefile-*- pour préparer le paquetage ulthese
 ##
-## Copyright (C) 2017-2023 Vincent Goulet
+## Copyright (C) 2017-2024 Faculté des études supérieures et
+## postdoctorales
 ##
 ## 'make class' extrait la classe et les gabarits du fichier dtx.
 ##
@@ -21,8 +22,10 @@
 
 ## Nom du paquetage sur CTAN
 PACKAGENAME = ulthese
+MAIN = ${PACKAGENAME}.dtx
+CLASS = ${MAIN:.dtx=.cls} 
 ARCHIVE = ${PACKAGENAME}.zip
-ARCHIVENOTEX = ${PACKAGENAME}-sans-tex-local.zip
+ARCHIVENOTEX = ${PACKAGENAME}-installation-projet.zip
 
 ## Nom du dépôt dans GitLab
 REPOSURL = https://gitlab.com/vigou3/ulthese
@@ -41,8 +44,9 @@ VERSION = $(shell awk -F '[ \[]' '/^  \[.*\]/ \
 	      exit }' ${PACKAGENAME}.dtx)
 
 ## Outils de travail
-LATEX = pdflatex
-MAKEINDEX = makeindex
+LATEX = latex -halt-on-error
+XELATEX = xelatex -halt-on-error
+TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
 CP = cp -p
 RM = rm -r
 MD := mkdir -p
@@ -59,21 +63,22 @@ OAUTHTOKEN = $(shell cat ~/.gitlab/token)
 TAGNAME = v$(word 1,${VERSION})
 
 
-all : class doc
+all: class doc
 
-${PACKAGENAME}.cls: ${PACKAGENAME}.dtx
-	${LATEX} ${PACKAGENAME}.ins
+${CLASS} ${TEMPLATES}: ${MAIN}
+	${LATEX} ${MAIN}
 
-${PACKAGENAME}.pdf: ${PACKAGENAME}.dtx
-	${LATEX} $<
-	${MAKEINDEX} -s gglo.ist -o ${PACKAGENAME}.gls ${PACKAGENAME}.glo
-	${LATEX} $<
+${MAIN:.dtx=.pdf}: ${MAIN}
+	${XELATEX} $<
+	${MAKEINDEX} -s gglo.ist -o ${MAIN:.dtx=.gls} ${MAIN:.dtx=.glo}
+	${XELATEX} $<
+	${XELATEX} $<
 
 .PHONY: class
-class : ${PACKAGENAME}.cls
+class: ${CLASS}
 
 .PHONY: doc
-doc : ${PACKAGENAME}.pdf
+doc: ${MAIN:.dtx=.pdf}
 
 .PHONY: release
 release: zip check-status upload create-release publish
