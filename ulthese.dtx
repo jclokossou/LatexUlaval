@@ -33,6 +33,7 @@
 %<*driver>
 \documentclass[article,oneside,11pt,x11names,french]{memoir}
   \usepackage{babel}
+  \usepackage[autolanguage]{numprint}
   \usepackage[round,semicolon,authoryear,sectionbib]{natbib}
   \usepackage{metalogo}
   \usepackage{enumitem}
@@ -71,7 +72,7 @@
   \DisableCrossrefs
   \CodelineNumbered
   \RecordChanges
-  \OnlyDescription
+  %\OnlyDescription
   \DontCheckModules
 
   %% Polices de caractères
@@ -147,6 +148,14 @@
   \setsecnumdepth{subsubsection}
   \maxsecnumdepth{subsubsection}
 
+  % Les annexes sont des sections, ici. Redéfinir la
+  % commande \appendix comme dans la classe article.
+  \makeatletter
+  \renewcommand*\appendix{\par
+    \setcounter{section}{0}
+    \gdef\thesection{\@Alph\c@section}}
+  \makeatother
+
   %% Aligner à gauche l'environnement description
   \setlist[description]{leftmargin=*,align=left}
 
@@ -188,15 +197,13 @@
   \MakeShortVerb{\|}
 
   %% Commandes pour les liens vers la documentation
-  \newcommand{\link}[2]{\href{#1}{#2~{\smaller\faExternalLink*}}}
-  \newcommand{\doc}[2][documentation]{\link{#2}{#1}}
+  \newcommand{\doc}[2][documentation]{\href{#2}{#1}}
 
 \begin{document}
   \DocInput{ulthese.dtx}
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{914}
 % \DoNotIndex{\',\^,\`,\ ,\ae}
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*}
@@ -258,25 +265,24 @@
 %
 % La classe {\ulclass} permet de composer des thèses et mémoires
 % immédiatement conformes aux règles générales et complémentaires de
-% présentation du mémore ou de la thèses de la Faculté des études
-% supérieures et postdoctorales (FESP) de l'Université Laval. Ces
-% règles définissent principalement la présentation des pages de titre
-% des thèses et mémoires ainsi que la disposition du texte sur la
-% page.
+% présentation de la Faculté des études supérieures et postdoctorales
+% (FESP) de l'Université Laval. Ces règles définissent principalement
+% la présentation des pages de titre des thèses et mémoires ainsi que
+% la disposition du texte sur la page.
 %
 % La composition d'un manuscript avec la classe {\ulclass} requiert une
 % distribution {\TeX} récente et à jour. Nous recommandons les
 % distributions %
-% \link{https://tug.org/texlive}{{\TeX}~Live} %
+% \href{https://tug.org/texlive}{{\TeX}~Live} %
 % --- %
 % ou sa variante pour macOS %
-% \link{https://tug.org/mactex}{Mac{\TeX}} %
+% \href{https://tug.org/mactex}{Mac{\TeX}} %
 % --- %
 % et %
-% \link{https://miktex.org}{MiK{\TeX}}. %
+% \href{https://miktex.org}{MiK{\TeX}}. %
 % Vous pouvez également avoir recours à une plateforme de rédaction en
 % ligne comme %
-% \link{https://overleaf.com}{Overleaf}; %
+% \href{https://overleaf.com}{Overleaf}; %
 % leurs distributions {\TeX} satisfont généralement les conditions
 % ci-dessus.
 %
@@ -304,14 +310,13 @@
 %
 % Pour débuter rapidement la rédaction de votre manuscrit, copiez les
 % gabarits appropriés dans votre dossier de travail et suivez les
-% directives qui s'y trouvent. La \autoref{sec:gabarits} fournit les
-% informations détaillées.
+% directives qui s'y trouvent. Nous recommandons de compiler votre
+% manuscript avec {\XeLaTeX}.
 %
-% Dès que le texte contient des caractères non-ASCII (comme des
-% lettres accentuées), vous devez obligatoirement enregistrer vos
-% fichiers dans le codage de caractères
-% \href{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}. Nous recommandons
-% de compiler votre manuscript avec {\XeLaTeX}. %
+% La classe utilise le codage de caractères
+% \href{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}. Vous devez donc
+% obligatoirement utiliser ce type codage quand un fichier contient
+% des caractères non-ASCII (comme des lettres accentuées).
 %
 % Le reste de ce guide contient les informations détaillées sur les
 % caractéristiques et fonctionnalités de la classe.
@@ -332,11 +337,11 @@
 % n'est pas à jour.
 %
 % La classe {\ulclass} est distribuée dans le paquetage %
-% \link{https://ctan.org/pkg/ulthese}{\pkg{ulthese}} %
+% \href{https://ctan.org/pkg/ulthese}{\pkg{ulthese}} %
 % via le réseau de sites \emph{Comprehensive {\TeX} Archive Network}
 % (CTAN). Elle fait partie des distributions {\TeX} standards telles
 % que {TeX}~Live, Mac{\TeX} et MiK{\TeX}. Nous recommandons fortement
-% d'installer ou de mettre à jour le paquetage à l'aide du
+% d'installer ou de mettre à jour \pkg{ulthese} à l'aide du
 % gestionnaire de paquetages de votre distribution {\TeX}. Par
 % exemple, avec {\TeX}~Live, vous pouvez effectuer ces opérations dans
 % l'assistant graphique, ou encore avec l'une ou l'autre des commandes
@@ -358,7 +363,7 @@
 %   \code{ulthese-installation-projet.zip}
 % \end{quote}
 % depuis le
-% \link{https://gitlab.com/vigou3/ulthese/-/releases}{dépôt du projet ulthese}
+% \href{https://gitlab.com/vigou3/ulthese/-/releases}{dépôt du projet ulthese}
 % et décompressez celle-ci dans le répertoire de votre document. Vous
 % disposerez alors de tous les fichiers essentiels de la classe à
 % l'intérieur de ce projet.
@@ -434,9 +439,9 @@
 % \subsection{Codage de caractères du code source}
 % \label{sec:utilisation:codage}
 %
-% La classe utilise par défaut le codage de caractères
-% \link{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8},
-% et ce, tant avec {pdf\LaTeX} qu'avec {\XeLaTeX}. Les fichiers
+% La classe utilise le codage de caractères
+% \href{https://fr.wikipedia.org/wiki/UTF-8}{UTF-8}
+% tant avec {pdf\LaTeX} qu'avec {\XeLaTeX}. Les fichiers
 % contenant du texte avec des accents ou tout autre symbole non-ASCII
 % doivent donc obligatoirement être enregistrés dans ce codage de
 % caractères\footnote{%
@@ -585,13 +590,6 @@
 %   de stage» et la page frontispice est supprimée.
 % \end{DescribeOption}
 %
-% \begin{DescribeOption}{10pt,11pt,12pt}
-%   Les options standards |10pt|, |11pt| et |12pt| sélectionnent une
-%   taille de police de 10, 11 ou 12~points. Par défaut la classe
-%   utilise une police de 11~points. Ces options n'ont aucun effet sur
-%   la taille des polices des pages de titre.
-% \end{DescribeOption}
-%
 % \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibchapitre}.}
 % \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibsection}.}
 % \changes{5.4}{2024-05-22}{Suppression des options
@@ -637,11 +635,12 @@
 % \end{DescribeOption}
 %
 % Toute autre option sera passée à la classe \class{memoir} dont,
-% entre autres, le format du papier. Le format lettre nord-américain
-% (option |letterpaper|) est utilisé par défaut. Si votre thèse doit
-% être imprimée en format international A4, utilisez l'option
-% |a4paper|. La classe \class{memoir} est toujours chargée avec
-% l'option |oneside|.
+% entre autres, la taille de la police de caractères et le format du
+% papier. La taille de police par défaut de la classe est 11~points
+% (option |11pt|). Le format lettre nord-américain (option
+% |letterpaper|) est utilisé par défaut. Si votre thèse doit être
+% imprimée en format international A4, utilisez l'option |a4paper|. La
+% classe \class{memoir} est toujours chargée avec l'option |oneside|.
 %
 % \subsection{Commandes de la classe}
 % \label{sec:utilisation:commandes}
@@ -674,12 +673,13 @@
 % \end{table}
 %
 % \begin{DescribeMacro}{\titre}
-%   Titre principal de la thèse ou du mémoire. Ne pas utiliser la
-%   commande \cmd{\title} de {\LaTeX} pour ce faire.
+%   La commande \cmdprint{\titre} sert à spécifier le titre principal
+%   du manuscrit. Vous ne devez pas utiliser utiliser la commande
+%   \cmd{\title} de {\LaTeX} pour ce faire.
 %
-%   Vous devez couper manuellement avec |\\| ou \cmd{\newline} un
-%   titre très long. Par exemple, la déclaration d'un titre d'une
-%   seule ligne est:
+%   Coupez manuellement avec {\bs\bs} ou \cmd{\newline} un titre très
+%   long. Par exemple, la déclaration d'un titre d'une seule ligne
+%   est:
 %   \begin{quote}
 %     |\titre{Ceci est un titre d'une seule ligne}|
 %   \end{quote}
@@ -691,48 +691,51 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\soustitre}
-%   Sous-titre de la thèse ou du mémoire, le cas échéant. Les remarques
-%   sur un long titre principal s'appliquent également au sous-titre.
+%   La commande \cmdprint{\soustitre} sert à spécifier le sous-titre
+%   du manuscrit, le cas échéant. Les remarques sur un long titre
+%   principal s'appliquent également au sous-titre.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\auteur}
-%   Nom complet de l'auteur de la thèse ou du mémoire, sous la forme
-%   |Prénom Nom| avec seulement des majuscules initiales. Ne pas
-%   utiliser la commande \cmd{\author} de {\LaTeX} pour le nom de
-%   l'auteur.
+%   La commande \cmdprint{\author} permet de saisir le nom complet de
+%   l'auteur de la thèse ou du mémoire, sous la forme |Prénom Nom|
+%   avec seulement des majuscules initiales. N'utilisez pas la
+%   commande \cmd{\author} de {\LaTeX} pour le nom de l'auteur.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\programme}
-%   Nom complet officiel du programme d'études comme «Doctorat en
-%   informatique» ou «Maîtrise en mathématiques». Si le programme
-%   comporte une majeure, séparer sa mention de celle du programme
-%   principal par un tiret demi-quadratin (obtenu avec |--|).
+%   La commande \cmdprint{\programme} sert à spécifier le nom complet
+%   officiel du programme d'études comme «Doctorat en informatique» ou
+%   «Maîtrise en mathématiques». Si le programme comporte une majeure,
+%   séparez sa mention de celle du programme principal par un tiret
+%   demi-quadratin (obtenu avec |--|).
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\direction}
-%   Nom complet du directeur ou de la directrice de recherche, sous la
-%   forme |Prénom Nom| avec seulement des majuscules initiales, suivi
-%   d'une virgule et de la mention «directeur de recherche» ou
-%   «directrice de recherche».
+%   La commande \cmdprint{\direction} sert à spécifier le nom complet
+%   du directeur ou de la directrice de recherche, sous la forme
+%   |Prénom Nom| avec seulement des majuscules initiales, suivi d'une
+%   virgule et de la mention «directeur de recherche» ou «directrice
+%   de recherche».
 %
 %   Les thèses en cotutelle comportent un directeur ou une directrice
 %   de recherche et un directeur ou une directrice de cotutelle.
-%   Séparer chaque mention par |\\|, comme ceci:
+%   Séparez chaque mention par {\bs\bs}, comme ceci:
 %   \begin{quote}
 %     |\direction{Prénom Nom, directrice de recherche \\| \\
 %     |           Prénom Nom, directeur de cotutelle}|
 %   \end{quote}
 %
 %   De même, les maîtrises en bidiplomation comptent deux directeurs
-%   ou directrices de recherche. Séparer chaque mention tel que
+%   ou directrices de recherche. Séparez chaque mention tel que
 %   mentionné ci-dessus.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\codirection}
-%   Comme la commande \cmd{\direction}, mais pour le ou les
-%   codirecteurs de recherche, s'il y a lieu. Lorsqu'il y a plus d'un
-%   codirecteur de recherche, séparer chaque mention par |\\|, comme
-%   ceci:
+%   La commande \cmdprint{\codirection} joue le même rôle que la
+%   commande \cmdprint{\direction}, mais pour le ou les codirecteurs
+%   de recherche, s'il y a lieu. Lorsqu'il y a plus d'un codirecteur
+%   de recherche, séparez chaque mention par {\bs\bs}, comme ceci:
 %   \begin{quote}
 %     |\codirection{Prénom Nom, directrice de recherche \\| \\
 %     |             Prénom Nom, directeur de recherche}|
@@ -740,27 +743,30 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\frontispice}
-%   Création de la page frontispice. De toutes les commandes
-%   ci-dessus, c'est la seule qui doit se trouver dans le corps du
-%   document plutôt que dans le préambule.
+%   La commande \cmdprint{\frontispice} crée la page frontispice à
+%   l'endroit où elle apparait dans le code source. De toutes les
+%   commandes ci-dessus, c'est la seule qui doit se trouver dans le
+%   corps du document plutôt que dans le préambule.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\dedicace}
-%   Ajout d'une dédicace («À mes parents», «À Camille») à la thèse ou
-%   au mémoire. La dédicace est disposée seule sur une page liminaire,
-%   à une dizaine de lignes de la marge du haut et alignée à droite.
-%   Par défaut, elle est composée en italique.
+%   La commande \cmdprint{\dedicace} permet d'insérer une dédicace («À
+%   mes parents», «À Camille») à l'endroit où elle apparait dans le
+%   code source. La dédicace est disposée seule sur une page
+%   liminaire, à une dizaine de lignes de la marge du haut et alignée
+%   à droite. Par défaut, elle est composée en italique.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\epigraphe}
-%   Ajout d'une épigraphe au début du document. Comme la dédicace,
-%   l'épigraphe est disposée seule sur une page liminaire, à une
-%   dizaine de lignes de la marge du haut et alignée à droite. La
-%   commande accepte deux arguments, soit le texte de la citation et
-%   son auteur ou la source, dans l'ordre.
+%   La commande \cmdprint{\epigraphe} permet d'insérer une épigraphe
+%   au début du document. Comme la dédicace, l'épigraphe est disposée
+%   seule sur une page liminaire, à une dizaine de lignes de la marge
+%   du haut et alignée à droite. La commande accepte deux arguments,
+%   soit le texte de la citation et son auteur ou la source, dans
+%   l'ordre.
 %
-%   Pour ajouter une épigraphe au début d'un ou plusieurs chapitres,
-%   utiliser directement la commande \cmd{\epigraph} de
+%   Pour ajouter une épigraphe au début d'un ou de plusieurs
+%   chapitres, utilisez directement la commande \cmd{\epigraph} de
 %   \class{memoir}, sur laquelle \cmd{\dedicace} et \cmd{\epigraphe}
 %   sont d'ailleurs basées.
 % \end{DescribeMacro}
@@ -781,8 +787,8 @@
 %   L'environnement |quotation|, quant à lui, doit être utilisé pour
 %   les citations «longues», celles qui peuvent s'étendre sur plus de
 %   cinq lignes ou, surtout, plus d'un paragraphe. Dans la classe, le
-%   texte est alors toujours placé en retrait de 10~mm, mais également
-%   à interligne simple. De plus, un espace vertical sépare les
+%   texte est alors toujours placé en retrait de 10~mm, mais aussi à
+%   interligne simple. De plus, un espace vertical sépare les
 %   paragraphes, le cas échéant, afin de bien les distinguer les uns
 %   des autres.
 % \end{DescribeEnv}
@@ -883,8 +889,7 @@
 % Des gabarits de document maître et de chapitre fournissent la
 % structure de base pour la thèse et le mémoire par articles. Vous
 % pouvez, au besoin, combiner les caractéristiques de ces gabarits à
-% celles de la thèse en cotutelle ou du mémoire en bidiplomation. La
-% \autoref{sec:gabarits} fournit les détails sur les gabarits.
+% celles de la thèse en cotutelle ou du mémoire en bidiplomation.
 %
 % \begin{rem}
 %   À l'automne~2023, la FESP a retiré l'exigence de produire une
@@ -934,7 +939,7 @@
 % etc. Consultez au moins les documents consacrés aux
 % langues utilisées dans votre thèse ou mémoire. Le plus simple
 % consiste sans doute à consulter en ligne sur CTAN les
-% \link{https://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
+% \href{https://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
 % documents spécifiques par langue}.
 % \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
 % de \textbf{babel}.}
@@ -1026,7 +1031,7 @@
 % numéros ISBN et les URL. Le paquetage fournit des styles de
 % bibliographie |plainnat|, |unsrtnat| et |abbrvnat| similaires aux
 % styles standards, mais plus complets. Il existe des
-% \link{https://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/}{versions
+% \href{https://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/}{versions
 % francisées} de ces styles (et de quelques autres) dans CTAN.
 %
 % Le paquetage \pkg{francais-bst} \citep{francais-bst} fournit une
@@ -1046,8 +1051,10 @@
 % \label{sec:police}
 %
 % Les documents {\LaTeX} sont facilement reconnaissables par leur
-% police de caractères par défaut, {\fontfamily{cmr}\selectfont
-% Computer Modern}. Avec toute distribution {\LaTeX} moderne, il est
+% police de caractères par défaut, %
+% {\iftutex\fontfamily{lmr}\else\fontfamily{cmr}\fi\selectfont
+% Computer Modern}. %
+% Avec toute distribution {\LaTeX} moderne, il est
 % maintenant simple d'utiliser l'une ou l'autre des polices PostScript
 % standards. D'ailleurs la classe {\ulclass} utilise la police
 % sans empattements \textsf{Helvetica} pour composer les pages de
@@ -1059,110 +1066,107 @@
 % polices dans votre document.
 %
 % \changes{5.4}{2024-05-22}{La section de la documentation portant sur
-% l'explication détaillée des gabarits a été supprimée en faveur de
-% commentaires additionnels dans les gabarits.}
+% l'explication détaillée des gabarits a été supprimée. En échange,
+% ceux-ci contiennent des commentaires additionnels.}
 %
 % \section{Commentaires, suggestions et aide}
 % \changes{5.0}{2018-08-09}{Code source du projet déplacé de GitHub
 % vers GitLab.}
 %
-% Le \link{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
+% Le \href{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
 % GitLab demeure le meilleur endroit pour rapporter des bogues ou pour
 % proposer des améliorations à la classe {\ulclass}.
 %
 % Pour obtenir de l'aide additionnelle sur l'utilisation de la classe
 % --- et non sur celle de {\LaTeX} en général --- consultez d'abord:
 % \begin{enumerate}
-% \item le \link{http://www.theses.ulaval.ca/wiki/}{WikiThèse} de
+% \item le \href{http://www.theses.ulaval.ca/wiki/}{WikiThèse} de
 %   l'Université Laval, en particulier la
-%   \link{http://www.theses.ulaval.ca/wiki/index.php?title=FAQ}{Foire aux questions};
+%   \href{http://www.theses.ulaval.ca/wiki/index.php?title=FAQ}{Foire aux questions};
 % \item les
-%   \link{http://listes.ulaval.ca/listserv/archives/ulthese-aide.html}{archives}
+%   \href{http://listes.ulaval.ca/listserv/archives/ulthese-aide.html}{archives}
 %   de la liste de distribution \texttt{ulthese-aide}.
 % \end{enumerate}
 % Si la réponse à votre question ne se trouve ni dans le wiki, ni dans
 % les archives, alors écrivez à l'adresse
 % \href{mailto:ulthese-aide@listes.ulaval.ca}{\url{ulthese-aide@listes.ulaval.ca}}.
 %
-% \StopEventually{
-%   \begin{thebibliography}{15}
-%     \addcontentsline{toc}{section}{Références}
-%   \bibitem[{Braams et Bezos(2016)}]{babel}
-%     Braams, J. et J.~Bezos. 2016,
-%     {\selectlanguage{english}\emph{Babel}}.
-%     URL~\url{https://www.ctan.org/pkg/babel/}.
+% \begin{thebibliography}{15}
+%   \addcontentsline{toc}{section}{Références}
+% \bibitem[{Braams et Bezos(2016)}]{babel}
+%   Braams, J. et J.~Bezos. 2016,
+%   {\selectlanguage{english}\emph{Babel}}.
+%   URL~\url{https://www.ctan.org/pkg/babel/}.
 %
-%   \bibitem[{Carlisle et {The \LaTeX3\ Project}(2016)}]{graphicx}
-%     Carlisle, D. et {The \LaTeX3\ Project}. 2016,
-%     {\selectlanguage{english}\emph{Packages in the `graphics'
-%     Bundle}}. URL~\url{https://www.ctan.org/pkg/graphics/}.
+% \bibitem[{Carlisle et {The \LaTeX3\ Project}(2016)}]{graphicx}
+%   Carlisle, D. et {The \LaTeX3\ Project}. 2016,
+%   {\selectlanguage{english}\emph{Packages in the `graphics'
+%   Bundle}}. URL~\url{https://www.ctan.org/pkg/graphics/}.
 %
-%   \bibitem[{Charette(2015)}]{polyglossia}
-%     Charette, F. 2015, {\selectlanguage{english}\emph{Polyglossia:
-%     An Alternative to Babel for {\XeLaTeX} and {\LuaLaTeX}}}.
-%     URL~\url{https://www.ctan.org/pkg/polyglossia/}, current
-%     maintainer Arthur Reutenauer.
+% \bibitem[{Charette(2015)}]{polyglossia}
+%   Charette, F. 2015, {\selectlanguage{english}\emph{Polyglossia:
+%   An Alternative to Babel for {\XeLaTeX} and {\LuaLaTeX}}}.
+%   URL~\url{https://www.ctan.org/pkg/polyglossia/}, current
+%   maintainer Arthur Reutenauer.
 %
-%   \bibitem[{Daly(2010)}]{natbib}
-%     Daly, P.~W. 2010, {\selectlanguage{english}\emph{Natural
-%     Sciences Citations and References}}.
-%     URL~\url{https://www.ctan.org/pkg/natbib/}.
+% \bibitem[{Daly(2010)}]{natbib}
+%   Daly, P.~W. 2010, {\selectlanguage{english}\emph{Natural
+%   Sciences Citations and References}}.
+%   URL~\url{https://www.ctan.org/pkg/natbib/}.
 %
-%   \bibitem[{Goulet(2013)}]{francais-bst}
-%     Goulet, V. 2013, {\selectlanguage{french}«Paquetage
-%     francais-bst»},
-%     URL~\url{https://www.ctan.org/pkg/francais-bst/}.
+% \bibitem[{Goulet(2013)}]{francais-bst}
+%   Goulet, V. 2013, {\selectlanguage{french}«Paquetage
+%   francais-bst»},
+%   URL~\url{https://www.ctan.org/pkg/francais-bst/}.
 %
-%   \bibitem[{Goulet(2020)}]{formation-latex-ul}
-%     Goulet, V. 2020, {\selectlanguage{french}\emph{Rédaction avec
-%     {\LaTeX}}}, document libre sous contrat Creative Commons.
-%     URL~\url{httpss://ctan.org/pkg/formation-latex-ul}.
+% \bibitem[{Goulet(2020)}]{formation-latex-ul}
+%   Goulet, V. 2020, {\selectlanguage{french}\emph{Rédaction avec
+%   {\LaTeX}}}, document libre sous contrat Creative Commons.
+%   URL~\url{httpss://ctan.org/pkg/formation-latex-ul}.
 %
-%   \bibitem[{Harders(2012)}]{numprint}
-%     Harders, H. 2012, {\selectlanguage{english}\emph{The
-%     numprint package}}.
-%     URL~\url{https://www.ctan.org/pkg/numprint/}.
+% \bibitem[{Harders(2012)}]{numprint}
+%   Harders, H. 2012, {\selectlanguage{english}\emph{The
+%   numprint package}}.
+%   URL~\url{https://www.ctan.org/pkg/numprint/}.
 %
-%   \bibitem[{Jeffrey et Mittelbach(2015)}]{inputenc}
-%     Jeffrey, A. et F.~Mittelbach. 2015,
-%     {\selectlanguage{english}\emph{inputenc.sty}}.
-%     URL~\url{https://www.ctan.org/pkg/inputenc/}.
+% \bibitem[{Jeffrey et Mittelbach(2015)}]{inputenc}
+%   Jeffrey, A. et F.~Mittelbach. 2015,
+%   {\selectlanguage{english}\emph{inputenc.sty}}.
+%   URL~\url{https://www.ctan.org/pkg/inputenc/}.
 %
-%   \bibitem[{Kern(2016)}]{xcolor}
-%     Kern, D.~U. 2016, {\selectlanguage{english}\emph{Extending
-%     {\LaTeX}’s color facilities: the xcolor package}}.
-%     URL~\url{https://www.ctan.org/pkg/xcolor/}.
+% \bibitem[{Kern(2016)}]{xcolor}
+%   Kern, D.~U. 2016, {\selectlanguage{english}\emph{Extending
+%   {\LaTeX}’s color facilities: the xcolor package}}.
+%   URL~\url{https://www.ctan.org/pkg/xcolor/}.
 %
-%   \bibitem[{Lehman et Wright(2018)}]{etoolbox}
-%     Lehman, P. et J.~Wright. 2018,
-%     {\selectlanguage{english}\emph{The etoolbox package}}.
-%     URL~\url{https://www.ctan.org/pkg/etoolbox/}.
+% \bibitem[{Lehman et Wright(2018)}]{etoolbox}
+%   Lehman, P. et J.~Wright. 2018,
+%   {\selectlanguage{english}\emph{The etoolbox package}}.
+%   URL~\url{https://www.ctan.org/pkg/etoolbox/}.
 %
-%   \bibitem[{Malo(1996)}]{Malo:1996}
-%     Malo, M. 1996, {\selectlanguage{french}\emph{Guide de la
-%     communication écrite au cégep, à l'université et en
-%     entreprise}}, Québec Amérique. ISBN~978-2-8903-7875-9.
+% \bibitem[{Malo(1996)}]{Malo:1996}
+%   Malo, M. 1996, {\selectlanguage{french}\emph{Guide de la
+%   communication écrite au cégep, à l'université et en
+%   entreprise}}, Québec Amérique. ISBN~978-2-8903-7875-9.
 %
-%   \bibitem[{Rahtz et Oberdiek(2017)}]{hyperref}
-%     Rahtz, S. et H.~Oberdiek. 2017,
-%     {\selectlanguage{english}\emph{Hypertext marks in {\LaTeX}: a
-%     manual for hyperref}}.
-%     URL~\url{https://www.ctan.org/pkg/hyperref/}.
+% \bibitem[{Rahtz et Oberdiek(2017)}]{hyperref}
+%   Rahtz, S. et H.~Oberdiek. 2017,
+%   {\selectlanguage{english}\emph{Hypertext marks in {\LaTeX}: a
+%   manual for hyperref}}.
+%   URL~\url{https://www.ctan.org/pkg/hyperref/}.
 %
-%   \bibitem[{Robertson et Hosny(2017)}]{fontspec}
-%     Robertson, W. et K.~Hosny. 2017,
-%     {\selectlanguage{english}\emph{The fontspec package: Font
-%     selection for {\XeLaTeX} and {\LuaLaTeX}}}.
-%     URL~\url{https://www.ctan.org/pkg/fontspec/}.
+% \bibitem[{Robertson et Hosny(2017)}]{fontspec}
+%   Robertson, W. et K.~Hosny. 2017,
+%   {\selectlanguage{english}\emph{The fontspec package: Font
+%   selection for {\XeLaTeX} and {\LuaLaTeX}}}.
+%   URL~\url{https://www.ctan.org/pkg/fontspec/}.
 %
-%   \bibitem[{Wilson(2016)}]{memoir}
-%     Wilson, P. 2016, {\selectlanguage{english}\emph{The Memoir Class
-%     for Configurable Typesetting}}, 8{\ieme} éd., The Herries Press.
-%     URL~\url{https://www.ctan.org/pkg/memoir/}, maintained by Lars
-%     Madsen.
-%   \end{thebibliography}
-%   \PrintChanges
-% }
+% \bibitem[{Wilson(2016)}]{memoir}
+%   Wilson, P. 2016, {\selectlanguage{english}\emph{The Memoir Class
+%   for Configurable Typesetting}}, 8{\ieme} éd., The Herries Press.
+%   URL~\url{https://www.ctan.org/pkg/memoir/}, maintained by Lars
+%   Madsen.
+% \end{thebibliography}
 %
 % \appendix
 %
@@ -1296,9 +1300,9 @@
 %   corps du document plutôt que dans le préambule.
 % \end{DescribeMacro}
 %
+% \MaybeStop{\PrintChanges}
 %
-% ^^A Début du code de la classe
-%
+% ^^A >>>>> Début du code de la classe
 % \section{Mise en œuvre}
 % \label{sec:meo}
 %
@@ -1582,7 +1586,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Chargement de la classe \class{memoir}}
+% \subsection{Chargement de la classe \texorpdfstring{\class{memoir}}{memoir}}
 %
 % Toutes les options de la classe sont passées à \class{memoir}. Le
 % format de papier et la taille de police par défaut sont, dans
@@ -2255,9 +2259,9 @@
 \setsecnumdepth{subsection}
 %</class>
 %    \end{macrocode}
-% ^^A Fin du code de la classe
+% ^^A <<<<< Fin du code de la classe
 %
-% ^^A Il faut placer ces notes de changement relatives aux gabarits
+% ^^A Les notes de versions relatives aux gabarits doivent se trouver
 % ^^A avant \Finale
 % \changes{5.0}{2018-06-08}{Gabarits: meilleure indication du texte à
 % remplacer.}
