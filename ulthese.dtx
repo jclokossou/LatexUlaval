@@ -838,7 +838,6 @@
 % \pkg{microtype} \citep{microtype}, %
 % \pkg{natbib} \citep[voir aussi la \autoref{sec:bibliographie}]{natbib},
 % \pkg{numprint} \citep{numprint}, %
-% \pkg{textcomp} \citep{textcomp}, %
 % \pkg{xcolor} \citep{xcolor}. %
 % Tel que mentionné précédemment, la classe est basée sur
 % \class{memoir} qui, elle-même, incorpore d'office une trentaine de
@@ -1685,11 +1684,8 @@
 \RequirePackage{xcolor}
 %    \end{macrocode}
 %
-% La commande \cmd{\textcopyright} utilisée sur la page de titre requiert le
-% paquetage \pkg{textcomp} pour obtenir un beau signe de copyright.
-%    \begin{macrocode}
-\RequirePackage{textcomp}
-%    \end{macrocode}
+% \changes{5.4}{2024-05-22}{Le paquetage \textbf{textcomp} n'est plus
+% chargé par la classe car il n'est pas nécessaire.}
 %
 % \subsection{Paquetage incompatible}
 %
