@@ -23,7 +23,6 @@
 ## Nom du paquetage sur CTAN
 PACKAGENAME = ulthese
 MAIN = ${PACKAGENAME}.dtx
-CLASS = ${MAIN:.dtx=.cls} 
 ARCHIVE = ${PACKAGENAME}.zip
 ARCHIVENOTEX = ${PACKAGENAME}-installation-projet.zip
 
@@ -65,8 +64,8 @@ TAGNAME = v$(word 1,${VERSION})
 
 all: class doc
 
-${CLASS} ${TEMPLATES}: ${MAIN}
-	${LATEX} ${MAIN}
+${MAIN:.dtx=.cls}: ${MAIN}
+	${LATEX} ${MAIN:.dtx=.ins}
 
 ${MAIN:.dtx=.pdf}: ${MAIN}
 	${XELATEX} $<
@@ -75,7 +74,7 @@ ${MAIN:.dtx=.pdf}: ${MAIN}
 	${XELATEX} $<
 
 .PHONY: class
-class: ${CLASS}
+class: ${MAIN:.dtx=.cls}
 
 .PHONY: doc
 doc: ${MAIN:.dtx=.pdf}
