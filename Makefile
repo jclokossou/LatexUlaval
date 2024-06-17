@@ -5,6 +5,9 @@
 ##
 ## 'make class' extrait la classe et les gabarits du fichier dtx.
 ##
+## 'make references' recrée la liste des références pour insertion
+## dans la documentation.
+##
 ## 'make doc' compile la documentation de la classe et le glossaire.
 ##
 ## 'make zip' crée l'archive pour le dépôt dans CTAN.
@@ -45,7 +48,6 @@ VERSION = $(shell awk -F '[ \[]' '/^  \[.*\]/ \
 ## Outils de travail
 LATEX = latex -halt-on-error
 XELATEX = xelatex -halt-on-error
-TEXI2DVI = LATEX=xelatex TEXINDY=makeindex texi2dvi -b
 CP = cp -p
 RM = rm -r
 MD := mkdir -p
@@ -168,6 +170,23 @@ create-release:
 	     ${APIURL}/releases
 	${RM} relnotes.in
 	@echo ----- Done creating the release
+
+.PHONY: check-url
+check-url: ${MAIN}
+	@printf "%s\n" "vérification des adresses URL dans les fichiers source"
+	$(eval url=$(shell grep -E -o -h 'https?:\/\/[^./]+(?:\.[^./]+)+(?:\/[^ ]*)?' $? \
+		   | cut -d \} -f 1 \
+		   | cut -d ] -f 1 \
+		   | cut -d '"' -f 1 \
+		   | sort | uniq))
+	@for u in ${url}; do \
+	    printf "%s... " "$$u"; \
+	    if curl --output /dev/null --silent --head --fail --max-time 5 "$$u"; then \
+	        printf "%s\n" "ok"; \
+	    else \
+		printf "%s\n" "invalide ou ne répond pas"; \
+	    fi; \
+	done
 
 .PHONY: publish
 publish:
