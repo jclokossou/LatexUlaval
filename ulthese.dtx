@@ -300,7 +300,7 @@
 % \label{sec:utilisation:rapide}
 %
 % La classe {\ulclass} est livrée avec un ensemble de gabarits sur
-% lesquels se baser pour le document maître de divers types de thèses
+% lesquels vous baser pour le document maître de divers types de thèses
 % et de mémoires (standard, par articles, en cotutelle, en
 % bidiplomation), ainsi que pour les parties les plus usuelles
 % (résumés français et anglais, avant-propos, introduction, chapitres,
@@ -398,7 +398,7 @@
 % \subsection{Gabarits}
 % \label{sec:utilisation:gabarits}
 %
-% La classe est livrée avec un ensemble de gabarits sur lesquels se
+% La classe est livrée avec un ensemble de gabarits sur lesquels vous
 % baser pour:
 % \begin{itemize}
 % \item le document maître de divers types de thèses et de mémoires
@@ -413,15 +413,15 @@
 %
 % Les gabarits vous incitent à adopter le mode d'organisation des
 % fichiers de tout document d'une certaine ampleur, soit: un fichier
-% |.tex| par partie et un fichier maître contenant le préambule
-% {\LaTeX} et un ensemble de commandes \cmd{\include} pour réunir les
-% parties dans un tout.
+% |.tex| par partie; un fichier maître contenant le préambule {\LaTeX}
+% et un ensemble de commandes \cmd{\include} pour réunir les parties
+% dans un tout.
 %
 % Si vous utilisez la version de la classe fournie avec votre
 % distribution {\TeX}, les gabarits peuvent être classés avec la
 % documentation (c'est le cas dans {\TeX}~Live). Si vous avez plutôt
-% installé la classe manuellement en suivant les instructions de la
-% \autoref{sec:installation}, les gabarits se trouvent dans votre
+% effectué une installation locale de la classe, ou si vous l'avez
+% installée manuellement, les gabarits se trouvent dans votre
 % dossier de travail.
 %
 % Nous recommandons fortement de rédiger votre manuscript à partir des
@@ -447,7 +447,7 @@
 % caractères\footnote{%
 %   L'UTF-8 n'étant pas le codage par défaut sous Windows, portez une
 %   attention toute particulière à ce point si vous utilisez ce système
-%   d'exploitation.}
+%   d'exploitation.}.
 %
 % \subsection{Déclaration de la classe et options}
 % \label{sec:utilisation:options}
@@ -827,43 +827,30 @@
 % \subsection{Autres paquetages chargés}
 % \label{sec:paquetages}
 %
-% Outre \class{memoir}, la classe {\ulclass} charge quelques
-% paquetages qui peuvent aussi vous être utiles. Il n'est donc pas
-% nécessaire de charger de nouveau les paquetages suivants:
-% \begin{description}
-% \item[\normalfont\pkg{babel}] \citep{babel} gestion des documents
-%   rédigés dans une ou plusieurs langues autres que l'anglais (si
-%   l'option |nobabel| de la classe est absente; voir aussi la
-%   \autoref{sec:langues});
-% \item[\normalfont\pkg{numprint}] \citep{numprint} requis par la
-%   commande \cmd{\nombre} de \pkg{babel}; le paquetage est donc
-%   chargé uniquement si \pkg{babel} l'est. Permet de composer
-%   automatiquement des nombres avec un séparateur toutes les trois
-%   positions (une espace en français);
-% \item[\normalfont\pkg{natbib}] \citep{natbib} gestion de la
-%   bibliographie (si l'option |nonatbib| de la classe est absente;
-%   voir aussi la \autoref{sec:bibliographie});
-% \item[\normalfont\pkg{hyperref}] \citep{hyperref} permet de
-%   transformer toutes les références en hyperliens cliquables lorsque
-%   le document est produit avec {pdf\LaTeX} ou {\XeLaTeX} (si
-%   l'option |nohyperref| est spécifiée, vous devez obligatoirement
-%   charger le paquetage vous-même);
-% \item[\normalfont\pkg{etoolbox}] \citep{etoolbox} outils
-%   additionnels pour la conception de classes et de paquetages
-%   (utilisé pour le chargement de \pkg{hyperref});
-% \item[\normalfont\pkg{fontspec}] \citep{fontspec} gestion des
-%   polices OpenType sous {\XeLaTeX} (chargé avec ce moteur
-%   seulement);
-% \item[\normalfont\pkg{graphicx}] \citep{graphicx} insertion et
-%   manipulation de graphiques;
-% \item[\normalfont\pkg{xcolor}] \citep{xcolor} gestion des couleurs
-%   dans le document, notamment celle des hyperliens;
-% \item[\normalfont\pkg{textcomp}] multitude de symboles spéciaux,
-%   dont un beau symbole de copyright, \textcopyright.
-% \end{description}
-% L'\autoref{sec:meo} sur la mise en œuvre de la classe fournit
-% plus de détails sur la liste des paquetages chargés et les raisons
-% pour lesquelles ils sont requis dans la classe.
+% \changes{5.4}{2024-05-22}{Simplification de la section de la
+% documentation sur les autres paquetages chargés par la classe.}
+% La classe {\ulclass} charge par défaut les paquetages suivants qui
+% peuvent vous être utiles: %
+% \pkg{babel} \citep[voir aussi la \autoref{sec:langues}]{babel}, %
+% \pkg{numprint} \citep{numprint}, %
+% \pkg{natbib} \citep[voir aussi la \autoref{sec:bibliographie}]{natbib},
+% \pkg{hyperref} \citep{hyperref}, %
+% \pkg{fontspec} \citep[avec {\XeLaTeX} uniquement]{fontspec}, %
+% \pkg{graphicx} \citep{graphicx},
+% \pkg{xcolor} \citep{xcolor},
+% \pkg{textcomp} \citep{textcomp}. %
+% Tel que mentionné précédemment, la classe est basée sur
+% \class{memoir} qui, elle-même, incorpore d'office une trentaine de
+% paquetages\footnote{%
+%   Consultez la section~18.24 de la documentation de \class{memoir}
+%   pour la liste, ou encore le journal de la compilation (\emph{log})
+%   d'un document utilisant la classe {\ulclass}.}. %
+% L'intégralité des fonctionnalités de \class{memoir} se retrouve donc
+% dans {\ulclass}.
+%
+% L'\autoref{sec:meo} sur la mise en œuvre de la classe fournit plus
+% de détails sur la liste des paquetages chargés et les raisons pour
+% lesquelles ils sont requis dans la classe.
 %
 % \subsection{Paquetage incompatible}
 % \label{sec:incompatible}
@@ -931,15 +918,15 @@
 % Si vous n'êtes pas autrement familier avec le paquetage
 % \pkg{babel}, consultez sa %
 % \doc{http://texdoc.net/pkg/babel/}. %
-% Celle-ci est éclatée en un
-% document principal, pour le cœur du paquetage et plusieurs
-% autres pour les fonctionnalités propres à une langue: %
+% Celle-ci est éclatée en un document principal pour le cœur du
+% paquetage et plusieurs autres pour les fonctionnalités propres à une
+% langue: %
 % \doc[anglais]{http://texdoc.net/pkg/babel-english}, %
 % \doc[français]{http://texdoc.net/pkg/babel-french}, %
 % etc. Consultez au moins les documents consacrés aux
 % langues utilisées dans votre thèse ou mémoire. Le plus simple
 % consiste sans doute à consulter en ligne sur CTAN les
-% \href{https://mirrors.ctan.org/tex-archive/macros/latex/required/babel/contrib/}{%
+% \href{https://ctan.org/pkg/babel-contrib/}{%
 % documents spécifiques par langue}.
 % \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
 % de \textbf{babel}.}
@@ -1667,14 +1654,17 @@
 %    \end{macrocode}
 %
 % Le paquetage obligatoire \pkg{hyperref} est chargé en tout dernier
-% avec la commande \cmd{\AtEndPreamble} du paquetage \pkg{etoolbox}.
-% Si l'option |nohyperref| a été spécifiée, la classe vérifie que le
-% paquetage a été chargé. La configuration de base de la classe fait
-% en sorte que tous les liens sont signalés par la couleur
-% |ULlinkcolor| définie à la \autoref{sec:couleurs}.
+% avec la commande \cmd{\AtEndPreamble} du paquetage \pkg{etoolbox}
+% (chargé par \class{memoir}. Si l'option |nohyperref| a été
+% spécifiée, la classe vérifie que le paquetage a été chargé. La
+% configuration de base de la classe fait en sorte que tous les liens
+% sont signalés par la couleur |ULlinkcolor| définie à la
+% \autoref{sec:couleurs}.
+% \changes{5.4}{2024-05-22}{Mise en œuvre: le chargement explicite de
+% \textbf{etoolbox} n'est pas nécessaire, car le paquetage est chargé
+% par memoir.}
 %    \begin{macrocode}
 \ifUL@hyperref
-  \RequirePackage{etoolbox}
   \AtEndPreamble{\RequirePackage{hyperref}}
 \else
   \AtBeginDocument{%
