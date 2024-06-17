@@ -832,13 +832,14 @@
 % La classe {\ulclass} charge par défaut les paquetages suivants qui
 % peuvent vous être utiles: %
 % \pkg{babel} \citep[voir aussi la \autoref{sec:langues}]{babel}, %
-% \pkg{numprint} \citep{numprint}, %
-% \pkg{natbib} \citep[voir aussi la \autoref{sec:bibliographie}]{natbib},
-% \pkg{hyperref} \citep{hyperref}, %
 % \pkg{fontspec} \citep[avec {\XeLaTeX} uniquement]{fontspec}, %
-% \pkg{graphicx} \citep{graphicx},
-% \pkg{xcolor} \citep{xcolor},
-% \pkg{textcomp} \citep{textcomp}. %
+% \pkg{graphicx} \citep{graphicx}, %
+% \pkg{hyperref} \citep{hyperref}, %
+% \pkg{microtype} \citep{microtype}, %
+% \pkg{natbib} \citep[voir aussi la \autoref{sec:bibliographie}]{natbib},
+% \pkg{numprint} \citep{numprint}, %
+% \pkg{textcomp} \citep{textcomp}, %
+% \pkg{xcolor} \citep{xcolor}. %
 % Tel que mentionné précédemment, la classe est basée sur
 % \class{memoir} qui, elle-même, incorpore d'office une trentaine de
 % paquetages\footnote{%
@@ -1617,6 +1618,8 @@
 % \changes{5.4}{2024-05-22}{Le paquetage \textbf{microtype} est
 % désormais chargé par la classe avec \textbf{fontspec} ou
 % \textbf{fontenc}.}
+% \changes{5.4}{2024-05-22}{L'option \texttt{Ligatures = TeX} n'est
+% plus définie par défaut pour les polices OpenType.}
 % La classe charge également les paquetages minimalement nécessaires
 % pour la gestion des polices de caractères, soit \pkg{fontspec} avec
 % les moteurs modernes et \pkg{fontenc} avec {pdf\LaTeX}.
@@ -1624,7 +1627,6 @@
 \iftutex
   \RequirePackage[babel=true]{microtype}
   \RequirePackage{fontspec}
-  \defaultfontfeatures{Ligatures=TeX}
 \else
   \RequirePackage[babel=true]{microtype}
   \RequirePackage[utf8]{inputenc}
