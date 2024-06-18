@@ -537,11 +537,11 @@
 % \begin{DescribeOption}{examen}
 %   L'option |examen| identifie un examen de doctorat. Elle permet
 %   d'utiliser la classe pour la rédaction d'un examen de doctorat
-%   respectant les règles de présentation matérielle de la FESP.
-%   L'option a pour effet de changer l'appellation «Thèse» sur la page
-%   de titre pour «Examen de doctorat». Elle supprime également la
-%   page frontispice. L'option n'est compatible qu'avec l'une des
-%   options de grade de doctorat.
+%   respectant les règles de présentation de la FESP. L'option a pour
+%   effet de changer l'appellation «Thèse» sur la page de titre pour
+%   «Examen de doctorat». Elle supprime également la page frontispice.
+%   L'option n'est compatible qu'avec l'une des options de grade de
+%   doctorat.
 % \end{DescribeOption}
 %
 % \changes{5.0}{2018-05-09}{Ajout d'une option \texttt{essai} pour les
@@ -551,12 +551,12 @@
 % \begin{DescribeOption}{essai}
 %   L'option |essai| identifie un essai de maîtrise. Elle permet
 %   d'utiliser la classe pour la rédaction d'un essai de maîtrise
-%   respectant les règles de présentation matérielle de la FESP.
-%   L'option a pour effet de changer l'appellation «Maîtrise» sur la
-%   page de titre pour «Essai». Elle n'est compatible qu'avec l'une
-%   des options de grade de maîtrise. Pour un essai de maîtrise,
-%   l'utilisation simultanée de l'option |article| de la classe
-%   \class{memoir} peut s'avérer tout indiquée.
+%   respectant les règles de présentation de la FESP. L'option a pour
+%   effet de changer l'appellation «Maîtrise» sur la page de titre
+%   pour «Essai». Elle n'est compatible qu'avec l'une des options de
+%   grade de maîtrise. Pour un essai de maîtrise, l'utilisation
+%   simultanée de l'option |article| de la classe \class{memoir} peut
+%   s'avérer tout indiquée.
 % \end{DescribeOption}
 %
 % \changes{5.2}{2019-05-06}{Ajout d'une option \texttt{projet} pour
@@ -564,8 +564,8 @@
 % \begin{DescribeOption}{projet}
 %   L'option |projet| identifie un projet de recherche. Elle permet
 %   d'utiliser la classe pour la rédaction d'un rapport de projet de
-%   recherche respectant les règles de présentation matérielle de la
-%   FESP. L'option a pour effet d'inscrire l'appellation «Projet de
+%   recherche respectant les règles de présentation de la FESP.
+%   L'option a pour effet d'inscrire l'appellation «Projet de
 %   recherche» sur la page de titre et de supprimer la mention du
 %   grade. Son utilisation rend d'ailleurs non obligatoire la
 %   déclaration de grade qui, si elle est présente, est simplement
@@ -1032,21 +1032,39 @@
 %
 % \section{Police de caractères du document}
 % \label{sec:police}
+% \changes{5.4}{2024-05-22}{La section de la documentation sur les
+% polices de caractères a été révisée suite aux modifications
+% appportées au règles de présentation de la FESP.}
 %
 % Les documents {\LaTeX} sont facilement reconnaissables par leur
-% police de caractères par défaut, %
+% police de caractères par défaut: %
 % {\iftutex\fontfamily{lmr}\else\fontfamily{cmr}\fi\selectfont
 % Computer Modern}. %
-% Avec toute distribution {\LaTeX} moderne, il est
-% maintenant simple d'utiliser l'une ou l'autre des polices PostScript
-% standards. D'ailleurs la classe {\ulclass} utilise la police
-% sans empattements \textsf{Helvetica} pour composer les pages de
-% titre.
+% Si vous le souhaitez, il est aujourd'hui assez simple de produire
+% des documents {\LaTeX} utilisant d'autres polices. L'approche à
+% favoriser consiste à utiliser une police OpenType ou TrueType
+% présente sur votre système avec le moteur {\XeLaTeX}. Si vous
+% composez toujours votre document avec pdf{\LaTeX}, vous pouvez charger l'une
+% ou l'autre des polices PostScript standards avec le paquetage %
+% \href{https://ctan.org/pkg/psnfss}{psnfss}.
 %
-% La FESP permet l'utilisation des polices Times, Palatino (la police
-% du présent document) et Lucida~Bright dans les thèse et mémoires.
-%  explique comment utiliser ces
-% polices dans votre document.
+% Les règles de présentation de la FESP dressent la liste des polices
+% de caractères permises dans  les thèse et mémoires,
+%
+% La Bibliothèque de l’Université Laval détient une licence
+% d’utilisation des polices de très grande qualité %
+% \href{https://tug.org/store/lucida}{Lucida Bright}. %
+% Vous pouvez vous procurer gratuitement une copie des polices en
+% écrivant à %
+% \href{mailto:lucida@bibl.ulaval.ca}{lucida@bibl.ulaval.ca}.
+%
+% À titre indicatif, le présent document a recours aux polices
+% OpenType %
+% \href{https://ctan.org/pkg/stix2-otf}{STIX~Two} %
+% pour le texte et %
+% \href{https://ctan.org/pkg/fira}{Fira} %
+% pour les éléments décoratifs (notamment \textsf{Fira Sans} pour les
+% titres de sections et \texttt{Fira Mono} pour le code informatique).
 %
 % \changes{5.4}{2024-05-22}{La section de la documentation portant sur
 % l'explication détaillée des gabarits a été supprimée. En échange,
