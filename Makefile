@@ -84,7 +84,7 @@ doc: ${MAIN:.dtx=.pdf}
 .PHONY: release
 release: zip check-status upload create-release publish
 
-## CTAN archive should start with a directory $PACKAGENAME
+## CTAN exige un répertoire $PACKAGENAME à la racine de l'archive
 .PHONY: zip
 zip : ${SOURCES} ${DOC} ${IMAGES} README.md
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
@@ -104,72 +104,115 @@ zip : ${SOURCES} ${DOC} ${IMAGES} README.md
 
 .PHONY: check-status
 check-status:
-	@echo ----- Checking status of working directory...
-	@if [ "master" != $(shell git branch --list | grep '^*' | cut -d " " -f 2-) ]; then \
-	    echo "not on branch master"; exit 2; fi
-	@if [ -n "$(shell git status --porcelain | grep -v '^??')" ]; then \
-	    echo "uncommitted changes in repository; not creating release"; exit 2; fi
-	@if [ -n "$(shell git log origin/master..HEAD | head -n1)" ]; then \
-	    echo "unpushed commits in repository; pushing to origin"; \
-	      git push; fi
-
-.PHONY: upload
-upload:
-	@echo ----- Uploading archive to GitLab...
-	$(eval upload_url_dist=$(shell curl --form "file=@${ARCHIVE}" \
-	                                    --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                                    --silent \
-	                               ${APIURL}/uploads \
-	                               | awk -F '"' '{ print $$8 }'))
-	$(eval upload_url_notex=$(shell curl --form "file=@${ARCHIVENOTEX}" \
-	                                     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}"	\
-	                                     --silent \
-	                                ${APIURL}/uploads \
-	                                | awk -F '"' '{ print $$8 }'))
-	@echo url to files:
-	@echo "${upload_url_dist}\n${upload_url_notex}"
-	@echo ----- Done uploading files
+	@{ \
+	    printf "%s" "vérification de l'état du dépôt local... "; \
+	    branch=$$(git branch --list | grep ^* | cut -d " " -f 2-); \
+	    if [ "$${branch}" != "master"  ] && [ "$${branch}" != "main" ]; \
+	    then \
+	        printf "\n%s\n" "! pas sur la branche main"; exit 2; \
+	    fi; \
+	    if [ -n "$$(git status --porcelain | grep -v '^??')" ]; \
+	    then \
+	        printf "\n%s\n" "! changements non archivés dans le dépôt"; exit 2; \
+	    fi; \
+	    if [ -n "$$(git log origin/master..HEAD | head -n1)" ]; \
+	    then \
+	        printf "\n%s\n" "changements non publiés dans le dépôt; publication dans origin"; \
+	        git push; \
+	    else \
+	        printf "%s\n" "ok"; \
+	    fi; \
+	}
 
 .PHONY: create-release
 create-release:
-	@echo ----- Creating release on GitLab...
-	if [ -e relnotes.in ]; then ${RM} relnotes.in; fi
-	touch relnotes.in
-	awk 'BEGIN { FS = "{"; \
-	             v = substr("${TAGNAME}", 2); \
-	             printf "{\"tag_name\": \"%s\", \"name\": \"Version %s\", \"description\":\"", \
-		            "${TAGNAME}", "${VERSION}" } \
-	     /\\changes/ && substr($$2, 1, length($$2) - 1) == v { \
-	         out = $$4; \
-	         if ((i = index($$4, "}")) != 0) { \
-	             out = substr($$4, 1, i - 1) \
-	         } else { \
-	             while (i == 0) { \
-	                 getline; \
-	                 gsub(/^%[ \t]+/, "", $$0); \
-	                 i = index($$0, "}"); \
-	                 if (i != 0) { \
-	                     out = out " " substr($$0, 1, i - 1) \
-			 } else { \
-			     out = out " " $$0 \
-		         } \
-		     } \
-	         } \
-		 printf "- %s\\n", out \
-	     } \
-	     END { print "\",\"assets\": { \"links\": [{ \"name\": \"${ARCHIVE}\", \"url\": \"${REPOSURL}${upload_url_dist}\", \"link_type\": \"package\"}, { \"name\": \"${ARCHIVENOTEX}\", \"url\": \"${REPOSURL}${upload_url_notex}\", \"link_type\": \"package\" }] }}" }' \
-	    ${PACKAGENAME}.dtx >> relnotes.in
-	curl --request POST \
-	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	     "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master"
-	curl --request POST \
-	     --data @relnotes.in \
-	     --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
-	     --header "Content-Type: application/json" \
-	     --output /dev/null --silent \
-	     ${APIURL}/releases
-	${RM} relnotes.in
-	@echo ----- Done creating the release
+	@{ \
+	    printf "%s" "vérification que la version existe déjà... "; \
+	    http_code=$$(curl -I "${APIURL}/releases/${TAGNAME}" 2>/dev/null \
+	                     | head -n1 | cut -d " " -f2) ; \
+	    if [ "$${http_code}" = "200" ]; \
+	    then \
+	        printf "%s\n" "oui"; \
+	        printf "%s\n" "-> utilisation de la version actuelle"; \
+	    else \
+	        printf "%s\n" "non"; \
+	        printf "%s" "création d'une version dans GitLab... "; \
+	        name="Version ${VERSION}"; \
+	        desc=$$(awk '/\\changes\{$(word 1,${VERSION})\}/ \
+	            { \
+	                sub(/^%[ \t]+\\changes\{.*\}\{.*\}\{/, "", $$0); \
+	                out = $$0; \
+	                if (match($$0, ".*\}$$")) { \
+	                    out = substr($$0, RSTART, RLENGTH - 1) \
+	                } else { \
+	                    while (RSTART == 0) { \
+	                        getline; \
+	                        sub(/^%[ \t]+/, "", $$0); \
+	                        if (match($$0, ".*\}$$")) { \
+	                            out = out " " substr($$0, RSTART, RLENGTH - 1) \
+	                        } else { \
+	                            out = out " " $$0 \
+	                        } \
+	                    } \
+	                } \
+	                printf "- %s\n", out \
+	            }' ${MAIN} | \
+	            sed -E -e 's/\\cs\{([^\}]*)\}/`\\\1`/g' \
+	                   -e 's/\\texttt\{([^\}]*)\}/`\1`/g') \
+	                   -e 's/\\emph\{([^\}]*)\}/*\1*/g'); \
+	        curl --request POST \
+	             --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	             --output /dev/null --silent \
+	             "${APIURL}/repository/tags?tag_name=${TAGNAME}&ref=master" && \
+	        curl --request POST \
+	             --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	             --data tag_name="${TAGNAME}" \
+	             --data name="$${name}" \
+	             --data description="$${desc}" \
+	             --output /dev/null --silent \
+	             ${APIURL}/releases; \
+	        printf "%s\n" "ok"; \
+	    fi; \
+	}
+
+.PHONY: upload
+upload:
+	@printf "%s\n" "téléversement de l'archive vers le registre..."
+	for f in ${ARCHIVE} ${ARCHIVENOTEX} ${TEMPLATES}; \
+	do \
+	    curl --upload-file $${f} \
+	         --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	         --silent \
+	         "${APIURL}/packages/generic/${REPOSNAME}/${TAGNAME}/$${f}"; \
+	done
+	@printf "\n%s\n" "ok"
+
+.PHONY: create-link
+create-link:
+	@printf "%s\n" "ajout du lien dans la description de la version..."
+	$(eval PKG_ID=$(shell curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	                           --silent \
+	                           "${APIURL}/packages" \
+	                      | grep -o -E '\{[^{]*"version":"${TAGNAME}"[^}]*}' \
+	                      | grep -o '"id":[0-9]*' | cut -d: -f 2))
+	@for f in ${ARCHIVE} ${ARCHIVENOTEX}; \
+	do \
+	    file_id=$$(curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	                    --silent \
+	                    "${APIURL}/packages/${PKG_ID}/package_files" \
+	               | grep -o -E "\{[^{]*\"file_name\":\"$${f}\"[^}]*}" \
+	               | grep -o '"id":[0-9]*' | cut -d: -f 2) && \
+	    url="${REPOSURL:/=}/-/package_files/$${file_id}/download" && \
+	    printf "  url to %s: %s\n" "$${f}" "$${url}" && \
+	    curl --request POST \
+	         --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
+	         --data name="$${f}" \
+	         --data url="$${url}" \
+	         --data link_type="package" \
+	         --output /dev/null --silent \
+	         "${APIURL}/releases/${TAGNAME}/assets/links"; \
+	done
+	@printf "%s\n" "ok"
 
 .PHONY: check-url
 check-url: ${MAIN}
