@@ -868,8 +868,9 @@
 % \section{Thèses et mémoires par articles}
 % \changes{5.0}{2018-06-08}{Ajout d'une section spécifique sur les
 % thèses et mémoires par articles.}
-% \changes{5.4}{2024-05-22}{La section sur les thèses et mémoire par
-% articles explique maintenant qu'une seule bibliographie est exigée.}
+% \changes{5.4}{2024-05-22}{La documentation sur les thèses et mémoire
+% par articles explique maintenant qu'une seule bibliographie est
+% exigée.}
 %
 % La rédaction de la thèse ou du mémoire par articles est une pratique
 % qui gagne en popularité. Elle consiste à remplacer le corps
@@ -950,8 +951,8 @@
 %
 % \section{Bibliographie}
 % \label{sec:bibliographie}
-% \changes{5.4}{2024-05-22}{Suppression de la section sur les
-% bibliographies multiples.}
+% \changes{5.4}{2024-05-22}{Suppression de la section de la
+% documentation sur les bibliographies multiples.}
 %
 % \begin{DescribeMacro}{\bibliography}
 %   Il est fortement recommandé d'utiliser {\BibTeX} pour la
@@ -965,41 +966,25 @@
 % \subsection{Mise en forme des citations}
 % \label{sec:bibliographie:options}
 %
-% Dans la classe {\ulclass}, la mise en forme des citations est
-% confiée au paquetage %
-% \href{https://ctan.org/pkg/natbib}{\pkg{natbib}} %
-% (à moins que l'option |nonatbib| ne soit spécifiée). Le paquetage
-% est chargé avec les options par défaut, soit |round|, |semicolon| et
-% |authoryear|. Pour spécifier d'autres options, vous avez deux
-% possibilités:
-% \begin{enumerate}
-% \item utiliser l'option |nonatbib| de la classe et ensuite charger
-%   explicitement \pkg{natbib} avec ses options;
-% \item
-%   \begin{DescribeMacro}{\setcitestyle}
-%     utiliser la commande \cmd{\setcitestyle} pour passer de
-%     nouvelles options à \pkg{natbib}.
-%   \end{DescribeMacro}
-% \end{enumerate}
+% \begin{DescribeMacro}{\setcitestyle}
+%   Dans la classe {\ulclass}, la mise en forme des citations est
+%   confiée au paquetage %
+%   \href{https://ctan.org/pkg/natbib}{\pkg{natbib}} %
+%   (à moins que l'option |nonatbib| ne soit spécifiée). Le paquetage
+%   est chargé avec les options par défaut, soit |round|, |semicolon|
+%   et |authoryear|. Pour spécifier d'autres options utilisez la
+%   commande \cmd{\setcitestyle} pour passer de nouvelles options à
+%   \pkg{natbib}.
+% \end{DescribeMacro}
 %
 % Par exemple, pour utiliser un style de citation numérique où le
-% numéro de la référence se trouve entre crochets, vous pouvez
-% procéder de l'une ou l'autre des deux manières suivantes:
+% numéro de la référence se trouve entre crochets, insérez la commande
+% suivante dans le préambule:
 % \begin{quote}
-%   |\documentclass[nonatbib]{ulthese}| \\
-%   |\usepackage[numbers,square]{natbib}| \\
-%   |...| \\
-%   |\bibliographystyle{plain-fr}|
-% \end{quote}
-% ou
-% \begin{quote}
-%   |\documentclass{ulthese}| \\
-%   |...| \\
-%   |\setcitestyle{numbers,square}| \\
-%   |\bibliographystyle{plain-fr}|
+%   |\setcitestyle{numbers,square}|
 % \end{quote}
 %
-% Consultez la documentation de \pkg{natbib} pour les détails.
+% Consultez la documentation de \pkg{natbib} pour plus de détails.
 %
 % \subsection{Style de la bibliographie}
 % \label{sec:bibliographie:style}
@@ -1007,30 +992,23 @@
 % \begin{DescribeMacro}{\bibliographystyle}
 %   Le format général de la bibliographie est contrôlé par un
 %   \emph{style} choisi avec la commande \cmd{\bibliographystyle} dans
-%   le préambule du document ou dans les fichiers de chaque chapitre
-%   dans une thèse ou un mémoire par articles. Les styles standards de
-%   {\LaTeX} sont |plain|, |unsrt|, |alpha| et |abbrv|.
+%   le préambule du document. Les styles standards de {\LaTeX} sont
+%   |plain|, |unsrt|, |alpha| et |abbrv|.
 % \end{DescribeMacro}
 %
-% Le paquetage \pkg{natbib} supporte le style de citation auteur-année
-% fréquemment employé en sciences naturelles, plusieurs commandes de
-% citation, un grand nombre de styles de bibliographie ainsi que des
-% entrées spécifiques pour les numéros ISBN et les URL. Le paquetage
-% fournit des styles de bibliographie |plainnat|, |unsrtnat| et
-% |abbrvnat| similaires aux styles standards, mais plus complets. Il
-% existe des %
+% Le paquetage \pkg{natbib} prend en charge le style de citation
+% auteur-année fréquemment employé en sciences naturelles, plusieurs
+% commandes de citation, un grand nombre de styles de bibliographie
+% ainsi que des entrées spécifiques pour les numéros ISBN et les
+% adresses URL. Le paquetage fournit des styles de bibliographie
+% |plainnat|, |unsrtnat| et |abbrvnat| similaires aux styles
+% standards, mais plus complets. Il existe des %
 % \href{https://ctan.org/pkg/bib-fr}{versions francisées} %
-% de ces styles (et de quelques autres) dans CTAN.
-%
-% Le paquetage %
+% de ces styles (et de quelques autres) dans CTAN. Les styles \code{francais} et
+% \code{francaissc} du paquetage %
 % \href{https://ctan.org/pkg/francais-bst}{\pkg{francais-bst}} %
-% fournit une feuille de style compatible avec \pkg{natbib} permettant
-% de composer des bibliographies auteur-année respectant les normes de
-% typographie française. Pour utiliser ce style, spécifier dans le
-% préambule du document LaTeX
-% \begin{quote}
-%   |\bibliographystyle{francais}|
-% \end{quote}
+% permettent de composer des bibliographies auteur-année respectant les normes de
+% typographie française. Ils sont modernes et compatibles avec \pkg{natbib}.
 %
 % Autrement, la FESP n'a pas d'exigences particulières quant à la
 % présentation de la bibliographie (présentation du titre, des auteurs
