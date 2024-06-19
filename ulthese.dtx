@@ -920,8 +920,7 @@
 % documents consacrés aux langues utilisées dans votre thèse ou
 % mémoire. Le plus simple consiste sans doute à consulter en ligne sur
 % CTAN les
-% \href{https://ctan.org/pkg/babel-contrib/}{%
-% documents spécifiques par langue}.
+% \href{https://ctan.org/pkg/babel-contrib/}{documents spécifiques par langue}.
 % \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
 % de \textbf{babel}.}
 %
@@ -1231,15 +1230,10 @@
 % \changes{4.4}{2017-06-01}{Tests et valeurs booléennes réalisés sans
 % \textbf{ifthen}.}
 %
-% Le paquetage \pkg{ifxetex} permet de tester si un document est
-% compilé avec {\XeTeX}.
-%    \begin{macrocode}
-%<*class>
-\RequirePackage{ifxetex}
-%    \end{macrocode}
 % Nous définissons ici toutes les valeurs booléennes requises par la
 % classe.
 %    \begin{macrocode}
+%<*class>
 \newif\ifUL@babel        \UL@babeltrue         % charger babel?
 \newif\ifUL@natbib       \UL@natbibtrue        % charger natbib?
 \newif\ifUL@hyperref     \UL@hyperreftrue      % charger hyperref?
