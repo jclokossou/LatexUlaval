@@ -31,7 +31,7 @@
   [2024/05/22 v5.4 Thesis class for Université Laval]
 %</class>
 %<*driver>
-\documentclass[article,oneside,11pt,x11names,french]{memoir}
+\documentclass[article,oneside,11pt,x11names,english,french]{memoir}
   \usepackage{babel}
   \usepackage[autolanguage]{numprint}
   \usepackage[round,semicolon,authoryear,sectionbib]{natbib}
@@ -123,18 +123,16 @@
       open = true,
       depth = 3,
       numbered = true}
+    \addto\extrasfrench{%
+      \def\subsectionautorefname{section}%
+    }
   }
 
   %% Paramétrage de babel
-  \frenchbsetup{%
+  \frenchsetup{%
     SmallCapsFigTabCaptions=false, % pas de petites capitales
     ThinSpaceInFrenchNumbers=true, % espace fine dans les nombres
     og=«, fg=»                     % « et » sont les guillemets
-  }
-  \addto\extrasfrench{%
-    \def\appendixautorefname{annexe}%
-    \def\tableautorefname{tableau}%
-    \def\subsectionautorefname{section}%
   }
   \renewcommand*\frenchtablename{Tab.}
   \renewcommand*\frenchfigurename{Fig.}
@@ -200,6 +198,8 @@
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*}
 % \DoNotIndex{\setlength}
+% \changes{5.4}{2024-05-22}{Révision exhaustive du texte de la
+% documentation.}
 % \changes{5.4}{2024-05-22}{Prise en compte des règles de présentation
 % entrées en vigueur à l'automne 2023 qui n'exigent plus une
 % bibliographie par chapitre pour les thèses et mémoire par
@@ -259,7 +259,7 @@
 % immédiatement conformes aux règles générales et complémentaires de
 % présentation de la Faculté des études supérieures et postdoctorales
 % (FESP) de l'Université Laval. Ces règles définissent principalement
-% la présentation des pages de titre des thèses et mémoires ainsi que
+% la présentation des pages de titre des thèses et mémoires, ainsi que
 % la disposition du texte sur la page.
 %
 % La composition d'un manuscript avec la classe {\ulclass} requiert une
@@ -279,11 +279,13 @@
 % ci-dessus.
 %
 % La classe {\ulclass} fait partie des distributions {\TeX} standards via
-% le paquetage \pkg{ulthese}. Dans la mesure où votre distribution est
+% le paquetage %
+% \href{https://ctan.org/pkg/ulthese}{\pkg{ulthese}}. %
+% Dans la mesure où votre distribution est
 % à jour, vous devriez pouvoir l'utiliser sans autre intervention.
 %
-% Le compagnon naturel de la présente documentation est «Rédaction
-% avec {\LaTeX}», la formation {\LaTeX} de l'Université Laval. Vous y
+% Le compagnon naturel de la présente documentation est \emph{Rédaction
+% avec {\LaTeX}}, la formation {\LaTeX} de l'Université Laval. Vous y
 % trouverez sans doute une foule d'informations utiles pour la
 % préparation de votre thèse ou de votre mémoire. L'ouvrage fait
 % lui aussi partie des distributions {\TeX} standards, via le
@@ -294,7 +296,7 @@
 % \label{sec:utilisation:rapide}
 %
 % La classe {\ulclass} est livrée avec un ensemble de gabarits sur
-% lesquels vous baser pour le document maître de divers types de thèses
+% lesquels se baser pour le document maître de divers types de thèses
 % et de mémoires (standard, par articles, en cotutelle, en
 % bidiplomation), ainsi que pour les parties les plus usuelles
 % (résumés français et anglais, avant-propos, introduction, chapitres,
@@ -333,7 +335,7 @@
 % La classe {\ulclass} est distribuée dans le paquetage %
 % \href{https://ctan.org/pkg/ulthese}{\pkg{ulthese}} %
 % via le réseau de sites \emph{Comprehensive {\TeX} Archive Network}
-% (CTAN). Elle fait partie des distributions {\TeX} standards telles
+% (CTAN). Celui-ci fait partie des distributions {\TeX} standards telles
 % que {TeX}~Live, Mac{\TeX} et MiK{\TeX}. Nous recommandons fortement
 % d'installer ou de mettre à jour \pkg{ulthese} à l'aide du
 % gestionnaire de paquetages de votre distribution {\TeX}. Par
@@ -453,13 +455,16 @@
 % aux règles de présentation de la FESP. La classe ne crée pas de page
 % de titre par défaut\footnote{%
 %   Depuis la version 5.0 de la classe.}, %
-% sa production étant prise en charge par la FESP.
+% sa production étant prise en charge par la FESP pour les thèses et
+% les mémoires. Si vous utilisez la classe pour un document qui
+% nécessite une page de titre, un examen de doctorat, un essai de
+% maitre
 %
 % \changes{5.0}{2018-04-24}{La classe ne crée plus de page de titre
 % suite à une nouvelle directive de la FESP.}
-% \tipbox{Des fonctionnalités de composition d'une page de titre
-%   demeurent disponibles dans la classe. Les commandes pertinentes
-%   sont regroupées à l'\autoref{sec:pagetitre}.}
+% \tipbox{Les fonctionnalités de composition d'une page de titre
+%   demeurent disponibles dans la classe. Si votre document en nécessite
+%   une, consultez l'\autoref{sec:pagetitre}.}
 %
 % Cette section passe en revue les \meta{options} que l'on peut
 % spécifier au chargement de la classe. Les commandes mentionnées
@@ -600,9 +605,9 @@
 %   \href{https://ctan.org/pkg/natbib}{\pkg{natbib}}. %
 %   Celui-ci est normalement chargé par la classe; voir la
 %   \autoref{sec:bibliographie}. L'option |nonatbib| permet d'empêcher
-%   le chargement pour modifier les options du paquetage ou en cas de
-%   conflit avec un autre paquetage de mise en forme de la
-%   bibliographie.
+%   son chargement pour vous permettre de modifier les options du
+%   paquetage ou en cas de conflit avec un autre paquetage de mise en
+%   forme de la bibliographie.
 % \end{DescribeOption}
 %
 % \begin{DescribeOption}{nobabel}
@@ -638,12 +643,11 @@
 % \end{DescribeOption}
 %
 % Toute autre option sera passée à la classe \class{memoir} dont,
-% entre autres, la taille de la police de caractères et le format du
-% papier. La taille de police par défaut de la classe est 11~points
-% (option |11pt|). Le format lettre nord-américain (option
-% |letterpaper|) est utilisé par défaut. Si votre thèse doit être
-% imprimée en format international A4, utilisez l'option |a4paper|. La
-% classe \class{memoir} est toujours chargée avec l'option |oneside|.
+% entre autres, le format du papier. Le format lettre nord-américain
+% (option |letterpaper|) est utilisé par défaut. Si votre thèse doit
+% être imprimée en format international A4, utilisez l'option
+% |a4paper|. La classe \class{memoir} est toujours chargée avec
+% l'option |oneside|.
 %
 % \subsection{Commandes de la classe}
 % \label{sec:utilisation:commandes}
@@ -677,8 +681,8 @@
 %
 % \begin{DescribeMacro}{\titre}
 %   La commande \cmdprint{\titre} sert à spécifier le titre principal
-%   du manuscrit. Vous ne devez pas utiliser utiliser la commande
-%   \cmd{\title} de {\LaTeX} pour ce faire.
+%   du manuscrit. Vous ne devez pas utiliser la commande \cmd{\title}
+%   de {\LaTeX} pour ce faire.
 %
 %   Coupez manuellement avec {\bs\bs} ou \cmd{\newline} un titre très
 %   long. Par exemple, la déclaration d'un titre d'une seule ligne
@@ -700,7 +704,7 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\auteur}
-%   La commande \cmdprint{\author} permet de saisir le nom complet de
+%   La commande \cmdprint{\auteur} permet de saisir le nom complet de
 %   l'auteur de la thèse ou du mémoire, sous la forme |Prénom Nom|
 %   avec seulement des majuscules initiales. N'utilisez pas la
 %   commande \cmd{\author} de {\LaTeX} pour le nom de l'auteur.
@@ -808,8 +812,9 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\SingleSpacing}
-%   Si ce devait être nécessaire ailleurs dans le document, la
-%   commande \cmd{\SingleSpacing} permet de passer à l'interligne simple.
+%   Si ce devait être nécessaire ailleurs dans le document, vous
+%   pouvez avoir recours à la commande \cmd{\SingleSpacing} pour
+%   passer à l'interligne simple.
 % \end{DescribeMacro}
 %
 % \subsection{Hyperliens}
@@ -840,7 +845,7 @@
 % \href{https://ctan.org/pkg/hyperref}{\pkg{hyperref}}, %
 % \href{https://ctan.org/pkg/microtype}{\pkg{microtype}}, %
 % \href{https://ctan.org/pkg/natbib}{\pkg{natbib}} (voir aussi la
-% \autoref{sec:bibliographie}, %
+% \autoref{sec:bibliographie}), %
 % \href{https://ctan.org/pkg/numprint}{\pkg{numprint}}, %
 % \href{https://ctan.org/pkg/xcolor}{\pkg{xcolor}}. %
 % Tel que mentionné précédemment, la classe est basée sur
@@ -852,8 +857,8 @@
 % L'intégralité des fonctionnalités de \class{memoir} se retrouve donc
 % dans {\ulclass}.
 %
-% L'\autoref{sec:meo} sur la mise en œuvre de la classe fournit plus
-% de détails sur la liste des paquetages chargés et les raisons pour
+% L'\autoref{sec:meo} sur la mise en œuvre de la classe fournit la
+% liste détaillée des paquetages chargés et les raisons pour
 % lesquelles ils sont requis dans la classe.
 %
 % \subsection{Paquetage incompatible}
@@ -890,76 +895,20 @@
 % articles. La thèse ou le mémoire doit désormais contenir une seule
 % bibliographie regroupant l’ensemble des références du document.}
 %
-% \section{Français et autres langues}
-% \label{sec:langues}
-%
-% Une complication additionnelle si vous rédigez dans une langue autre
-% que l'anglais consiste à adapter {\LaTeX} à votre langue, qu'il
-% s'agisse des mots clés, de la typographie ou de la césure des mots.
-% La solution standard à ce problème provient du paquetage %
-% \href{https://ctan.org/pkg/babel}{\pkg{babel}}. %
-% Celui-ci permet de combiner plusieurs langues dans un même document
-% et de passer de l'une à l'autre facilement. Il est chargé par défaut
-% par la classe {\ulclass}.
-%
-% Aucune langue n'est spécifiée dans la classe. Vous aurez sans doute
-% recours à l'anglais et au français, ne serait-ce que pour les deux
-% résumés demandés par la FESP. Vous devez spécifier les langues
-% utilisées dans le document en options à la classe, tel que mentionné
-% à la \autoref{sec:utilisation:options}. La \emph{dernière} langue
-% spécifiée devient par défaut la langue active du document.
-%
-% \begin{DescribeMacro}{\selectlanguage}
-%   La commande \cmd{\selectlanguage} de \pkg{babel} permet de passer de
-%   la langue courante à la langue spécifiée en argument.
-% \end{DescribeMacro}
-%
-% \begin{DescribeEnv}{otherlanguage}
-%   L'environnement |otherlanguage| de \pkg{babel} permet de faire
-%   la même chose que la commande \cmd{\selectlanguage}, sauf que le
-%   changement de langue est local à l'environnement --- utile pour
-%   les brefs changements de langue.
-% \end{DescribeEnv}
-%
-% Si vous n'êtes pas autrement familier avec le paquetage \pkg{babel},
-% consultez sa documentation. Celle-ci est éclatée en un document
-% principal pour le cœur du paquetage et plusieurs autres pour les
-% fonctionnalités propres à une langue. Consultez au moins les
-% documents consacrés aux langues utilisées dans votre thèse ou
-% mémoire. Le plus simple consiste sans doute à consulter en ligne sur
-% CTAN les
-% \href{https://ctan.org/pkg/babel-contrib/}{documents spécifiques par langue}.
-% \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
-% de \textbf{babel}.}
-%
-% \begin{DescribeMacro}{\nombre}
-%   Le paquetage %
-%   \href{https://ctan.org/pkg/numprint}{\pkg{numprint}} %
-%   étant chargé dans la classe avec \pkg{babel}, vous pouvez utiliser
-%   la commande \cmd{\nombre} pour formater automatiquement les
-%   nombres. Par exemple, le résultat de |\nombre{123456789}| est
-%   \nombre{123456789}.
-% \end{DescribeMacro}
-%
-% Si vous souhaitez plutôt utiliser le plus récent paquetage %
-% \href{https://ctan.org/pkg/polyglossia}{\pkg{polyglossia}} %
-% avec {\XeLaTeX}, vous devez empêcher le chargement de \pkg{babel}
-% avec l'option |nobabel| de la classe, puis  charger et configurer
-% \pkg{polyglossia} vous-même dans l'entête de votre document. Ce
-% paquetage est moins évolué que \pkg{babel} pour la typographie
-% française.
-%
 % \section{Bibliographie}
 % \label{sec:bibliographie}
 % \changes{5.4}{2024-05-22}{Suppression de la section de la
 % documentation sur les bibliographies multiples.}
+% \changes{5.4}{2024-05-22}{Inversion des sections sur la
+% bibliographie et sur al rédaction en français dans la
+% documentation.}
 %
 % \begin{DescribeMacro}{\bibliography}
 %   Il est fortement recommandé d'utiliser {\BibTeX} pour la
 %   préparation de la bibliographie d'un document. Celle-ci est
 %   insérée dans le document à l'endroit où apparait la commande
 %   \cmd{\bibliography} dans le code source. Cette commande prend en
-%   arguments les noms des bases de données bibliographiques séparés
+%   arguments les noms des bases de données bibliographiques, séparés
 %   par des virgules.
 % \end{DescribeMacro}
 %
@@ -998,21 +947,82 @@
 %
 % Le paquetage \pkg{natbib} prend en charge le style de citation
 % auteur-année fréquemment employé en sciences naturelles, plusieurs
-% commandes de citation, un grand nombre de styles de bibliographie
+% commandes de citation, un grand nombre de styles de bibliographie,
 % ainsi que des entrées spécifiques pour les numéros ISBN et les
 % adresses URL. Le paquetage fournit des styles de bibliographie
 % |plainnat|, |unsrtnat| et |abbrvnat| similaires aux styles
 % standards, mais plus complets. Il existe des %
 % \href{https://ctan.org/pkg/bib-fr}{versions francisées} %
-% de ces styles (et de quelques autres) dans CTAN. Les styles \code{francais} et
-% \code{francaissc} du paquetage %
+% de ces styles (et de quelques autres) dans CTAN.
+%
+% Les styles \code{francais} et \code{francaissc} du paquetage %
 % \href{https://ctan.org/pkg/francais-bst}{\pkg{francais-bst}} %
-% permettent de composer des bibliographies auteur-année respectant les normes de
-% typographie française. Ils sont modernes et compatibles avec \pkg{natbib}.
+% permettent de composer des bibliographies auteur-année respectant
+% les normes de typographie française. Ils sont compatibles avec
+% \pkg{natbib} et plus modernes que les styles mentionnés ci-dessus.
 %
 % Autrement, la FESP n'a pas d'exigences particulières quant à la
 % présentation de la bibliographie (présentation du titre, des auteurs
 % et autres informations bibliographiques).
+%
+% \section{Français et autres langues}
+% \label{sec:langues}
+%
+% Une complication additionnelle si vous rédigez dans une langue autre
+% que l'anglais consiste à adapter {\LaTeX} à votre langue, qu'il
+% s'agisse des mots clés, de la typographie ou de la césure des mots.
+% La solution standard à ce problème provient du paquetage %
+% \href{https://ctan.org/pkg/babel}{\pkg{babel}}. %
+% Celui-ci permet de combiner plusieurs langues dans un même document
+% et de passer de l'une à l'autre facilement. Il est chargé par défaut
+% par la classe {\ulclass}.
+%
+% Aucune langue n'est spécifiée dans la classe. Vous aurez sans doute
+% recours à l'anglais et au français, ne serait-ce que pour les deux
+% résumés demandés par la FESP. Vous devez spécifier les langues
+% utilisées dans le document en options à la classe, tel que mentionné
+% à la \autoref{sec:utilisation:options}. La \emph{dernière} langue
+% spécifiée devient par défaut la langue active du document.
+%
+% \begin{DescribeMacro}{\selectlanguage}
+%   La commande \cmd{\selectlanguage} de \pkg{babel} permet de passer de
+%   la langue courante à la langue spécifiée en argument.
+% \end{DescribeMacro}
+%
+% \begin{DescribeEnv}{otherlanguage}
+%   L'environnement |otherlanguage| de \pkg{babel} permet de faire la
+%   même chose que la commande \cmd{\selectlanguage}, sauf que le
+%   changement de langue est local à l'environnement, ce qui peut
+%   s'avérer utile pour les brefs changements de langue.
+% \end{DescribeEnv}
+%
+% Si vous n'êtes pas autrement familier avec le paquetage \pkg{babel},
+% consultez sa documentation. Celle-ci est éclatée en un document
+% principal pour le cœur du paquetage et plusieurs autres pour les
+% fonctionnalités propres à une langue. Consultez au moins les
+% documents consacrés aux langues utilisées dans votre thèse ou
+% mémoire. Le plus simple consiste sans doute à consulter en ligne sur
+% CTAN les
+% \href{https://ctan.org/pkg/babel-contrib/}{documents spécifiques par langue}.
+% \changes{4.4}{2017-05-14}{Correction d'une url vers la documentation
+% de \textbf{babel}.}
+%
+% \begin{DescribeMacro}{\nombre}
+%   Le paquetage %
+%   \href{https://ctan.org/pkg/numprint}{\pkg{numprint}} %
+%   étant chargé dans la classe avec \pkg{babel}, vous pouvez utiliser
+%   la commande \cmd{\nombre} pour formater automatiquement les
+%   nombres. Par exemple, le résultat de |\nombre{123456789}| est
+%   \nombre{123456789}.
+% \end{DescribeMacro}
+%
+% Si vous souhaitez plutôt utiliser le plus récent paquetage %
+% \href{https://ctan.org/pkg/polyglossia}{\pkg{polyglossia}} %
+% avec {\XeLaTeX}, vous devez empêcher le chargement de \pkg{babel}
+% avec l'option |nobabel| de la classe, puis  charger et configurer
+% \pkg{polyglossia} vous-même dans l'entête de votre document. Ce
+% paquetage est moins évolué que \pkg{babel} pour la typographie
+% française.
 %
 % \section{Police de caractères du document}
 % \label{sec:police}
@@ -1025,15 +1035,15 @@
 % {\iftutex\fontfamily{lmr}\else\fontfamily{cmr}\fi\selectfont
 % Computer Modern}. %
 % Si vous le souhaitez, il est aujourd'hui assez simple de produire
-% des documents {\LaTeX} utilisant d'autres polices. L'approche à
-% favoriser consiste à utiliser une police OpenType ou TrueType
-% présente sur votre système avec le moteur {\XeLaTeX}. Si vous
-% composez toujours votre document avec pdf{\LaTeX}, vous pouvez charger l'une
-% ou l'autre des polices PostScript standards avec le paquetage %
-% \href{https://ctan.org/pkg/psnfss}{\pkg{psnfss}}.
-%
-% Les règles de présentation de la FESP dressent la liste des polices
-% de caractères permises dans  les thèse et mémoires,
+% des documents {\LaTeX} utilisant d'autres polices. L'approche
+% recommandée consiste à utiliser une police OpenType ou TrueType
+% présente sur votre système avec le moteur {\XeLaTeX}. Autrement,
+% vous pouvez charger l'une ou l'autre des polices PostScript
+% standards compatibles avec le moteur pdf{\LaTeX} en ayant recours au
+% paquetage %
+% \href{https://ctan.org/pkg/psnfss}{\pkg{psnfss}}. %
+% Dans tous les cas, assurez-vous de respecter les règles de
+% présentation de la FESP en matière de polices de caractères.
 %
 % La Bibliothèque de l’Université Laval détient une licence
 % d’utilisation des polices de très grande qualité %
@@ -1042,7 +1052,7 @@
 % écrivant à %
 % \href{mailto:lucida@bibl.ulaval.ca}{lucida@bibl.ulaval.ca}.
 %
-% À titre indicatif, le présent document a recours aux polices
+% À titre indicatif, le présent document est composé avec les polices
 % OpenType %
 % \href{https://ctan.org/pkg/stix2-otf}{STIX~Two} %
 % pour le texte et %
