@@ -409,8 +409,8 @@
 % Les gabarits vous incitent à adopter le mode d'organisation des
 % fichiers de tout document d'une certaine ampleur, soit: un fichier
 % |.tex| par partie; un fichier maître contenant le préambule {\LaTeX}
-% et un ensemble de commandes \cmd{\include} pour réunir les parties
-% dans un tout.
+% et un ensemble de commandes \cmdprint{\include} pour réunir les
+% parties dans un tout.
 %
 % Si vous utilisez la version de la classe fournie avec votre
 % distribution {\TeX}, les gabarits peuvent être classés avec la
@@ -635,10 +635,11 @@
 % \end{DescribeOption}
 %
 % \begin{DescribeOption}{english, french, ...}
-%   Déclare les langues utilisées dans le document. Ces options sont
-%   transférées au paquetage \pkg{babel} (dans la mesure où |nobabel|
-%   n'est pas spécifié, bien entendu). Le libellé des langues devrait
-%   donc correspondre aux options de \pkg{babel}. La dernière langue
+%   Les options telles que |english|, |french| ou autres déclarent les
+%   langues utilisées dans le document. Ces options sont transférées
+%   au paquetage \pkg{babel} (dans la mesure où |nobabel| n'est pas
+%   spécifié, bien entendu). Le libellé des langues devrait donc
+%   correspondre aux options de \pkg{babel}. La dernière langue
 %   spécifiée est la langue active par défaut dans le document.
 % \end{DescribeOption}
 %
@@ -1095,44 +1096,47 @@
 % la \autoref{sec:utilisation:options} lorsque l'on souhaite créer une
 % page de titre.
 %
-% \begin{DescribeMacro}{multifacultaire}
-%   Identifie une thèse multifacultaire. Valide uniquement avec un
-%   grade de doctorat. Cette déclaration requiert ensuite d'utiliser
-%   la commande \cmd{\faculteUL}.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{multifacultaire}
+%   L'option |multifacultaire| identifie une thèse
+%   multifacultaire. Valide uniquement avec un grade de doctorat.
+%   Cette déclaration requiert ensuite d'utiliser la commande
+%   \cmd{\faculteUL}.
+% \end{DescribeOption}
 %
-% \begin{DescribeMacro}{extensionUdeS}
-%   Identifie une thèse réalisée en extension à l'Université de
-%   Sherbrooke. Valide uniquement avec un grade de doctorat. Cette
-%   déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUdeS}.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{extensionUdeS}
+%   L'option |extensionUdeS| identifie une thèse réalisée en extension
+%   à l'Université de Sherbrooke. Valide uniquement avec un grade de
+%   doctorat. Cette déclaration requiert ensuite d'utiliser les
+%   commandes \cmd{\faculteUL} et \cmd{\faculteUdeS}.
+% \end{DescribeOption}
 %
-% \begin{DescribeMacro}{extensionUQO}
-%   Identifie une thèse réalisée en extension à l'Université du
-%   Québec en Outaouais (UQO). Valide uniquement avec un grade de doctorat.
-%   Cette déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUQO}.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{extensionUQO}
+%   L'option |extensionUQO| identifie une thèse réalisée en extension
+%   à l'Université du Québec en Outaouais (UQO). Valide uniquement
+%   avec un grade de doctorat. Cette déclaration requiert ensuite
+%   d'utiliser les commandes \cmd{\faculteUL} et \cmd{\faculteUQO}.
+% \end{DescribeOption}
 %
-% \begin{DescribeMacro}{extensionUQAC}
-%   Identifie un mémoire réalisé en extension à l'Université du Québec
-%   à Chicoutimi (UQAC). Valide uniquement avec un grade de maîtrise.
-%   Cette déclaration requiert ensuite d'utiliser les commandes
-%   \cmd{\faculteUL} et \cmd{\faculteUQAC}.
-% \end{DescribeMacro}
+% \begin{DescribeOption}{extensionUQAC}
+%   L'option |extensionUQAC| identifie un mémoire réalisé en extension
+%   à l'Université du Québec à Chicoutimi (UQAC). Valide uniquement
+%   avec un grade de maîtrise. Cette déclaration requiert ensuite
+%   d'utiliser les commandes \cmd{\faculteUL} et \cmd{\faculteUQAC}.
+% \end{DescribeOption}
 %
 % Ensuite, la composition d'une page de titre peut nécessiter
 % d'utiliser les commandes ci-dessous en plus de celles de la
 % \autoref{sec:utilisation:commandes}.
 %
 % \begin{DescribeMacro}{\annee}
-%   Année du dépôt final de la thèse ou du mémoire.
+%   La commande \cmdprint{\annee} spécifie l'année du dépôt final de
+%   la thèse ou du mémoire.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\univcotutelle}
-%   Nom, ville et pays de l'université de cotutelle, déclarés sous la
-%   forme
+%   Pour les thèses en cotutelle, la commande
+%   \cmdprint{\univcotutelle} permet de saisir le nom, la ville et le
+%   pays de l'université de cotutelle, sous la forme
 %   \begin{quote}
 %     |\univcotutelle{Nom de l'université \\ Ville, Pays}|
 %   \end{quote}
@@ -1141,8 +1145,9 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\gradecotutelle}
-%   Grade conféré par l'université de cotutelle, déclaré
-%   sous la forme
+%   Pour les thèses en cotutelle, la commande
+%   \cmdprint{\gradecotutelle} spécifie le grade conféré par
+%   l'université de cotutelle, sous la forme
 %   \begin{quote}
 %     |\gradecotutelle{Nom du grade (sigle)}|
 %   \end{quote}
@@ -1151,8 +1156,9 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\univbidiplomation}
-%   Nom, ville et pays de l'université de bidiplomation, déclarés sous
-%   la forme
+%   Pour les mémoires en bidiplomation, la commande
+%   \cmdprint{\univbidiplomation} permet de saisir le nom, la ville et
+%   le pays de l'université de bidiplomation, sous la forme
 %   \begin{quote}
 %     |\univbidiplomation{Nom de l'université \\ Ville, Pays}|
 %   \end{quote}
@@ -1161,8 +1167,9 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\gradebidiplomation}
-%   Grade conféré par l'université de bidiplomation, déclaré sous la
-%   forme
+%   Pour les mémoires en bidiplomation, la commande
+%   \cmdprint{\gradebidiplomation} spécifie le grade conféré par
+%   l'université de bidiplomation, sous la forme
 %   \begin{quote}
 %     |\gradebidiplomation{Nom du grade (sigle)}|
 %   \end{quote}
@@ -1171,7 +1178,8 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\faculteUL}
-%   La commande a deux usages:
+%   La commande \cmdprint{\faculteUL} sert à saisir deux types
+%   d'informations:
 %   \begin{enumerate}
 %   \item noms des facultés pour les thèses et mémoires
 %     multifacultaires, séparés par des commandes |\\|;
@@ -1185,28 +1193,30 @@
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\faculteUdeS}
-%   Nom de la faculté de l'Université de Sherbrooke hébergeant la
-%   thèse en extension. Cette commande prend effet seulement lorsque
-%   la classe est chargée avec l'option |extensionUdeS|.
+%   La commande \cmdprint{\faculteUdeS} spécifie le nom de la faculté
+%   de l'Université de Sherbrooke hébergeant la thèse en extension.
+%   Cette commande prend effet seulement lorsque la classe est chargée
+%   avec l'option |extensionUdeS|.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\faculteUQO}
-%   Nom de la faculté de l'Université du Québec en Outaouais
-%   hébergeant la thèse en extension. Cette commande prend effet
-%   seulement lorsque la classe est chargée avec l'option
-%   |extensionUQO|.
+%   La commande \cmdprint{\faculteUQO} spécifie le nom de la faculté
+%   de l'Université du Québec en Outaouais hébergeant la thèse en
+%   extension. Cette commande prend effet seulement lorsque la classe
+%   est chargée avec l'option |extensionUQO|.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\faculteUQAC}
-%   Nom de la faculté de l'Université du Québec à Chicoutimi
-%   hébergeant le mémoire en extension. Cette commande prend effet
-%   seulement lorsque la classe est chargée avec l'option
-%   |extensionUQAC|.
+%   La commande \cmdprint{\faculteUQAC} spécifie le nom de la faculté
+%   de l'Université du Québec à Chicoutimi hébergeant le mémoire en
+%   extension. Cette commande prend effet seulement lorsque la classe
+%   est chargée avec l'option |extensionUQAC|.
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\pagetitre}
-%   Création de la page de titre. Ne pas utiliser la commande
-%   \cmd{\titlepage} de {\LaTeX} pour ce faire. De toutes les
+%   La commande \cmdprint{\pagetitre} crée la page de titre à
+%   l'endroit où elle apparait dans le code source. N'utilisez pas la
+%   commande \cmd{\titlepage} de {\LaTeX} pour ce faire. De toutes les
 %   commandes ci-dessus, c'est la seule qui doit se trouver dans le
 %   corps du document plutôt que dans le préambule.
 % \end{DescribeMacro}
@@ -1703,6 +1713,9 @@
 %
 % \begin{table}
 %   \centering
+%   \caption{Tailles et graisses de la police Helvetica des éléments
+%     de la page de titre}
+%   \label{tab:polices}
 %   \begin{tabular}{ll}
 %     \toprule
 %     Élément          & Police \\
@@ -1714,9 +1727,6 @@
 %     Autres éléments  & 12~points normal \\
 %     \bottomrule
 %   \end{tabular}
-%   \caption{Tailles et graisses de la police Helvetica des éléments
-%     de la page de titre}
-%   \label{tab:polices}
 % \end{table}
 %
 %    \begin{macrocode}
