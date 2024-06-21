@@ -204,8 +204,8 @@
 % entrées en vigueur à l'automne 2023 qui n'exigent plus une
 % bibliographie par chapitre pour les thèses et mémoire par
 % intégration d'articles.}
-% \changes{5.4}{2024-05-22}{L'UTF-8 est maintenant le codage de
-% caractères par défaut de la classe. Les gabarits sont modifiés en
+% \changes{5.4}{2024-05-22}{Utilisation du codage de caractères UTF-8
+% par défaut dans la classe. Modification des gabarits en
 % conséquence.}
 % \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
 % multiples pour les thèses et mémoires par articles.}
@@ -874,9 +874,6 @@
 % \section{Thèses et mémoires par articles}
 % \changes{5.0}{2018-06-08}{Ajout d'une section spécifique sur les
 % thèses et mémoires par articles.}
-% \changes{5.4}{2024-05-22}{La documentation sur les thèses et mémoire
-% par articles explique maintenant qu'une seule bibliographie est
-% exigée.}
 %
 % La rédaction de la thèse ou du mémoire par articles est une pratique
 % qui gagne en popularité. Elle consiste à remplacer le corps
@@ -900,9 +897,8 @@
 % \label{sec:bibliographie}
 % \changes{5.4}{2024-05-22}{Suppression de la section de la
 % documentation sur les bibliographies multiples.}
-% \changes{5.4}{2024-05-22}{Inversion des sections sur la
-% bibliographie et sur al rédaction en français dans la
-% documentation.}
+% \changes{5.4}{2024-05-22}{Inversion des sections de la documentation
+% sur la bibliographie et sur la rédaction en français.}
 %
 % \begin{DescribeMacro}{\bibliography}
 %   Il est fortement recommandé d'utiliser {\BibTeX} pour la
@@ -1027,9 +1023,9 @@
 %
 % \section{Police de caractères du document}
 % \label{sec:police}
-% \changes{5.4}{2024-05-22}{La section de la documentation sur les
-% polices de caractères a été révisée suite aux modifications
-% appportées au règles de présentation de la FESP.}
+% \changes{5.4}{2024-05-22}{Révision de la section de la documentation
+% sur les polices de caractères suite aux modifications appportées au
+% règles de présentation de la FESP.}
 %
 % Les documents {\LaTeX} sont facilement reconnaissables par leur
 % police de caractères par défaut: %
@@ -1061,16 +1057,15 @@
 % pour les éléments décoratifs (notamment \textsf{Fira Sans} pour les
 % titres de sections et \texttt{Fira Mono} pour le code informatique).
 %
-% \changes{5.4}{2024-05-22}{La section de la documentation portant sur
-% l'explication détaillée des gabarits a été supprimée. En échange,
-% ceux-ci contiennent des commentaires additionnels.}
+% \changes{5.4}{2024-05-22}{Suppression de la section de la
+% documentation portant sur l'explication détaillée des gabarits. En
+% échange, ceux-ci comportent des commentaires additionnels.}
 %
 % \section{Commentaires, suggestions et aide}
 % \changes{5.0}{2018-08-09}{Code source du projet déplacé de GitHub
 % vers GitLab.}
-% \changes{5.4}{2024-05-22}{La documentation ne mentionne plus le wiki
-% thèse (fermé) et les archives de la liste ulthese-aide (peu
-% utiles).}
+% \changes{5.4}{2024-05-22}{Retrait de la documentation du wiki thèse
+% (fermé) et des archives de la liste ulthese-aide (peu utiles).}
 %
 % Le \href{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
 % GitLab demeure le meilleur endroit pour rapporter des bogues ou pour
@@ -1536,16 +1531,16 @@
 % La classe s'efforce de charger un minimum de paquetages afin d'éviter
 % les conflits potentiels.
 %
-% \changes{5.4}{2024-05-22}{Le paquetage \textbf{inputenc} est
+% \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage \textbf{inputenc}
 % désormais chargé avec l'option \texttt{utf8} lorsque la compilation
 % est effectuée par pdf{\LaTeX}.}
 % Le code source doit obligatoirement être enregistré dans le codage
 % UTF-8. Avec pdf{\LaTeX}, cela requiert le paquetage \pkg{inputenc}.
 %
-% \changes{5.4}{2024-05-22}{Le paquetage \textbf{microtype} est
-% désormais chargé par la classe avec \textbf{fontspec} ou
-% \textbf{fontenc}.}
-% \changes{5.4}{2024-05-22}{L'option \texttt{Ligatures = TeX} n'est
+% \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage
+% \textbf{microtype} désormais chargé par la classe avec
+% \textbf{fontspec} ou \textbf{fontenc}.}
+% \changes{5.4}{2024-05-22}{Mise en œuvre: option \texttt{Ligatures}
 % plus définie par défaut pour les polices OpenType.}
 % La classe charge également les paquetages minimalement nécessaires
 % pour la gestion des polices de caractères, soit \pkg{fontspec} avec
@@ -1589,9 +1584,8 @@
 % configuration de base de la classe fait en sorte que tous les liens
 % sont signalés par la couleur |ULlinkcolor| définie à la
 % \autoref{sec:couleurs}.
-% \changes{5.4}{2024-05-22}{Mise en œuvre: le chargement explicite de
-% \textbf{etoolbox} n'est pas nécessaire, car le paquetage est chargé
-% par memoir.}
+% \changes{5.4}{2024-05-22}{Mise en œuvre: chargement explicite de
+% \textbf{etoolbox} retiré, car le paquetage est chargé par memoir.}
 %    \begin{macrocode}
 \ifUL@hyperref
   \AtEndPreamble{\RequirePackage{hyperref}}
@@ -1612,8 +1606,8 @@
 \RequirePackage{xcolor}
 %    \end{macrocode}
 %
-% \changes{5.4}{2024-05-22}{Le paquetage \textbf{textcomp} n'est plus
-% chargé par la classe car il n'est pas nécessaire.}
+% \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage \textbf{textcomp}
+% retiré, car non pas nécessaire.}
 %
 % \subsection{Paquetage incompatible}
 %
@@ -2192,12 +2186,13 @@
 % par articles.}
 % \changes{4.2}{2016-03-29}{Gabarits: nouvelles options de babel.}
 % \changes{5.4}{2024-05-22}{Gabarits: gabarits pour une thèse par
-% articles révisés suites aux changements aux règles de présentation.}
+% articles révisés suite aux changements aux règles de présentation.}
 % \changes{5.4}{2024-05-22}{Gabarits: meilleure sélection automatique
 % des paquetages pour les polices et pour le codage selon le moteur
 % {\TeX}.}
-% \changes{5.4}{2024-05-22}{Gabarits: ajout d'exemples pour
-% l'utilisation des polices STIX Two.}
+% \changes{5.4}{2024-05-22}{Gabarits: un seul exemple de changement de
+% police maintenant fourni, celui pour les polices STIX Two, dans une
+% version qui fonctionne avec les polices livrées avec TeX Live.}
 %
 % \Finale
 %
@@ -2232,33 +2227,38 @@
 %<m>%%    MServSoc, MPsEd]
 %% et les langues les plus courantes. Le français sera la langue par
 %% défaut du document.
-%<phd&standard>\documentclass[PhD,english,french]{ulthese}
+%<phd&(standard|articles)>\documentclass[PhD,english,french]{ulthese}
 %<phd&cotutelle>\documentclass[PhD,cotutelle,english,french]{ulthese}
-%<m&standard>\documentclass[MSc,english,french]{ulthese}
+%<m&(standard|articles)>\documentclass[MSc,english,french]{ulthese}
 %<m&bidiplomation>\documentclass[MA,bidiplomation,english,french]{ulthese}
   %% Charger ici les autres paquetages nécessaires pour le document.
   %% Quelques exemples; décommenter au besoin.
   %\usepackage{amsmath}       % recommandé pour les mathématiques
   %\usepackage{icomma}        % gestion de la virgule dans les nombres
 
-  %% Utilisation d'une autre police de caractères pour le document.
-  %% - Sous LaTeX
-  %\usepackage{stix2}         % texte et mathématiques en STIX Two
-  %\usepackage{mathpazo}      % texte et mathématiques en Palatino
-  %\usepackage{mathptmx}      % texte et mathématiques en Times
-  %% - Sous XeLaTeX
-  %\setmainfont{TeX Gyre Pagella}      % texte en Pagella (Palatino)
-  %\setmathfont{TeX Gyre Pagella Math} % mathématiques en Pagella (Palatino)
-  %\setmainfont{TeX Gyre Termes}       % texte en Termes (Times)
-  %\setmathfont{TeX Gyre Termes Math}  % mathématiques en Termes (Times)
-  %\setmainfont{STIX Two Text}         % texte en STIX Two
-  %\setmainfont{STIX Two Math}         % mathématiques en STIX Two
+  %% Utilisation d'une autre police de caractères pour le document
+  %% (exemple pour les polices STIX Two incluses dans TeX Live).
+  %% - Avec pdfLaTeX
+  %\usepackage{stix2}
+  %% - Avec XeLaTeX
+  %\setmainfont{STIXTwoText}
+  %[
+  %  Extension = .otf,
+  %  UprightFont = *-Regular,
+  %  BoldFont = *-SemiBold,
+  %  ItalicFont = *-Italic,
+  %  BoldItalicFont = *-SemiBoldItalic,
+  %]
+  %\setmathfont{STIXTwoMath-Regular}
+  %[
+  %  Extension = .otf,
+  %]
 
   %% Options de mise en forme du mode français de babel. Consulter la
-  %% documentation du paquetage babel pour les options disponibles.
-  %% Désactiver (effacer ou mettre en commentaire) si l'option
-  %% 'nobabel' est spécifiée au chargement de la classe.
-  \frenchbsetup{%
+  %% documentation du paquetage babel-french pour les options
+  %% disponibles. Désactiver (effacer ou mettre en commentaire) si
+  %% l'option 'nobabel' est spécifiée au chargement de la classe.
+  \frenchsetup{%
     StandardItemizeEnv=true,       % format standard des listes
     ThinSpaceInFrenchNumbers=true, % espace fine dans les nombres
     og=«, fg=»                     % caractères « et » sont les guillemets
