@@ -26,6 +26,7 @@
 ## Nom du paquetage sur CTAN
 PACKAGENAME = ulthese
 MAIN = ${PACKAGENAME}.dtx
+README = README.md
 ARCHIVE = ${PACKAGENAME}.zip
 ARCHIVENOTEX = ${PACKAGENAME}-installation-projet.zip
 
@@ -36,6 +37,12 @@ REPOSURL = https://gitlab.com/vigou3/ulthese
 SOURCES = ${PACKAGENAME}.ins ${PACKAGENAME}.dtx
 DOC = ${PACKAGENAME}.pdf
 IMAGES = ul_p.eps ul_p.pdf
+
+## Liste des fichiers créés lors de l'installation
+CLASS = ${MAIN:.dtx=.cls} 
+TEMPLATES = $(shell awk -F '[{}]' \
+	            '$$1 ~ /\\file/ && $$2 ~ /\.tex$$/ { print $$2 }' \
+	            ${MAIN:.dtx=.ins})
 
 ## Numéro de version et date de publication extraits du fichier
 ## ulthese.dtx. Le résultat est une chaîne de caractères de la forme
@@ -48,9 +55,11 @@ VERSION = $(shell awk -F '[ \[]' '/^  \[.*\]/ \
 ## Outils de travail
 LATEX = latex -halt-on-error
 XELATEX = xelatex -halt-on-error
+MAKEINDEX = makeindex
 CP = cp -p
 RM = rm -r
 MD := mkdir -p
+ZIP = zip --filesync -r -9
 
 ## Dossier temporaire pour construire l'archive
 BUILDDIR := builddir
@@ -66,7 +75,7 @@ TAGNAME = v$(word 1,${VERSION})
 
 all: class doc
 
-${MAIN:.dtx=.cls}: ${MAIN}
+${CLASS} ${TEMPLATES}: ${MAIN}
 	${LATEX} ${MAIN:.dtx=.ins}
 
 ${MAIN:.dtx=.pdf}: ${MAIN}
@@ -86,21 +95,32 @@ release: zip check-status upload create-release publish
 
 ## CTAN exige un répertoire $PACKAGENAME à la racine de l'archive
 .PHONY: zip
-zip : ${SOURCES} ${DOC} ${IMAGES} README.md
+zip : ${SOURCES} ${CLASS} ${TEMPLATES} ${DOC} ${IMAGES} ${README}
 	if [ -d ${BUILDDIR} ]; then ${RM} ${BUILDDIR}; fi
-	${MD} ${BUILDDIR}/${PACKAGENAME}
-	touch ${BUILDDIR}/${PACKAGENAME}/README.md && \
+	${MD} ${BUILDDIR}/${PACKAGENAME} \
+	      ${BUILDDIR}/${PACKAGENAME}.tds/doc/latex/${PACKAGENAME} \
+	      ${BUILDDIR}/${PACKAGENAME}.tds/source/latex/${PACKAGENAME} \
+	      ${BUILDDIR}/${PACKAGENAME}.tds/tex/latex/${PACKAGENAME}
+	touch ${BUILDDIR}/${PACKAGENAME}/${README} && \
 	  awk '(state == 0) && /^# / { state = 1 }; \
 	       /^## Author/ { printf("## Version\n\n%s\n\n", "${VERSION}") } \
-	       state' README.md >> ${BUILDDIR}/${PACKAGENAME}/README.md
-	${CP} ${SOURCES} ${DOC} ${IMAGES} ${BUILDDIR}/${PACKAGENAME}
+	       state' ${README} >> ${BUILDDIR}/${PACKAGENAME}/${README}
+	${CP} ${DOC} ${SOURCES} ${IMAGES} ${BUILDDIR}/${PACKAGENAME}
+	${CP} ${BUILDDIR}/${PACKAGENAME}/${README} ${DOC} ${TEMPLATES} \
+	      ${BUILDDIR}/${PACKAGENAME}.tds/doc/latex/${PACKAGENAME}
+	${CP} ${SOURCES} \
+	      ${BUILDDIR}/${PACKAGENAME}.tds/source/latex/${PACKAGENAME}
+	${CP} ${CLASS} ${IMAGES} \
+	      ${BUILDDIR}/${PACKAGENAME}.tds/tex/latex/${PACKAGENAME}
+	cd ${BUILDDIR}/${PACKAGENAME}.tds && \
+	  ${ZIP} ../${ARCHIVE:.zip=.tds.zip} *
 	cd ${BUILDDIR} && \
-	  zip --filesync -r ../${ARCHIVE} ${PACKAGENAME}
+	  ${ZIP} ../${ARCHIVE} ${PACKAGENAME} ${ARCHIVE:.zip=.tds.zip}
 	cd ${BUILDDIR}/${PACKAGENAME} && \
-	  ${LATEX} ${PACKAGENAME}.ins
-	cd ${BUILDDIR}/${PACKAGENAME} && \
-	  zip --filesync -r ../../${ARCHIVENOTEX} * -x ${SOURCES} \*.log
-	rm -r ${BUILDDIR}
+	   ${LATEX} ${PACKAGENAME}.ins && \
+	   ${ZIP} ../../${ARCHIVENOTEX} * \
+	          -x ${SOURCES}  ${ARCHIVE:.zip=.tds.zip} \*.log
+	${RM} ${BUILDDIR}
 
 .PHONY: check-status
 check-status:
