@@ -1,12 +1,7 @@
-> Ceci est le fichier `README.md` du paquetage LaTeX **ulthese**.
->
-> Le paquetage est distribué via
-> [CTAN](https://www.ctan.org/pkg/ulthese).
-
 # Package ulthese
 
-The package provides a class based on memoir and compatible with LaTeX
-and XeLaTeX to prepare theses and memoirs compliant with the
+The package provides a class based on memoir and compatible with
+pdfLaTeX and XeLaTeX to prepare theses and memoirs compliant with the
 presentation rules set forth by the Faculty of Graduate Studies of
 Université Laval, Québec, Canada. The class also comes with an
 extensive set of templates for the various types of theses and memoirs
@@ -44,7 +39,7 @@ selon les mêmes règles de présentation que les thèses et mémoires:
 examen de doctorat, essai de maîtrise, projet de recherche, rapport de
 stage.
 
-La classe est compatible avec LaTeX et XeLaTeX.
+La classe est compatible avec pdfLaTeX et XeLaTeX.
 
 ## Contenu du paquetage
 
@@ -110,7 +105,8 @@ source avec les commandes
 
 ## Historique des versions
 
-L'historique des versions de la classe se trouve en annexe de la documentation.
+L'historique des versions de la classe se trouve en annexe de la
+documentation.
 
 ## Commentaires et suggestions
 
