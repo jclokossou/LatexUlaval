@@ -72,7 +72,7 @@ define get_changes
 	                 } \
 	             } \
 	         } \
-	         gsub(/\^\^A/, "", out); \
+	         gsub(/ \^\^A/, "", out); \
 	         printf "- %s\n", out \
 	     }' "${2}"
 endef
