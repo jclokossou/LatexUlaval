@@ -198,8 +198,6 @@
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*}
 % \DoNotIndex{\setlength}
-% \changes{5.4}{2024-05-22}{Révision exhaustive du texte de la
-% documentation.}
 % \changes{5.4}{2024-05-22}{Prise en compte des règles de présentation
 % entrées en vigueur à l'automne 2023 qui n'exigent plus une
 % bibliographie par chapitre pour les thèses et mémoire par
@@ -207,6 +205,7 @@
 % \changes{5.4}{2024-05-22}{Utilisation du codage de caractères UTF-8
 % par défaut dans la classe. Modification des gabarits en
 % conséquence.}
+% \changes{5.4}{2024-05-22}{Révision exhaustive de la documentation.}
 % \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
 % multiples pour les thèses et mémoires par articles.}
 % \changes{4.4}{2017-05-16}{Documentation révisée, principalement ce
@@ -243,8 +242,8 @@
 % \changes{1.0}{2012-09-30}{Version initiale.}
 % \GetFileInfo{ulthese.dtx}
 %
-% \title{Guide d'utilisation de la classe {\ulclass} pour les thèses et
-%   mémoires de l'Université Laval}
+% \title{Guide d'utilisation de la classe {\ulclass} \\ pour les thèses et
+%   mémoires \\ de l'Université Laval}
 % \author{Faculté des études supérieures et postdoctorales\thanks{%
 %   Cette classe et sa documentation ont été rédigées par Vincent
 %   Goulet~(Faculté des sciences et de génie) avec la collaboration de
@@ -429,8 +428,8 @@
 %   maîtrise avec l'une ou l'autre des options |examen|, |essai|,
 %   |projet| ou |stage|.}
 %
-% \changes{5.4}{2024-05-22}{Nouvelle section de la documentation sur
-% le codage de caractères du code source.}
+% \changes{5.4}{2024-05-22}{Documentation: nouvelle section sur le
+% codage de caractères du code source.}
 % \subsection{Codage de caractères du code source}
 % \label{sec:utilisation:codage}
 %
@@ -836,8 +835,8 @@
 % \subsection{Autres paquetages chargés}
 % \label{sec:paquetages}
 %
-% \changes{5.4}{2024-05-22}{Simplification de la section de la
-% documentation sur les autres paquetages chargés par la classe.}
+% \changes{5.4}{2024-05-22}{Documentation: simplification de la
+% section sur les autres paquetages chargés par la classe.}
 % La classe {\ulclass} charge par défaut les paquetages suivants qui
 % peuvent vous être utiles: %
 % \href{https://ctan.org/pkg/babel}{\pkg{babel}} (voir aussi la \autoref{sec:langues}) %
@@ -895,10 +894,10 @@
 %
 % \section{Bibliographie}
 % \label{sec:bibliographie}
-% \changes{5.4}{2024-05-22}{Suppression de la section de la
-% documentation sur les bibliographies multiples.}
-% \changes{5.4}{2024-05-22}{Inversion des sections de la documentation
-% sur la bibliographie et sur la rédaction en français.}
+% \changes{5.4}{2024-05-22}{Documentation: suppression de la section
+% sur les bibliographies multiples.}
+% \changes{5.4}{2024-05-22}{Documentation: inversion des sections sur
+% la bibliographie et sur la rédaction en français.}
 %
 % \begin{DescribeMacro}{\bibliography}
 %   Il est fortement recommandé d'utiliser {\BibTeX} pour la
@@ -1023,8 +1022,8 @@
 %
 % \section{Police de caractères du document}
 % \label{sec:police}
-% \changes{5.4}{2024-05-22}{Révision de la section de la documentation
-% sur les polices de caractères suite aux modifications appportées au
+% \changes{5.4}{2024-05-22}{Documentation: révision de la section sur
+% les polices de caractères suite aux modifications apportées aux
 % règles de présentation de la FESP.}
 %
 % Les documents {\LaTeX} sont facilement reconnaissables par leur
@@ -1057,14 +1056,14 @@
 % pour les éléments décoratifs (notamment \textsf{Fira Sans} pour les
 % titres de sections et \texttt{Fira Mono} pour le code informatique).
 %
-% \changes{5.4}{2024-05-22}{Suppression de la section de la
-% documentation portant sur l'explication détaillée des gabarits. En
-% échange, ceux-ci comportent des commentaires additionnels.}
+% \changes{5.4}{2024-05-22}{Documentation: suppression de la section
+% portant sur l'explication détaillée des gabarits. En échange,
+% ceux-ci comportent des commentaires additionnels.}
 %
 % \section{Commentaires, suggestions et aide}
 % \changes{5.0}{2018-08-09}{Code source du projet déplacé de GitHub
 % vers GitLab.}
-% \changes{5.4}{2024-05-22}{Retrait de la documentation du wiki thèse
+% \changes{5.4}{2024-05-22}{Documentation: retrait du wiki thèse
 % (fermé) et des archives de la liste ulthese-aide (peu utiles).}
 %
 % Le \href{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
@@ -1531,7 +1530,7 @@
 % La classe s'efforce de charger un minimum de paquetages afin d'éviter
 % les conflits potentiels.
 %
-% \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage \textbf{inputenc}
+% \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage \textbf{inputenc}^^A
 % désormais chargé avec l'option \texttt{utf8} lorsque la compilation
 % est effectuée par pdf{\LaTeX}.}
 % Le code source doit obligatoirement être enregistré dans le codage
@@ -1540,7 +1539,7 @@
 % \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage
 % \textbf{microtype} désormais chargé par la classe avec
 % \textbf{fontspec} ou \textbf{fontenc}.}
-% \changes{5.4}{2024-05-22}{Mise en œuvre: option \texttt{Ligatures}
+% \changes{5.4}{2024-05-22}{Mise en œuvre: option \texttt{Ligatures}^^A
 % plus définie par défaut pour les polices OpenType.}
 % La classe charge également les paquetages minimalement nécessaires
 % pour la gestion des polices de caractères, soit \pkg{fontspec} avec
@@ -1606,8 +1605,8 @@
 \RequirePackage{xcolor}
 %    \end{macrocode}
 %
-% \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage \textbf{textcomp}
-% retiré, car non pas nécessaire.}
+% \changes{5.4}{2024-05-22}{Mise en œuvre: paquetage \textbf{textcomp}^^A
+% retiré, car non nécessaire.}
 %
 % \subsection{Paquetage incompatible}
 %
@@ -2190,8 +2189,8 @@
 % \changes{5.4}{2024-05-22}{Gabarits: meilleure sélection automatique
 % des paquetages pour les polices et pour le codage selon le moteur
 % {\TeX}.}
-% \changes{5.4}{2024-05-22}{Gabarits: un seul exemple de changement de
-% police maintenant fourni, celui pour les polices STIX Two, dans une
+% \changes{5.4}{2024-05-22}{Gabarits: seul l'exemple de changement
+% pour les polices STIX Two est maintenant fourni, et ce, dans une
 % version qui fonctionne avec les polices livrées avec TeX Live.}
 %
 % \Finale
