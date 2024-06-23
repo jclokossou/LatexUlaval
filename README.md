@@ -95,8 +95,8 @@ Les gabarits inutiles peuvent être supprimés.
 ## Documentation
 
 Le fichier `ulthese.pdf` contient la documentation complète de la
-classe et des gabarits. Le document peut être recréé à partir du code
-source avec les commandes
+classe. Le document peut être recréé à partir du code source avec les
+commandes
 
     xelatex ulthese.dtx
     makeindex -s gglo.ist -o ulthese.gls ulthese.glo
