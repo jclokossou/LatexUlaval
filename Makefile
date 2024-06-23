@@ -5,10 +5,10 @@
 ##
 ## 'make class' extrait la classe et les gabarits du fichier dtx.
 ##
-## 'make references' recrée la liste des références pour insertion
-## dans la documentation.
-##
 ## 'make doc' compile la documentation de la classe et le glossaire.
+##
+## 'make changes' extrait la liste des notes de version (vers la
+## sortie standard).
 ##
 ## 'make zip' crée l'archive pour le dépôt dans CTAN.
 ##
@@ -52,6 +52,31 @@ VERSION = $(shell awk -F '[ \[]' '/^  \[.*\]/ \
 	      printf("%s (%s)", substr($$5, 2), $$4); \
 	      exit }' ${PACKAGENAME}.dtx)
 
+## «Fonction» d'extraction des entrées de l'historique des versions
+## correspondant à VERSION.
+define get_changes
+	awk '/\\changes\{$(word 1,${1})\}/ \
+	     { \
+	         sub(/^%[ \t]+\\changes\{.*\}\{.*\}\{/, "", $$0); \
+	         out = $$0; \
+	         if (match($$0, ".*\}$$")) { \
+	             out = substr($$0, RSTART, RLENGTH - 1) \
+	         } else { \
+	             while (RSTART == 0) { \
+	                 getline; \
+	                 sub(/^%[ \t]+/, "", $$0); \
+	                 if (match($$0, ".*\}$$")) { \
+	                     out = out " " substr($$0, RSTART, RLENGTH - 1) \
+	                 } else { \
+	                     out = out " " $$0 \
+	                 } \
+	             } \
+	         } \
+	         gsub(/\^\^A/, "", out); \
+	         printf "- %s\n", out \
+	     }' "${2}"
+endef
+
 ## Outils de travail
 LATEX = latex -halt-on-error
 XELATEX = xelatex -halt-on-error
@@ -89,6 +114,10 @@ class: ${MAIN:.dtx=.cls}
 
 .PHONY: doc
 doc: ${MAIN:.dtx=.pdf}
+
+.PHONY: changes
+changes:
+	@$(call get_changes,${VERSION},${MAIN})
 
 .PHONY: release
 release: zip check-status upload create-release publish
@@ -158,28 +187,12 @@ create-release:
 	        printf "%s\n" "non"; \
 	        printf "%s" "création d'une version dans GitLab... "; \
 	        name="Version ${VERSION}"; \
-	        desc=$$(awk '/\\changes\{$(word 1,${VERSION})\}/ \
-	            { \
-	                sub(/^%[ \t]+\\changes\{.*\}\{.*\}\{/, "", $$0); \
-	                out = $$0; \
-	                if (match($$0, ".*\}$$")) { \
-	                    out = substr($$0, RSTART, RLENGTH - 1) \
-	                } else { \
-	                    while (RSTART == 0) { \
-	                        getline; \
-	                        sub(/^%[ \t]+/, "", $$0); \
-	                        if (match($$0, ".*\}$$")) { \
-	                            out = out " " substr($$0, RSTART, RLENGTH - 1) \
-	                        } else { \
-	                            out = out " " $$0 \
-	                        } \
-	                    } \
-	                } \
-	                printf "- %s\n", out \
-	            }' ${MAIN} | \
+	        desc="$$($(call get_changes,${VERSION},${MAIN}) | \
 	            sed -E -e 's/\\cs\{([^\}]*)\}/`\\\1`/g' \
-	                   -e 's/\\texttt\{([^\}]*)\}/`\1`/g') \
-	                   -e 's/\\emph\{([^\}]*)\}/*\1*/g'); \
+	                   -e 's/\\texttt\{([^\}]*)\}/`\1`/g' \
+	                   -e 's/\\textbf\{([^\}]*)\}/**\1**/g' \
+	                   -e 's/\\emph\{([^\}]*)\}/*\1*/g' \
+	                   -e 's/\{?\\(La)?TeX\}?/\1TeX/g')"; \
 	        curl --request POST \
 	             --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
 	             --output /dev/null --silent \
