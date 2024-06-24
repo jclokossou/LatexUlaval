@@ -25,10 +25,10 @@
 %<*dtx>
 \ProvidesFile{ulthese.dtx}
 %</dtx>
-%<class>\NeedsTeXFormat{LaTeX2e}[2009/09/24]
+%<class>\NeedsTeXFormat{LaTeX2e}[2021/06/01]
 %<class>\ProvidesClass{ulthese}%
 %<*class>
-  [2024/05/22 v5.4 Thesis class for Université Laval]
+  [2024/06/25 v6.0 Thesis class for Université Laval]
 %</class>
 %<*driver>
 \documentclass[article,oneside,11pt,x11names,english,french]{memoir}
@@ -203,16 +203,20 @@
 % \DoNotIndex{\RequirePackage,\ExecuteOptions,\ProcessOptions}
 % \DoNotIndex{\newcommand,\newcommand*}
 % \DoNotIndex{\setlength}
-% \changes{5.4}{2024-05-22}{Prise en compte des règles de présentation
+% \changes{6.0}{2024-05-22}{Prise en compte des règles de présentation
 % entrées en vigueur à l'automne 2023 qui n'exigent plus une
 % bibliographie par chapitre pour les thèses et mémoire par
 % intégration d'articles.}
-% \changes{5.4}{2024-05-24}{Utilisation du codage de caractères UTF-8
+% \changes{6.0}{2024-05-22}{Suppression des options
+% \texttt{bibchapitre} et \texttt{bibsection}.}
+% \changes{6.0}{2024-05-24}{Utilisation du codage de caractères UTF-8
 % par défaut dans la classe. Modification des gabarits en
 % conséquence.}
-% \changes{5.4}{2024-06-17}{Révision exhaustive de la documentation.}
+% \changes{6.0}{2024-06-17}{Révision exhaustive de la documentation.}
 % \changes{4.4}{2017-05-16}{Prise en charge des bibliographies
 % multiples pour les thèses et mémoires par articles.}
+% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibchapitre}.}
+% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibsection}.}
 % \changes{4.4}{2017-05-16}{Documentation révisée, principalement ce
 % qui touche à la préparation de la bibliographie.}
 % \changes{4.3}{2017-03-01}{Nouvelles options pour les titres de
@@ -433,7 +437,7 @@
 %   maîtrise avec l'une ou l'autre des options |examen|, |essai|,
 %   |projet| ou |stage|.}
 %
-% \changes{5.4}{2024-05-24}{Documentation: nouvelle section sur le
+% \changes{6.0}{2024-05-24}{Documentation: nouvelle section sur le
 % codage de caractères du code source.}
 % \subsection{Codage de caractères du code source}
 % \label{sec:utilisation:codage}
@@ -598,11 +602,6 @@
 %   police de 11~points. Ces options n'ont aucun effet sur la taille
 %   des polices des pages de titre.
 % \end{DescribeOption}
-%
-% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibchapitre}.}
-% \changes{4.4}{2017-05-15}{Ajout de l'option \texttt{bibsection}.}
-% \changes{5.4}{2024-05-22}{Suppression des options
-% \texttt{bibchapitre} et \texttt{bibsection}.}
 %
 % \begin{DescribeOption}{nonatbib}
 %   L'option |nonatbib| empêche le chargement du paquetage %
@@ -840,7 +839,7 @@
 % \subsection{Autres paquetages chargés}
 % \label{sec:paquetages}
 %
-% \changes{5.4}{2024-06-17}{Documentation: simplification de la
+% \changes{6.0}{2024-06-17}{Documentation: simplification de la
 % section sur les autres paquetages chargés par la classe.}
 % La classe {\ulclass} charge par défaut les paquetages suivants qui
 % peuvent vous être utiles: %
@@ -899,9 +898,9 @@
 %
 % \section{Bibliographie}
 % \label{sec:bibliographie}
-% \changes{5.4}{2024-05-22}{Documentation: suppression de la section
+% \changes{6.0}{2024-05-22}{Documentation: suppression de la section
 % sur les bibliographies multiples.}
-% \changes{5.4}{2024-06-19}{Documentation: inversion des sections sur
+% \changes{6.0}{2024-06-19}{Documentation: inversion des sections sur
 % la bibliographie et sur la rédaction en français.}
 %
 % \begin{DescribeMacro}{\bibliography}
@@ -1027,7 +1026,7 @@
 %
 % \section{Police de caractères du document}
 % \label{sec:police}
-% \changes{5.4}{2024-06-17}{Documentation: révision de la section sur
+% \changes{6.0}{2024-06-17}{Documentation: révision de la section sur
 % les polices de caractères suite aux modifications apportées aux
 % règles de présentation de la FESP.}
 %
@@ -1061,14 +1060,14 @@
 % pour les éléments décoratifs (notamment \textsf{Fira Sans} pour les
 % titres de sections et \texttt{Fira Mono} pour le code informatique).
 %
-% \changes{5.4}{2024-05-25}{Documentation: suppression de la section
+% \changes{6.0}{2024-05-25}{Documentation: suppression de la section
 % portant sur l'explication détaillée des gabarits. En échange,
 % ceux-ci comportent des commentaires additionnels.}
 %
 % \section{Commentaires, suggestions et aide}
 % \changes{5.0}{2018-08-09}{Code source du projet déplacé de GitHub
 % vers GitLab.}
-% \changes{5.4}{2024-06-18}{Documentation: retrait du wiki thèse
+% \changes{6.0}{2024-06-18}{Documentation: retrait du wiki thèse
 % (fermé) et des archives de la liste ulthese-aide (peu utiles).}
 %
 % Le \href{https://gitlab.com/vigou3/ulthese/}{dépôt du projet} dans
@@ -1535,16 +1534,16 @@
 % La classe s'efforce de charger un minimum de paquetages afin d'éviter
 % les conflits potentiels.
 %
-% \changes{5.4}{2024-05-24}{Mise en œuvre: paquetage \textbf{inputenc} ^^A
+% \changes{6.0}{2024-05-24}{Mise en œuvre: paquetage \textbf{inputenc} ^^A
 % désormais chargé avec l'option \texttt{utf8} lorsque la compilation
 % est effectuée par pdf{\LaTeX}.}
 % Le code source doit obligatoirement être enregistré dans le codage
 % UTF-8. Avec pdf{\LaTeX}, cela requiert le paquetage \pkg{inputenc}.
 %
-% \changes{5.4}{2024-05-24}{Mise en œuvre: paquetage
+% \changes{6.0}{2024-05-24}{Mise en œuvre: paquetage
 % \textbf{microtype} désormais chargé par la classe avec
 % \textbf{fontspec} ou \textbf{fontenc}.}
-% \changes{5.4}{2024-05-24}{Mise en œuvre: option \texttt{Ligatures} ^^A
+% \changes{6.0}{2024-05-24}{Mise en œuvre: option \texttt{Ligatures} ^^A
 % plus définie par défaut pour les polices OpenType.}
 % La classe charge également les paquetages minimalement nécessaires
 % pour la gestion des polices de caractères, soit \pkg{fontspec} avec
@@ -1588,7 +1587,7 @@
 % configuration de base de la classe fait en sorte que tous les liens
 % sont signalés par la couleur |ULlinkcolor| définie à la
 % \autoref{sec:couleurs}.
-% \changes{5.4}{2024-06-17}{Mise en œuvre: chargement explicite de
+% \changes{6.0}{2024-06-17}{Mise en œuvre: chargement explicite de
 % \textbf{etoolbox} retiré, car le paquetage est chargé par memoir.}
 %    \begin{macrocode}
 \ifUL@hyperref
@@ -1610,7 +1609,7 @@
 \RequirePackage{xcolor}
 %    \end{macrocode}
 %
-% \changes{5.4}{2024-06-17}{Mise en œuvre: paquetage \textbf{textcomp} ^^A
+% \changes{6.0}{2024-06-17}{Mise en œuvre: paquetage \textbf{textcomp} ^^A
 % retiré, car non nécessaire.}
 %
 % \subsection{Paquetage incompatible}
@@ -2189,12 +2188,12 @@
 % \changes{4.4}{2017-05-16}{Gabarits: nouveau gabarit pour une thèse
 % par articles.}
 % \changes{4.2}{2016-03-29}{Gabarits: nouvelles options de babel.}
-% \changes{5.4}{2024-05-22}{Gabarits: gabarits pour une thèse par
+% \changes{6.0}{2024-05-22}{Gabarits: gabarits pour une thèse par
 % articles révisés suite aux changements aux règles de présentation.}
-% \changes{5.4}{2024-05-22}{Gabarits: meilleure sélection automatique
+% \changes{6.0}{2024-05-22}{Gabarits: meilleure sélection automatique
 % des paquetages pour les polices et pour le codage selon le moteur
 % {\TeX}.}
-% \changes{5.4}{2024-06-20}{Gabarits: seul l'exemple de changement
+% \changes{6.0}{2024-06-20}{Gabarits: seul l'exemple de changement
 % pour les polices STIX Two est maintenant fourni, et ce, dans une
 % version qui fonctionne avec les polices livrées avec TeX Live.}
 %
