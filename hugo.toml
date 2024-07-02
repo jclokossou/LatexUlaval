@@ -12,9 +12,14 @@ enableRobotsTXT = true
   pages_home = "https://vigou3.gitlab.io/fr"
   gitlab = "https://gitlab.com/vigou3"
   repos = "ulthese"
+
+  ## Release information
   ctan = "https://ctan.org/pkg"
   version = "5.3a"
-  release_notes = "-/releases/"
+  release_date = "2023-11-29"
+  release_notes = "-/releases"
+  archive_name = "ulthese-installation-projet.zip"
+  archive_id = "https://gitlab.com/cjs-rcs/cjs-rcs-article/-/package_files/103860853/download"
 
   ## Look and feel
   custom_css = ["css/custom.css"]

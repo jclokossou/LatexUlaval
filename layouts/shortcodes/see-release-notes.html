@@ -1,0 +1,7 @@
+{{ $repos_url := printf "%s/%s" .Site.Params.gitlab .Site.Params.repos }}
+{{ $url := printf "%s/%s/v%s" $repos_url .Site.Params.release_notes .Site.Params.version }}
+
+<!-- link to release notes (news) -->
+<a class="ba black-80 no-underline bg-animate hover-bg-black-20 br2 inline-flex items-center ml2 mb2 pv1 ph2 f5" href="{{- $url -}}" title="Voir les notes de version">
+  <span>Notes de version</span>
+</a>
