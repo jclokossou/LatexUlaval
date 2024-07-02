@@ -120,7 +120,7 @@ changes:
 	@$(call get_changes,${VERSION},${MAIN})
 
 .PHONY: release
-release: zip check-status upload create-release publish
+release: zip templates check-status create-release upload create-link
 
 ## CTAN exige un répertoire $PACKAGENAME à la racine de l'archive
 .PHONY: zip
