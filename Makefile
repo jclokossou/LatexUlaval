@@ -210,8 +210,8 @@ create-release:
 
 .PHONY: upload
 upload:
-	@printf "%s\n" "téléversement de l'archive vers le registre..."
-	for f in ${ARCHIVE} ${ARCHIVENOTEX} ${TEMPLATES}; \
+	@printf "%s\n" "téléversement des archives vers le registre..."
+	for f in ${ARCHIVE} ${ARCHIVENOTEX}; \
 	do \
 	    curl --upload-file $${f} \
 	         --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
