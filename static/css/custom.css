@@ -6,6 +6,16 @@
     fill: #fca326;
 }
 
+.measure-wide {
+    max-width: 40em;
+}
+
+/* Links without underline */
 a:any-link {
     text-decoration: none;
+}
+
+/* Inline code in slightly smaller font (normal text is 1.25rem) */
+code {
+    font-size: 1.15rem;
 }
