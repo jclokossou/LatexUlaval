@@ -204,6 +204,10 @@
 % intégration d'articles.}
 % \changes{6.0}{2024-05-22}{Suppression des options
 % \texttt{bibchapitre} et \texttt{bibsection}.}
+% \changes{6.0}{2024-07-02}{Ajout du grade de maître en travail
+% social.}
+% \changes{6.0}{2024-07-02}{Retrait du grade de maître en
+% physiothérapie.}
 % \changes{6.0}{2024-05-24}{Utilisation du codage de caractères UTF-8
 % par défaut dans la classe. Modification des gabarits en
 % conséquence.}
@@ -487,7 +491,7 @@
 %   \caption{Options de la classe pour la déclaration du grade et libellés
 %     correspondants}
 %   \label{tab:grades}
-%   \begin{tabularx}{0.85\linewidth}{lX}
+%   \begin{tabularx}{0.9\linewidth}{l>{\raggedright\arraybackslash}X}
 %     \toprule
 %     Option & Nom du grade (sigle) \\
 %     \midrule
@@ -508,24 +512,24 @@
 %     |MArch|
 %       & Maître en architecture
 %       (M.~Arch.) \\
-%     |MA|
-%       & Maître ès arts (M.A.) \\
 %     |LLM|
 %       & Maître en droit (LL.~M.) \\
 %     |MErg|
 %       & Maître en ergothérapie (M.~Erg.) \\
 %     |MMus|
 %       & Maître en musique (M.~Mus.) \\
-%     |MPht|
-%       & Maître en physiothérapie (M.~Pht.) \\
-%     |MSc|
-%       & Maître ès sciences (M.~Sc.) \\
+%     |MPsEd|
+%       & Maître en psychoéducation (M.~Ps.~éd.) \\
 %     |MScGeogr|
 %       & Maître en sciences géographiques (M.~Sc.~géogr.) \\
 %     |MServSoc|
 %       & Maître en service social (M.~Serv.~soc.) \\
-%     |MPsEd|
-%       & Maître en psychoéducation (M.~Ps.~éd.) \\
+%     |MTravSoc|
+%       & Maître en travail social (M.~Trav.~soc.) \\
+%     |MA|
+%       & Maître ès arts (M.A.) \\
+%     |MSc|
+%       & Maître ès sciences (M.~Sc.) \\
 %     \bottomrule
 %   \end{tabularx}
 % \end{table}
@@ -1351,10 +1355,6 @@
   \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
   \newcommand*{\UL@degree}{Ma\^itre en architecture (M.~Arch.)}}
-\DeclareOption{MA}{%
-  \UL@isthesisfalse
-  \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@degree}{Ma\^itre \`es arts (M.A.)}}
 \DeclareOption{LLM}{%
   \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
@@ -1367,14 +1367,10 @@
   \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
   \newcommand*{\UL@degree}{Ma\^itre en musique (M.~Mus.)}}
-\DeclareOption{MPht}{%
+\DeclareOption{MPsEd}{%
   \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@degree}{Ma\^itre en physioth\'erapie (M.~Pht.)}}
-\DeclareOption{MSc}{%
-  \UL@isthesisfalse
-  \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@degree}{Ma\^itre \`es sciences (M.~Sc.)}}
+  \newcommand*{\UL@degree}{Ma\^itre en psycho\'education (M.~Ps.~\'ed.)}}
 \DeclareOption{MScGeogr}{%
   \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
@@ -1383,10 +1379,18 @@
   \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
   \newcommand*{\UL@degree}{Ma\^itre en service social (M.~Serv.~soc.)}}
-\DeclareOption{MPsEd}{%
+\DeclareOption{MTravSoc}{%
   \UL@isthesisfalse
   \renewcommand*{\UL@typenum}{0}
-  \newcommand*{\UL@degree}{Ma\^itre en psycho\'education (M.~Ps.~\'ed.)}}
+  \newcommand*{\UL@degree}{Ma\^itre en travail social (M.~Trav.~soc.)}}
+\DeclareOption{MA}{%
+  \UL@isthesisfalse
+  \renewcommand*{\UL@typenum}{0}
+  \newcommand*{\UL@degree}{Ma\^itre \`es arts (M.A.)}}
+\DeclareOption{MSc}{%
+  \UL@isthesisfalse
+  \renewcommand*{\UL@typenum}{0}
+  \newcommand*{\UL@degree}{Ma\^itre \`es sciences (M.~Sc.)}}
 \DeclareOption{multifacultaire}{%
   \ifUL@isthesis
     \renewcommand*{\UL@typenum}{1}
@@ -2221,8 +2225,8 @@
 %%
 %% Déclaration de la classe avec le type de grade
 %<phd>%%   [l'un de LLD, DMus, DPsy, DThP, PhD]
-%<m>%%   [l'un de MATDR, MArch, MA, LLM, MErg, MMus, MPht, MSc, MScGeogr,
-%<m>%%    MServSoc, MPsEd]
+%<m>%%   [l'un de MATDR, MArch, LLM, MErg, MMus, MPsEd, MScGeogr,
+%<m>%%    MServSoc, MTravSoc, MA, MSc]
 %% et les langues les plus courantes. Le français sera la langue par
 %% défaut du document.
 %<phd&(standard|articles)>\documentclass[PhD,english,french]{ulthese}
