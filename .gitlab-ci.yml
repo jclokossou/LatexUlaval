@@ -3,6 +3,7 @@ image: registry.gitlab.com/pages/hugo/hugo_extended:latest
 default:
   before_script:
     - apk add --update --no-cache git go
+    - mkdir -p themes/github.com/theNewDynamic/gohugo-theme-ananke
     - hugo mod init gitlab.com/vigou3/ulthese
     - hugo mod get -u github.com/theNewDynamic/gohugo-theme-ananke
 
