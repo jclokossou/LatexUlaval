@@ -4,6 +4,7 @@
 *.lot
 *.blg
 *.bbl
+*.hd
 *.out
 *.ilg
 *.idx
@@ -19,3 +20,7 @@
 *.zip
 resources/
 resources/**
+auto/
+auto/**
+*.mod
+*.sum
