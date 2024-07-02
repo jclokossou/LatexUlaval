@@ -1,7 +1,7 @@
 {{ $featured_image := .Param "featured_image" | default "images/gohugo-default-sample-hero-image.jpg" }}
 {{ $repos_url := printf "%s/%s" .Site.Params.gitlab .Site.Params.repos }}
 {{ $ctan_url := printf "%s/%s" .Site.Params.ctan .Site.Params.repos }}
-{{ $release_notes_url := printf "%s/%s" $repos_url .Site.Params.release_notes }}
+{{ $release_notes_url := printf "%s/%s/v%s" $repos_url .Site.Params.release_notes .Site.Params.version }}
 
 {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
 {{ $featured_image := (trim $featured_image "/") | absURL }}
