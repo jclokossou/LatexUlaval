@@ -50,6 +50,9 @@ all: config commit
 
 config:
 	@printf "mise à jour de la configuration...\n"
+	@printf "  numéro de version: %s\n" "${VERSION}"
+	@printf "  date de publication: %s\n" "${DATE}"
+	@printf "  nom de l'archive: %s\n" "${ARCHIVE}"
 	@printf "  adresse URL de l'archive: %s\n" "${ARCHIVE_ID}"
 	@awk 'BEGIN { FS = "\""; OFS = "\"" } \
 	     /version/    { $$2 = "${VERSION}" } \
