@@ -15,11 +15,11 @@ enableRobotsTXT = true
 
   ## Release information
   ctan = "https://ctan.org/pkg"
-  version = "5.3a"
-  release_date = "2023-11-29"
+  version = "6.0"
+  release_date = "2024-07-02"
   release_notes = "-/releases"
   archive_name = "ulthese-installation-projet.zip"
-  archive_id = "https://gitlab.com/cjs-rcs/cjs-rcs-article/-/package_files/103860853/download"
+  archive_id = ""
 
   ## Look and feel
   custom_css = ["css/custom.css"]
