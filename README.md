@@ -1,4 +1,4 @@
-# Package ulthese
+# Thesis class for Université Laval
 
 The package provides a class based on memoir and compatible with
 pdfLaTeX and XeLaTeX to prepare theses and memoirs compliant with the
@@ -7,9 +7,8 @@ Université Laval, Québec, Canada. The class also comes with an
 extensive set of templates for the various types of theses and memoirs
 offered at Laval.
 
-Please note that the documentation for the class and the comments in
-the templates are written in French, the language of the target
-audience.
+The documentation for the class and the comments in the templates are
+written in French, the language of the target audience.
 
 ## Licence
 
@@ -18,7 +17,7 @@ later version.
 
 ## Author
 
-Université Laval <ulthese-dev@bibl.ulaval.ca>
+Vincent Goulet for Université Laval <ulthese-dev@bibl.ulaval.ca>
 
 ## Source code repository
 
@@ -26,13 +25,13 @@ https://gitlab.com/vigou3/ulthese/
 
 > The rest of this file is in French for the target audience.
 
-# Paquetage ulthese
+# Classe pour les thèses et mémoires de l'Université Laval
 
 Le paquetage **ulthese** fournit la classe du même nom permettant de
 composer des thèses et des mémoires immédiatement conformes aux règles
-générales de présentation matérielle de la Faculté des études
-supérieures et postdoctorales (FESP) de l'[Université
-Laval](https://www.ulaval.ca). 
+générales et complémentaires de présentation matérielle de la Faculté
+des études supérieures et postdoctorales (FESP) de l'[Université
+Laval](https://www.ulaval.ca).
 
 La classe permet également de produire les types de documents suivants
 selon les mêmes règles de présentation que les thèses et mémoires:
