@@ -34,8 +34,8 @@ ARCHIVENOTEX = ${PACKAGENAME}-installation-projet.zip
 REPOSURL = https://gitlab.com/vigou3/ulthese
 
 ## Liste des fichiers à inclure dans l'archive (outre README.md)
-SOURCES = ${PACKAGENAME}.ins ${PACKAGENAME}.dtx
-DOC = ${PACKAGENAME}.pdf
+SOURCES = ${MAIN:.dtx=.ins} ${MAIN}
+DOC = ${MAIN:.dtx=.pdf}
 IMAGES = ul_p.eps ul_p.pdf
 
 ## Liste des fichiers créés lors de l'installation
@@ -100,20 +100,20 @@ TAGNAME = v$(word 1,${VERSION})
 
 all: class doc
 
-${CLASS} ${TEMPLATES}: ${MAIN}
+${CLASS} ${TEMPLATES}: ${SOURCES}
 	${LATEX} ${MAIN:.dtx=.ins}
 
-${MAIN:.dtx=.pdf}: ${MAIN}
+${DOC}: ${MAIN}
 	${XELATEX} $<
 	${MAKEINDEX} -s gglo.ist -o ${MAIN:.dtx=.gls} ${MAIN:.dtx=.glo}
 	${XELATEX} $<
 	${XELATEX} $<
 
 .PHONY: class
-class: ${MAIN:.dtx=.cls}
+class: ${CLASS}
 
 .PHONY: doc
-doc: ${MAIN:.dtx=.pdf}
+doc: ${DOC}
 
 .PHONY: changes
 changes:
