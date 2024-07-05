@@ -102,6 +102,8 @@
   \definecolor{link}{rgb}{0,0.4,0.6}        % liens internes
   \definecolor{url}{rgb}{0.6,0,0}           % liens externes
   \definecolor{citation}{rgb}{0,0.5,0}      % citations
+  \colorlet{codebg}{LightYellow1}           % blocs de code
+  \colorlet{prompt}{Orchid4}                % invite de commande
 
   %% Hyperliens
   \AtEndPreamble{%
@@ -140,8 +142,8 @@
   \setsecnumdepth{subsubsection}
   \maxsecnumdepth{subsubsection}
 
-  % Les annexes sont des sections, ici. Redéfinir la
-  % commande \appendix comme dans la classe article.
+  % Les annexes sont des sections. Redéfinir la commande \appendix
+  % comme dans la classe article.
   \makeatletter
   \renewcommand*\appendix{\par
     \setcounter{section}{0}
@@ -162,6 +164,27 @@
   %% Nouvel environnement de type \DescribeMacro pour les options de
   %% la classe
   \NewDocElement[envlike,notoplevel,printtype=\emph{option}]{Option}{option}
+
+  %% Code source
+  \usepackage{listings}
+  \lstset{%
+    basicstyle=\ttfamily\NoAutoSpacing,
+    moredelim=[is][\color{prompt}]{---}{-},
+    escapeinside=`',
+    showstringspaces=false,
+    backgroundcolor=\color{codebg},
+    frame=leftline,
+    framerule=2pt,
+    framesep=5pt,
+    xleftmargin=7.4pt
+  }
+
+  %% La commande \meta de memoir nécessite une commande \normalfont
+  %% additionnelle pour maintenir la police du document dans les blocs
+  %% de code.
+  \makeatletter
+  \def\meta@font@select{\normalfont\itshape}
+  \makeatother
 
   %% Commandes sémantiques additionnelles
   \let\class\textsf
@@ -342,13 +365,25 @@
 % exemple, avec {\TeX}~Live, vous pouvez effectuer ces opérations dans
 % l'assistant graphique, ou encore avec l'une ou l'autre des commandes
 % ci-dessous:
-% \begin{quote}
-%   \code{tlmgr install ulthese}
-% \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+---$- tlmgr install ulthese
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 % ou
-% \begin{quote}
-%   \code{tlmgr update ulthese}
-% \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+---$- tlmgr update ulthese
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %
 % S'il vous est impossible d'installer des paquetages ou de mettre à
 % jour la distribution {\TeX}~--- notamment si vous utilisez une
@@ -448,9 +483,15 @@
 % \label{sec:utilisation:options}
 %
 % On charge la classe avec la commande
-% \begin{quote}
-%   |\documentclass|\oarg{options}|{ulthese}|
-% \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\documentclass`\oarg{options}\marg{ulthese}'
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 % Les marges, l'interligne et la numérotation des pages sont adaptées
 % aux règles de présentation de la FESP. La classe ne crée pas de page
 % de titre par défaut\footnote{%
@@ -683,14 +724,26 @@
 %   Coupez manuellement avec {\bs\bs} ou \cmd{\newline} un titre très
 %   long. Par exemple, la déclaration d'un titre d'une seule ligne
 %   est:
-%   \begin{quote}
-%     |\titre{Ceci est un titre d'une seule ligne}|
-%   \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\titre{Ceci est un titre d'une seule ligne}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %   Pour un titre de deux lignes, ce sera plutôt:
-%   \begin{quote}
-%     |\titre{Ceci est la première ligne d'un long titre \\| \\
-%     |       et ceci est la seconde}|
-%   \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\titre{Ceci est la première ligne d'un long titre \\
+       et ceci est la seconde}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\soustitre}
@@ -724,10 +777,16 @@
 %   Les thèses en cotutelle comportent un directeur ou une directrice
 %   de recherche et un directeur ou une directrice de cotutelle.
 %   Séparez chaque mention par {\bs\bs}, comme ceci:
-%   \begin{quote}
-%     |\direction{Prénom Nom, directrice de recherche \\| \\
-%     |           Prénom Nom, directeur de cotutelle}|
-%   \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\direction{Prénom Nom, directrice de recherche \\
+           Prénom Nom, directeur de cotutelle}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %
 %   De même, les maîtrises en bidiplomation comptent deux directeurs
 %   ou directrices de recherche. Séparez chaque mention tel que
@@ -739,10 +798,16 @@
 %   commande \cmdprint{\direction}, mais pour le ou les codirecteurs
 %   de recherche, s'il y a lieu. Lorsqu'il y a plus d'un codirecteur
 %   de recherche, séparez chaque mention par {\bs\bs}, comme ceci:
-%   \begin{quote}
-%     |\codirection{Prénom Nom, directrice de recherche \\| \\
-%     |             Prénom Nom, directeur de recherche}|
-%   \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\codirection{Prénom Nom, directrice de recherche \\
+             Prénom Nom, directeur de cotutelle}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 % \end{DescribeMacro}
 %
 % \begin{DescribeMacro}{\frontispice}
@@ -921,9 +986,15 @@
 % Par exemple, pour utiliser un style de citation numérique où le
 % numéro de la référence se trouve entre crochets, insérez la commande
 % suivante dans le préambule:
-% \begin{quote}
-%   |\setcitestyle{numbers,square}|
-% \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\setcitestyle{numbers,square}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %
 % Consultez la documentation de \pkg{natbib} pour plus de détails.
 %
@@ -1126,10 +1197,16 @@
 % \begin{DescribeMacro}{\univcotutelle}
 %   Pour les thèses en cotutelle, la commande
 %   \cmdprint{\univcotutelle} permet de saisir le nom, la ville et le
-%   pays de l'université de cotutelle, sous la forme
-%   \begin{quote}
-%     |\univcotutelle{Nom de l'université \\ Ville, Pays}|
-%   \end{quote}
+%   pays de l'université de cotutelle, sous la forme suivante:
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\univcotutelle{Nom de l'université \\ Ville, Pays}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %   Cette commande prend effet seulement lorsque la classe est chargée
 %   avec l'option |cotutelle|.
 % \end{DescribeMacro}
@@ -1137,10 +1214,16 @@
 % \begin{DescribeMacro}{\gradecotutelle}
 %   Pour les thèses en cotutelle, la commande
 %   \cmdprint{\gradecotutelle} spécifie le grade conféré par
-%   l'université de cotutelle, sous la forme
-%   \begin{quote}
-%     |\gradecotutelle{Nom du grade (sigle)}|
-%   \end{quote}
+%   l'université de cotutelle, sous la forme suivante:
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\gradecotutelle{Nom du grade (sigle)}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %   Cette commande prend effet seulement lorsque la classe est chargée
 %   avec l'option |cotutelle|.
 % \end{DescribeMacro}
@@ -1149,9 +1232,15 @@
 %   Pour les mémoires en bidiplomation, la commande
 %   \cmdprint{\univbidiplomation} permet de saisir le nom, la ville et
 %   le pays de l'université de bidiplomation, sous la forme
-%   \begin{quote}
-%     |\univbidiplomation{Nom de l'université \\ Ville, Pays}|
-%   \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\univbidiplomation{Nom de l'université \\ Ville, Pays}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %   Cette commande prend effet seulement lorsque la classe est chargée
 %   avec l'option |bidiplomation|.
 % \end{DescribeMacro}
@@ -1160,9 +1249,15 @@
 %   Pour les mémoires en bidiplomation, la commande
 %   \cmdprint{\gradebidiplomation} spécifie le grade conféré par
 %   l'université de bidiplomation, sous la forme
-%   \begin{quote}
-%     |\gradebidiplomation{Nom du grade (sigle)}|
-%   \end{quote}
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}
+\gradebidiplomation{Nom du grade (sigle)}
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %   Cette commande prend effet seulement lorsque la classe est chargée
 %   avec l'option |bidiplomation|.
 % \end{DescribeMacro}
