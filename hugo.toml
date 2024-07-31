@@ -18,11 +18,10 @@ enableRobotsTXT = true
   ## Release information
   version = "6.0"
   release_date = "2024-07-02"
-  archive_name = "ulthese.zip"
-  archive_url = "https://gitlab.com/vigou3/ulthese/-/package_files/136061075/download"
-  archivenotex_name = "ulthese-installation-projet.zip"
-  archivenotex_url = "https://gitlab.com/vigou3/ulthese/-/package_files/136061074/download"
-
+  archive = "ulthese.zip"
+  archivenotex = "ulthese-installation-projet.zip"
+  assets = [ { name = "ulthese-installation-projet.zip", url = "https://gitlab.com/vigou3/ulthese/-/package_files/136061075/download" }, { name = "ulthese.zip", url = "https://gitlab.com/vigou3/ulthese/-/package_files/136061074/download" } ]
+  
   ## Look and feel
   custom_css = ["css/custom.css"]
   background_color_class = "bg-black"

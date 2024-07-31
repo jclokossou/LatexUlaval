@@ -9,16 +9,11 @@
 ## mémoires de l'Université Laval"
 ## https://gitlab.com/vigou3/ulthese
 
-## Noms des contenus
-ARCHIVE = ulthese.zip
-ARCHIVENOTEX = ulthese-installation-projet.zip
-ASSETS = ${ARCHIVE} ${ARCHIVENOTEX}
-
 ## Fichier de configuration
 CONFIG = hugo.toml
 
 ## Dépôt GitLab et authentification
-REPOSNAME = $(basename ${ARCHIVE})
+REPOSNAME = ulthese
 APIURL = https://gitlab.com/api/v4/projects/vigou3%2F${REPOSNAME}
 OAUTHTOKEN = $(shell cat ~/.gitlab/token)
 
@@ -35,40 +30,46 @@ VERSIONFULL = $(shell \
 VERSION = $(word 2,${VERSIONFULL})
 DATE = $(word 3,${VERSIONFULL})
 
-## Extraction des adresses URL des contenus publiés avec la version
-ASSETS_URL = $(shell \
+## Extraction des contenus publiés avec la version et leurs adresses
+## URL
+ASSETS = $(shell \
   curl --header "PRIVATE-TOKEN: ${OAUTHTOKEN}" \
        --silent \
        ${APIURL}/releases/v${VERSION}/assets/links | \
   sed 's/,/\n/g' | \
-  awk 'BEGIN { FS = "\""; split("${ASSETS}", assets, " ")} \
-       $$2 == "name" { for (i in assets) if ($$4 == assets[i]) { state = 1; break } } \
-       $$2 == "direct_asset_url" && state { print $$4; state = 0 }')
+  awk 'BEGIN { FS = "\"" } \
+       $$2 == "name" { name = $$4; state = 1 } \
+       $$2 == "direct_asset_url" && state { printf "%s %s\n", name, $$4; state = 0 }')
 
 all: config commit
 
 config:
-	@printf "updating the configuration...\n"
+	@printf "mise à jour de la configuration...\n"
 	@awk 'BEGIN \
 	      { \
-	          split("${ASSETS}", assets, " "); \
-	          split("${ASSETS_URL}", url, " "); \
-	          for (i in assets) \
-	              printf "  url to %s: %s\n", assets[i], url[i] \
+	          printf "  version: %s\n", "${VERSION}"; \
+	          printf "  release date: %s\n", "${DATE}"; \
+	          n = split("${ASSETS}", a, " "); \
+	          for (i = 1; i <= n; i = i + 2) \
+	              printf "  url de %s: %s\n", a[i], a[i + 1] \
 	      }'
 	@awk 'BEGIN \
 	      { \
 	          FS = "\""; OFS = "\""; \
-	          split("${ASSETS}", assets, " "); \
-	          split("${ASSETS_URL}", url, " "); \
-	          for (i in assets) a[assets[i]] = url[i] \
+	          n = split("${ASSETS}", a, " "); \
+	          out = "assets = ["; sep = " "; \
+	          for (i = 1; i <= n; i = i + 2) \
+	          { \
+	              out = out sep \
+	                    sprintf("{ name = \"%s\", url = \"%s\" }", \
+	                            a[i], a[i + 1]); \
+	              sep = ", " \
+	          }; \
+	          out = out " ]" \
 	      } \
-	      $$1 ~ /version/      { $$2 = "${VERSION}" } \
-	      $$1 ~ /release_date/ { $$2 = "${DATE}" } \
-	      $$1 ~ /archive_name/ { $$2 = "${ARCHIVE}" } \
-	      $$1 ~ /archive_url/  { $$2 = a["${ARCHIVE}"] } \
-	      $$1 ~ /archivenotex_name/ { $$2 = "${ARCHIVENOTEX}" } \
-	      $$1 ~ /archivenotex_url/  { $$2 = a["${ARCHIVENOTEX}"] } \
+	      $$1 ~ /version =/      { $$2 = "${VERSION}" } \
+	      $$1 ~ /release_date =/ { $$2 = "${DATE}" } \
+	      $$1 ~ /assets =/       { $$0 = "  " out } \
 	      1' \
 	    ${CONFIG} > tmpfile && \
 	  mv tmpfile ${CONFIG}

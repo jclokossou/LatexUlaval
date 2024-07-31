@@ -1,8 +1,12 @@
-{{ $file_name := .Site.Params.archivenotex_name }}
-{{ $file_url := .Site.Params.archivenotex_url }}
-{{ $title := printf "%s %s" (i18n "title_archive") .Site.Params.archive_name }}
+{{ $file_name := .Site.Params.archivenotex }}
 
 <!-- button for zip archive -->
-<a class="ba black-80 no-underline bg-animate hover-bg-black-20 br2 inline-flex items-center mr3 mb3 pv2 ph3" href="{{- $file_url -}}" title="{{- $title -}}">
-  <span class="fas fa-file-archive f2 pr3"></span> <span>{{- $file_name -}}</span>
-</a>
+{{ range .Site.Params.assets }}
+  {{ if eq (index .name) $file_name }}
+    {{ $file_url := printf "%s" (index .url) }}
+    {{ $title := printf "%s %s" (i18n "title_archive") $file_name }}
+    <a class="ba black-80 no-underline bg-animate hover-bg-black-20 br2 inline-flex items-center mr3 mb3 pv2 ph3" href="{{- $file_url -}}" title="{{- $title -}}">
+      <span class="fas fa-file-archive f2 pr3"></span> <span>{{- $file_name -}}</span>
+    </a>
+  {{ end }}
+{{ end }}
